@@ -25,12 +25,15 @@ if VJExists == true then
 	VJ.AddNPC("Proto-Tyrant","npc_vj_recb_prototyrant",vCat)
 	VJ.AddNPC("Hunter","npc_vj_recb_hunter",vCat)
     VJ.AddNPC("Licker","npc_vj_recb_licker",vCat)
+	--VJ.AddNPC("Spider (Black Tiger)","npc_vj_recb_spider_giant",vCat)
 	--VJ.AddNPC("Spider (Giant)","npc_vj_recb_spider_giant",vCat)
 	--VJ.AddNPC("Spider (Baby)","npc_vj_recb_spider_baby",vCat)
 	--VJ.AddNPC("Crawler","npc_vj_recb_crawler",vCat)
 	--VJ.AddNPC("Snake","npc_vj_recb_snake",vCat)
 	--VJ.AddNPC("Ant","npc_vj_recb_ant",vCat)
-	--VJ.AddNPC("Flyclaw","npc_vj_recb_flyclaw",vCat)
+	VJ.AddNPC("Flyclaw","npc_vj_recb_flyclaw",vCat)
+	VJ.AddNPC("Crow","npc_vj_recb_crow",vCat)
+	VJ.AddNPC("Neptune","npc_vj_recb_neptune",vCat)
 
 -- !!!!!! DON'T TOUCH ANYTHING BELOW THIS !!!!!! -------------------------------------------------------------------------------------------------------------------------
 	AddCSLuaFile(AutorunFile)

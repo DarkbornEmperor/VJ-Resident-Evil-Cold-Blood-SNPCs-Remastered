@@ -11,6 +11,7 @@ ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
 ENT.BloodColor = "Red"
 ENT.FootStepTimeRun = 0.27
 ENT.FootStepTimeWalk = 0.6
+ENT.NextMeleeAttackTime = 1.5
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.AnimTbl_Death = {ACT_DIEVIOLENT}

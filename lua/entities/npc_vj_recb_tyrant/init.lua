@@ -9,6 +9,7 @@ ENT.Model = {"models/recb/recb_tyrant_103.mdl"}
 ENT.StartHealth = 1000
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
 ENT.BloodColor = "Red"
+ENT.NextMeleeAttackTime = 1.5
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 10
 ENT.AnimTbl_Death = {ACT_DIESIMPLE}
