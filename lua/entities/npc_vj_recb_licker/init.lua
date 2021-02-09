@@ -7,7 +7,7 @@ include('shared.lua')
 -----------------------------------------------*/
 ENT.Model = {"models/recb/recb_licker.mdl"} 
 ENT.StartHealth = 200
-ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
+ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
 ENT.HullType = HULL_HUMAN
 ENT.CanFlinch = 1
@@ -16,12 +16,13 @@ ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
 ENT.NextMeleeAttackTime = 1.5
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.MeleeAttackDistance = 30 
-ENT.MeleeAttackDamageDistance = 65
+ENT.MeleeAttackDistance = 35 
+ENT.MeleeAttackDamageDistance = 80
 ENT.HasLeapAttack = true 
 ENT.LeapAttackDamage = 15
 ENT.TimeUntilLeapAttackDamage = 0.4
-ENT.NextAnyAttackTime_Leap = 8
+ENT.NextAnyAttackTime_Leap = 1.5
+ENT.NextLeapAttackTime = 8
 ENT.LeapAttackAnimationDecreaseLengthAmount = 1.8
 ENT.AnimTbl_LeapAttack = {"vjseq_jump"}
 ENT.LeapAttackVelocityForward = 100 
@@ -39,12 +40,12 @@ ENT.GibOnDeathDamagesTable = {"All"}
 ENT.SoundTbl_FootStep = {"licker/li_walk.wav"}
 ENT.SoundTbl_Idle = {"licker/li_idle.wav"}
 ENT.SoundTbl_Alert = {"licker/li_idle.wav"}
-ENT.SoundTbl_MeleeAttackMiss = {"licker/li_slash.wav"}
+--ENT.SoundTbl_MeleeAttackMiss = {"licker/li_slash.wav"}
 ENT.SoundTbl_Pain = {"licker/li_pain.wav"}
 ENT.SoundTbl_Death = {"licker/li_die.wav"}
 ENT.SoundTbl_LeapAttackJump = {"licker/li_jump.wav"}
 ENT.SoundTbl_LeapAttackDamage = {"licker/li_slash.wav"}
-ENT.SoundTbl_LeapAttackMiss = {"licker/li_slash.wav"}
+--ENT.SoundTbl_LeapAttackMiss = {"licker/li_slash.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -63,6 +64,16 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
 	self:SetCollisionBounds(Vector(32, 25, 35), Vector(-32, -25, 0))	
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnEntityRelationshipCheck(ent, entFri, entDist) 
+timer.Simple(0.001,function()
+if ent:GetClass("npc_re_tyrant") then
+ent.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
+if IsValid(ent) then
+end
+end
+end)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:MultipleMeleeAttacks()

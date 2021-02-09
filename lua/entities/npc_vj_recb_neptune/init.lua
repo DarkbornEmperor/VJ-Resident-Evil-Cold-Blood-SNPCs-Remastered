@@ -7,7 +7,7 @@ include('shared.lua')
 -----------------------------------------------*/
 ENT.Model = {"models/recb/recb_neptune.mdl"} 
 ENT.StartHealth = 400
-ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
+ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
 ENT.MovementType = VJ_MOVETYPE_AQUATIC 
 ENT.Aquatic_SwimmingSpeed_Calm = 80 
 ENT.Aquatic_SwimmingSpeed_Alerted = 200
@@ -52,6 +52,16 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
 	self:SetCollisionBounds(Vector(123.34, 72.88, 58.51), Vector(-169.60, -69.65, -37.19))	
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnEntityRelationshipCheck(ent, entFri, entDist) 
+timer.Simple(0.001,function()
+if ent:GetClass("npc_re_tyrant") then
+ent.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
+if IsValid(ent) then
+end
+end
+end)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:MultipleMeleeAttacks()

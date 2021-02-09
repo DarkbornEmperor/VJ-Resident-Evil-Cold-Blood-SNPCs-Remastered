@@ -6,8 +6,8 @@ include('shared.lua')
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/recb/recb_tyrant_103.mdl"} 
-ENT.StartHealth = 1000
-ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
+ENT.StartHealth = 2000
+ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
 ENT.MeleeAttackDamage = 25
 ENT.MeleeAttackDistance = 40
@@ -42,6 +42,16 @@ end
 function ENT:CustomInitialize() 
 	self:SetCollisionBounds(Vector(14, 22, 87), Vector(-10, -21, 0))	
 end   	 
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnEntityRelationshipCheck(ent, entFri, entDist) 
+timer.Simple(0.001,function()
+if ent:GetClass("npc_re_tyrant") then
+ent.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
+if IsValid(ent) then
+end
+end
+end)
+end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2017 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,

@@ -7,7 +7,7 @@ include('shared.lua')
 -----------------------------------------------*/
 ENT.Model = {"models/recb/recb_zombie_torso.mdl"} 
 ENT.StartHealth = 100
-ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
+ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
 ENT.HullType = HULL_HUMAN
 ENT.CanFlinch = 1
@@ -65,6 +65,16 @@ local zombieskin = math.random(1,2)
 	--self:SetBodygroup(1,math.random(0,2))	
 	self:SetBodygroup(7,math.random(0,1))
 end
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnEntityRelationshipCheck(ent, entFri, entDist) 
+timer.Simple(0.001,function()
+if ent:GetClass("npc_re_tyrant") then
+ent.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
+if IsValid(ent) then
+end
+end
+end)
 end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***

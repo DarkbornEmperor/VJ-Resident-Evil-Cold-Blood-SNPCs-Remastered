@@ -7,7 +7,7 @@ include('shared.lua')
 -----------------------------------------------*/
 ENT.Model = {"models/recb/recb_flyclaw.mdl"} 
 ENT.StartHealth = 300
-ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
+ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
 ENT.HullType = HULL_HUMAN
 ENT.CanFlinch = 1
@@ -54,6 +54,16 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize() 
 	self:SetCollisionBounds(Vector(35, 22, 60), Vector(-25, -22, 0))
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnEntityRelationshipCheck(ent, entFri, entDist) 
+timer.Simple(0.001,function()
+if ent:GetClass("npc_re_tyrant") then
+ent.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
+if IsValid(ent) then
+end
+end
+end)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)

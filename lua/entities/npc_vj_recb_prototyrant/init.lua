@@ -7,7 +7,7 @@ include('shared.lua')
 -----------------------------------------------*/
 ENT.Model = {"models/recb/recb_prototyrant.mdl"} 
 ENT.StartHealth = 5000
-ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
+ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.FootStepTimeRun = 0.27
@@ -39,6 +39,20 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 		self:MeleeAttackCode()
 	end
 end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomInitialize() 
+	self:SetCollisionBounds(Vector(20, 20, 100), Vector(-20, -20, 0))
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnEntityRelationshipCheck(ent, entFri, entDist) 
+timer.Simple(0.001,function()
+if ent:GetClass("npc_re_tyrant") then
+ent.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
+if IsValid(ent) then
+end
+end
+end)
+end
 ---------------------------------------------------------------------------------------------------------------------------------------------	
 function ENT:MultipleMeleeAttacks()
 	local randattack = math.random(1,2)
@@ -56,25 +70,20 @@ function ENT:MultipleMeleeAttacks()
 
 	end
 end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomInitialize() 
-	self:SetCollisionBounds(Vector(20, 20, 100), Vector(-20, -20, 0))
-end
 ---------------------------------------------------------------------------------------------------------------------------------------------    
-function ENT:CustomOnThink_AIEnabled()
-	if self.Tyrant_Mutate == false && self.Dead == false && (self.StartHealth -1000 > self:Health()) then
-		self.Tyrant_Mutate = true
-		self:VJ_ACT_PLAYACTIVITY("attack2",true,1,false)
-		timer.Simple(0.3,function() if IsValid(self) then
-			if self.HasSounds == true then VJ_EmitSound(self,"tyrant/tyrant_roar.wav") end end end)
-			timer.Simple(1,function() if IsValid(self) then 
-				 self.AnimTbl_Run = {ACT_RUN}
+--function ENT:CustomOnThink_AIEnabled()
+	--if self.Tyrant_Mutate == false && self.Dead == false && (self.StartHealth -1000 > self:Health()) then
+		--self.Tyrant_Mutate = true
+		--self:VJ_ACT_PLAYACTIVITY("attack2",true,1,false)
+		--timer.Simple(0.3,function() if IsValid(self) then
+			--if self.HasSounds == true then VJ_EmitSound(self,"tyrant/tyrant_roar.wav") end end end)
+			--timer.Simple(1,function() if IsValid(self) then 
+				-- self.AnimTbl_Run = {ACT_RUN}
                
-			end
-		end)
-	end
-end
-	 
+			--end
+		--end)
+	--end
+--end	 
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2017 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
