@@ -9,6 +9,7 @@ ENT.Model = {"models/recb/recb_prototyrant.mdl"}
 ENT.StartHealth = 5000
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
 ENT.BloodColor = "Red"
+ENT.TimeUntilMeleeAttackDamage = false
 ENT.FootStepTimeRun = 0.27
 ENT.FootStepTimeWalk = 0.6
 ENT.NextMeleeAttackTime = 1.5

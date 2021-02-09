@@ -9,6 +9,10 @@ ENT.Model = {"models/recb/recb_tyrant_103.mdl"}
 ENT.StartHealth = 1000
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
 ENT.BloodColor = "Red"
+ENT.MeleeAttackDamage = 25
+ENT.MeleeAttackDistance = 40
+ENT.MeleeAttackDamageDistance = 80
+ENT.TimeUntilMeleeAttackDamage = false
 ENT.NextMeleeAttackTime = 1.5
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 10
@@ -32,28 +36,6 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	end
 	if key == "attack" then
 		self:MeleeAttackCode()
-	end
-end
----------------------------------------------------------------------------------------------------------------------------------------------	
-function ENT:MultipleMeleeAttacks()
-	local randattack = math.random(1,3)
-	if randattack == 1 then
-		self.AnimTbl_MeleeAttack = {"vjseq_attack1"}
-		self.MeleeAttackDamage = 25
-		self.MeleeAttackDistance = 40
-		self.MeleeAttackDamageDistance = 80
-		
-	elseif randattack == 2 then
-		self.AnimTbl_MeleeAttack = {"vjseq_attack2"}
-		self.MeleeAttackDamage = 25
-		self.MeleeAttackDistance = 40
-		self.MeleeAttackDamageDistance = 80
-		
-	elseif randattack == 3 then
-		self.AnimTbl_MeleeAttack = {"vjseq_attack3"}
-		self.MeleeAttackDamage = 25
-		self.MeleeAttackDistance = 40
-		self.MeleeAttackDamageDistance = 80
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
