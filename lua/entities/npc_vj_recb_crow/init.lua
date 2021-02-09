@@ -53,16 +53,6 @@ function ENT:CustomInitialize()
 	self:SetCollisionBounds(Vector(6.06, 13.58, 11.63), Vector(-9.57, -13.59, -5.53))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnEntityRelationshipCheck(ent, entFri, entDist) 
-timer.Simple(0.001,function()
-if ent:GetClass("npc_re_tyrant") then
-ent.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
-if IsValid(ent) then
-end
-end
-end)
-end
----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:MultipleMeleeAttacks()
     local shark_attack = math.random(1,1)
 

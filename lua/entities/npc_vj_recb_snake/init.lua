@@ -1,28 +1,24 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2016 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/recb/recb_neptune.mdl"} 
-ENT.StartHealth = 400
-ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
-ENT.MovementType = VJ_MOVETYPE_AQUATIC 
-ENT.Aquatic_SwimmingSpeed_Calm = 80 
-ENT.Aquatic_SwimmingSpeed_Alerted = 200
-ENT.Aquatic_AnimTbl_Calm = {ACT_WALK} 
-ENT.Aquatic_AnimTbl_Alerted = {ACT_RUN}
+ENT.Model = {"models/recb/recb_snake.mdl"} 
+ENT.StartHealth = 50
+ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK"}
 ENT.BloodColor = "Red"
 ENT.HullType = HULL_HUMAN
 ENT.CanFlinch = 1
 ENT.FlinchChance = 5
-ENT.AnimTbl_Flinch = {ACT_FLINCH_SMALL,ACT_FLINCH_BIG}
+ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
-ENT.NextMeleeAttackTime = 1.5
+ENT.MeleeAttackDamageType = DMG_POISON
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.MeleeAttackDistance = 80 
-ENT.MeleeAttackDamageDistance = 170
+ENT.MeleeAttackDamage = 10
+ENT.MeleeAttackDistance = 15 
+ENT.MeleeAttackDamageDistance = 45
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
@@ -30,16 +26,15 @@ ENT.DisableFootStepSoundTimer = true
 ENT.GibOnDeathDamagesTable = {"All"}
 
 	-- ====== Sound File Paths ====== --
--- Leave blank if you don't want any sounds to play}
-ENT.SoundTbl_Breath = {"shark/shark_swim_peace.wav"}
-ENT.SoundTbl_Alert = {"shark/Shark_Alert.wav"}
-ENT.SoundTbl_BeforeMeleeAttack = {"shark/Shark_attack.wav"} 
-ENT.SoundTbl_MeleeAttack = {"shark/shark_bite.wav"} 
-ENT.SoundTbl_Pain = {"shark/Shark_pain.wav"}
-ENT.SoundTbl_Death = {"shark/Shark_death.wav"}
+-- Leave blank if you don't want any sounds to play
+ENT.SoundTbl_BeforeMeleeAttack = {"snake/snake_attack.wav"}
+ENT.SoundTbl_MeleeAttack = {"snake/snake_bite.wav"}
+ENT.SoundTbl_MeleeAttackMiss = {"hunter/hu_slash.wav"}
+ENT.SoundTbl_Death = {"snake/snake_die.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
+
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	if key == "step" then
@@ -48,26 +43,20 @@ end
 	if key == "attack" then
 		self:MeleeAttackCode()
 end
+	--if key == "crawl" then
+		--self:FootStepSoundCode()
+	--end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomInitialize() 
-	self:SetCollisionBounds(Vector(123.34, 72.88, 58.51), Vector(-169.60, -69.65, -37.19))	
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:MultipleMeleeAttacks()
-    local shark_attack = math.random(1,1)
-
-	if licker_attack == 1 then
-		self.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
-		self.MeleeAttackDamage = 15
-end
+function ENT:CustomOnInitialize()
+self:SetCollisionBounds(Vector(29.86, 6.04, 5.87), Vector(-15.24, -10.02, -2.78))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
-		self.AnimTbl_Death = {ACT_DIESIMPLE,ACT_DIEVIOLENT}
+		self.AnimTbl_Death = {ACT_DIESIMPLE}
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2016 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

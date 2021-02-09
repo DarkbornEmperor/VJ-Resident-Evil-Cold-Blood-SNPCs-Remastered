@@ -13,7 +13,7 @@ function ENT:CustomOnInitialize()
 	self:SetBodygroup(1,math.random(0,4))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
+function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
 	if (dmginfo:IsBulletDamage())then
 		local attacker = dmginfo:GetAttacker()
 	
