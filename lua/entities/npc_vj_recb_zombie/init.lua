@@ -15,7 +15,6 @@ ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.MeleeAttackDamage = 10
 ENT.MeleeAttackDistance = 20 
 ENT.MeleeAttackDamageDistance = 50
 ENT.HasDeathAnimation = true

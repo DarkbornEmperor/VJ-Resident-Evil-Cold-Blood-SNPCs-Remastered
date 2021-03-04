@@ -15,8 +15,6 @@ ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.MeleeAttackDamage = 10
-ENT.AnimTbl_MeleeAttack = {"vjseq_attack2"}
 ENT.MeleeAttackDistance = 20 
 ENT.MeleeAttackDamageDistance = 50
 ENT.HasDeathAnimation = true
@@ -133,10 +131,10 @@ function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
 	if hitgroup == HITGROUP_HEAD && self.Zombie_Crawl == false then
 		self.AnimTbl_Death = {ACT_DIE_HEADSHOT}
 	else
-		self.AnimTbl_Death = {ACT_DIEBACKWARD,ACT_DIEFORWARD,ACT_DIESIMPLE,ACT_DIE_GUTSHOT,ACT_DIEVIOLENT}
+		self.AnimTbl_Death = {ACT_DIEBACKWARD,ACT_DIEFORWARD,ACT_DIESIMPLE,ACT_DIE_GUTSHOT,ACT_DIEVIOLENT,ACT_CHESTSHOT}
 end
 	if self.Zombie_Crawl == true then
-	self.AnimTbl_Death = {"crawl_die","crawl_die","crawl_die"}
+	self.AnimTbl_Death = {ACT_DIE_BACKSHOT}
 end
 end
 /*-----------------------------------------------
