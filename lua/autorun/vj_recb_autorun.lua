@@ -6,7 +6,7 @@
 --------------------------------------------------*/
 ------------------ Addon Information ------------------
 local PublicAddonName = "Resident Evil: Cold Blood SNPCs"
-local AddonName = "Resident Evil: SNPCs"
+local AddonName = "Resident Evil: Cold Blood"
 local AddonType = "SNPC"
 local AutorunFile = "autorun/vj_recb_autorun.lua"
 -------------------------------------------------------
