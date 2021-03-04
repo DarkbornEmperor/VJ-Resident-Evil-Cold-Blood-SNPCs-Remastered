@@ -49,7 +49,11 @@ end
 end
 	--if key == "crawl" then
 		--self:FootStepSoundCode()
-	--end	
+	--end
+
+	if key == "death" then
+		VJ_EmitSound(self, "zombie/zom_bodyfall"..math.random(1,2)..".wav", 85, math.random(100,100))
+	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
@@ -91,7 +95,25 @@ end
 		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
 		self:SetBodygroup(6,1)
 end
+
+		if math.random(1,5) == 1 && hitgroup == HITGROUP_RIGHTLEG or hitgroup == HITGROUP_LEFTLEG && self.Zombie_Crawl == false then
+		self.Zombie_Crawl = true
+		self:EmitSound(Sound("zombie/zom_leglost.wav",70))
+		self:VJ_ACT_PLAYACTIVITY("legless_fall",true,0.4,true)
+		self.AnimTbl_IdleStand = {self:GetSequenceActivity(self:LookupSequence("legless_idle"))}
+	    self.AnimTbl_Walk = {self:GetSequenceActivity(self:LookupSequence("crawl_1","crawl_2"))}
+	    self.AnimTbl_Run = {self:GetSequenceActivity(self:LookupSequence("crawl_1","crawl_2"))}
+	    self.CanFlinch = 0
+		self:SetCollisionBounds(Vector(35, 15, 20), -Vector(35, 15, 0))	
+		
+		if hitgroup == HITGROUP_RIGHTLEG then
+		self:SetBodygroup(2,1)
+		
+		elseif hitgroup == HITGROUP_LEFTLEG then
+		self:SetBodygroup(3,1)
+end
 end	
+end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
@@ -124,10 +146,13 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
-	if hitgroup == HITGROUP_HEAD then
-		self.AnimTbl_Death = {ACT_DIE_GUTSHOT,ACT_DIE_HEADSHOT}
+	if hitgroup == HITGROUP_HEAD && self.Zombie_Crawl == false then
+		self.AnimTbl_Death = {ACT_DIE_HEADSHOT}
 	else
-		self.AnimTbl_Death = {ACT_DIEBACKWARD,ACT_DIEFORWARD,ACT_DIESIMPLE}
+		self.AnimTbl_Death = {ACT_DIEBACKWARD,ACT_DIEFORWARD,ACT_DIESIMPLE,ACT_DIE_GUTSHOT,ACT_DIEVIOLENT}
+end
+	if self.Zombie_Crawl == true then
+	self.AnimTbl_Death = {"crawl_die","crawl_die","crawl_die"}
 end
 end
 /*-----------------------------------------------

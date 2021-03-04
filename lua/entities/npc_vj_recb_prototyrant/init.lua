@@ -17,6 +17,7 @@ ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.AnimTbl_Death = {ACT_DIEVIOLENT}
 ENT.HasDeathRagdoll = false
+ENT.DisableFootStepSoundTimer = true 
 
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
@@ -34,10 +35,13 @@ ENT.Tyrant_Mutate = false
 function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	if key == "step" then
 		self:FootStepSoundCode()
-	end
+end
 	if key == "attack" then
 		self:MeleeAttackCode()
-	end
+end
+	if key == "death" then
+		VJ_EmitSound(self, "tyrant/tyrant_bodyhit.wav", 85, math.random(100,100))
+	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 

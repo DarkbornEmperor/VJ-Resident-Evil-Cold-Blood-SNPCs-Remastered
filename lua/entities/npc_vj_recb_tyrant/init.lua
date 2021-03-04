@@ -33,10 +33,13 @@ ENT.GeneralSoundPitch2 = 100
 function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	if key == "step" then
 		self:FootStepSoundCode()
-	end
+end
 	if key == "attack" then
 		self:MeleeAttackCode()
-	end
+end
+	if key == "death" then
+		VJ_EmitSound(self, "tyrant103/ty_bodydrop.wav", 85, math.random(100,100))
+	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 

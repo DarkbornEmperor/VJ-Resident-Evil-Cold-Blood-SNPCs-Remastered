@@ -16,7 +16,6 @@ ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDamage = 10
-ENT.AnimTbl_MeleeAttack = {"vjseq_attack2"}
 ENT.MeleeAttackDistance = 20 
 ENT.MeleeAttackDamageDistance = 50
 ENT.HasDeathAnimation = true
@@ -50,7 +49,11 @@ end
 end
 	--if key == "crawl" then
 		--self:FootStepSoundCode()
-	--end	
+	--end
+
+	if key == "death" then
+		VJ_EmitSound(self, "zombie/zom_bodyfall"..math.random(1,2)..".wav", 85, math.random(100,100))
+	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
@@ -70,12 +73,11 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:MultipleMeleeAttacks()
-	if math.random(1,1) == 1 then
 		self.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
 		self.MeleeAttackDamage = 15
-end
-	if self.Zombie_Crawl == true then
-	self.AnimTbl_MeleeAttack = {"vjseq_crawl_attack"}
+		
+	 if self.Zombie_Crawl == true then
+	    self.AnimTbl_MeleeAttack = {"vjseq_crawl_attack"}
 end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -154,12 +156,12 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
 	if hitgroup == HITGROUP_HEAD && self.Zombie_Crawl == false then
-		self.AnimTbl_Death = {ACT_DIE_GUTSHOT,ACT_DIE_HEADSHOT}
+		self.AnimTbl_Death = {ACT_DIE_HEADSHOT}
 	else
-		self.AnimTbl_Death = {ACT_DIEBACKWARD,ACT_DIEFORWARD,ACT_DIESIMPLE}
+		self.AnimTbl_Death = {ACT_DIEBACKWARD,ACT_DIEFORWARD,ACT_DIESIMPLE,ACT_DIE_GUTSHOT,ACT_DIEVIOLENT,ACT_CHESTSHOT}
 end
 	if self.Zombie_Crawl == true then
-	self.AnimTbl_Death = {"crawl_die","crawl_die","crawl_die"}
+	self.AnimTbl_Death = {ACT_DIE_BACKSHOT}
 end
 end
 /*-----------------------------------------------

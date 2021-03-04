@@ -1,4 +1,5 @@
 "VertexlitGeneric"
 {
 	"$basetexture" "models/recb/supertyrant/tyrant"
+                "$model" 1
 }
