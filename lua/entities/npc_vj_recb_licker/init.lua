@@ -61,11 +61,14 @@ end
 end
 	if key == "tongue_attack" then
 		self:MeleeAttackCode()
+end	
+	if key == "death" then
+		VJ_EmitSound(self, "licker/li_bodyfall.wav", 85, math.random(100,100))
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
-	self:SetCollisionBounds(Vector(32, 25, 35), Vector(-32, -25, 0))	
+	self:SetCollisionBounds(Vector(30, 20, 32), Vector(-30, -20, 0))	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:MultipleMeleeAttacks()

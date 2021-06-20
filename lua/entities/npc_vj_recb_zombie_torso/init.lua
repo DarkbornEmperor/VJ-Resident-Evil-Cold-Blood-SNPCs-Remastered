@@ -45,10 +45,7 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 end
 	if key == "attack" then
 		self:MeleeAttackCode()
-end
-	--if key == "crawl" then
-		--self:FootStepSoundCode()
-	--end	
+   end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
@@ -59,14 +56,11 @@ local zombieskin = math.random(1,2)
     if zombieskin == 1 then
 	self:SetSkin(math.random(0,3))
 	self:SetBodygroup(0,math.random(0,1))
-	--self:SetBodygroup(1,math.random(0,2))
-	
+
     elseif zombieskin == 2 then
 	self:SetSkin(math.random(4,5))
-	--self:SetBodygroup(0,math.random(1,1))
-	--self:SetBodygroup(1,math.random(0,2))	
 	self:SetBodygroup(7,math.random(0,1))
-end
+   end
 end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***

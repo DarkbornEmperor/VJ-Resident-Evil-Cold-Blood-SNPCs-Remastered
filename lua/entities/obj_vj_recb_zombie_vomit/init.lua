@@ -6,9 +6,9 @@ include("shared.lua")
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/spitball_small.mdl"} -- The models it should spawn with | Picks a random one from the table
-ENT.DecalTbl_DeathDecals = {"VJ_Blood1"}
-ENT.SoundTbl_Idle = {"vj_acid/acid_idle1.wav"}
-ENT.SoundTbl_OnCollide = {"vj_acid/acid_splat.wav"}
+ENT.DecalTbl_DeathDecals = {"VJ_RECB_Blood_Red_Large"}
+--ENT.SoundTbl_Idle = {"vj_acid/acid_idle1.wav"}
+ENT.SoundTbl_OnCollide = {"zombie/vomit_floor.wav"}
 ENT.DoesRadiusDamage = true -- Should it do a blast damage when it hits something?
 ENT.RadiusDamageRadius = 180 -- How far the damage go? The farther away it's from its enemy, the less damage it will do | Counted in world units
 ENT.RadiusDamage = 10 -- How much damage should it deal? Remember this is a radius damage, therefore it will do less damage the farther away the entity is from its enemy
@@ -23,26 +23,29 @@ function ENT:CustomPhysicsObjectOnInitialize(phys)
 	//phys:SetMass(1)
 	phys:SetBuoyancyRatio(0)
 	phys:EnableDrag(false)
+	phys:EnableGravity(true)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
-	ParticleEffectAttach("vj_impact1_red", PATTACH_ABSORIGIN_FOLLOW, self, 0)
+	ParticleEffectAttach("drg_re1_blood_impact", PATTACH_ABSORIGIN_FOLLOW, self, 0)
+	ParticleEffectAttach("drg_re1_blood_impact", PATTACH_ABSORIGIN_FOLLOW, self, 0)
 	self:SetNoDraw(true)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnThink()
-	ParticleEffectAttach("vj_impact1_red", PATTACH_ABSORIGIN_FOLLOW, self, 0)
+	ParticleEffectAttach("drg_re1_blood_impact", PATTACH_ABSORIGIN_FOLLOW, self, 0)
+	ParticleEffectAttach("drg_re1_blood_impact", PATTACH_ABSORIGIN_FOLLOW, self, 0)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:DeathEffects(data,phys)
 	local effectdata = EffectData()
 	effectdata:SetOrigin(data.HitPos)
 	effectdata:SetScale( 1 )
-	util.Effect("StriderBlood",effectdata)
-	util.Effect("StriderBlood",effectdata)
-	util.Effect("StriderBlood",effectdata)
-	ParticleEffect("vj_impact1_red", data.HitPos, Angle(0,0,0), nil)
-	ParticleEffect("vj_impact1_red", data.HitPos, Angle(0,0,0), nil)
+	--util.Effect("StriderBlood",effectdata)
+	--util.Effect("StriderBlood",effectdata)
+	--util.Effect("StriderBlood",effectdata)
+	ParticleEffect("drg_re1_blood_impact_large", data.HitPos, Angle(0,0,0), nil)
+	ParticleEffect("drg_re1_blood_impact_large", data.HitPos, Angle(0,0,0), nil)
 end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***

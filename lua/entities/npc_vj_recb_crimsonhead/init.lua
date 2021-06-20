@@ -34,7 +34,7 @@ ENT.SoundTbl_Breath = {"zombie/crimsonhead/crimhead_run.wav"}
 ENT.SoundTbl_Idle = {"zombie/CrimsonHead/crimhead_attack1.wav","zombie/CrimsonHead/crimhead_attack2.wav"}
 ENT.SoundTbl_Alert = {"zombie/CrimsonHead/crimhead_alert.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"zombie/CrimsonHead/crimhead_attack1.wav","zombie/CrimsonHead/crimhead_attack2.wav"}
---ENT.SoundTbl_MeleeAttackMiss = {"nhzombie/claw_miss1.wav","nhzombie/claw_miss2.wav"}
+ENT.SoundTbl_MeleeAttackMiss = {""}
 ENT.SoundTbl_Pain = {"zombie/CrimsonHead/crimhead_pain.wav"}
 ENT.SoundTbl_Death = {"zombie/CrimsonHead/crimhead_die.wav"}
 ENT.SoundTbl_MeleeAttack = {"zombie/CrimsonHead/crimhead_slash.wav"}
@@ -63,59 +63,41 @@ local zombieskin = math.random(1,2)
 
     if zombieskin == 1 then
 	self:SetSkin(math.random(0,3))
-	--self:SetBodygroup(0,math.random(1,1))
-	--self:SetBodygroup(1,math.random(0,2))
-	
+
     elseif zombieskin == 2 then
 	self:SetSkin(math.random(4,5))
-	--self:SetBodygroup(0,math.random(1,1))
-	--self:SetBodygroup(1,math.random(0,2))	
 	self:SetBodygroup(7,math.random(0,1))
-end
+   end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
-	if (dmginfo:IsBulletDamage())then
+	if (dmginfo:IsBulletDamage()) && self.Damaged == false then
 		local attacker = dmginfo:GetAttacker()
 	
-		if math.random(1,5) == 1 && hitgroup == HITGROUP_HEAD then
+		if math.random(1,10) == 1 && hitgroup == HITGROUP_HEAD then
 		self:EmitSound(Sound("zombie/zom_neck_break.wav",70))
 		self:SetBodygroup(1,2)
 		self:SetBodygroup(7,0)
+		self.Damaged = true
 end	
 	
-		if math.random(1,5) == 1 && hitgroup == HITGROUP_CHEST then
+		if math.random(1,10) == 1 && hitgroup == HITGROUP_CHEST then
 		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
 		self:SetBodygroup(4,1)
+		self.Damaged = true
 end		
-		if math.random(1,5) == 1 && hitgroup == HITGROUP_RIGHTARM then
+		if math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
 		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
 		self:SetBodygroup(5,1)
+		self.Damaged = true
 end
 
-		if math.random(1,5) == 1 && hitgroup == HITGROUP_LEFTARM then
+		if math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
 		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
 		self:SetBodygroup(6,1)
-end
-
-		if math.random(1,5) == 1 && hitgroup == HITGROUP_RIGHTLEG or hitgroup == HITGROUP_LEFTLEG && self.Zombie_Crawl == false then
-		self.Zombie_Crawl = true
-		self:EmitSound(Sound("zombie/zom_leglost.wav",70))
-		self:VJ_ACT_PLAYACTIVITY("legless_fall",true,0.4,true)
-		self.AnimTbl_IdleStand = {self:GetSequenceActivity(self:LookupSequence("legless_idle"))}
-	    self.AnimTbl_Walk = {self:GetSequenceActivity(self:LookupSequence("crawl_1","crawl_2"))}
-	    self.AnimTbl_Run = {self:GetSequenceActivity(self:LookupSequence("crawl_1","crawl_2"))}
-	    self.CanFlinch = 0
-		self:SetCollisionBounds(Vector(35, 15, 20), -Vector(35, 15, 0))	
-		
-		if hitgroup == HITGROUP_RIGHTLEG then
-		self:SetBodygroup(2,1)
-		
-		elseif hitgroup == HITGROUP_LEFTLEG then
-		self:SetBodygroup(3,1)
-end
-end	
-end
+		self.Damaged = true
+    end
+  end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
@@ -126,9 +108,9 @@ function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	
 		if self.HasGibDeathParticles == true then
 			for i=1,3 do
-				ParticleEffect("blood_impact_red_01",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				ParticleEffect("blood_impact_red_01",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				ParticleEffect("blood_impact_red_01",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
 				
 		local bloodeffect = ents.Create("info_particle_system")
 		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
@@ -148,12 +130,12 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
-	if hitgroup == HITGROUP_HEAD && self.Zombie_Crawl == false then
+	if hitgroup == HITGROUP_HEAD && !self.Crippled then
 		self.AnimTbl_Death = {ACT_DIE_HEADSHOT}
 	else
 		self.AnimTbl_Death = {ACT_DIEBACKWARD,ACT_DIEFORWARD,ACT_DIESIMPLE,ACT_DIE_GUTSHOT,ACT_DIEVIOLENT,ACT_CHESTSHOT}
 end
-	if self.Zombie_Crawl == true then
+	if self.Crippled == true then
 	self.AnimTbl_Death = {ACT_DIE_BACKSHOT}
 end
 end

@@ -9,8 +9,8 @@ ENT.Model = {"models/recb/recb_crawler.mdl"}
 ENT.StartHealth = 100
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
-ENT.CustomBlood_Particle = {"drg_re1_blood_impact"}
-ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
+ENT.CustomBlood_Particle = {"drg_re1_blood_impact_green"}
+ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Yellow"}
 ENT.HullType = HULL_HUMAN
 ENT.CanFlinch = 1
 ENT.FlinchChance = 5
@@ -44,13 +44,13 @@ end
 	if key == "attack" then
 		self:MeleeAttackCode()
 end
-	--if key == "crawl" then
-		--self:FootStepSoundCode()
-	--end	
+	if key == "death" then
+		VJ_EmitSound(self, "crawler/crawler_bodyfall.wav", 85, math.random(100,100))
+	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize() 
-	self:SetCollisionBounds(Vector(40, 22, 70), Vector(-40, -22, 0))
+	self:SetCollisionBounds(Vector(40, 22, 65), Vector(-40, -22, 0))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)

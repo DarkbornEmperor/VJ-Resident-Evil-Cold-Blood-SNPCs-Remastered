@@ -49,10 +49,13 @@ end
 	if key == "attack" then
 		self:MeleeAttackCode()
 end
+	if key == "death" then
+		VJ_EmitSound(self, "crow/crow_bodyhit.wav", 85, math.random(100,100))
+	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
-	self:SetCollisionBounds(Vector(6.06, 13.58, 11.63), Vector(-9.57, -13.59, -5.53))
+	self:SetCollisionBounds(Vector(10, 10, 11.63), Vector(-10, -10, -5.53))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:MultipleMeleeAttacks()

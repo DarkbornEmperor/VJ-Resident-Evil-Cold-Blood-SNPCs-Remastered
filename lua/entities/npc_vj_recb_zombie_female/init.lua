@@ -40,9 +40,10 @@ ENT.SoundTbl_MeleeAttack = {"zombie/bite1.wav","zombie/bite2.wav"}
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
 
--- Crawling
+-- Custom
 ENT.LegHealth = 20
 ENT.Crippled = false
+ENT.Vomit_Zombie = false
 ENT.Damaged = false
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnAcceptInput(key,activator,caller,data)
@@ -52,16 +53,39 @@ end
 	if key == "attack" then
 		self:MeleeAttackCode()
 end
-	--if key == "crawl" then
-		--self:FootStepSoundCode()
-	--end
-
+	if key == "vomit" then
+		self:RangeAttackCode()
+end
 	if key == "death" then
 		VJ_EmitSound(self, "zombie/zom_bodyfall"..math.random(1,2)..".wav", 85, math.random(100,100))
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
+function ENT:CustomOnPreInitialize()
+		if math.random(1,10) == 1 then
+			self.Vomit_Zombie = true
+	end
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnInitialize()
+	if self.Vomit_Zombie && !self.Crippled then
+	     self:SetVomitZombie()
+   end		
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:SetVomitZombie()
+    self.HasMeleeAttack = false 
+	self.HasRangeAttack = true 
+	self.AnimTbl_RangeAttack = {ACT_SPECIAL_ATTACK1}
+	self.RangeAttackEntityToSpawn = "obj_vj_recb_zombie_vomit"
+	self.RangeDistance = 60
+    self.RangeToMeleeDistance = 1 
+	self.TimeUntilRangeAttackProjectileRelease = false
+	self.RangeUseAttachmentForPos = true 
+    self.RangeUseAttachmentForPosID = "mouth"
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
 	if (dmginfo:IsBulletDamage()) && self.Damaged == false then
 		local attacker = dmginfo:GetAttacker()
 		
@@ -112,6 +136,8 @@ function ENT:Cripple()
 	self:CapabilitiesRemove(bit.bor(CAP_MOVE_JUMP))
 	self:CapabilitiesRemove(bit.bor(CAP_MOVE_CLIMB))	
 	self.CanFlinch = 0
+	self.HasRangeAttack = false
+	self.HasMeleeAttack = true 
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
@@ -146,7 +172,7 @@ function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
 	if hitgroup == HITGROUP_HEAD && !self.Crippled then
 		self.AnimTbl_Death = {ACT_DIE_HEADSHOT}
 	else
-		self.AnimTbl_Death = {ACT_DIEBACKWARD,ACT_DIEFORWARD,ACT_DIESIMPLE,ACT_DIE_GUTSHOT,ACT_DIEVIOLENT,ACT_CHESTSHOT}
+		self.AnimTbl_Death = {ACT_DIEFORWARD,ACT_DIESIMPLE}
 end
 	if self.Crippled == true then
 	self.AnimTbl_Death = {ACT_DIE_BACKSHOT}

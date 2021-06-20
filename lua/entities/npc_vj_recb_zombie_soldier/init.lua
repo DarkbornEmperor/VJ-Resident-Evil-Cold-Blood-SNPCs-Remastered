@@ -74,10 +74,10 @@ function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 		bloodeffect:Fire("Start","",0)
 		bloodeffect:Fire("Kill","",2)	
 				
-	end
+   end
 end
 		return true,{DeathAnim=true}
-end
+   end
 end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***

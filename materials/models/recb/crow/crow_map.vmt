@@ -1,4 +1,6 @@
 "VertexLitGeneric"
 {
 	"$basetexture" "models/recb/crow/crow_map"
+	"$translucent" 1
+	"$alphatest" 1
 }
