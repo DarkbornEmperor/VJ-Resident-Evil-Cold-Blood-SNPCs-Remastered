@@ -1,0 +1,18 @@
+"UnlitGeneric"
+{
+	"$basetexture"	"effects/resident_evil_1/re1_blood"
+	"$additive"	0
+	"$vertexcolor"	1
+	"$vertexalpha"	1
+
+"Proxies"
+   {
+      "AnimatedTexture"
+      {
+         "animatedtexturevar" "$basetexture"
+         "animatedtextureframenumvar" "$frame"
+         "animatedtextureframerate" "30"
+      }
+   }
+
+}

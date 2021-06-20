@@ -35,6 +35,21 @@ if VJExists == true then
 	VJ.AddNPC("Crow","npc_vj_recb_crow",vCat)
 	VJ.AddNPC("Neptune","npc_vj_recb_neptune",vCat)
 
+game.AddDecal("VJ_RECB_Blood_Red",{"vj_hl/decals/hl_blood01","vj_hl/decals/hl_blood02","vj_hl/decals/hl_blood03","vj_hl/decals/hl_blood04","vj_hl/decals/hl_blood05","vj_hl/decals/hl_blood06","vj_hl/decals/hl_blood07","vj_hl/decals/hl_blood08"})
+
+game.AddParticles( "particles/drg_re1_monster_effects.pcf" )
+game.AddParticles( "particles/drg_re2_fire_effects.pcf" )
+PrecacheParticleSystem( "drg_re2_fire_huge" )
+PrecacheParticleSystem( "drg_re2_fire_large" )
+PrecacheParticleSystem( "drg_re2_fire_medium" )
+PrecacheParticleSystem( "drg_re2_fire_small" )
+PrecacheParticleSystem( "drg_re2_fire_tiny" )
+PrecacheParticleSystem( "drg_re1_blood_impact_large" )
+PrecacheParticleSystem( "drg_re1_blood_impact_acid" )
+PrecacheParticleSystem( "drg_re1_blood_impact_green" )
+PrecacheParticleSystem( "drg_re1_blood_impact_plant" )
+PrecacheParticleSystem( "drg_re1_blood_impact_plant_small" )
+
 -- !!!!!! DON'T TOUCH ANYTHING BELOW THIS !!!!!! -------------------------------------------------------------------------------------------------------------------------
 	AddCSLuaFile(AutorunFile)
 	VJ.AddAddonProperty(AddonName,AddonType)

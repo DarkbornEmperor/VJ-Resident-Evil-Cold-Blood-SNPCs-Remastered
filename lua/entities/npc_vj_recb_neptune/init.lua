@@ -7,13 +7,15 @@ include('shared.lua')
 -----------------------------------------------*/
 ENT.Model = {"models/recb/recb_neptune.mdl"} 
 ENT.StartHealth = 400
-ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
+ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.MovementType = VJ_MOVETYPE_AQUATIC 
 ENT.Aquatic_SwimmingSpeed_Calm = 80 
 ENT.Aquatic_SwimmingSpeed_Alerted = 200
 ENT.Aquatic_AnimTbl_Calm = {ACT_WALK} 
 ENT.Aquatic_AnimTbl_Alerted = {ACT_RUN}
 ENT.BloodColor = "Red"
+ENT.CustomBlood_Particle = {"drg_re1_blood_impact"}
+ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
 ENT.HullType = HULL_HUMAN
 ENT.CanFlinch = 1
 ENT.FlinchChance = 5

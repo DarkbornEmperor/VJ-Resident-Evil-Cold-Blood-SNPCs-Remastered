@@ -7,8 +7,10 @@ include('shared.lua')
 -----------------------------------------------*/
 ENT.Model = {"models/recb/recb_zombie_torso.mdl"} 
 ENT.StartHealth = 100
-ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","FACTION_MOLDED","FACTION_RE6_USTANAK","C_MONSTER_LAB"}
+ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
+ENT.CustomBlood_Particle = {"drg_re1_blood_impact"}
+ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
 ENT.HullType = HULL_HUMAN
 ENT.CanFlinch = 1
 ENT.FlinchChance = 5
@@ -50,7 +52,7 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
-self:SetCollisionBounds(Vector(35, 15, 20), -Vector(35, 15, 0))
+self:SetCollisionBounds(Vector(16,16,20),Vector(-16,-16,0))
 
 local zombieskin = math.random(1,2)
 

@@ -25,26 +25,30 @@ end
 		if math.random(1,5) == 1 && hitgroup == HITGROUP_LEFTARM then
 		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
 		self:SetBodygroup(6,1)
+    end
+  end	
 end
-
-		if math.random(1,5) == 1 && hitgroup == HITGROUP_RIGHTLEG or hitgroup == HITGROUP_LEFTLEG && self.Zombie_Crawl == false then
-		self.Zombie_Crawl = true
-		self:EmitSound(Sound("zombie/zom_leglost.wav",70))
-		self:VJ_ACT_PLAYACTIVITY("legless_fall",true,0.4,true)
-		self.AnimTbl_IdleStand = {self:GetSequenceActivity(self:LookupSequence("legless_idle"))}
-	    self.AnimTbl_Walk = {self:GetSequenceActivity(self:LookupSequence("crawl_1","crawl_2"))}
-	    self.AnimTbl_Run = {self:GetSequenceActivity(self:LookupSequence("crawl_1","crawl_2"))}
-	    self.CanFlinch = 0
-		self:SetCollisionBounds(Vector(35, 15, 20), -Vector(35, 15, 0))	
-		
-		if hitgroup == HITGROUP_RIGHTLEG then
-		self:SetBodygroup(3,1)
-		
-		elseif hitgroup == HITGROUP_LEFTLEG then
-		self:SetBodygroup(4,1)
-end
-end	
-end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
+	if !self.Crippled then
+		local legs = {6,7}
+		if VJ_HasValue(legs,hitgroup) then
+			self.LegHealth = self.LegHealth -dmginfo:GetDamage()
+			if self.LegHealth <= 0 then
+				self.Crippled = true
+				local anim = ACT_FLINCH_PHYSICS
+				if hitgroup == HITGROUP_LEFTLEG then
+					self:SetBodygroup(4,1)
+				elseif hitgroup == HITGROUP_RIGHTLEG then
+					self:SetBodygroup(3,1)
+				end
+				if math.random(1,4) == 1 then anim = ACT_FLINCH_PHYSICS end
+				self:VJ_ACT_PLAYACTIVITY(anim,true,false,true)
+				self:EmitSound(Sound("zombie/zom_leglost.wav",70))
+				self:Cripple()
+			end
+		end
+	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
@@ -55,9 +59,9 @@ function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	
 		if self.HasGibDeathParticles == true then
 			for i=1,3 do
-				ParticleEffect("blood_impact_red_01",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				ParticleEffect("blood_impact_red_01",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				ParticleEffect("blood_impact_red_01",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
 				
 		local bloodeffect = ents.Create("info_particle_system")
 		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
