@@ -50,10 +50,6 @@ end
 	if key == "attack" then
 		self:MeleeAttackCode()
 end
-	--if key == "crawl" then
-		--self:FootStepSoundCode()
-	--end
-
 	if key == "death" then
 		VJ_EmitSound(self, "zombie/zom_bodyfall"..math.random(1,2)..".wav", 85, math.random(100,100))
 	end	
@@ -97,8 +93,8 @@ end
 		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
 		self:SetBodygroup(6,1)
 		self.Damaged = true
-    end
-  end	
+      end
+   end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
@@ -127,7 +123,7 @@ function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	end
 end
 		return true,{DeathAnim=true}
-end
+    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)

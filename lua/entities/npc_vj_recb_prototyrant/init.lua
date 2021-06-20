@@ -6,7 +6,7 @@ include('shared.lua')
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/recb/recb_prototyrant.mdl"} 
-ENT.StartHealth = 5000
+ENT.StartHealth = 3000
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact"}
@@ -15,6 +15,7 @@ ENT.TimeUntilMeleeAttackDamage = false
 ENT.FootStepTimeRun = 0.27
 ENT.FootStepTimeWalk = 0.6
 ENT.NextMeleeAttackTime = 1.5
+ENT.AnimTbl_Run = {ACT_WALK}
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.AnimTbl_Death = {ACT_DIEVIOLENT}
@@ -33,7 +34,7 @@ ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
 
 -- Custom
-ENT.Tyrant_Mutate = false
+ENT.Tyrant_Rage = false
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	if key == "step" then
@@ -48,7 +49,12 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
-	self:SetCollisionBounds(Vector(20, 20, 100), Vector(-20, -20, 0))
+	self:SetCollisionBounds(Vector(20, 20, 100), Vector(-20, -20, 0))	
+	
+	if math.random(1,10) == 1 then
+	 self.Tyrant_Rage = true
+	 self:TyrantRage()
+	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------	
 function ENT:MultipleMeleeAttacks()
@@ -67,20 +73,26 @@ function ENT:MultipleMeleeAttacks()
 
 	end
 end
----------------------------------------------------------------------------------------------------------------------------------------------    
---function ENT:CustomOnThink_AIEnabled()
-	--if self.Tyrant_Mutate == false && self.Dead == false && (self.StartHealth -1000 > self:Health()) then
-		--self.Tyrant_Mutate = true
-		--self:VJ_ACT_PLAYACTIVITY("attack2",true,1,false)
-		--timer.Simple(0.3,function() if IsValid(self) then
-			--if self.HasSounds == true then VJ_EmitSound(self,"tyrant/tyrant_roar.wav") end end end)
-			--timer.Simple(1,function() if IsValid(self) then 
-				-- self.AnimTbl_Run = {ACT_RUN}
-               
-			--end
-		--end)
-	--end
---end	 
+-----------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnAlert()
+if math.random(1,2) == 1 && self.Tyrant_Rage == true then
+        self:VJ_ACT_PLAYACTIVITY("vjseq_attack2",true,1,false)	
+    end
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
+	 if self.Tyrant_Rage == true then
+	    dmginfo:ScaleDamage(0.75)
+    end
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:TyrantRage()
+     if self.Tyrant_Rage == true then
+       --self:VJ_ACT_PLAYACTIVITY("attack2",true,1,false)
+       --VJ_EmitSound(self,{"tyrant/tyrant_roar.wav"},80,100)  
+        self.AnimTbl_Run = {ACT_RUN}	
+    end
+end	 
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2017 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,

@@ -47,6 +47,9 @@ ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/h
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
+
+-- Custom
+ENT.GraySkin = false
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	if key == "step" then
@@ -63,14 +66,18 @@ end
 function ENT:CustomOnInitialize() 
 --VJ_EmitSound(self,{"hunter/hu_scream.wav"},70)
 	--self:VJ_ACT_PLAYACTIVITY("scream",true,1.76,true)
-	--self:SetBodygroup(0,math.random(0,1))
 	self:SetCollisionBounds(Vector(18, 22, 60), Vector(-18, -22, 0))
+	
+    if math.random(1,2) == 1 then
+	        self.GraySkin = true
+			self:SetBodygroup(0,1)
+	end		
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnAlert()
+function ENT:CustomOnCallForHelp(ally)
 if math.random(1,2) == 1 then
         self:VJ_ACT_PLAYACTIVITY("vjseq_scream",true,2,true)	
-end
+    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:MultipleMeleeAttacks()
@@ -78,16 +85,14 @@ function ENT:MultipleMeleeAttacks()
 	
 		if hunter_attack == 1 then
 			self.AnimTbl_MeleeAttack = {"vjseq_attack1"}
-			--self.NextAnyAttackTime_Melee = 0.9
 
 		elseif hunter_attack == 2 then
 			self.AnimTbl_MeleeAttack = {"vjseq_attack2"}
-			--self.NextAnyAttackTime_Melee = 0.9
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
-	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
+	if self.GraySkin == false && hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
 	    self:EmitSound(Sound("zombie/zom_headburst.wav",70))
 		self:SetBodygroup(0,2)
 	
@@ -111,7 +116,7 @@ function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	end
 end
 		return true,{DeathAnim=true}
-end
+    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
@@ -119,7 +124,7 @@ function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
 		self.AnimTbl_Death = {ACT_DIE_GUTSHOT,ACT_DIE_HEADSHOT}
 	else
 		self.AnimTbl_Death = {ACT_DIEBACKWARD,ACT_DIEFORWARD,ACT_DIESIMPLE}
-end
+    end
 end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2016 by DrVrej, All rights reserved. ***

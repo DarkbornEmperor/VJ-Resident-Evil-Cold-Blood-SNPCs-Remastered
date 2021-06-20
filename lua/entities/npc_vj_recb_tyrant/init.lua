@@ -25,7 +25,6 @@ ENT.DisableFootStepSoundTimer = true
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_FootStep = {"tyrant103/ty_walk.wav"}
---ENT.SoundTbl_BeforeMeleeAttack = {"tyrant103/ty_swing.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"tyrant103/ty_swing.wav"}
 ENT.SoundTbl_MeleeAttack = {"tyrant103/ty_punch.wav"}
 ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
@@ -47,7 +46,13 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
 	self:SetCollisionBounds(Vector(14, 22, 87), Vector(-10, -21, 0))	
-end   	 
+end   	
+ ---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
+    if hitgroup == HITGROUP_CHEST or hitgroup == HITGROUP_RIGHTARM or hitgroup == HITGROUP_LEFTARM or hitgroup == HITGROUP_RIGHTLEG or hitgroup == HITGROUP_LEFTARM then
+	    dmginfo:ScaleDamage(0.50)
+	end
+end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2017 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
