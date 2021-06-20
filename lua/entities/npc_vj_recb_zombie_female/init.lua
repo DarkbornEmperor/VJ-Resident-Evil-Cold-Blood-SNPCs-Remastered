@@ -36,6 +36,7 @@ ENT.SoundTbl_Pain = {"zombie/female/female1/zof_pain.wav","zombie/female/female2
 ENT.SoundTbl_Death = {"zombie/female/female1/zof_die.wav","zombie/female/female2/zof_die.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"zombie/female/female1/zof_attack.wav","zombie/female/female2/zof_attack.wav"}
 ENT.SoundTbl_MeleeAttack = {"zombie/bite1.wav","zombie/bite2.wav"}
+ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100

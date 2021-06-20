@@ -27,6 +27,7 @@ ENT.SoundTbl_FootStep = {"tyrant/tyrant_foot.wav"}
 ENT.SoundTbl_Alert = {"tyrant/tyrant_roar.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"tyrant/tyrant_swing2.wav","tyrant/tyrant_swing.wav"}
 ENT.SoundTbl_MeleeAttack = {"tyrant/tyrant_stab.wav","tyrant/tyrant_slash.wav"}
+ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100

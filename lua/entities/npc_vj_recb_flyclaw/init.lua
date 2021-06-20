@@ -8,7 +8,7 @@ include('shared.lua')
 ENT.Model = {"models/recb/recb_flyclaw.mdl"} 
 ENT.StartHealth = 300
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
-ENT.BloodColor = "Red"
+ENT.BloodColor = "Yellow"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact_green"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Yellow"}
 ENT.HullType = HULL_HUMAN
@@ -38,6 +38,7 @@ ENT.SoundTbl_BeforeMeleeAttack = {"flyclaw/fl_att.wav"}
 ENT.SoundTbl_MeleeAttack = {"flyclaw/fl_slash.wav"}
 ENT.SoundTbl_Pain = {"flyclaw/fl_dam.wav"}
 ENT.SoundTbl_Death = {"flyclaw/fl_out.wav"}
+ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100

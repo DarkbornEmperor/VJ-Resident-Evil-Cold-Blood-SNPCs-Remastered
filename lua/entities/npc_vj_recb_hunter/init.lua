@@ -43,6 +43,7 @@ ENT.SoundTbl_Pain = {"hunter/hu_pain.wav"}
 ENT.SoundTbl_Death = {"hunter/hu_die.wav"}
 ENT.SoundTbl_LeapAttackJump = {"hunter/hu_jump.wav"}
 ENT.SoundTbl_LeapAttackDamage = {"hunter/hu_clawhit.wav"}
+ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100

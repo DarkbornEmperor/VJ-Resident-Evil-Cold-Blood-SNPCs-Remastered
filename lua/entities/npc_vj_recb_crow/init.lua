@@ -14,7 +14,7 @@ ENT.Aerial_AnimTbl_Alerted = {ACT_WALK}
 ENT.BloodColor = "Red"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
-ENT.HullType = HULL_HUMAN
+ENT.HullType = HULL_TINY
 ENT.CanFlinch = 1
 ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_SMALL,ACT_FLINCH_BIG}
@@ -37,6 +37,7 @@ ENT.SoundTbl_Alert = {"crow/crow_caw.wav"}
 ENT.SoundTbl_Death = {"crow/crow_die.wav"}
 ENT.SoundTbl_MeleeAttack = {"crow/crow_peck.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"crow/crow_attack.wav"} 
+ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100

@@ -48,6 +48,7 @@ ENT.SoundTbl_Death = {"licker/li_die.wav"}
 ENT.SoundTbl_LeapAttackJump = {"licker/li_jump.wav"}
 ENT.SoundTbl_LeapAttackDamage = {"licker/li_slash.wav"}
 --ENT.SoundTbl_LeapAttackMiss = {"licker/li_slash.wav"}
+ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100

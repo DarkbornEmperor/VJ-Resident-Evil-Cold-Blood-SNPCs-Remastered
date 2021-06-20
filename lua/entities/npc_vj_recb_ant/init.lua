@@ -6,12 +6,12 @@ include('shared.lua')
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/recb/recb_ant_boss.mdl"} 
-ENT.StartHealth = 300
+ENT.StartHealth = 200
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
-ENT.BloodColor = "Red"
+ENT.BloodColor = "Yellow"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact_green"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Yellow"}
-ENT.HullType = HULL_HUMAN
+ENT.HullType = HULL_LARGE
 ENT.CanFlinch = 1
 ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
@@ -35,6 +35,7 @@ ENT.SoundTbl_MeleeAttack = {"ant/ant_bite.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"ant/ant_bitemiss.wav"}
 ENT.SoundTbl_Pain = {"ant/ant_pain.wav"}
 ENT.SoundTbl_Death = {"ant/ant_die.wav"}
+ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
