@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/recb/recb_hunter.mdl"} -- The game will pick a random model from the table when the SNPC is spawned | Add as many as you want
+ENT.Model = {"models/vj_recb/recb_hunter.mdl"} -- The game will pick a random model from the table when the SNPC is spawned | Add as many as you want
 ENT.StartHealth = 300
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
@@ -43,19 +43,19 @@ ENT.GibOnDeathDamagesTable = {"All"}
 
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_FootStep = {"hunter/hu_runleft.wav","hunter/hu_runright.wav"}
-ENT.SoundTbl_Idle = {"hunter/hu_idle1.wav","hunter/hu_idle2.wav","hunter/hu_idle3.wav"}
-ENT.SoundTbl_Alert = {"hunter/hu_alert.wav"}
-ENT.SoundTbl_CallForHelp = {"hunter/hu_scream.wav"}
-ENT.SoundTbl_BeforeMeleeAttack = {"hunter/hu_alert.wav"}
-ENT.SoundTbl_MeleeAttack = {"hunter/hu_clawhit.wav"}
-ENT.SoundTbl_MeleeAttackMiss = {"hunter/hu_slash.wav"}
-ENT.SoundTbl_Pain = {"hunter/hu_pain.wav"}
-ENT.SoundTbl_Death = {"hunter/hu_die.wav"}
-ENT.SoundTbl_LeapAttackJump = {"hunter/hu_jump.wav"}
-ENT.SoundTbl_LeapAttackDamage = {"hunter/hu_clawhit.wav"}
+ENT.SoundTbl_FootStep = {"vj_recb/hunter/hu_runleft.wav","vj_recb/hunter/hu_runright.wav"}
+ENT.SoundTbl_Idle = {"vj_recb/hunter/hu_idle1.wav","vj_recb/hunter/hu_idle2.wav","vj_recb/hunter/hu_idle3.wav"}
+ENT.SoundTbl_Alert = {"vj_recb/hunter/hu_alert.wav"}
+ENT.SoundTbl_CallForHelp = {"vj_recb/hunter/hu_scream.wav"}
+ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/hunter/hu_alert.wav"}
+ENT.SoundTbl_MeleeAttack = {"vj_recb/hunter/hu_clawhit.wav"}
+ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/hunter/hu_slash.wav"}
+ENT.SoundTbl_Pain = {"vj_recb/hunter/hu_pain.wav"}
+ENT.SoundTbl_Death = {"vj_recb/hunter/hu_die.wav"}
+ENT.SoundTbl_LeapAttackJump = {"vj_recb/hunter/hu_jump.wav"}
+ENT.SoundTbl_LeapAttackDamage = {"vj_recb/hunter/hu_clawhit.wav"}
 ENT.SoundTbl_LeapAttackDamageMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
-ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
+ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -71,7 +71,7 @@ end
 		self:MeleeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "hunter/hu_bodyfall.wav", 85, 100)
+		VJ_EmitSound(self, "vj_recb/hunter/hu_bodyfall.wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	if self.GraySkin == false && hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
-	    self:EmitSound(Sound("zombie/zom_headburst.wav",70))
+	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",70))
 		self:SetBodygroup(0,2)
 	
 		if self.HasGibDeathParticles == true then

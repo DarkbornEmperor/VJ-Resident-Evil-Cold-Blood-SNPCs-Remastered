@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/recb/recb_zombie_torso.mdl"} 
+ENT.Model = {"models/vj_recb/recb_zombie_torso.mdl"} 
 ENT.StartHealth = 100
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
@@ -28,14 +28,14 @@ ENT.DisableFootStepSoundTimer = true
 
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_FootStep = {"zombie/zom_crawl_leftarm.wav","zombie/zom_crawl_rightarm.wav"}
-ENT.SoundTbl_Idle = {"zombie/male/male1/zom_idle.wav","zombie/male/male2/zom_idle.wav","zombie/male/male3/zom_idle.wav","zombie/male/male4/zom_idle.wav","zombie/male/male5/zom_idle.wav","zombie/male/male6/zom_idle.wav","zombie/male/male7/zom_idle.wav","zombie/male/male8/zom_idle.wav","zombie/male/male9/zom_idle.wav","zombie/male/male10/zom_idle.wav","zombie/male/male11/zom_idle.wav"}
-ENT.SoundTbl_Alert = {"zombie/male/male1/zom_idle.wav","zombie/male/male2/zom_idle.wav","zombie/male/male3/zom_idle.wav","zombie/male/male4/zom_idle.wav","zombie/male/male5/zom_idle.wav","zombie/male/male6/zom_idle.wav","zombie/male/male7/zom_idle.wav","zombie/male/male8/zom_idle.wav","zombie/male/male9/zom_idle.wav","zombie/male/male10/zom_idle.wav","zombie/male/male11/zom_idle.wav"}
-ENT.SoundTbl_Pain = {"zombie/male/male1/zom_pain.wav","zombie/male/male2/zom_pain.wav","zombie/male/male3/zom_pain.wav","zombie/male/male4/zom_idle.wav","zombie/male/male5/zom_pain.wav","zombie/male/male6/zom_pain.wav","zombie/male/male7/zom_pain.wav","zombie/male/male8/zom_pain.wav","zombie/male/male9/zom_pain.wav","zombie/male/male10/zom_pain.wav","zombie/male/male11/zom_pain.wav"}
-ENT.SoundTbl_Death = {"zombie/male/male1/zom_die.wav","zombie/male/male2/zom_die.wav","zombie/male/male3/zom_die.wav","zombie/male/male4/zom_die.wav","zombie/male/male5/zom_die.wav","zombie/male/male6/zom_die.wav","zombie/male/male7/zom_die.wav","zombie/male/male8/zom_die.wav","zombie/male/male9/zom_die.wav","zombie/male/male10/zom_die.wav","zombie/male/male11/zom_die.wav"}
-ENT.SoundTbl_BeforeMeleeAttack = {"zombie/male/male1/zom_attack.wav","zombie/male/male2/zom_attack.wav","zombie/male/male3/zom_attack.wav","zombie/male/male4/zom_attack.wav","zombie/male/male5/zom_attack.wav","zombie/male/male6/zom_attack.wav","zombie/male/male7/zom_attack.wav","zombie/male/male8/zom_attack.wav","zombie/male/male9/zom_attack.wav","zombie/male/male10/zom_attack.wav","zombie/male/male11/zom_attack.wav"}
-ENT.SoundTbl_MeleeAttack = {"zombie/bite1.wav","zombie/bite2.wav"}
-ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
+ENT.SoundTbl_FootStep = {"vj_recb/zombie/zom_crawl_leftarm.wav","vj_recb/zombie/zom_crawl_rightarm.wav"}
+ENT.SoundTbl_Idle = {"vj_recb/zombie/male/male1/zom_idle.wav","vj_recb/zombie/male/male2/zom_idle.wav","vj_recb/zombie/male/male3/zom_idle.wav","vj_recb/zombie/male/male4/zom_idle.wav","vj_recb/zombie/male/male5/zom_idle.wav","vj_recb/zombie/male/male6/zom_idle.wav","vj_recb/zombie/male/male7/zom_idle.wav","vj_recb/zombie/male/male8/zom_idle.wav","vj_recb/zombie/male/male9/zom_idle.wav","vj_recb/zombie/male/male10/zom_idle.wav","vj_recb/zombie/male/male11/zom_idle.wav"}
+ENT.SoundTbl_Alert = {"vj_recb/zombie/male/male1/zom_idle.wav","vj_recb/zombie/male/male2/zom_idle.wav","vj_recb/zombie/male/male3/zom_idle.wav","vj_recb/zombie/male/male4/zom_idle.wav","vj_recb/zombie/male/male5/zom_idle.wav","vj_recb/zombie/male/male6/zom_idle.wav","vj_recb/zombie/male/male7/zom_idle.wav","vj_recb/zombie/male/male8/zom_idle.wav","vj_recb/zombie/male/male9/zom_idle.wav","vj_recb/zombie/male/male10/zom_idle.wav","vj_recb/zombie/male/male11/zom_idle.wav"}
+ENT.SoundTbl_Pain = {"vj_recb/zombie/male/male1/zom_pain.wav","vj_recb/zombie/male/male2/zom_pain.wav","vj_recb/zombie/male/male3/zom_pain.wav","vj_recb/zombie/male/male4/zom_idle.wav","vj_recb/zombie/male/male5/zom_pain.wav","vj_recb/zombie/male/male6/zom_pain.wav","vj_recb/zombie/male/male7/zom_pain.wav","vj_recb/zombie/male/male8/zom_pain.wav","vj_recb/zombie/male/male9/zom_pain.wav","vj_recb/zombie/male/male10/zom_pain.wav","vj_recb/zombie/male/male11/zom_pain.wav"}
+ENT.SoundTbl_Death = {"vj_recb/zombie/male/male1/zom_die.wav","vj_recb/zombie/male/male2/zom_die.wav","vj_recb/zombie/male/male3/zom_die.wav","vj_recb/zombie/male/male4/zom_die.wav","vj_recb/zombie/male/male5/zom_die.wav","vj_recb/zombie/male/male6/zom_die.wav","vj_recb/zombie/male/male7/zom_die.wav","vj_recb/zombie/male/male8/zom_die.wav","vj_recb/zombie/male/male9/zom_die.wav","vj_recb/zombie/male/male10/zom_die.wav","vj_recb/zombie/male/male11/zom_die.wav"}
+ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male/male1/zom_attack.wav","vj_recb/zombie/male/male2/zom_attack.wav","vj_recb/zombie/male/male3/zom_attack.wav","vj_recb/zombie/male/male4/zom_attack.wav","vj_recb/zombie/male/male5/zom_attack.wav","vj_recb/zombie/male/male6/zom_attack.wav","vj_recb/zombie/male/male7/zom_attack.wav","vj_recb/zombie/male/male8/zom_attack.wav","vj_recb/zombie/male/male9/zom_attack.wav","vj_recb/zombie/male/male10/zom_attack.wav","vj_recb/zombie/male/male11/zom_attack.wav"}
+ENT.SoundTbl_MeleeAttack = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
+ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100

@@ -5,9 +5,11 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/recb/recb_black_tiger.mdl"} 
-ENT.StartHealth = 500
+ENT.Model = {"models/vj_recb/recb_black_tiger.mdl"} 
+ENT.StartHealth = 800
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
+ENT.VJ_IsHugeMonster = true
+ENT.Immune_Physics = true
 ENT.BloodColor = "Yellow"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact_green"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Yellow"}
@@ -37,10 +39,10 @@ ENT.GibOnDeathDamagesTable = {"All"}
 
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_MeleeAttack = {"spider/spider_bite.wav","spider/spider_bite2.wav"}
+ENT.SoundTbl_MeleeAttack = {"vj_recb/spider/spider_bite.wav","vj_recb/spider/spider_bite2.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
-ENT.SoundTbl_RangeAttack = {"spider/Sp_spit.wav"}
-ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
+ENT.SoundTbl_RangeAttack = {"vj_recb/spider/Sp_spit.wav"}
+ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -56,7 +58,7 @@ end
 		self:RangeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "spider/sp_bodyfall.wav", 85, 100)
+		VJ_EmitSound(self, "vj_recb/spider/sp_bodyfall.wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,7 +72,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	if hitgroup == 1 && dmginfo:GetDamageForce():Length() > 800 then
-	    self:EmitSound(Sound("spider/sp_abdomenlost.wav",70))
+	    self:EmitSound(Sound("vj_recb/spider/sp_abdomenlost.wav",70))
 		self:SetBodygroup(0,1)
 	
 		if self.HasGibDeathParticles == true then

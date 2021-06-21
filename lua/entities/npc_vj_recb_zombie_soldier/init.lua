@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/recb/recb_zombie_soldier.mdl"} 
+ENT.Model = {"models/vj_recb/recb_zombie_soldier.mdl"} 
 ENT.StartHealth = 250
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
@@ -14,17 +14,17 @@ function ENT:CustomOnInitialize()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
-	if (dmginfo:IsBulletDamage())then
+	if self.Damaged == false then --(dmginfo:IsBulletDamage())
 		local attacker = dmginfo:GetAttacker()
 	
-		if math.random(1,5) == 1 && hitgroup == HITGROUP_RIGHTARM then
-		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
+		if math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
+		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(5,1)
-end
 
-		if math.random(1,5) == 1 && hitgroup == HITGROUP_LEFTARM then
-		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
+		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
+		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(6,1)
+		self.Damaged = true
     end
   end	
 end
@@ -44,7 +44,7 @@ function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
 				end
 				if math.random(1,4) == 1 then anim = ACT_FLINCH_PHYSICS end
 				self:VJ_ACT_PLAYACTIVITY(anim,true,false,true)
-				self:EmitSound(Sound("zombie/zom_leglost.wav",70))
+				self:EmitSound(Sound("vj_recb/zombie/zom_leglost.wav",70))
 				self:Cripple()
 			end
 		end
@@ -53,7 +53,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
-	    self:EmitSound(Sound("zombie/zom_headburst.wav",70))
+	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",70))
 		self:SetBodygroup(0,1)
 		self:SetBodygroup(1,5)
 	

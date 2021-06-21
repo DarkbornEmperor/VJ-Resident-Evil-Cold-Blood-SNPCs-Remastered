@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/recb/recb_zombie.mdl"} 
+ENT.Model = {"models/vj_recb/recb_zombie.mdl"} 
 ENT.StartHealth = 150
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
@@ -17,7 +17,7 @@ ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_CHEST}
 ENT.HasMeleeAttack = true 
 ENT.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
-ENT.MeleeAttackDamage = 15
+ENT.MeleeAttackDamage = 10
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDistance = 20 
 ENT.MeleeAttackDamageDistance = 50
@@ -29,15 +29,15 @@ ENT.GibOnDeathDamagesTable = {"All"}
 
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_FootStep = {"zombie/footstep1.wav","zombie/footstep2.wav","zombie/footstep3.wav"}
-ENT.SoundTbl_Idle = {"zombie/male/male1/zom_idle.wav","zombie/male/male2/zom_idle.wav","zombie/male/male3/zom_idle.wav","zombie/male/male4/zom_idle.wav","zombie/male/male5/zom_idle.wav","zombie/male/male6/zom_idle.wav","zombie/male/male7/zom_idle.wav","zombie/male/male8/zom_idle.wav","zombie/male/male9/zom_idle.wav","zombie/male/male10/zom_idle.wav","zombie/male/male11/zom_idle.wav"}
-ENT.SoundTbl_Alert = {"zombie/male/male1/zom_idle.wav","zombie/male/male2/zom_idle.wav","zombie/male/male3/zom_idle.wav","zombie/male/male4/zom_idle.wav","zombie/male/male5/zom_idle.wav","zombie/male/male6/zom_idle.wav","zombie/male/male7/zom_idle.wav","zombie/male/male8/zom_idle.wav","zombie/male/male9/zom_idle.wav","zombie/male/male10/zom_idle.wav","zombie/male/male11/zom_idle.wav"}
-ENT.SoundTbl_Pain = {"zombie/male/male1/zom_pain.wav","zombie/male/male2/zom_pain.wav","zombie/male/male3/zom_pain.wav","zombie/male/male4/zom_idle.wav","zombie/male/male5/zom_pain.wav","zombie/male/male6/zom_pain.wav","zombie/male/male7/zom_pain.wav","zombie/male/male8/zom_pain.wav","zombie/male/male9/zom_pain.wav","zombie/male/male10/zom_pain.wav","zombie/male/male11/zom_pain.wav"}
-ENT.SoundTbl_Death = {"zombie/male/male1/zom_die.wav","zombie/male/male2/zom_die.wav","zombie/male/male3/zom_die.wav","zombie/male/male4/zom_die.wav","zombie/male/male5/zom_die.wav","zombie/male/male6/zom_die.wav","zombie/male/male7/zom_die.wav","zombie/male/male8/zom_die.wav","zombie/male/male9/zom_die.wav","zombie/male/male10/zom_die.wav","zombie/male/male11/zom_die.wav"}
-ENT.SoundTbl_BeforeMeleeAttack = {"zombie/male/male1/zom_attack.wav","zombie/male/male2/zom_attack.wav","zombie/male/male3/zom_attack.wav","zombie/male/male4/zom_attack.wav","zombie/male/male5/zom_attack.wav","zombie/male/male6/zom_attack.wav","zombie/male/male7/zom_attack.wav","zombie/male/male8/zom_attack.wav","zombie/male/male9/zom_attack.wav","zombie/male/male10/zom_attack.wav","zombie/male/male11/zom_attack.wav"}
-ENT.SoundTbl_MeleeAttack = {"zombie/bite1.wav","zombie/bite2.wav"}
-ENT.SoundTbl_RangeAttack = {"zombie/vomit.wav"}
-ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
+ENT.SoundTbl_FootStep = {"vj_recb/zombie/footstep1.wav","vj_recb/zombie/footstep2.wav","vj_recb/zombie/footstep3.wav"}
+ENT.SoundTbl_Idle = {"vj_recb/zombie/male/male1/zom_idle.wav","vj_recb/zombie/male/male2/zom_idle.wav","vj_recb/zombie/male/male3/zom_idle.wav","vj_recb/zombie/male/male4/zom_idle.wav","vj_recb/zombie/male/male5/zom_idle.wav","vj_recb/zombie/male/male6/zom_idle.wav","vj_recb/zombie/male/male7/zom_idle.wav","vj_recb/zombie/male/male8/zom_idle.wav","vj_recb/zombie/male/male9/zom_idle.wav","vj_recb/zombie/male/male10/zom_idle.wav","vj_recb/zombie/male/male11/zom_idle.wav"}
+ENT.SoundTbl_Alert = {"vj_recb/zombie/male/male1/zom_idle.wav","vj_recb/zombie/male/male2/zom_idle.wav","vj_recb/zombie/male/male3/zom_idle.wav","vj_recb/zombie/male/male4/zom_idle.wav","vj_recb/zombie/male/male5/zom_idle.wav","vj_recb/zombie/male/male6/zom_idle.wav","vj_recb/zombie/male/male7/zom_idle.wav","vj_recb/zombie/male/male8/zom_idle.wav","vj_recb/zombie/male/male9/zom_idle.wav","vj_recb/zombie/male/male10/zom_idle.wav","vj_recb/zombie/male/male11/zom_idle.wav"}
+ENT.SoundTbl_Pain = {"vj_recb/zombie/male/male1/zom_pain.wav","vj_recb/zombie/male/male2/zom_pain.wav","vj_recb/zombie/male/male3/zom_pain.wav","vj_recb/zombie/male/male4/zom_idle.wav","vj_recb/zombie/male/male5/zom_pain.wav","vj_recb/zombie/male/male6/zom_pain.wav","vj_recb/zombie/male/male7/zom_pain.wav","vj_recb/zombie/male/male8/zom_pain.wav","vj_recb/zombie/male/male9/zom_pain.wav","vj_recb/zombie/male/male10/zom_pain.wav","vj_recb/zombie/male/male11/zom_pain.wav"}
+ENT.SoundTbl_Death = {"vj_recb/zombie/male/male1/zom_die.wav","vj_recb/zombie/male/male2/zom_die.wav","vj_recb/zombie/male/male3/zom_die.wav","vj_recb/zombie/male/male4/zom_die.wav","vj_recb/zombie/male/male5/zom_die.wav","vj_recb/zombie/male/male6/zom_die.wav","vj_recb/zombie/male/male7/zom_die.wav","vj_recb/zombie/male/male8/zom_die.wav","vj_recb/zombie/male/male9/zom_die.wav","vj_recb/zombie/male/male10/zom_die.wav","vj_recb/zombie/male/male11/zom_die.wav"}
+ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male/male1/zom_attack.wav","vj_recb/zombie/male/male2/zom_attack.wav","vj_recb/zombie/male/male3/zom_attack.wav","vj_recb/zombie/male/male4/zom_attack.wav","vj_recb/zombie/male/male5/zom_attack.wav","vj_recb/zombie/male/male6/zom_attack.wav","vj_recb/zombie/male/male7/zom_attack.wav","vj_recb/zombie/male/male8/zom_attack.wav","vj_recb/zombie/male/male9/zom_attack.wav","vj_recb/zombie/male/male10/zom_attack.wav","vj_recb/zombie/male/male11/zom_attack.wav"}
+ENT.SoundTbl_MeleeAttack = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
+ENT.SoundTbl_RangeAttack = {"vj_recb/zombie/vomit.wav"}
+ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -59,12 +59,12 @@ end
 		self:RangeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "zombie/zom_bodyfall"..math.random(1,2)..".wav", 85, 100)
+		VJ_EmitSound(self, "vj_recb/zombie/zom_bodyfall"..math.random(1,2)..".wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPreInitialize()
-		if math.random(1,10) == 1 then
+		if math.random(1,5) == 1 then
 			self.Vomit_Zombie = true
 	end
 end
@@ -97,29 +97,24 @@ function ENT:SetVomitZombie()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
-	if (dmginfo:IsBulletDamage()) && self.Damaged == false then
+	if self.Damaged == false then --(dmginfo:IsBulletDamage())
 		local attacker = dmginfo:GetAttacker()
 	
 		if math.random(1,10) == 1 && hitgroup == HITGROUP_HEAD then
-		self:EmitSound(Sound("zombie/zom_neck_break.wav",70))
+		self:EmitSound(Sound("vj_recb/zombie/zom_neck_break.wav",70))
 		self:SetBodygroup(1,2)
 		self:SetBodygroup(7,0)
-		self.Damaged = true
-end	
 	
-		if math.random(1,10) == 1 && hitgroup == HITGROUP_CHEST then
-		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
+		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_CHEST then
+		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(4,1)
-		self.Damaged = true
-end		
-		if math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
-		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
+	
+		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
+		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(5,1)
-		self.Damaged = true
-end
 
-		if math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
-		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
+		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
+		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(6,1)
 		self.Damaged = true
     end
@@ -141,7 +136,7 @@ function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
 				end
 				if math.random(1,4) == 1 then anim = ACT_FLINCH_PHYSICS end
 				self:VJ_ACT_PLAYACTIVITY(anim,true,false,true)
-				self:EmitSound(Sound("zombie/zom_leglost.wav",70))
+				self:EmitSound(Sound("vj_recb/zombie/zom_leglost.wav",70))
 				self:Cripple()
 			end
 		end
@@ -166,7 +161,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
-	    self:EmitSound(Sound("zombie/zom_headburst.wav",70))
+	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",70))
 		self:SetBodygroup(1,3)
 		self:SetBodygroup(7,0)
 	

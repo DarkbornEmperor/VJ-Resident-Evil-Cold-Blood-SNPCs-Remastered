@@ -14,6 +14,8 @@ local VJExists = file.Exists("lua/autorun/vj_base_autorun.lua","GAME")
 if VJExists == true then
 	include('autorun/vj_controls.lua')
 
+    VJ.AddCategoryInfo("Resident Evil: Cold Blood", {Icon = "vj_recb/icons/recb.png"})
+
 	local vCat = "Resident Evil: Cold Blood"
 	VJ.AddNPC("Zombie (Male)","npc_vj_recb_zombie",vCat)
 	VJ.AddNPC("Zombie (Female)","npc_vj_recb_zombie_female",vCat)
@@ -35,23 +37,52 @@ if VJExists == true then
 	VJ.AddNPC("Crow","npc_vj_recb_crow",vCat)
 	VJ.AddNPC("Neptune","npc_vj_recb_neptune",vCat)
 
-game.AddDecal("VJ_RECB_Blood_Red",{"vj_hl/decals/hl_blood01","vj_hl/decals/hl_blood02","vj_hl/decals/hl_blood03","vj_hl/decals/hl_blood04","vj_hl/decals/hl_blood05","vj_hl/decals/hl_blood06","vj_hl/decals/hl_blood07","vj_hl/decals/hl_blood08"})
-game.AddDecal("VJ_RECB_Blood_Red_Large",{"vj_hl/decals/hl_bigblood01","vj_hl/decals/hl_bigblood02"})
-game.AddDecal("VJ_RECB_Blood_Yellow",{"vj_hl/decals/hl_yblood01","vj_hl/decals/hl_yblood02","vj_hl/decals/hl_yblood03","vj_hl/decals/hl_yblood04","vj_hl/decals/hl_yblood05","vj_hl/decals/hl_yblood06"})
+    -- Spawners and Random	
+	VJ.AddNPC("Random Monster","sent_vj_recb_mon",vCat)
+	VJ.AddNPC("Random Monster Spawner","sent_vj_recb_mon_sp",vCat)
+	VJ.AddNPC("Random Monster Spawner (Single)","sent_vj_recb_mon_sinsp",vCat)
+	VJ.AddNPC("Monster Map Spawner","sent_vj_recb_mapspawner",vCat)
+	
+	-- Precache Models --
+	util.PrecacheModel("models/vj_recb/recb_ant_boss.mdl")
+	util.PrecacheModel("models/vj_recb/recb_babyspider.mdl")
+	util.PrecacheModel("models/vj_recb/recb_black_tiger.mdl")
+	util.PrecacheModel("models/vj_recb/recb_cerberus.mdl")
+	util.PrecacheModel("models/vj_recb/recb_crawler.mdl")
+	util.PrecacheModel("models/vj_recb/recb_crow.mdl")
+	util.PrecacheModel("models/vj_recb/recb_flyclaw.mdl")
+	util.PrecacheModel("models/vj_recb/recb_giantspider.mdl")
+	util.PrecacheModel("models/vj_recb/recb_hunter.mdl")
+	util.PrecacheModel("models/vj_recb/recb_licker.mdl")
+	util.PrecacheModel("models/vj_recb/recb_neptune.mdl")
+	util.PrecacheModel("models/vj_recb/recb_prototyrant.mdl")
+	util.PrecacheModel("models/vj_recb/recb_snake.mdl")
+	util.PrecacheModel("models/vj_recb/recb_tyrant_103.mdl")
+	util.PrecacheModel("models/vj_recb/recb_zombie.mdl")
+	util.PrecacheModel("models/vj_recb/recb_zombie_crimsonhead.mdl")
+	util.PrecacheModel("models/vj_recb/recb_zombie_female.mdl")
+	util.PrecacheModel("models/vj_recb/recb_zombie_soldier.mdl")
+	util.PrecacheModel("models/vj_recb/recb_zombie_torso.mdl")	
 
-game.AddParticles( "particles/drg_re1_monster_effects.pcf" )
-game.AddParticles( "particles/drg_re2_fire_effects.pcf" )
-PrecacheParticleSystem( "drg_re2_fire_huge" )
-PrecacheParticleSystem( "drg_re2_fire_large" )
-PrecacheParticleSystem( "drg_re2_fire_medium" )
-PrecacheParticleSystem( "drg_re2_fire_small" )
-PrecacheParticleSystem( "drg_re2_fire_tiny" )
-PrecacheParticleSystem( "drg_re1_blood_impact" )
-PrecacheParticleSystem( "drg_re1_blood_impact_large" )
-PrecacheParticleSystem( "drg_re1_blood_impact_acid" )
-PrecacheParticleSystem( "drg_re1_blood_impact_green" )
-PrecacheParticleSystem( "drg_re1_blood_impact_plant" )
-PrecacheParticleSystem( "drg_re1_blood_impact_plant_small" )
+    -- Decals from HL1 --
+    game.AddDecal("VJ_RECB_Blood_Red",{"vj_hl/decals/hl_blood01","vj_hl/decals/hl_blood02","vj_hl/decals/hl_blood03","vj_hl/decals/hl_blood04","vj_hl/decals/hl_blood05","vj_hl/decals/hl_blood06","vj_hl/decals/hl_blood07","vj_hl/decals/hl_blood08"})
+    game.AddDecal("VJ_RECB_Blood_Red_Large",{"vj_hl/decals/hl_bigblood01","vj_hl/decals/hl_bigblood02"})
+    game.AddDecal("VJ_RECB_Blood_Yellow",{"vj_hl/decals/hl_yblood01","vj_hl/decals/hl_yblood02","vj_hl/decals/hl_yblood03","vj_hl/decals/hl_yblood04","vj_hl/decals/hl_yblood05","vj_hl/decals/hl_yblood06"})
+
+    -- Particles by Dopey --
+    game.AddParticles( "particles/drg_re1_monster_effects.pcf" )
+    game.AddParticles( "particles/drg_re2_fire_effects.pcf" )
+    PrecacheParticleSystem( "drg_re2_fire_huge" )
+    PrecacheParticleSystem( "drg_re2_fire_large" )
+    PrecacheParticleSystem( "drg_re2_fire_medium" )
+    PrecacheParticleSystem( "drg_re2_fire_small" )
+    PrecacheParticleSystem( "drg_re2_fire_tiny" )
+    PrecacheParticleSystem( "drg_re1_blood_impact" )
+    PrecacheParticleSystem( "drg_re1_blood_impact_large" )
+    PrecacheParticleSystem( "drg_re1_blood_impact_acid" )
+    PrecacheParticleSystem( "drg_re1_blood_impact_green" )
+    PrecacheParticleSystem( "drg_re1_blood_impact_plant" )
+    PrecacheParticleSystem( "drg_re1_blood_impact_plant_small" )
 
 -- !!!!!! DON'T TOUCH ANYTHING BELOW THIS !!!!!! -------------------------------------------------------------------------------------------------------------------------
 	AddCSLuaFile(AutorunFile)

@@ -5,9 +5,11 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/recb/recb_neptune.mdl"} 
+ENT.Model = {"models/vj_recb/recb_neptune.mdl"} 
 ENT.StartHealth = 400
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
+ENT.VJ_IsHugeMonster = true
+ENT.Immune_Physics = true
 ENT.MovementType = VJ_MOVETYPE_AQUATIC 
 ENT.Aquatic_SwimmingSpeed_Calm = 80 
 ENT.Aquatic_SwimmingSpeed_Alerted = 200
@@ -33,13 +35,13 @@ ENT.GibOnDeathDamagesTable = {"All"}
 
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play}
-ENT.SoundTbl_Breath = {"shark/shark_swim_peace.wav"}
-ENT.SoundTbl_Alert = {"shark/Shark_Alert.wav"}
-ENT.SoundTbl_BeforeMeleeAttack = {"shark/Shark_attack.wav"} 
-ENT.SoundTbl_MeleeAttack = {"shark/shark_bite.wav"} 
-ENT.SoundTbl_Pain = {"shark/Shark_pain.wav"}
-ENT.SoundTbl_Death = {"shark/Shark_death.wav"}
-ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
+ENT.SoundTbl_Breath = {"vj_recb/shark/shark_swim_peace.wav"}
+ENT.SoundTbl_Alert = {"vj_recb/shark/Shark_Alert.wav"}
+ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/shark/Shark_attack.wav"} 
+ENT.SoundTbl_MeleeAttack = {"vj_recb/shark/shark_bite.wav"} 
+ENT.SoundTbl_Pain = {"vj_recb/shark/Shark_pain.wav"}
+ENT.SoundTbl_Death = {"vj_recb/shark/Shark_death.wav"}
+ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100

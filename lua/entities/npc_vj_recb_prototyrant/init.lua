@@ -5,16 +5,18 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/recb/recb_prototyrant.mdl"} 
+ENT.Model = {"models/vj_recb/recb_prototyrant.mdl"} 
 ENT.StartHealth = 3000
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
+ENT.VJ_IsHugeMonster = true
+ENT.Immune_Physics = true
 ENT.BloodColor = "Red"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.FootStepTimeRun = 0.27
 ENT.FootStepTimeWalk = 0.6
-ENT.NextMeleeAttackTime = 1.5
+ENT.NextMeleeAttackTime = 1.8
 ENT.AnimTbl_Run = {ACT_WALK}
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
@@ -24,11 +26,11 @@ ENT.DisableFootStepSoundTimer = true
 
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_FootStep = {"tyrant/tyrant_foot.wav"}
-ENT.SoundTbl_Alert = {"tyrant/tyrant_roar.wav"}
-ENT.SoundTbl_MeleeAttackMiss = {"tyrant/tyrant_swing2.wav","tyrant/tyrant_swing.wav"}
-ENT.SoundTbl_MeleeAttack = {"tyrant/tyrant_stab.wav","tyrant/tyrant_slash.wav"}
-ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
+ENT.SoundTbl_FootStep = {"vj_recb/tyrant/tyrant_foot.wav"}
+ENT.SoundTbl_Alert = {"vj_recb/tyrant/tyrant_roar.wav"}
+ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/tyrant/tyrant_swing2.wav","vj_recb/tyrant/tyrant_swing.wav"}
+ENT.SoundTbl_MeleeAttack = {"vj_recb/tyrant/tyrant_stab.wav","vj_recb/tyrant/tyrant_slash.wav"}
+ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -44,7 +46,7 @@ end
 		self:MeleeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "tyrant/tyrant_bodyhit.wav", 85, 100)
+		VJ_EmitSound(self, "vj_recb/tyrant/tyrant_bodyhit.wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

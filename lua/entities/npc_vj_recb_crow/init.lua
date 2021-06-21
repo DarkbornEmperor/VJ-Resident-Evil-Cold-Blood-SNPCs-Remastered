@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/recb/recb_crow.mdl"} 
+ENT.Model = {"models/vj_recb/recb_crow.mdl"} 
 ENT.StartHealth = 50
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.MovementType = VJ_MOVETYPE_AERIAL
@@ -31,14 +31,14 @@ ENT.GibOnDeathDamagesTable = {"All"}
 
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play}
-ENT.SoundTbl_Breath = {"crow/crow_flap.wav"}
-ENT.SoundTbl_Idle = {"crow/crow_caw.wav"}
-ENT.SoundTbl_Alert = {"crow/crow_caw.wav"}
-ENT.SoundTbl_Death = {"crow/crow_die.wav"}
-ENT.SoundTbl_MeleeAttack = {"crow/crow_peck.wav"}
-ENT.SoundTbl_BeforeMeleeAttack = {"crow/crow_attack.wav"} 
+ENT.SoundTbl_Breath = {"vj_recb/crow/crow_flap.wav"}
+ENT.SoundTbl_Idle = {"vj_recb/crow/crow_caw.wav"}
+ENT.SoundTbl_Alert = {"vj_recb/crow/crow_caw.wav"}
+ENT.SoundTbl_Death = {"vj_recb/crow/crow_die.wav"}
+ENT.SoundTbl_MeleeAttack = {"vj_recb/crow/crow_peck.wav"}
+ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/crow/crow_attack.wav"} 
 ENT.SoundTbl_MeleeAttackMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
-ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
+ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -52,7 +52,7 @@ end
 		self:MeleeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "crow/crow_bodyhit.wav", 85, 100)
+		VJ_EmitSound(self, "vj_recb/crow/crow_bodyhit.wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

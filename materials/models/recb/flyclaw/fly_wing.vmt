@@ -1,6 +1,0 @@
-"VertexLitGeneric"
-{
-	"$basetexture" "models/recb/flyclaw/fly_wing"
-	//"$translucent" 1
-	"$alphatest" 1
-}

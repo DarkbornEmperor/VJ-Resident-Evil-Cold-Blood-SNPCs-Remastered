@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/recb/recb_cerberus.mdl"} 
+ENT.Model = {"models/vj_recb/recb_cerberus.mdl"} 
 ENT.StartHealth = 80
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
@@ -36,20 +36,20 @@ ENT.LeapToMeleeDistance = 75
 
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_FootStep = {"cerberus/cer_run.wav","cerberus/cer_run2.wav"}
-ENT.SoundTbl_Idle = {"cerberus/cer_growl.wav"} 
-ENT.SoundTbl_CombatIdle = {"cerberus/cer_bark.wav","cerberus/cer_growl.wav"} 
-ENT.SoundTbl_Alert = {"cerberus/cer_alert.wav"}
-ENT.SoundTbl_CallForHelp = {"cerberus/cer_howl.wav"}
-ENT.SoundTbl_Pain = {"cerberus/cer_pain.wav","cerberus/cer_pain2.wav"}
-ENT.SoundTbl_Death = {"cerberus/cer_die.wav"}
-ENT.SoundTbl_BeforeMeleeAttack = {"cerberus/cer_bite.wav"}
-ENT.SoundTbl_MeleeAttack = {"cerberus/Bite.wav"}
+ENT.SoundTbl_FootStep = {"vj_recb/cerberus/cer_run.wav","vj_recb/cerberus/cer_run2.wav"}
+ENT.SoundTbl_Idle = {"vj_recb/cerberus/cer_growl.wav"} 
+ENT.SoundTbl_CombatIdle = {"vj_recb/cerberus/cer_bark.wav","vj_recb/cerberus/cer_growl.wav"} 
+ENT.SoundTbl_Alert = {"vj_recb/cerberus/cer_alert.wav"}
+ENT.SoundTbl_CallForHelp = {"vj_recb/cerberus/cer_howl.wav"}
+ENT.SoundTbl_Pain = {"vj_recb/cerberus/cer_pain.wav","vj_recb/cerberus/cer_pain2.wav"}
+ENT.SoundTbl_Death = {"vj_recb/cerberus/cer_die.wav"}
+ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/cerberus/cer_bite.wav"}
+ENT.SoundTbl_MeleeAttack = {"vj_recb/cerberus/Bite.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
-ENT.SoundTbl_LeapAttackJump = {"cerberus/cer_jump.wav"}
-ENT.SoundTbl_LeapAttackDamage = {"cerberus/Bite.wav"}
+ENT.SoundTbl_LeapAttackJump = {"vj_recb/cerberus/cer_jump.wav"}
+ENT.SoundTbl_LeapAttackDamage = {"vj_recb/cerberus/Bite.wav"}
 ENT.SoundTbl_LeapAttackDamageMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
-ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
+ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -68,7 +68,7 @@ end
 		self:MeleeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "cerberus/cer_bodyfall.wav", 85, 100)
+		VJ_EmitSound(self, "vj_recb/cerberus/cer_bodyfall.wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -121,7 +121,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
-	    self:EmitSound(Sound("zombie/zom_headburst.wav",70))
+	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",70))
 		self:SetBodygroup(0,1)
 	
 		if self.HasGibDeathParticles == true then

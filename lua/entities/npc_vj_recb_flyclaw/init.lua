@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/recb/recb_flyclaw.mdl"} 
+ENT.Model = {"models/vj_recb/recb_flyclaw.mdl"} 
 ENT.StartHealth = 300
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Yellow"
@@ -29,17 +29,16 @@ ENT.GibOnDeathDamagesTable = {"All"}
 
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_FootStep = {"flyclaw/fl_walk.wav"}
-ENT.SoundTbl_Idle = {"flyclaw/fl_idle.wav","flyclaw/fl_idle2.wav","flyclaw/fl_idle3.wav"}
-ENT.SoundTbl_CombatIdle = {"flyclaw/fl_ang.wav"}
-ENT.SoundTbl_Alert = {"flyclaw/fl_alrt.wav"}
-ENT.SoundTbl_CallForHelp = {"hunter/hu_scream.wav"}
-ENT.SoundTbl_BeforeMeleeAttack = {"flyclaw/fl_att.wav"}
-ENT.SoundTbl_MeleeAttack = {"flyclaw/fl_slash.wav"}
+ENT.SoundTbl_FootStep = {"vj_recb/flyclaw/fl_walk.wav"}
+ENT.SoundTbl_Idle = {"vj_recb/flyclaw/fl_idle.wav","vj_recb/flyclaw/fl_idle2.wav","vj_recb/flyclaw/fl_idle3.wav"}
+ENT.SoundTbl_CombatIdle = {"vj_recb/flyclaw/fl_ang.wav"}
+ENT.SoundTbl_Alert = {"vj_recb/flyclaw/fl_alrt.wav"}
+ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/flyclaw/fl_att.wav"}
+ENT.SoundTbl_MeleeAttack = {"vj_recb/flyclaw/fl_slash.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
-ENT.SoundTbl_Pain = {"flyclaw/fl_dam.wav"}
-ENT.SoundTbl_Death = {"flyclaw/fl_out.wav"}
-ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
+ENT.SoundTbl_Pain = {"vj_recb/flyclaw/fl_dam.wav"}
+ENT.SoundTbl_Death = {"vj_recb/flyclaw/fl_out.wav"}
+ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -52,7 +51,7 @@ end
 		self:MeleeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "flyclaw/fl_fall.wav", 85, 100)
+		VJ_EmitSound(self, "vj_recb/flyclaw/fl_fall.wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

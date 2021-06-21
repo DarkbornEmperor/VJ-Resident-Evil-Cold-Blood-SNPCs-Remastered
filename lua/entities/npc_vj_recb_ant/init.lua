@@ -5,8 +5,8 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/recb/recb_ant_boss.mdl"} 
-ENT.StartHealth = 200
+ENT.Model = {"models/vj_recb/recb_ant_boss.mdl"} 
+ENT.StartHealth = 300
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Yellow"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact_green"}
@@ -17,9 +17,9 @@ ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.MeleeAttackDamage = 10
-ENT.MeleeAttackDistance = 25 
-ENT.MeleeAttackDamageDistance = 70
+ENT.MeleeAttackDamage = 20
+ENT.MeleeAttackDistance = 30 
+ENT.MeleeAttackDamageDistance = 60
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
@@ -28,14 +28,14 @@ ENT.GibOnDeathDamagesTable = {"All"}
 
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_FootStep = {"ant/ant_walk.wav"}
-ENT.SoundTbl_Idle = {"ant/ant_idle.wav"}
-ENT.SoundTbl_BeforeMeleeAttack = {"ant/ant_attack.wav"}
-ENT.SoundTbl_MeleeAttack = {"ant/ant_bite.wav"}
-ENT.SoundTbl_MeleeAttackMiss = {"ant/ant_bitemiss.wav"}
-ENT.SoundTbl_Pain = {"ant/ant_pain.wav"}
-ENT.SoundTbl_Death = {"ant/ant_die.wav"}
-ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
+ENT.SoundTbl_FootStep = {"vj_recb/ant/ant_walk.wav"}
+ENT.SoundTbl_Idle = {"vj_recb/ant/ant_idle.wav"}
+ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/ant/ant_attack.wav"}
+ENT.SoundTbl_MeleeAttack = {"vj_recb/ant/ant_bite.wav"}
+ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/ant/ant_bitemiss.wav"}
+ENT.SoundTbl_Pain = {"vj_recb/ant/ant_pain.wav"}
+ENT.SoundTbl_Death = {"vj_recb/ant/ant_die.wav"}
+ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -48,7 +48,7 @@ end
 		self:MeleeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "ant/ant_bodyfall.wav", 85, 100)
+		VJ_EmitSound(self, "vj_recb/ant/ant_bodyfall.wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

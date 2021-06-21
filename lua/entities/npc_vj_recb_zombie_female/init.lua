@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/recb/recb_zombie_female.mdl"}
+ENT.Model = {"models/vj_recb/recb_zombie_female.mdl"}
 ENT.StartHealth = 150
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
@@ -17,7 +17,7 @@ ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_CHEST}
 ENT.HasMeleeAttack = true 
 ENT.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
-ENT.MeleeAttackDamage = 15
+ENT.MeleeAttackDamage = 10
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDistance = 20 
 ENT.MeleeAttackDamageDistance = 50
@@ -29,14 +29,14 @@ ENT.GibOnDeathDamagesTable = {"All"}
 
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_FootStep = {"zombie/footstep1.wav","zombie/footstep2.wav","zombie/footstep3.wav"}
-ENT.SoundTbl_Idle = {"zombie/female/female1/zof_idle.wav","zombie/female/female2/zof_idle.wav"}
-ENT.SoundTbl_Alert = {"zombie/female/female1/zof_idle.wav","zombie/female/female2/zof_idle.wav"}
-ENT.SoundTbl_Pain = {"zombie/female/female1/zof_pain.wav","zombie/female/female2/zof_pain.wav"}
-ENT.SoundTbl_Death = {"zombie/female/female1/zof_die.wav","zombie/female/female2/zof_die.wav"}
-ENT.SoundTbl_BeforeMeleeAttack = {"zombie/female/female1/zof_attack.wav","zombie/female/female2/zof_attack.wav"}
-ENT.SoundTbl_MeleeAttack = {"zombie/bite1.wav","zombie/bite2.wav"}
-ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
+ENT.SoundTbl_FootStep = {"vj_recb/zombie/footstep1.wav","vj_recb/zombie/footstep2.wav","vj_recb/zombie/footstep3.wav"}
+ENT.SoundTbl_Idle = {"vj_recb/zombie/female/female1/zof_idle.wav","vj_recb/zombie/female/female2/zof_idle.wav"}
+ENT.SoundTbl_Alert = {"vj_recb/zombie/female/female1/zof_idle.wav","vj_recb/zombie/female/female2/zof_idle.wav"}
+ENT.SoundTbl_Pain = {"vj_recb/zombie/female/female1/zof_pain.wav","vj_recb/zombie/female/female2/zof_pain.wav"}
+ENT.SoundTbl_Death = {"vj_recb/zombie/female/female1/zof_die.wav","vj_recb/zombie/female/female2/zof_die.wav"}
+ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female1/zof_attack.wav","vj_recb/zombie/female/female2/zof_attack.wav"}
+ENT.SoundTbl_MeleeAttack = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
+ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -58,12 +58,12 @@ end
 		self:RangeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "zombie/zom_bodyfall"..math.random(1,2)..".wav", 85, 100)
+		VJ_EmitSound(self, "vj_recb/zombie/zom_bodyfall"..math.random(1,2)..".wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPreInitialize()
-		if math.random(1,10) == 1 then
+		if math.random(1,5) == 1 then
 			self.Vomit_Zombie = true
 	end
 end
@@ -87,16 +87,15 @@ function ENT:SetVomitZombie()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
-	if (dmginfo:IsBulletDamage()) && self.Damaged == false then
+	if self.Damaged == false then --(dmginfo:IsBulletDamage())
 		local attacker = dmginfo:GetAttacker()
 		
 		if math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
-		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
+		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(4,1)
-		self.Damaged = true
-end
-		if math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
-		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
+
+		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
+		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(5,1)
 		self.Damaged = true
     end
@@ -118,7 +117,7 @@ function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
 				end
 				if math.random(1,4) == 1 then anim = ACT_FLINCH_PHYSICS end
 				self:VJ_ACT_PLAYACTIVITY(anim,true,false,true)
-				self:EmitSound(Sound("zombie/zom_leglost.wav",70))
+				self:EmitSound(Sound("vj_recb/zombie/zom_leglost.wav",70))
 				self:Cripple()
 			end
 		end
@@ -143,7 +142,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
-	    self:EmitSound(Sound("zombie/zom_headburst.wav",70))
+	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",70))
 		self:SetBodygroup(1,1)
 	
 		if self.HasGibDeathParticles == true then

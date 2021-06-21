@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/recb/recb_babyspider.mdl"} 
+ENT.Model = {"models/vj_recb/recb_babyspider.mdl"} 
 ENT.StartHealth = 5
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Yellow"
@@ -20,7 +20,7 @@ ENT.DisableFootStepSoundTimer = true
 
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
+ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -32,7 +32,7 @@ end
 function ENT:CustomOnTouch(ent)
 	if ent:IsPlayer() or ent:IsNPC() then
 		self:TakeDamage(self:Health() + 1, ent, ent)
-		VJ_EmitSound(self, "spider/mini_spider_crush.wav", 70)
+		VJ_EmitSound(self, "vj_recb/spider/mini_spider_crush.wav", 70)
 	end
 end
 /*-----------------------------------------------
