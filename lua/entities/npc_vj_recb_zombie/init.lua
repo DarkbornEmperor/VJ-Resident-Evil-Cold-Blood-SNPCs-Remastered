@@ -102,21 +102,24 @@ function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
 	
 		if math.random(1,10) == 1 && hitgroup == HITGROUP_HEAD then
 		self:EmitSound(Sound("vj_recb/zombie/zom_neck_break.wav",70))
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
 		self:SetBodygroup(1,2)
 		self:SetBodygroup(7,0)
 	
 		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_CHEST then
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("chest")).Pos,self:GetAngles())
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(4,1)
 	
 		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rarm")).Pos,self:GetAngles())
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(5,1)
 
 		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("larm")).Pos,self:GetAngles())
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(6,1)
-		self.Damaged = true
     end
   end	
 end
@@ -130,8 +133,10 @@ function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
 				self.Crippled = true
 				local anim = ACT_FLINCH_PHYSICS
 				if hitgroup == HITGROUP_LEFTLEG then
+				    ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("lleg")).Pos,self:GetAngles())
 					self:SetBodygroup(3,1)
 				elseif hitgroup == HITGROUP_RIGHTLEG then
+				    ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rleg")).Pos,self:GetAngles())
 					self:SetBodygroup(2,1)
 				end
 				if math.random(1,4) == 1 then anim = ACT_FLINCH_PHYSICS end

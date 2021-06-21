@@ -68,34 +68,27 @@ local zombieskin = math.random(1,2)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
-	if (dmginfo:IsBulletDamage()) && self.Damaged == false then
+	if self.Damaged == false then
 		local attacker = dmginfo:GetAttacker()
 	
-		if math.random(1,10) == 1 && hitgroup == HITGROUP_HEAD then
-		self:EmitSound(Sound("zombie/zom_neck_break.wav",70))
+	elseif math.random(1,10) == 1 && hitgroup == HITGROUP_HEAD then
+		self:EmitSound(Sound("vj_recb/zombie/zom_neck_break.wav",70))
 		self:SetBodygroup(1,2)
 		self:SetBodygroup(7,0)
-		self.Damaged = true
-end	
 	
-		if math.random(1,10) == 1 && hitgroup == HITGROUP_CHEST then
-		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
+	elseif math.random(1,10) == 1 && hitgroup == HITGROUP_CHEST then
+		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(4,1)
-		self.Damaged = true
-end		
-		if math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
-		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
+		
+	elseif math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
+		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(5,1)
-		self.Damaged = true
-end
 
-		if math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
-		self:EmitSound(Sound("zombie/zom_armlost.wav",70))
-		self:SetBodygroup(6,1)
-		self.Damaged = true
-      end
-   end	
-end
+	elseif math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
+		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
+		self:SetBodygroup(6,1)	
+    end
+end	
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
