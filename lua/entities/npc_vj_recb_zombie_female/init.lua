@@ -51,6 +51,9 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	if key == "step" then
 		self:FootStepSoundCode()
 end
+	if key == "crawl" then
+		self:FootStepSoundCode()
+end
 	if key == "attack" then
 		self:MeleeAttackCode()
 end
@@ -130,6 +133,7 @@ end
 function ENT:Cripple()
 	self:SetHullType(HULL_TINY)
 	self:SetCollisionBounds(Vector(16,16,20),Vector(-16,-16,0))
+	self.SoundTbl_FootStep = {"vj_recb/zombie/crawl.wav"}
 	self.AnimTbl_IdleStand = {ACT_IDLE_STIMULATED}
 	self.AnimTbl_Walk = {ACT_WALK_STIMULATED}
 	self.AnimTbl_Run = {ACT_WALK_STIMULATED}

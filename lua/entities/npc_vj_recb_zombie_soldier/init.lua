@@ -6,7 +6,7 @@ include('shared.lua')
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/vj_recb/recb_zombie_soldier.mdl"} 
-ENT.StartHealth = 250
+ENT.StartHealth = 150
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
 	self:SetSkin(math.random(0,3))
@@ -51,6 +51,12 @@ function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
 				self:Cripple()
 			end
 		end
+	end
+end
+ ---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
+    if (dmginfo:IsBulletDamage()) && hitgroup == HITGROUP_CHEST then
+	    dmginfo:ScaleDamage(0.50)
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

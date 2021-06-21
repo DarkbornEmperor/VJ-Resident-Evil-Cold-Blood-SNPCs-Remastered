@@ -52,6 +52,9 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	if key == "step" then
 		self:FootStepSoundCode()
 end
+	if key == "crawl" then
+		self:FootStepSoundCode()
+end
 	if key == "attack" then
 		self:MeleeAttackCode()
 end
@@ -71,7 +74,8 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
 local zombieskin = math.random(1,2)
-
+    self:SetBodygroup(0,1)
+	
     if zombieskin == 1 then
 	self:SetSkin(math.random(0,3))
 	
@@ -102,23 +106,27 @@ function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
 	
 		if math.random(1,10) == 1 && hitgroup == HITGROUP_HEAD then
 		self:EmitSound(Sound("vj_recb/zombie/zom_neck_break.wav",70))
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())	
+        self:SetBodygroup(0,0)		
 		self:SetBodygroup(1,2)
 		self:SetBodygroup(7,0)
 	
 		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_CHEST then
 		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("chest")).Pos,self:GetAngles())
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
+		self:SetBodygroup(0,0)
 		self:SetBodygroup(4,1)
 	
 		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
 		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rarm")).Pos,self:GetAngles())
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
+		self:SetBodygroup(0,0)
 		self:SetBodygroup(5,1)
 
 		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
 		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("larm")).Pos,self:GetAngles())
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
+		self:SetBodygroup(0,0)
 		self:SetBodygroup(6,1)
     end
   end	
@@ -140,6 +148,7 @@ function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
 					self:SetBodygroup(2,1)
 				end
 				if math.random(1,4) == 1 then anim = ACT_FLINCH_PHYSICS end
+				self:SetBodygroup(0,0)
 				self:VJ_ACT_PLAYACTIVITY(anim,true,false,true)
 				self:EmitSound(Sound("vj_recb/zombie/zom_leglost.wav",70))
 				self:Cripple()
@@ -151,6 +160,7 @@ end
 function ENT:Cripple()
 	self:SetHullType(HULL_TINY)
 	self:SetCollisionBounds(Vector(16,16,20),Vector(-16,-16,0))
+	self.SoundTbl_FootStep = {"vj_recb/zombie/crawl.wav"}
 	self.AnimTbl_IdleStand = {ACT_IDLE_STIMULATED}
 	self.AnimTbl_Walk = {ACT_WALK_STIMULATED}
 	self.AnimTbl_Run = {ACT_WALK_STIMULATED}
@@ -167,6 +177,7 @@ end
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
 	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",70))
+		self:SetBodygroup(0,0)
 		self:SetBodygroup(1,3)
 		self:SetBodygroup(7,0)
 	
@@ -201,7 +212,7 @@ function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
 end
 	if self.Crippled == true then
 	self.AnimTbl_Death = {ACT_DIE_BACKSHOT}
-    end
+end
 end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
