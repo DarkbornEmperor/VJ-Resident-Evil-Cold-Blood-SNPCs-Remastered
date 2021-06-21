@@ -20,7 +20,7 @@ ENT.MeleeAttackDamageType = DMG_POISON
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDamage = 10
 ENT.MeleeAttackDistance = 15 
-ENT.MeleeAttackDamageDistance = 45
+ENT.MeleeAttackDamageDistance = 60
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
@@ -31,7 +31,7 @@ ENT.GibOnDeathDamagesTable = {"All"}
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_BeforeMeleeAttack = {"snake/snake_attack.wav"}
 ENT.SoundTbl_MeleeAttack = {"snake/snake_bite.wav"}
-ENT.SoundTbl_MeleeAttackMiss = {"hunter/hu_slash.wav"}
+ENT.SoundTbl_MeleeAttackMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
 ENT.SoundTbl_Death = {"snake/snake_die.wav"}
 ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
 
@@ -46,9 +46,9 @@ end
 	if key == "attack" then
 		self:MeleeAttackCode()
 end
-	--if key == "crawl" then
-		--self:FootStepSoundCode()
-	--end	
+	if key == "death" then
+		VJ_EmitSound(self, "snake/snake_fall.wav", 85, 100)
+	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()

@@ -59,7 +59,7 @@ end
 		self:RangeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "zombie/zom_bodyfall"..math.random(1,2)..".wav", 85, math.random(100,100))
+		VJ_EmitSound(self, "zombie/zom_bodyfall"..math.random(1,2)..".wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

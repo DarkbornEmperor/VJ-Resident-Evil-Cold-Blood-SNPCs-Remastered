@@ -33,6 +33,7 @@ ENT.SoundTbl_Idle = {"crawler/crawler_idle.wav"}
 ENT.SoundTbl_Pain = {"crawler/crawler_pain.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"crawler/crawler_attack.wav"}
 ENT.SoundTbl_MeleeAttack = {"crawler/crawler_bite.wav"}
+ENT.SoundTbl_MeleeAttackMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
 ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
@@ -46,7 +47,7 @@ end
 		self:MeleeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "crawler/crawler_bodyfall.wav", 85, math.random(100,100))
+		VJ_EmitSound(self, "crawler/crawler_bodyfall.wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

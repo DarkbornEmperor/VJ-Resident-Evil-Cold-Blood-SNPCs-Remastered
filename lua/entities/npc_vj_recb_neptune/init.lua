@@ -50,7 +50,7 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 end
 	if key == "attack" then
 		self:MeleeAttackCode()
-end
+   end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
@@ -60,10 +60,10 @@ end
 function ENT:MultipleMeleeAttacks()
     local shark_attack = math.random(1,1)
 
-	if licker_attack == 1 then
+	if shark_attack == 1 then
 		self.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
 		self.MeleeAttackDamage = 15
-end
+   end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)

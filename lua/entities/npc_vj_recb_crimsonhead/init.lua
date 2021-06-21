@@ -34,7 +34,7 @@ ENT.SoundTbl_Breath = {"zombie/crimsonhead/crimhead_run.wav"}
 ENT.SoundTbl_Idle = {"zombie/CrimsonHead/crimhead_attack1.wav","zombie/CrimsonHead/crimhead_attack2.wav"}
 ENT.SoundTbl_Alert = {"zombie/CrimsonHead/crimhead_alert.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"zombie/CrimsonHead/crimhead_attack1.wav","zombie/CrimsonHead/crimhead_attack2.wav"}
-ENT.SoundTbl_MeleeAttackMiss = {""}
+ENT.SoundTbl_MeleeAttackMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
 ENT.SoundTbl_Pain = {"zombie/CrimsonHead/crimhead_pain.wav"}
 ENT.SoundTbl_Death = {"zombie/CrimsonHead/crimhead_die.wav"}
 ENT.SoundTbl_MeleeAttack = {"zombie/CrimsonHead/crimhead_slash.wav"}
@@ -51,7 +51,7 @@ end
 		self:MeleeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "zombie/zom_bodyfall"..math.random(1,2)..".wav", 85, math.random(100,100))
+		VJ_EmitSound(self, "zombie/zom_bodyfall"..math.random(1,2)..".wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

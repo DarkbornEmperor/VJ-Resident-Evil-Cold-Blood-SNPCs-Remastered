@@ -44,7 +44,7 @@ end
 		self:MeleeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "tyrant/tyrant_bodyhit.wav", 85, math.random(100,100))
+		VJ_EmitSound(self, "tyrant/tyrant_bodyhit.wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

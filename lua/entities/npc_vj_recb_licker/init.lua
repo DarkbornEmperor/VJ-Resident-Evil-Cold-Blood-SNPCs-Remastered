@@ -18,8 +18,8 @@ ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
 ENT.NextMeleeAttackTime = 1.5
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.MeleeAttackDistance = 35 
-ENT.MeleeAttackDamageDistance = 80
+ENT.MeleeAttackDistance = 30 
+ENT.MeleeAttackDamageDistance = 60
 ENT.HasLeapAttack = true 
 ENT.LeapAttackDamage = 15
 ENT.TimeUntilLeapAttackDamage = 0.4
@@ -42,12 +42,12 @@ ENT.GibOnDeathDamagesTable = {"All"}
 ENT.SoundTbl_FootStep = {"licker/li_walk.wav"}
 ENT.SoundTbl_Idle = {"licker/li_idle.wav"}
 ENT.SoundTbl_Alert = {"licker/li_idle.wav"}
---ENT.SoundTbl_MeleeAttackMiss = {"licker/li_slash.wav"}
+ENT.SoundTbl_MeleeAttackMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
 ENT.SoundTbl_Pain = {"licker/li_pain.wav"}
 ENT.SoundTbl_Death = {"licker/li_die.wav"}
 ENT.SoundTbl_LeapAttackJump = {"licker/li_jump.wav"}
 ENT.SoundTbl_LeapAttackDamage = {"licker/li_slash.wav"}
---ENT.SoundTbl_LeapAttackMiss = {"licker/li_slash.wav"}
+ENT.SoundTbl_LeapAttackDamageMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
 ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
@@ -64,7 +64,7 @@ end
 		self:MeleeAttackCode()
 end	
 	if key == "death" then
-		VJ_EmitSound(self, "licker/li_bodyfall.wav", 85, math.random(100,100))
+		VJ_EmitSound(self, "licker/li_bodyfall.wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

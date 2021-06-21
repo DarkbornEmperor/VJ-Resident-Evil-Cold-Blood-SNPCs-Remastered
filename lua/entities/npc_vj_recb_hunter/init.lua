@@ -22,11 +22,11 @@ ENT.HasMeleeAttack = true
 ENT.NextMeleeAttackTime = 1.5
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDamage = 15
-ENT.MeleeAttackDistance = 20 
-ENT.MeleeAttackDamageDistance = 50
+ENT.MeleeAttackDistance = 30 
+ENT.MeleeAttackDamageDistance = 60
 ENT.HasLeapAttack = true 
-ENT.LeapAttackDamage = false
-ENT.TimeUntilLeapAttackDamage = false
+ENT.LeapAttackDamage = 15
+ENT.TimeUntilLeapAttackDamage = 0.6
 ENT.NextAnyAttackTime_Leap = 1.5
 ENT.NextLeapAttackTime = 8
 ENT.LeapAttackAnimationDecreaseLengthAmount = 1.4
@@ -34,7 +34,7 @@ ENT.AnimTbl_LeapAttack = {"vjseq_hunterjump"}
 ENT.LeapAttackVelocityForward = 100 
 ENT.LeapAttackVelocityUp = 200
 ENT.LeapDistance = 200
-ENT.LeapToMeleeDistance = 100
+ENT.LeapToMeleeDistance = 150
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
@@ -54,6 +54,7 @@ ENT.SoundTbl_Pain = {"hunter/hu_pain.wav"}
 ENT.SoundTbl_Death = {"hunter/hu_die.wav"}
 ENT.SoundTbl_LeapAttackJump = {"hunter/hu_jump.wav"}
 ENT.SoundTbl_LeapAttackDamage = {"hunter/hu_clawhit.wav"}
+ENT.SoundTbl_LeapAttackDamageMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
 ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
@@ -70,7 +71,7 @@ end
 		self:MeleeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "hunter/hu_bodyfall.wav", 85, math.random(100,100))
+		VJ_EmitSound(self, "hunter/hu_bodyfall.wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

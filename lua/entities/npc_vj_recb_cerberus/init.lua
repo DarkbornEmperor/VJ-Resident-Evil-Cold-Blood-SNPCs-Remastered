@@ -31,8 +31,8 @@ ENT.TimeUntilLeapAttackDamage = 0.4
 ENT.AnimTbl_LeapAttack = {"vjseq_jump_window"}
 ENT.LeapAttackVelocityForward = 100 
 ENT.LeapAttackVelocityUp = 100
-ENT.LeapDistance = 100
-ENT.LeapToMeleeDistance = 50
+ENT.LeapDistance = 150
+ENT.LeapToMeleeDistance = 75
 
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
@@ -45,8 +45,10 @@ ENT.SoundTbl_Pain = {"cerberus/cer_pain.wav","cerberus/cer_pain2.wav"}
 ENT.SoundTbl_Death = {"cerberus/cer_die.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"cerberus/cer_bite.wav"}
 ENT.SoundTbl_MeleeAttack = {"cerberus/Bite.wav"}
+ENT.SoundTbl_MeleeAttackMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
 ENT.SoundTbl_LeapAttackJump = {"cerberus/cer_jump.wav"}
 ENT.SoundTbl_LeapAttackDamage = {"cerberus/Bite.wav"}
+ENT.SoundTbl_LeapAttackDamageMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
 ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
@@ -66,7 +68,7 @@ end
 		self:MeleeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "cerberus/cer_bodyfall.wav", 85, math.random(100,100))
+		VJ_EmitSound(self, "cerberus/cer_bodyfall.wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

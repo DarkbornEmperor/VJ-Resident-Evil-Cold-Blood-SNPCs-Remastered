@@ -38,6 +38,7 @@ ENT.GibOnDeathDamagesTable = {"All"}
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_MeleeAttack = {"spider/spider_bite.wav","spider/spider_bite2.wav"}
+ENT.SoundTbl_MeleeAttackMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
 ENT.SoundTbl_RangeAttack = {"spider/Sp_spit.wav"}
 ENT.SoundTbl_Impact = {"shared/hit_flesh1.wav","shared/hit_flesh2.wav","shared/hit_flesh3.wav","shared/hit_flesh4.wav"}
 
@@ -55,7 +56,7 @@ end
 		self:RangeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "spider/sp_bodyfall.wav", 85, math.random(100,100))
+		VJ_EmitSound(self, "spider/sp_bodyfall.wav", 85, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
