@@ -144,11 +144,11 @@ function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	end
 end
 		return true,{DeathAnim=true}
-end
+    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnKilled(dmginfo, hitgroup) 
-	 if self.DeathAnimationCodeRan == true then
+	 if self.DeathAnimationCodeRan == true && self.Dead == true then
 	 self.Cerberus_IdleState = false
      self.Cerberus_InTransition = false
 	 self.Cerberus_NextGetUpT = false

@@ -61,16 +61,16 @@ function ENT:CustomInitialize()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:MultipleMeleeAttacks()
-    local shark_attack = math.random(1,1)
+    local crow_attack = math.random(1,1)
 
-	if licker_attack == 1 then
+	if crow_attack == 1 then
 		self.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
-		self.MeleeAttackDamage = 15
+		self.MeleeAttackDamage = 6
 end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
-		self.AnimTbl_Death = {ACT_DIESIMPLE,ACT_DIEVIOLENT}
+		self.AnimTbl_Death = {ACT_DIESIMPLE}
 end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2016 by DrVrej, All rights reserved. ***
