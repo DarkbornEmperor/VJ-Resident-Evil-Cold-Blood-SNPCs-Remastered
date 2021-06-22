@@ -84,6 +84,76 @@ if VJExists == true then
     PrecacheParticleSystem( "drg_re1_blood_impact_plant" )
     PrecacheParticleSystem( "drg_re1_blood_impact_plant_small" )
 
+	-- ConVars --
+	local AddConvars = {}
+	AddConvars["VJ_RECB_Boss_Music"] = 1
+	AddConvars["VJ_RECB_Gibbing"] = 1
+	
+    -- Map Spawner ConVars --
+    AddConvars["VJ_RECB_MapSpawner_Music"] = 1
+	AddConvars["VJ_RECB_MapSpawner_Boss"] = 0
+	
+		for k, v in pairs(AddConvars) do
+		if !ConVarExists( k ) then CreateConVar( k, v, {FCVAR_ARCHIVE} ) end
+	end
+	
+if (CLIENT) then
+local function VJ_RECB_MAIN(Panel)
+			if !game.SinglePlayer() then
+			if !LocalPlayer():IsAdmin() or !LocalPlayer():IsSuperAdmin() then
+				Panel:AddControl( "Label", {Text = "You Are Not An Admin!"})
+				Panel:ControlHelp("Note: Only Admins Can Change These Settings!")
+return
+	end
+end
+			Panel:AddControl( "Label", {Text = "Note: Only Admins Can Change These Settings!"})
+			local vj_recbreset = {Options = {}, CVars = {}, Label = "Reset Everything:", MenuButton = "0"}
+			vj_recbreset.Options["#vjbase.menugeneral.default"] = { 
+				VJ_RECB_Boss_Music = "1",
+				VJ_RECB_Gibbing = "1",
+}
+Panel:AddControl("ComboBox", vj_recbreset)
+Panel:ControlHelp("NOTE: Only Future Spawned SNPCs Will Be Affected!")
+Panel:AddControl("Checkbox", {Label ="Bosses Have Music?", Command ="VJ_RECB_Boss_Music"})
+Panel:AddControl("Checkbox", {Label ="SNPCs Can Gib?", Command ="VJ_RECB_Gibbing"})
+Panel:AddPanel(typebox)
+
+end
+	function VJ_ADDTOMENU_RECB(Panel)
+		spawnmenu.AddToolMenuOption("DrVrej","SNPC Configures","RE:CB","RE:CB","","", VJ_RECB_MAIN, {} )
+end
+		hook.Add("PopulateToolMenu","VJ_ADDTOMENU_RECB", VJ_ADDTOMENU_RECB )
+end
+
+if (CLIENT) then
+local function VJ_RECB_MAPSPAWNER(Panel)
+			if !game.SinglePlayer() then
+			if !LocalPlayer():IsAdmin() or !LocalPlayer():IsSuperAdmin() then
+				Panel:AddControl( "Label", {Text = "You are not an admin!"})
+				Panel:ControlHelp("Note: Only admins can change these settings!")
+return
+	end
+end
+			Panel:AddControl( "Label", {Text = "Note: Only admins can change these settings!"})
+			local vj_recbreset_mapspawner = {Options = {}, CVars = {}, Label = "Reset Everything:", MenuButton = "0"}
+			vj_recbreset_mapspawner.Options["#vjbase.menugeneral.default"] = { 
+			    VJ_RECB_MapSpawner_Music = "1",
+				VJ_RECB_MapSpawner_Boss = "0",			
+
+}
+Panel:AddControl("ComboBox", vj_recbreset_mapspawner)
+Panel:ControlHelp("NOTE: Only enable if you have the specific addon installed!")
+Panel:AddControl("Checkbox", {Label ="Enable Music?", Command ="VJ_RECB_MapSpawner_Music"})
+Panel:AddControl("Checkbox", {Label ="Enable Bosses?", Command ="VJ_RECB_MapSpawner_Boss"})
+Panel:AddPanel(typebox)
+
+end
+	function VJ_ADDTOMENU_RECB_MAPSPAWNER(Panel)
+		spawnmenu.AddToolMenuOption("DrVrej","SNPC Configures","RE:CB Map Spawner","RE:CB Map Spawner","","", VJ_RECB_MAPSPAWNER, {} )
+end
+		hook.Add("PopulateToolMenu","VJ_ADDTOMENU_RECB_MAPSPAWNER", VJ_ADDTOMENU_RECB_MAPSPAWNER )
+end
+
 -- !!!!!! DON'T TOUCH ANYTHING BELOW THIS !!!!!! -------------------------------------------------------------------------------------------------------------------------
 	AddCSLuaFile(AutorunFile)
 	VJ.AddAddonProperty(AddonName,AddonType)

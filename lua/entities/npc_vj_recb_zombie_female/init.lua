@@ -72,10 +72,15 @@ end
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnPreInitialize()
+function ENT:CustomOnPreInitialize() 
+if GetConVarNumber("VJ_RECB_Gibbing") == 0 then
+        self.AllowedToGib = false 
+        self.HasGibOnDeath = false 
+        self.HasGibOnDeathSounds = false 
+        self.HasGibDeathParticles = false
+end
 		if math.random(1,5) == 1 then
-			self.Vomit_Zombie = true
-	end
+	end		self.Vomit_Zombie = true
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()

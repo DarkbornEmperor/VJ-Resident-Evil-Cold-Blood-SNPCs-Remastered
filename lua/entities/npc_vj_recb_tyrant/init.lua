@@ -45,6 +45,9 @@ ENT.SoundTbl_FootStep = {"vj_recb/tyrant103/ty_walk.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/tyrant103/ty_swing.wav"}
 ENT.SoundTbl_MeleeAttack = {"vj_recb/tyrant103/ty_punch.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
+ENT.SoundTbl_SoundTrack = {"vj_recb/tyrant103/recb_-_tyrant.wav"}
+ENT.HasSoundTrack = true
+ENT.SoundTrackLevel = 0.8
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -59,6 +62,12 @@ end
 	if key == "death" then
 		VJ_EmitSound(self, "vj_recb/tyrant103/ty_bodydrop.wav", 85, 100)
 	end	
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnPreInitialize() 
+if GetConVarNumber("VJ_RECB_Boss_Music") == 0 then
+        self.HasSoundTrack = false 
+    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 

@@ -6,7 +6,7 @@ include('shared.lua')
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/vj_recb/recb_black_tiger.mdl"} 
-ENT.StartHealth = 1000
+ENT.StartHealth = 1500
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.VJ_IsHugeMonster = true
 ENT.Immune_Physics = true
@@ -52,6 +52,9 @@ ENT.SoundTbl_MeleeAttack = {"vj_recb/spider/spider_bite.wav","vj_recb/spider/spi
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
 ENT.SoundTbl_RangeAttack = {"vj_recb/spider/Sp_spit.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
+ENT.SoundTbl_SoundTrack = {"vj_recb/mapspawner/spidersrevenge.wav"}
+ENT.HasSoundTrack = true
+ENT.SoundTrackLevel = 0.8
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -71,6 +74,19 @@ end
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnPreInitialize() 
+if GetConVarNumber("VJ_RECB_Gibbing") == 0 then
+        self.AllowedToGib = false 
+        self.HasGibOnDeath = false 
+        self.HasGibOnDeathSounds = false 
+        self.HasGibDeathParticles = false
+end
+
+if GetConVarNumber("VJ_RECB_Boss_Music") == 0 then
+        self.HasSoundTrack = false 
+    end	
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize() 
 	self:SetCollisionBounds(Vector(80, 80, 75), Vector(-60, -70, 0))
 end
@@ -80,7 +96,9 @@ function ENT:RangeAttackCode_GetShootPos(projectile)
 end
  ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
+    if (dmginfo:IsBulletDamage()) then
 	    dmginfo:ScaleDamage(0.25)
+	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)

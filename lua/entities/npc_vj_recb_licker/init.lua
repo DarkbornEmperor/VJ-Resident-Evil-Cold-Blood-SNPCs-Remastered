@@ -75,6 +75,15 @@ end
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnPreInitialize() 
+if GetConVarNumber("VJ_RECB_Gibbing") == 0 then
+        self.AllowedToGib = false 
+        self.HasGibOnDeath = false 
+        self.HasGibOnDeathSounds = false 
+        self.HasGibDeathParticles = false
+    end
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
 	self:SetCollisionBounds(Vector(30, 20, 32), Vector(-30, -20, 0))	
 end

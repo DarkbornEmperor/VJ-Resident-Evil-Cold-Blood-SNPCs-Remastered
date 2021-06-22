@@ -1,4 +1,4 @@
-ENT.Base 			= "npc_vj_recb_zombie"
+ENT.Base 			= "npc_vj_recb_zombie_male"
 ENT.Type 			= "ai"
 ENT.PrintName 		= "Zombie (Soldier)"
 ENT.Author 			= "Darkborn"

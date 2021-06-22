@@ -37,9 +37,9 @@ ENT.GodMode = true
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = ""
 ENT.RECBControl = true
-ENT.RECB = {"npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_crimsonhead","npc_vj_recb_cerberus","npc_vj_recb_hunter","npc_vj_recb_licker","npc_vj_recb_crawler","npc_vj_recb_snake","npc_vj_recb_flyclaw","npc_vj_recb_crow","npc_vj_recb_tyrant","npc_vj_recb_prototyrant","npc_vj_recb_spider_blacktiger","npc_vj_recb_spider_giant","npc_vj_recb_ant"}
-ENT.RECB2 = {"npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_crimsonhead","npc_vj_recb_cerberus","npc_vj_recb_hunter","npc_vj_recb_licker","npc_vj_recb_crawler","npc_vj_recb_snake","npc_vj_recb_flyclaw","npc_vj_recb_crow","npc_vj_recb_tyrant","npc_vj_recb_prototyrant","npc_vj_recb_spider_blacktiger","npc_vj_recb_spider_giant","npc_vj_recb_ant"}
-ENT.RECB3 = {"npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_crimsonhead","npc_vj_recb_cerberus","npc_vj_recb_hunter","npc_vj_recb_licker","npc_vj_recb_crawler","npc_vj_recb_snake","npc_vj_recb_flyclaw","npc_vj_recb_crow","npc_vj_recb_tyrant","npc_vj_recb_prototyrant","npc_vj_recb_spider_blacktiger","npc_vj_recb_spider_giant","npc_vj_recb_ant"}
+ENT.RECB = {"npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_crimsonhead","npc_vj_recb_cerberus","npc_vj_recb_hunter","npc_vj_recb_licker","npc_vj_recb_crawler","npc_vj_recb_snake","npc_vj_recb_flyclaw","npc_vj_recb_crow","npc_vj_recb_spider_giant","npc_vj_recb_ant"}
+ENT.RECB2 = {"npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_crimsonhead","npc_vj_recb_cerberus","npc_vj_recb_hunter","npc_vj_recb_licker","npc_vj_recb_crawler","npc_vj_recb_snake","npc_vj_recb_flyclaw","npc_vj_recb_crow","npc_vj_recb_spider_giant","npc_vj_recb_ant"}
+ENT.RECB3 = {"npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_crimsonhead","npc_vj_recb_cerberus","npc_vj_recb_hunter","npc_vj_recb_licker","npc_vj_recb_crawler","npc_vj_recb_snake","npc_vj_recb_flyclaw","npc_vj_recb_crow","npc_vj_recb_spider_giant","npc_vj_recb_ant"}
 ENT.RunAwayOnUnknownDamage = false
 ENT.HasMeleeAttack = false
 ENT.SAngle2 = 55
@@ -59,7 +59,7 @@ ENT.CREA2da = true
 ENT.CREA3 = true
 ENT.Decrease = false
 ENT.HasDeathAnimation = false
-ENT.HasBloodPool = false -- Does it have a blood pool?
+ENT.HasBloodPool = false 
 ENT.HasDeathRagdoll = false
 ENT.MaxZombie = 0 
 ENT.cout = true
@@ -70,8 +70,21 @@ ENT.time2 = 0.65
 ENT.time3 = 0.65
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_SoundTrack = {""}
-ENT.HasSoundTrack = false
+ENT.SoundTbl_SoundTrack = {"vj_recb/mapspawner/mall_music.wav"}
+ENT.HasSoundTrack = true
+ENT.SoundTrackLevel = 0.8
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnPreInitialize() 
+if GetConVarNumber("VJ_RECB_MapSpawner_Music") == 0 then
+        self.HasSoundTrack = false 
+end
+	
+if GetConVarNumber("VJ_RECB_MapSpawner_Boss") == 1 then
+        self.RECB = {"npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_crimsonhead","npc_vj_recb_cerberus","npc_vj_recb_hunter","npc_vj_recb_licker","npc_vj_recb_crawler","npc_vj_recb_snake","npc_vj_recb_flyclaw","npc_vj_recb_crow","npc_vj_recb_tyrant","npc_vj_recb_prototyrant","npc_vj_recb_spider_blacktiger","npc_vj_recb_spider_giant","npc_vj_recb_ant"}
+        self.RECB2 = {"npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_crimsonhead","npc_vj_recb_cerberus","npc_vj_recb_hunter","npc_vj_recb_licker","npc_vj_recb_crawler","npc_vj_recb_snake","npc_vj_recb_flyclaw","npc_vj_recb_crow","npc_vj_recb_tyrant","npc_vj_recb_prototyrant","npc_vj_recb_spider_blacktiger","npc_vj_recb_spider_giant","npc_vj_recb_ant"}
+        self.RECB3 = {"npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_zombie_male","npc_vj_recb_zombie_female","npc_vj_recb_zombie_soldier","npc_vj_recb_zombie_torso","npc_vj_recb_crimsonhead","npc_vj_recb_cerberus","npc_vj_recb_hunter","npc_vj_recb_licker","npc_vj_recb_crawler","npc_vj_recb_snake","npc_vj_recb_flyclaw","npc_vj_recb_crow","npc_vj_recb_tyrant","npc_vj_recb_prototyrant","npc_vj_recb_spider_blacktiger","npc_vj_recb_spider_giant","npc_vj_recb_ant"}
+    end	
+end
 -------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
 for k,v in pairs(ents.GetAll()) do  
@@ -84,6 +97,7 @@ end
  --PrintMessage( HUD_PRINTTALK, "The Horde comes.....")
  -- PrintMessage( HUD_PRINTTALK, "===============================================")
 --self:SetMaterial("hud/killicons/default")
+VJ_EmitSound(self,{"vj_recb/mapspawner/residentevil.wav"},70)
 self:SetNoDraw(true)
 self.VJ_NoTarget = true
 self:SetCollisionBounds(Vector(0, 0, 0), -Vector(0, 0, 0))

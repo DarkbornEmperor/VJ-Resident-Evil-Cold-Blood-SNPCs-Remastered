@@ -68,6 +68,15 @@ end
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnPreInitialize() 
+if GetConVarNumber("VJ_RECB_Gibbing") == 0 then
+        self.AllowedToGib = false 
+        self.HasGibOnDeath = false 
+        self.HasGibOnDeathSounds = false 
+        self.HasGibDeathParticles = false
+    end
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
 local zombieskin = math.random(1,2)
     self:SetBodygroup(0,1)

@@ -17,6 +17,15 @@ ENT.TimeUntilMeleeAttackDamage = false
 ENT.FootStepTimeRun = 0.27
 ENT.FootStepTimeWalk = 0.6
 ENT.NextMeleeAttackTime = 1.8
+ENT.HasMeleeAttackKnockBack = true 
+ENT.MeleeAttackKnockBack_Forward1 = 150
+ENT.MeleeAttackKnockBack_Forward2 = 150 
+ENT.MeleeAttackKnockBack_Up1 = 60
+ENT.MeleeAttackKnockBack_Up2 = 60 
+ENT.SlowPlayerOnMeleeAttack = true
+ENT.SlowPlayerOnMeleeAttack_WalkSpeed = 100 
+ENT.SlowPlayerOnMeleeAttack_RunSpeed = 100 
+ENT.SlowPlayerOnMeleeAttackTime = 0.8
 ENT.AnimTbl_Run = {ACT_WALK}
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
@@ -37,6 +46,9 @@ ENT.SoundTbl_Alert = {"vj_recb/tyrant/tyrant_roar.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/tyrant/tyrant_swing2.wav","vj_recb/tyrant/tyrant_swing.wav"}
 ENT.SoundTbl_MeleeAttack = {"vj_recb/tyrant/tyrant_stab.wav","vj_recb/tyrant/tyrant_slash.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
+ENT.SoundTbl_SoundTrack = {"vj_recb/mapspawner/mansionbossend.wav"}
+ENT.HasSoundTrack = true
+ENT.SoundTrackLevel = 0.8
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -56,12 +68,16 @@ end
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnPreInitialize() 
+if GetConVarNumber("VJ_RECB_Boss_Music") == 0 then
+        self.HasSoundTrack = false 
+    end
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
-	self:SetCollisionBounds(Vector(20, 20, 100), Vector(-20, -20, 0))	
-	
-	if math.random(1,10) == 1 then
-	 self.Tyrant_Rage = true
-	 self:TyrantRage()
+	    self:SetCollisionBounds(Vector(20, 20, 100), Vector(-20, -20, 0))		
+	if math.random(1,5) == 1 then
+	    self.Tyrant_Rage = true 
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------	
@@ -78,7 +94,6 @@ function ENT:MultipleMeleeAttacks()
 		self.MeleeAttackDamage = 35
 		self.MeleeAttackDistance = 40
 		self.MeleeAttackDamageDistance = 90
-
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------
@@ -88,21 +103,24 @@ if math.random(1,2) == 1 && self.Tyrant_Rage == true then
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
-	 if self.Tyrant_Rage == true then
+function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
+	 if self.Tyrant_Rage == true && (dmginfo:IsBulletDamage()) then
 	    dmginfo:ScaleDamage(0.10)
 	else
 	    dmginfo:ScaleDamage(0.25)
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
+     if math.random(1,5) == 1 && self.Tyrant_Rage == true && (self.StartHealth -1500 > self:Health()) then
+        self:TyrantRage()
+    end	
+end	
+---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:TyrantRage()
-     if self.Tyrant_Rage == true then
-       --self:VJ_ACT_PLAYACTIVITY("attack2",true,1,false)
-       --VJ_EmitSound(self,{"tyrant/tyrant_roar.wav"},80,100)  
+        self.MeleeAttackDamage = 50
         self.AnimTbl_Run = {ACT_RUN}	
-    end
-end	 
+end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2017 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
