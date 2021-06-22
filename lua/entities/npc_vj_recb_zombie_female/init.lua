@@ -26,7 +26,13 @@ ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.GibOnDeathDamagesTable = {"All"}
-
+	-- ====== Controller Data ====== --
+ENT.VJC_Data = {
+	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
+	ThirdP_Offset = Vector(30, 25, -50), -- The offset for the controller when the camera is in third person
+	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
+}
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_FootStep = {"vj_recb/zombie/footstep1.wav","vj_recb/zombie/footstep2.wav","vj_recb/zombie/footstep3.wav"}
@@ -36,6 +42,7 @@ ENT.SoundTbl_Pain = {"vj_recb/zombie/female/female1/zof_pain.wav","vj_recb/zombi
 ENT.SoundTbl_Death = {"vj_recb/zombie/female/female1/zof_die.wav","vj_recb/zombie/female/female2/zof_die.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female1/zof_attack.wav","vj_recb/zombie/female/female2/zof_attack.wav"}
 ENT.SoundTbl_MeleeAttack = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
+ENT.SoundTbl_RangeAttack = {"vj_recb/zombie/vomit.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
@@ -145,6 +152,12 @@ function ENT:Cripple()
 	self.CanFlinch = 0
 	self.HasRangeAttack = false
 	self.HasMeleeAttack = true 
+	self.VJC_Data = {
+	CameraMode = 1, 
+	ThirdP_Offset = Vector(30, 25, -15), 
+	FirstP_Bone = "ValveBiped.Bip01_Head1", 
+	FirstP_Offset = Vector(10, 0, -30), 
+}
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)

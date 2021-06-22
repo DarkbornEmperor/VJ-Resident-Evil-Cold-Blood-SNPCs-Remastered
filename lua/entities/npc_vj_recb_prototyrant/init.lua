@@ -23,7 +23,13 @@ ENT.DeathAnimationTime = 8
 ENT.AnimTbl_Death = {ACT_DIEVIOLENT}
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
-
+	-- ====== Controller Data ====== --
+ENT.VJC_Data = {
+	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
+	ThirdP_Offset = Vector(20, 25, -70), -- The offset for the controller when the camera is in third person
+	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
+}
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_FootStep = {"vj_recb/tyrant/tyrant_foot.wav"}
@@ -85,6 +91,8 @@ end
 function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
 	 if self.Tyrant_Rage == true then
 	    dmginfo:ScaleDamage(0.75)
+	else
+	    dmginfo:ScaleDamage(0.50)
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

@@ -26,7 +26,13 @@ ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.GibOnDeathDamagesTable = {"All"}
-
+	-- ====== Controller Data ====== --
+ENT.VJC_Data = {
+	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
+	ThirdP_Offset = Vector(30, 25, -50), -- The offset for the controller when the camera is in third person
+	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
+}
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_FootStep = {"vj_recb/zombie/footstep1.wav","vj_recb/zombie/footstep2.wav","vj_recb/zombie/footstep3.wav"}
@@ -172,6 +178,12 @@ function ENT:Cripple()
 	self.CanFlinch = 0
 	self.HasRangeAttack = false
 	self.HasMeleeAttack = true 
+	self.VJC_Data = {
+	CameraMode = 1, 
+	ThirdP_Offset = Vector(30, 25, -15), 
+	FirstP_Bone = "ValveBiped.Bip01_Head1", 
+	FirstP_Offset = Vector(10, 0, -30), 
+}
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)

@@ -18,9 +18,11 @@ ENT.CanFlinch = 1
 ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
+ENT.NextMeleeAttackTime = 1.5
+ENT.MeleeAttackDamageType = DMG_POISON
 ENT.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.MeleeAttackDamage = 10
+ENT.MeleeAttackDamage = 15
 ENT.MeleeAttackDistance = 30 
 ENT.MeleeAttackDamageDistance = 90
 ENT.HasRangeAttack = true 
@@ -36,7 +38,13 @@ ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.GibOnDeathDamagesTable = {"All"}
-
+	-- ====== Controller Data ====== --
+ENT.VJC_Data = {
+	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
+	ThirdP_Offset = Vector(-15, 25, -20), -- The offset for the controller when the camera is in third person
+	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
+}
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_MeleeAttack = {"vj_recb/spider/spider_bite.wav","vj_recb/spider/spider_bite2.wav"}

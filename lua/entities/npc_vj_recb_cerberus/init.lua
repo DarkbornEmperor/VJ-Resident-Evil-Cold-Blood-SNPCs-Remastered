@@ -22,8 +22,9 @@ ENT.AnimTbl_Death = {ACT_DIESIMPLE}
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true
 ENT.GibOnDeathDamagesTable = {"All"}
-ENT.MeleeAttackDistance = 20 
+ENT.MeleeAttackDistance = 30 
 ENT.MeleeAttackDamageDistance = 60
+ENT.NextMeleeAttackTime = 1.5
 ENT.NextAnyAttackTime_Melee = 0.8
 ENT.HasLeapAttack = true 
 ENT.LeapAttackDamage = 15
@@ -33,7 +34,13 @@ ENT.LeapAttackVelocityForward = 100
 ENT.LeapAttackVelocityUp = 100
 ENT.LeapDistance = 150
 ENT.LeapToMeleeDistance = 75
-
+	-- ====== Controller Data ====== --
+ENT.VJC_Data = {
+	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
+	ThirdP_Offset = Vector(30, 25, -30), -- The offset for the controller when the camera is in third person
+	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
+}
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_FootStep = {"vj_recb/cerberus/cer_run.wav","vj_recb/cerberus/cer_run2.wav"}
@@ -83,7 +90,7 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnThink_AIEnabled()
-	if self.Cerberus_IdleState != "N" && (self:IsMoving() or CurTime() > self.Cerberus_NextGetUpT) then 
+	if self.VJ_IsBeingControlled == false && self.Cerberus_IdleState != "N" && (self:IsMoving() or CurTime() > self.Cerberus_NextGetUpT) && self.DeathAnimationCodeRan == false && self.Dead == false then 
 		self:VJ_ACT_PLAYACTIVITY("sleeptostand",true,false)
 		self.Cerberus_IdleState = "N"
 		self.DisableWandering = false
@@ -91,7 +98,7 @@ function ENT:CustomOnThink_AIEnabled()
 		self.Cerberus_NextSleepT = CurTime() + 10
 end
 	
-		if IsValid(self:GetEnemy()) then 
+		if self.VJ_IsBeingControlled == false && IsValid(self:GetEnemy()) && self.DeathAnimationCodeRan == false && self.Dead == false then 
 			if self.Cerberus_IdleState != "N" && self.Cerberus_InTransition == false then
 				self.Cerberus_InTransition = true
 				self:VJ_ACT_PLAYACTIVITY("sleeptostand",true,false,false,0,{},function(vsched)
@@ -104,7 +111,7 @@ end
 				self.DisableChasingEnemy = false
 	end
 end
-			if self.Cerberus_IdleState == "N" && !self:IsMoving() && CurTime() > self.Cerberus_NextGetUpT && math.random(1,150) == 1 then 
+			if self.VJ_IsBeingControlled == false && self.Cerberus_IdleState == "N" && !self:IsMoving() && CurTime() > self.Cerberus_NextGetUpT && math.random(1,150) == 1 && self.DeathAnimationCodeRan == false && self.Dead == false then 
 				self:VJ_ACT_PLAYACTIVITY("gotosleep",true,false)
 				self.Cerberus_IdleState = "S"
 				self.DisableWandering = true
@@ -112,7 +119,7 @@ end
 				self.Cerberus_NextGetUpT = CurTime() + 20 //math.Rand(10,35)
 end
 			
-			if self.Cerberus_IdleState == "N" then
+			if self.VJ_IsBeingControlled == false && self.Cerberus_IdleState == "N" && self.DeathAnimationCodeRan == false && self.Dead == false then
 				self.AnimTbl_IdleStand = {ACT_IDLE}
 			elseif  self.Cerberus_IdleState == "S" then
 				self.AnimTbl_IdleStand = {"sleep"}
@@ -147,7 +154,7 @@ end
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnKilled(dmginfo, hitgroup) 
+function ENT:CustomDeathAnimationCode(dmginfo, hitgroup) 
 	 if self.DeathAnimationCodeRan == true && self.Dead == true then
 	 self.Cerberus_IdleState = false
      self.Cerberus_InTransition = false

@@ -6,7 +6,7 @@ include('shared.lua')
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/vj_recb/recb_crawler.mdl"} 
-ENT.StartHealth = 100
+ENT.StartHealth = 200
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Yellow"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact_green"}
@@ -16,6 +16,7 @@ ENT.CanFlinch = 1
 ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
+ENT.NextMeleeAttackTime = 1.5
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDamage = 10
 ENT.MeleeAttackDistance = 30 
@@ -25,7 +26,13 @@ ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.GibOnDeathDamagesTable = {"All"}
-
+	-- ====== Controller Data ====== --
+ENT.VJC_Data = {
+	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
+	ThirdP_Offset = Vector(40, 20, -50), -- The offset for the controller when the camera is in third person
+	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
+}
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_FootStep = {"vj_recb/crawler/crawler_walk.wav"}

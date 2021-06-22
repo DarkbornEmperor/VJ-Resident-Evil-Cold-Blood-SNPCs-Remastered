@@ -32,7 +32,13 @@ ENT.DeathAnimationTime = 10
 ENT.AnimTbl_Death = {ACT_DIESIMPLE}
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true
-
+	-- ====== Controller Data ====== --
+ENT.VJC_Data = {
+	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
+	ThirdP_Offset = Vector(20, 25, -60), -- The offset for the controller when the camera is in third person
+	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
+}
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_FootStep = {"vj_recb/tyrant103/ty_walk.wav"}

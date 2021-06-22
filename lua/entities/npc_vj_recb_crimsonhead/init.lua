@@ -26,7 +26,13 @@ ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.GibOnDeathDamagesTable = {"All"}
-
+	-- ====== Controller Data ====== --
+ENT.VJC_Data = {
+	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
+	ThirdP_Offset = Vector(30, 25, -50), -- The offset for the controller when the camera is in third person
+	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
+}
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_FootStep = {"vj_recb/zombie/footstep1.wav","vj_recb/zombie/footstep2.wav","vj_recb/zombie/footstep3.wav"}
@@ -81,22 +87,26 @@ function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
 	
 	elseif math.random(1,10) == 1 && hitgroup == HITGROUP_HEAD then
 		self:EmitSound(Sound("vj_recb/zombie/zom_neck_break.wav",70))
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())	
 		self:SetBodygroup(0,0)
 		self:SetBodygroup(1,2)
 		self:SetBodygroup(7,0)
 	
 	elseif math.random(1,10) == 1 && hitgroup == HITGROUP_CHEST then
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("chest")).Pos,self:GetAngles())
 		self:SetBodygroup(0,0)
 		self:SetBodygroup(4,1)
 		
 	elseif math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rarm")).Pos,self:GetAngles())
 		self:SetBodygroup(0,0)
 		self:SetBodygroup(5,1)
 
 	elseif math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("larm")).Pos,self:GetAngles())
 		self:SetBodygroup(0,0)
 		self:SetBodygroup(6,1)	
     end
@@ -144,6 +154,12 @@ function ENT:Cripple()
 	self.HasMeleeAttack = true 
 	self.MeleeAttackDistance = 20 
     self.MeleeAttackDamageDistance = 50
+	self.VJC_Data = {
+	CameraMode = 1, 
+	ThirdP_Offset = Vector(30, 25, -15), 
+	FirstP_Bone = "ValveBiped.Bip01_Head1", 
+	FirstP_Offset = Vector(10, 0, -30), 
+}
 end
  ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)

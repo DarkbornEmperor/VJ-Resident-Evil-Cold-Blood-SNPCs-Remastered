@@ -17,6 +17,7 @@ ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
 ENT.MeleeAttackDamageType = DMG_POISON
+ENT.NextMeleeAttackTime = 1.5
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDamage = 10
 ENT.MeleeAttackDistance = 15 
@@ -26,7 +27,13 @@ ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.GibOnDeathDamagesTable = {"All"}
-
+	-- ====== Controller Data ====== --
+ENT.VJC_Data = {
+	CameraMode = 1, 
+	ThirdP_Offset = Vector(35, 25, 5), 
+	FirstP_Bone = "ValveBiped.Bip01_Head1", 
+	FirstP_Offset = Vector(10, 0, -30), 
+}
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/snake/snake_attack.wav"}
@@ -52,7 +59,7 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
-self:SetCollisionBounds(Vector(29.86, 6.04, 5.87), Vector(-15.24, -10.02, -2.78))
+self:SetCollisionBounds(Vector(29.86, 6.04, 5.87), Vector(-15.24, -10.02, 0))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)

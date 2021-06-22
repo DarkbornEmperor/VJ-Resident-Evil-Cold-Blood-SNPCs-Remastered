@@ -17,7 +17,13 @@ ENT.HullType = HULL_TINY
 ENT.HasMeleeAttack = false 
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
-
+	-- ====== Controller Data ====== --
+ENT.VJC_Data = {
+	CameraMode = 1, 
+	ThirdP_Offset = Vector(35, 15, 5), 
+	FirstP_Bone = "ValveBiped.Bip01_Head1", 
+	FirstP_Offset = Vector(10, 0, -30), 
+}
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}

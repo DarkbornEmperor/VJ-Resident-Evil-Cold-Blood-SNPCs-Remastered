@@ -6,7 +6,7 @@ include('shared.lua')
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/vj_recb/recb_black_tiger.mdl"} 
-ENT.StartHealth = 800
+ENT.StartHealth = 1000
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.VJ_IsHugeMonster = true
 ENT.Immune_Physics = true
@@ -18,6 +18,8 @@ ENT.CanFlinch = 1
 ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
+ENT.NextMeleeAttackTime = 1.8
+ENT.MeleeAttackDamageType = DMG_POISON
 ENT.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDamage = 25
@@ -36,7 +38,13 @@ ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.GibOnDeathDamagesTable = {"All"}
-
+	-- ====== Controller Data ====== --
+ENT.VJC_Data = {
+	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
+	ThirdP_Offset = Vector(-40, 25, -25), -- The offset for the controller when the camera is in third person
+	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
+}
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_MeleeAttack = {"vj_recb/spider/spider_bite.wav","vj_recb/spider/spider_bite2.wav"}
@@ -68,6 +76,10 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:RangeAttackCode_GetShootPos(TheProjectile)
 	return (self:GetEnemy():GetPos() - self:LocalToWorld(Vector(80,0,0)))*2 + self:GetUp()*120
+end
+ ---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
+	    dmginfo:ScaleDamage(0.50)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)

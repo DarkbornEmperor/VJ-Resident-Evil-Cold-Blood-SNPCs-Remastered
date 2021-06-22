@@ -10,13 +10,13 @@ ENT.DecalTbl_DeathDecals = {"VJ_RECB_Blood_Yellow"}
 --ENT.SoundTbl_Idle = {"vj_acid/acid_idle1.wav"}
 ENT.SoundTbl_OnCollide = {"vj_recb/spider/spidershot.wav"}
 ENT.DoesRadiusDamage = true -- Should it do a blast damage when it hits something?
-ENT.RadiusDamageRadius = 180 -- How far the damage go? The farther away it's from its enemy, the less damage it will do | Counted in world units
+ENT.RadiusDamageRadius = 50 -- How far the damage go? The farther away it's from its enemy, the less damage it will do | Counted in world units
 ENT.RadiusDamage = 10 -- How much damage should it deal? Remember this is a radius damage, therefore it will do less damage the farther away the entity is from its enemy
 ENT.RadiusDamageUseRealisticRadius = true -- Should the damage decrease the farther away the enemy is from the position that the projectile hit?
-ENT.RadiusDamageType = DMG_ACID-- Damage type
+ENT.RadiusDamageType = DMG_POISON-- Damage type
 ENT.DoesDirectDamage = false -- Should it do a direct damage when it hits something?
 ENT.DirectDamage = 10 -- How much damage should it do when it hits something
-ENT.DirectDamageType = DMG_ACID -- Damage type
+ENT.DirectDamageType = DMG_POISON -- Damage type
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomPhysicsObjectOnInitialize(phys)
 	phys:Wake()
