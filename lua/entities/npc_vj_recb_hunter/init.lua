@@ -110,15 +110,30 @@ function ENT:MultipleMeleeAttacks()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
-	if self.GraySkin == false && hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
+	if self.GraySkin == false && hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 && self.HasGibDeathParticles == true then
 	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",70))
 		self:SetBodygroup(0,2)
-	
-		if self.HasGibDeathParticles == true then
-			for i=1,3 do
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+		
+		local bloodeffect = ents.Create("info_particle_system")
+		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
+		bloodeffect:SetPos(self:GetAttachment(self:LookupAttachment("head")).Pos)
+		bloodeffect:SetAngles(self:GetAttachment(self:LookupAttachment("head")).Ang)
+		bloodeffect:SetParent(self)
+		bloodeffect:Fire("SetParentAttachment","head")
+		bloodeffect:Spawn()
+		bloodeffect:Activate()
+		bloodeffect:Fire("Start","",0)
+		bloodeffect:Fire("Kill","",2)	
+		
+	elseif self.GraySkin == true && hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 && self.HasGibDeathParticles == true then
+		self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",70))
+	    self:SetBodygroup(0,3)		
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
 				
 		local bloodeffect = ents.Create("info_particle_system")
 		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
@@ -131,10 +146,8 @@ function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 		bloodeffect:Fire("Start","",0)
 		bloodeffect:Fire("Kill","",2)
 			
-	end
 end
-		return true,{DeathAnim=true}
-    end
+	return true,{DeathAnim=true}
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
