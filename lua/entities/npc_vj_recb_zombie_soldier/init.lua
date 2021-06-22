@@ -11,6 +11,10 @@ ENT.StartHealth = 150
 function ENT:CustomOnInitialize()
 	self:SetSkin(math.random(0,3))
 	self:SetBodygroup(1,math.random(0,4))
+	
+	if self.Vomit_Zombie && !self.Crippled then
+	     self:SetVomitZombie()
+   end		
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)

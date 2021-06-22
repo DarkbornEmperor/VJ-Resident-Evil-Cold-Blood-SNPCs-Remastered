@@ -5,13 +5,13 @@ include("shared.lua")
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/spitball_small.mdl"} -- The models it should spawn with | Picks a random one from the table
+ENT.Model = {"models/spitball_medium.mdl"} -- The models it should spawn with | Picks a random one from the table
 ENT.DecalTbl_DeathDecals = {"VJ_RECB_Blood_Yellow"}
 --ENT.SoundTbl_Idle = {"vj_acid/acid_idle1.wav"}
 ENT.SoundTbl_OnCollide = {"vj_recb/spider/spidershot.wav"}
 ENT.DoesRadiusDamage = true -- Should it do a blast damage when it hits something?
 ENT.RadiusDamageRadius = 50 -- How far the damage go? The farther away it's from its enemy, the less damage it will do | Counted in world units
-ENT.RadiusDamage = 10 -- How much damage should it deal? Remember this is a radius damage, therefore it will do less damage the farther away the entity is from its enemy
+ENT.RadiusDamage = 15 -- How much damage should it deal? Remember this is a radius damage, therefore it will do less damage the farther away the entity is from its enemy
 ENT.RadiusDamageUseRealisticRadius = true -- Should the damage decrease the farther away the enemy is from the position that the projectile hit?
 ENT.RadiusDamageType = DMG_POISON-- Damage type
 ENT.DoesDirectDamage = false -- Should it do a direct damage when it hits something?
@@ -20,10 +20,9 @@ ENT.DirectDamageType = DMG_POISON -- Damage type
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomPhysicsObjectOnInitialize(phys)
 	phys:Wake()
-	//phys:SetMass(1)
-	phys:SetBuoyancyRatio(0)
-	phys:EnableDrag(false)
 	phys:EnableGravity(true)
+	phys:EnableDrag(false)
+	phys:SetBuoyancyRatio(0)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
@@ -38,12 +37,6 @@ function ENT:CustomOnThink()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:DeathEffects(data,phys)
-	local effectdata = EffectData()
-	effectdata:SetOrigin(data.HitPos)
-	effectdata:SetScale( 1 )
-	--util.Effect("StriderBlood",effectdata)
-	--util.Effect("StriderBlood",effectdata)
-	--util.Effect("StriderBlood",effectdata)
 	ParticleEffect("drg_re1_blood_impact_acid", data.HitPos, Angle(0,0,0), nil)
 	ParticleEffect("drg_re1_blood_impact_acid", data.HitPos, Angle(0,0,0), nil)
 end

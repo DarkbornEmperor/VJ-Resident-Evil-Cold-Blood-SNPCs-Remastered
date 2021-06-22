@@ -89,11 +89,16 @@ function ENT:SetVomitZombie()
 	self.HasRangeAttack = true 
 	self.AnimTbl_RangeAttack = {ACT_SPECIAL_ATTACK1}
 	self.RangeAttackEntityToSpawn = "obj_vj_recb_zombie_vomit"
-	self.RangeDistance = 60
+	self.RangeDistance = 100
     self.RangeToMeleeDistance = 1 
 	self.TimeUntilRangeAttackProjectileRelease = false
 	self.RangeUseAttachmentForPos = true 
     self.RangeUseAttachmentForPosID = "mouth"
+	self.NextRangeAttackTime = 4
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:RangeAttackCode_GetShootPos(projectile)
+	return self:CalculateProjectile("Curve", self:GetAttachment(self:LookupAttachment(self.RangeUseAttachmentForPosID)).Pos, self:GetEnemy():GetPos() + self:GetEnemy():OBBCenter(), 1500)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)

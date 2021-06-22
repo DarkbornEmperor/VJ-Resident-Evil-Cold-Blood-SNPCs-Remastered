@@ -26,7 +26,7 @@ ENT.MeleeAttackDistance = 30
 ENT.MeleeAttackDamageDistance = 60
 ENT.HasLeapAttack = true 
 ENT.LeapAttackDamage = 15
-ENT.TimeUntilLeapAttackDamage = 0.6
+ENT.TimeUntilLeapAttackDamage = false
 ENT.NextAnyAttackTime_Leap = 1.5
 ENT.NextLeapAttackTime = 8
 ENT.LeapAttackAnimationDecreaseLengthAmount = 1.4
@@ -75,6 +75,7 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 end
 	if key == "attack" then
 		self:MeleeAttackCode()
+		self:LeapDamageCode()
 end
 	if key == "death" then
 		VJ_EmitSound(self, "vj_recb/hunter/hu_bodyfall.wav", 85, 100)

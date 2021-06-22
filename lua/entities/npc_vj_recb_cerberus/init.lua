@@ -28,7 +28,7 @@ ENT.NextMeleeAttackTime = 1.5
 ENT.NextAnyAttackTime_Melee = 0.8
 ENT.HasLeapAttack = true 
 ENT.LeapAttackDamage = 15
-ENT.TimeUntilLeapAttackDamage = 0.4
+ENT.TimeUntilLeapAttackDamage = false
 ENT.AnimTbl_LeapAttack = {"vjseq_jump_window"}
 ENT.LeapAttackVelocityForward = 100 
 ENT.LeapAttackVelocityUp = 100
@@ -73,6 +73,7 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 end
 	if key == "attack" then
 		self:MeleeAttackCode()
+		self:LeapDamageCode()
 end
 	if key == "death" then
 		VJ_EmitSound(self, "vj_recb/cerberus/cer_bodyfall.wav", 85, 100)

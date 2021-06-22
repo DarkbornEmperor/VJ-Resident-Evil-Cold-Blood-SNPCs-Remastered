@@ -90,9 +90,9 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
 	 if self.Tyrant_Rage == true then
-	    dmginfo:ScaleDamage(0.75)
+	    dmginfo:ScaleDamage(0.10)
 	else
-	    dmginfo:ScaleDamage(0.50)
+	    dmginfo:ScaleDamage(0.25)
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

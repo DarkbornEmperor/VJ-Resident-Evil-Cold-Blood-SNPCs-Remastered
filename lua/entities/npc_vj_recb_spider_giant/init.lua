@@ -28,8 +28,9 @@ ENT.MeleeAttackDamageDistance = 90
 ENT.HasRangeAttack = true 
 ENT.AnimTbl_RangeAttack = {ACT_RANGE_ATTACK1}
 ENT.RangeAttackEntityToSpawn = "obj_vj_recb_spider_spit"
-ENT.RangeDistance = 2000
-ENT.RangeToMeleeDistance = 500
+ENT.NextRangeAttackTime = 6
+ENT.RangeDistance = 700
+ENT.RangeToMeleeDistance = 200
 ENT.TimeUntilRangeAttackProjectileRelease = false
 ENT.RangeUseAttachmentForPos = true 
 ENT.RangeUseAttachmentForPosID = "mouth"
@@ -74,8 +75,8 @@ function ENT:CustomOnInitialize()
 	self:SetCollisionBounds(Vector(60, 50, 52), Vector(-60, -50, 0))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:RangeAttackCode_GetShootPos(TheProjectile)
-	return (self:GetEnemy():GetPos() - self:LocalToWorld(Vector(80,0,0)))*2 + self:GetUp()*120
+function ENT:RangeAttackCode_GetShootPos(projectile)
+	return self:CalculateProjectile("Curve", self:GetAttachment(self:LookupAttachment(self.RangeUseAttachmentForPosID)).Pos, self:GetEnemy():GetPos() + self:GetEnemy():OBBCenter(), 1500)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
