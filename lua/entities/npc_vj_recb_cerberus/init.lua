@@ -52,10 +52,10 @@ ENT.SoundTbl_Pain = {"vj_recb/cerberus/cer_pain.wav","vj_recb/cerberus/cer_pain2
 ENT.SoundTbl_Death = {"vj_recb/cerberus/cer_die.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/cerberus/cer_bite.wav"}
 ENT.SoundTbl_MeleeAttack = {"vj_recb/cerberus/Bite.wav"}
-ENT.SoundTbl_MeleeAttackMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
+ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
 ENT.SoundTbl_LeapAttackJump = {"vj_recb/cerberus/cer_jump.wav"}
 ENT.SoundTbl_LeapAttackDamage = {"vj_recb/cerberus/Bite.wav"}
-ENT.SoundTbl_LeapAttackDamageMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
+ENT.SoundTbl_LeapAttackDamageMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100

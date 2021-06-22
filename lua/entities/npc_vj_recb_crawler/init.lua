@@ -40,7 +40,7 @@ ENT.SoundTbl_Idle = {"vj_recb/crawler/crawler_idle.wav"}
 ENT.SoundTbl_Pain = {"vj_recb/crawler/crawler_pain.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/crawler/crawler_attack.wav"}
 ENT.SoundTbl_MeleeAttack = {"vj_recb/crawler/crawler_bite.wav"}
-ENT.SoundTbl_MeleeAttackMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
+ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100

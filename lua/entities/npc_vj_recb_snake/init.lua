@@ -38,7 +38,7 @@ ENT.VJC_Data = {
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/snake/snake_attack.wav"}
 ENT.SoundTbl_MeleeAttack = {"vj_recb/snake/snake_bite.wav"}
-ENT.SoundTbl_MeleeAttackMiss = {"npc/zombie/claw_miss1.wav","npc/zombie/claw_miss2.wav"}
+ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
 ENT.SoundTbl_Death = {"vj_recb/snake/snake_die.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 

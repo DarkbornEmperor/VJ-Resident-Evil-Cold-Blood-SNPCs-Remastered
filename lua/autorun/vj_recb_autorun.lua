@@ -17,7 +17,7 @@ if VJExists == true then
     VJ.AddCategoryInfo("Resident Evil: Cold Blood", {Icon = "vj_recb/icons/recb.png"})
 
 	local vCat = "Resident Evil: Cold Blood"
-	VJ.AddNPC("Zombie (Male)","npc_vj_recb_zombie",vCat)
+	VJ.AddNPC("Zombie (Male)","npc_vj_recb_zombie_male",vCat)
 	VJ.AddNPC("Zombie (Female)","npc_vj_recb_zombie_female",vCat)
 	VJ.AddNPC("Zombie (Soldier)","npc_vj_recb_zombie_soldier",vCat)
 	VJ.AddNPC("Zombie (Torso)","npc_vj_recb_zombie_torso",vCat)
