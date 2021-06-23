@@ -40,10 +40,10 @@ ENT.SoundTbl_Breath = {"vj_recb/zombie/crimsonhead/crimhead_run.wav"}
 ENT.SoundTbl_Idle = {"vj_recb/zombie/CrimsonHead/crimhead_attack1.wav","vj_recb/zombie/CrimsonHead/crimhead_attack2.wav"}
 ENT.SoundTbl_Alert = {"vj_recb/zombie/CrimsonHead/crimhead_alert.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/CrimsonHead/crimhead_attack1.wav","vj_recb/zombie/CrimsonHead/crimhead_attack2.wav"}
+ENT.SoundTbl_MeleeAttack = {"vj_recb/zombie/CrimsonHead/crimhead_slash.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
 ENT.SoundTbl_Pain = {"vj_recb/zombie/CrimsonHead/crimhead_pain.wav"}
 ENT.SoundTbl_Death = {"vj_recb/zombie/CrimsonHead/crimhead_die.wav"}
-ENT.SoundTbl_MeleeAttack = {"vj_recb/zombie/CrimsonHead/crimhead_slash.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100

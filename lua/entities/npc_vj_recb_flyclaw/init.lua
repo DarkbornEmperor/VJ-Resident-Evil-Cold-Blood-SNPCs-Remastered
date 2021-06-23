@@ -37,8 +37,8 @@ ENT.VJC_Data = {
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_FootStep = {"vj_recb/flyclaw/fl_walk.wav"}
 ENT.SoundTbl_Idle = {"vj_recb/flyclaw/fl_idle.wav","vj_recb/flyclaw/fl_idle2.wav","vj_recb/flyclaw/fl_idle3.wav"}
-ENT.SoundTbl_CombatIdle = {"vj_recb/flyclaw/fl_ang.wav"}
 ENT.SoundTbl_Alert = {"vj_recb/flyclaw/fl_alrt.wav"}
+ENT.SoundTbl_CombatIdle = {"vj_recb/flyclaw/fl_ang.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/flyclaw/fl_att.wav"}
 ENT.SoundTbl_MeleeAttack = {"vj_recb/flyclaw/fl_slash.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}

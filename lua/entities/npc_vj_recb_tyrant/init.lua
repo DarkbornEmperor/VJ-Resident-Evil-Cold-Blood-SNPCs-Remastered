@@ -42,8 +42,8 @@ ENT.VJC_Data = {
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_FootStep = {"vj_recb/tyrant103/ty_walk.wav"}
-ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/tyrant103/ty_swing.wav"}
 ENT.SoundTbl_MeleeAttack = {"vj_recb/tyrant103/ty_punch.wav"}
+ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/tyrant103/ty_swing.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 ENT.SoundTbl_SoundTrack = {"vj_recb/tyrant103/recb_-_tyrant.wav"}
 ENT.HasSoundTrack = true

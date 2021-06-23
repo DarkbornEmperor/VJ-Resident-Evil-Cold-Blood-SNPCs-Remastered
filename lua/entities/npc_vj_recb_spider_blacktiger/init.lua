@@ -48,9 +48,14 @@ ENT.VJC_Data = {
 }
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
+ENT.SoundTbl_FootStep = {"vj_recb/spider/fl_walk.wav"}
+ENT.SoundTbl_Idle = {"vj_recb/spider/fl_out.wav"} 
+ENT.SoundTbl_Alert = {"vj_recb/spider/fl_out.wav"}
 ENT.SoundTbl_MeleeAttack = {"vj_recb/spider/spider_bite.wav","vj_recb/spider/spider_bite2.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
 ENT.SoundTbl_RangeAttack = {"vj_recb/spider/Sp_spit.wav"}
+ENT.SoundTbl_Pain = {"vj_recb/spider/fl_dam.wav"}
+ENT.SoundTbl_Death = {"vj_recb/ant/ant_die.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 ENT.SoundTbl_SoundTrack = {"vj_recb/mapspawner/spidersrevenge.wav"}
 ENT.HasSoundTrack = true

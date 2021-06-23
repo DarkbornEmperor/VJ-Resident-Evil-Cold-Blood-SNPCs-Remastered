@@ -44,18 +44,18 @@ ENT.VJC_Data = {
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_FootStep = {"vj_recb/cerberus/cer_run.wav","vj_recb/cerberus/cer_run2.wav"}
-ENT.SoundTbl_Idle = {"vj_recb/cerberus/cer_growl.wav"} 
-ENT.SoundTbl_CombatIdle = {"vj_recb/cerberus/cer_bark.wav","vj_recb/cerberus/cer_growl.wav"} 
+ENT.SoundTbl_Idle = {"vj_recb/cerberus/cer_growl.wav"}
 ENT.SoundTbl_Alert = {"vj_recb/cerberus/cer_alert.wav"}
-ENT.SoundTbl_CallForHelp = {"vj_recb/cerberus/cer_howl.wav"}
-ENT.SoundTbl_Pain = {"vj_recb/cerberus/cer_pain.wav","vj_recb/cerberus/cer_pain2.wav"}
-ENT.SoundTbl_Death = {"vj_recb/cerberus/cer_die.wav"}
+ENT.SoundTbl_CombatIdle = {"vj_recb/cerberus/cer_bark.wav","vj_recb/cerberus/cer_growl.wav"} 
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/cerberus/cer_bite.wav"}
 ENT.SoundTbl_MeleeAttack = {"vj_recb/cerberus/Bite.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
 ENT.SoundTbl_LeapAttackJump = {"vj_recb/cerberus/cer_jump.wav"}
 ENT.SoundTbl_LeapAttackDamage = {"vj_recb/cerberus/Bite.wav"}
 ENT.SoundTbl_LeapAttackDamageMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
+ENT.SoundTbl_CallForHelp = {"vj_recb/cerberus/cer_howl.wav"}
+ENT.SoundTbl_Pain = {"vj_recb/cerberus/cer_pain.wav","vj_recb/cerberus/cer_pain2.wav"}
+ENT.SoundTbl_Death = {"vj_recb/cerberus/cer_die.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100

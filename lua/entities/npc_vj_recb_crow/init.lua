@@ -40,10 +40,10 @@ ENT.VJC_Data = {
 ENT.SoundTbl_Breath = {"vj_recb/crow/crow_flap.wav"}
 ENT.SoundTbl_Idle = {"vj_recb/crow/crow_caw.wav"}
 ENT.SoundTbl_Alert = {"vj_recb/crow/crow_caw.wav"}
-ENT.SoundTbl_Death = {"vj_recb/crow/crow_die.wav"}
 ENT.SoundTbl_MeleeAttack = {"vj_recb/crow/crow_peck.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/crow/crow_attack.wav"} 
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
+ENT.SoundTbl_Death = {"vj_recb/crow/crow_die.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100

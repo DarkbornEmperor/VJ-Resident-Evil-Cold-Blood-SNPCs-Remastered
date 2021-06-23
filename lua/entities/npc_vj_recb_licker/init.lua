@@ -49,11 +49,11 @@ ENT.SoundTbl_FootStep = {"vj_recb/licker/li_walk.wav"}
 ENT.SoundTbl_Idle = {"vj_recb/licker/li_idle.wav"}
 ENT.SoundTbl_Alert = {"vj_recb/licker/li_idle.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
-ENT.SoundTbl_Pain = {"vj_recb/licker/li_pain.wav"}
-ENT.SoundTbl_Death = {"vj_recb/licker/li_die.wav"}
 ENT.SoundTbl_LeapAttackJump = {"vj_recb/licker/li_jump.wav"}
 ENT.SoundTbl_LeapAttackDamage = {"vj_recb/licker/li_slash.wav"}
 ENT.SoundTbl_LeapAttackDamageMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
+ENT.SoundTbl_Pain = {"vj_recb/licker/li_pain.wav"}
+ENT.SoundTbl_Death = {"vj_recb/licker/li_die.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
