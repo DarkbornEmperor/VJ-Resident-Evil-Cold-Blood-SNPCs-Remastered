@@ -1,8 +1,5 @@
 "VertexLitGeneric"
 {
 	"$basetexture" "models/vj_recb/spider/Back_hair"
-	"$translucent" 1
-	"$halflambert" 1
-	"$nodecal" "1"
-	"$nocull" "1"
+                "$alphatest" 1
 }
