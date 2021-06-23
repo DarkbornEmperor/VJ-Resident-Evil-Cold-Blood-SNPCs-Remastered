@@ -86,14 +86,14 @@ function ENT:MultipleMeleeAttacks()
 	if randattack == 1 then
 		self.AnimTbl_MeleeAttack = {"vjseq_attack1"}
 		self.MeleeAttackDamage = 35
-		self.MeleeAttackDistance = 40
-		self.MeleeAttackDamageDistance = 90
+		self.MeleeAttackDistance = 35
+		self.MeleeAttackDamageDistance = 75
 		
 	elseif randattack == 2 then
 		self.AnimTbl_MeleeAttack = {"vjseq_attack2"}
 		self.MeleeAttackDamage = 35
-		self.MeleeAttackDistance = 40
-		self.MeleeAttackDamageDistance = 90
+		self.MeleeAttackDistance = 30
+		self.MeleeAttackDamageDistance = 60
 	end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------

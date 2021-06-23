@@ -58,6 +58,9 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	if key == "step" then
 		self:FootStepSoundCode()
 end
+    if key == "step" then
+	    VJ_EmitSound(self, "vj_recb/zombie/footstep"..math.random(1,3)..".wav", 85, 100)	
+end
 	if key == "crawl" then
 		self:FootStepSoundCode()
 end
@@ -106,6 +109,60 @@ end
 function ENT:RangeAttackCode_GetShootPos(projectile)
 	return self:CalculateProjectile("Curve", self:GetAttachment(self:LookupAttachment(self.RangeUseAttachmentForPosID)).Pos, self:GetEnemy():GetPos() + self:GetEnemy():OBBCenter(), 1500)
 end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
+local attacker = dmginfo:GetAttacker()
+if math.random(1,20) == 1 && !self.Crippled && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+self:VJ_ACT_PLAYACTIVITY("knocked_to_floor",true,100,false)
+self.GodMode = true
+self.VJ_NoTarget = true
+self.DisableMakingSelfEnemyToNPCs = true
+self.DisableChasingEnemy = true
+self.DisableFindEnemy = true
+self.DisableWandering = true
+self.MovementType = VJ_MOVETYPE_STATIONARY
+self.CanTurnWhileStationary = false
+self.HasSounds = false
+self.GodMode = true
+self.CanFlinch = 0
+
+timer.Simple(GetConVarNumber("VJ_RECB_Zombie_Time"),function()
+if IsValid(self) && !self.Crippled && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+self:VJ_ACT_PLAYACTIVITY("getup",true,2.5,false)
+self.GodMode = false
+self.VJ_NoTarget = false
+self.DisableMakingSelfEnemyToNPCs = false
+self.DisableChasingEnemy = false
+self.DisableFindEnemy = false
+self.DisableWandering = false
+self.HasSounds = true
+self.GodMode = false
+
+elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+self:VJ_ACT_PLAYACTIVITY("crawl_attack",true,1,false)
+self.GodMode = false
+self.VJ_NoTarget = false
+self.DisableMakingSelfEnemyToNPCs = false
+self.DisableChasingEnemy = false
+self.DisableFindEnemy = false
+self.DisableWandering = false
+self.HasSounds = true
+self.GodMode = false
+end
+
+timer.Simple(3,function()
+if IsValid(self) && !self.Crippled then
+self.MovementType = VJ_MOVETYPE_GROUND
+self.CanFlinch = 1
+
+elseif IsValid(self) && self.Crippled == true then
+self.MovementType = VJ_MOVETYPE_GROUND
+self.CanFlinch = 0
+end
+end)
+end)
+end
+end	
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
 	if self.Damaged == false then --(dmginfo:IsBulletDamage())

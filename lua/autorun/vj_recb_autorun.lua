@@ -58,7 +58,7 @@ if VJExists == true then
 	util.PrecacheModel("models/vj_recb/recb_prototyrant.mdl")
 	util.PrecacheModel("models/vj_recb/recb_snake.mdl")
 	util.PrecacheModel("models/vj_recb/recb_tyrant_103.mdl")
-	util.PrecacheModel("models/vj_recb/recb_zombie.mdl")
+	util.PrecacheModel("models/vj_recb/recb_zombie_male.mdl")
 	util.PrecacheModel("models/vj_recb/recb_zombie_crimsonhead.mdl")
 	util.PrecacheModel("models/vj_recb/recb_zombie_female.mdl")
 	util.PrecacheModel("models/vj_recb/recb_zombie_soldier.mdl")
@@ -76,18 +76,20 @@ if VJExists == true then
     PrecacheParticleSystem( "drg_re2_fire_large" )
     PrecacheParticleSystem( "drg_re2_fire_medium" )
     PrecacheParticleSystem( "drg_re2_fire_small" )
-    PrecacheParticleSystem( "drg_re2_fire_tiny" )
+    --PrecacheParticleSystem( "drg_re2_fire_tiny" )
     PrecacheParticleSystem( "drg_re1_blood_impact" )
     PrecacheParticleSystem( "drg_re1_blood_impact_large" )
     PrecacheParticleSystem( "drg_re1_blood_impact_acid" )
     PrecacheParticleSystem( "drg_re1_blood_impact_green" )
-    PrecacheParticleSystem( "drg_re1_blood_impact_plant" )
-    PrecacheParticleSystem( "drg_re1_blood_impact_plant_small" )
+    --PrecacheParticleSystem( "drg_re1_blood_impact_plant" )
+    --PrecacheParticleSystem( "drg_re1_blood_impact_plant_small" )
 
 	-- ConVars --
 	local AddConvars = {}
 	AddConvars["VJ_RECB_Boss_Music"] = 1
 	AddConvars["VJ_RECB_Gibbing"] = 1
+	AddConvars["VJ_RECB_Zombie_Time"] = 10
+	AddConvars["VJ_RECB_GetUp"] = 1
 	
     -- Map Spawner ConVars --
     AddConvars["VJ_RECB_MapSpawner_Music"] = 1
@@ -111,11 +113,15 @@ end
 			vj_recbreset.Options["#vjbase.menugeneral.default"] = { 
 				VJ_RECB_Boss_Music = "1",
 				VJ_RECB_Gibbing = "1",
+				VJ_RECB_Zombie_Time = "10",
+				VJ_RECB_GetUp = "1",
 }
 Panel:AddControl("ComboBox", vj_recbreset)
 Panel:ControlHelp("NOTE: Only Future Spawned SNPCs Will Be Affected!")
 Panel:AddControl("Checkbox", {Label ="Bosses Have Music?", Command ="VJ_RECB_Boss_Music"})
 Panel:AddControl("Checkbox", {Label ="SNPCs Can Gib?", Command ="VJ_RECB_Gibbing"})
+Panel:AddControl("Checkbox", {Label ="Zombies Can Be Knocked Down?", Command ="VJ_RECB_GetUp"})
+Panel:AddControl("Slider", {Label ="Time Until Zombies Get Back Up",Command ="VJ_RECB_Zombie_Time",Min = "10",Max = "100"})
 Panel:AddPanel(typebox)
 
 end

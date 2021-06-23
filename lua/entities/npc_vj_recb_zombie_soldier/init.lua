@@ -61,8 +61,60 @@ end
 function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
     if (dmginfo:IsBulletDamage()) && hitgroup == HITGROUP_CHEST then
 	    dmginfo:ScaleDamage(0.50)
-	end
 end
+	
+local attacker = dmginfo:GetAttacker()
+if math.random(1,20) == 1 && !self.Crippled && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+self:VJ_ACT_PLAYACTIVITY("knocked_to_floor",true,100,false)
+self.GodMode = true
+self.VJ_NoTarget = true
+self.DisableMakingSelfEnemyToNPCs = true
+self.DisableChasingEnemy = true
+self.DisableFindEnemy = true
+self.DisableWandering = true
+self.MovementType = VJ_MOVETYPE_STATIONARY
+self.CanTurnWhileStationary = false
+self.HasSounds = false
+self.GodMode = true
+self.CanFlinch = 0
+
+timer.Simple(GetConVarNumber("VJ_RECB_Zombie_Time"),function()
+if IsValid(self) && !self.Crippled && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+self:VJ_ACT_PLAYACTIVITY("getup",true,2.5,false)
+self.GodMode = false
+self.VJ_NoTarget = false
+self.DisableMakingSelfEnemyToNPCs = false
+self.DisableChasingEnemy = false
+self.DisableFindEnemy = false
+self.DisableWandering = false
+self.HasSounds = true
+self.GodMode = false
+
+elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+self:VJ_ACT_PLAYACTIVITY("crawl_attack",true,1,false)
+self.GodMode = false
+self.VJ_NoTarget = false
+self.DisableMakingSelfEnemyToNPCs = false
+self.DisableChasingEnemy = false
+self.DisableFindEnemy = false
+self.DisableWandering = false
+self.HasSounds = true
+self.GodMode = false
+end
+
+timer.Simple(3,function()
+if IsValid(self) && !self.Crippled then
+self.MovementType = VJ_MOVETYPE_GROUND
+self.CanFlinch = 1
+
+elseif IsValid(self) && self.Crippled == true then
+self.MovementType = VJ_MOVETYPE_GROUND
+self.CanFlinch = 0
+end
+end)
+end)
+end
+end	
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
