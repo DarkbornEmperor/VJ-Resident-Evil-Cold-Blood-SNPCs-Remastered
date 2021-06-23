@@ -80,7 +80,8 @@ if GetConVarNumber("VJ_RECB_Gibbing") == 0 then
         self.HasGibDeathParticles = false
 end
 		if math.random(1,5) == 1 then
-	end		self.Vomit_Zombie = true
+			self.Vomit_Zombie = true
+	end		
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
