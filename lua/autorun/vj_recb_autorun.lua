@@ -88,8 +88,8 @@ if VJExists == true then
 	local AddConvars = {}
 	AddConvars["VJ_RECB_Boss_Music"] = 1
 	AddConvars["VJ_RECB_Gibbing"] = 1
-	AddConvars["VJ_RECB_Zombie_Time"] = 10
-	AddConvars["VJ_RECB_GetUp"] = 1
+	AddConvars["VJ_RECB_Zombie_GetUp_Time"] = 5
+	AddConvars["VJ_RECB_Knocked"] = 1
 	AddConvars["VJ_RECB_Cerberus_Sleep"] = 1
 	
     -- Map Spawner ConVars --
@@ -114,8 +114,8 @@ end
 			vj_recbreset.Options["#vjbase.menugeneral.default"] = { 
 				VJ_RECB_Boss_Music = "1",
 				VJ_RECB_Gibbing = "1",
-				VJ_RECB_Zombie_Time = "10",
-				VJ_RECB_GetUp = "1",
+				VJ_RECB_Zombie_GetUp_Time = "5",
+				VJ_RECB_Knocked = "1",
 				VJ_RECB_Cerberus_Sleep = "1",
 }
 Panel:AddControl("ComboBox", vj_recbreset)
@@ -124,7 +124,7 @@ Panel:AddControl("Checkbox", {Label ="Bosses Have Music?", Command ="VJ_RECB_Bos
 Panel:AddControl("Checkbox", {Label ="SNPCs Can Gib?", Command ="VJ_RECB_Gibbing"})
 Panel:AddControl("Checkbox", {Label ="Cerberus Can Sleep?", Command ="VJ_RECB_Cerberus_Sleep"})
 Panel:AddControl("Checkbox", {Label ="Zombies Can Be Knocked Down?", Command ="VJ_RECB_Knocked"})
-Panel:AddControl("Slider", {Label ="Time Until Zombies Get Back Up",Command ="VJ_RECB_Zombie_GetUp_Time",Min = "10",Max = "100"})
+Panel:AddControl("Slider", {Label ="Time Until Zombies Get Back Up",Command ="VJ_RECB_Zombie_GetUp_Time",Min = "5",Max = "100"})
 Panel:AddPanel(typebox)
 
 end
@@ -138,12 +138,12 @@ if (CLIENT) then
 local function VJ_RECB_MAPSPAWNER(Panel)
 			if !game.SinglePlayer() then
 			if !LocalPlayer():IsAdmin() or !LocalPlayer():IsSuperAdmin() then
-				Panel:AddControl( "Label", {Text = "You are not an admin!"})
-				Panel:ControlHelp("Note: Only admins can change these settings!")
+				Panel:AddControl( "Label", {Text = "You Are Not An Admin!"})
+				Panel:ControlHelp("Note: Only Admins Can Change These Settings!")
 return
 	end
 end
-			Panel:AddControl( "Label", {Text = "Note: Only admins can change these settings!"})
+			Panel:AddControl( "Label", {Text = "Note: Only Admins Can Change These Settings!"})
 			local vj_recbreset_mapspawner = {Options = {}, CVars = {}, Label = "Reset Everything:", MenuButton = "0"}
 			vj_recbreset_mapspawner.Options["#vjbase.menugeneral.default"] = { 
 			    VJ_RECB_MapSpawner_Music = "1",
@@ -151,7 +151,7 @@ end
 
 }
 Panel:AddControl("ComboBox", vj_recbreset_mapspawner)
-Panel:ControlHelp("NOTE: Only enable if you have the specific addon installed!")
+Panel:ControlHelp("NOTE: Only Admins Can Change These Settings!")
 Panel:AddControl("Checkbox", {Label ="Enable Music?", Command ="VJ_RECB_MapSpawner_Music"})
 Panel:AddControl("Checkbox", {Label ="Enable Bosses?", Command ="VJ_RECB_MapSpawner_Boss"})
 Panel:AddPanel(typebox)

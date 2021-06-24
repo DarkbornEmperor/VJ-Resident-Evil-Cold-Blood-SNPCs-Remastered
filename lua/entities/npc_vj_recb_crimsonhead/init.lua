@@ -94,7 +94,6 @@ local zombieskin = math.random(1,2)
 	self:SetBodygroup(7,math.random(0,1))
    end
 end
-
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
     if (dmginfo:IsBulletDamage()) && hitgroup == HITGROUP_CHEST or hitgroup == HITGROUP_RIGHTARM or hitgroup == HITGROUP_LEFTARM or hitgroup == HITGROUP_RIGHTLEG or hitgroup == HITGROUP_LEFTARM then
@@ -198,7 +197,7 @@ function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
 				elseif hitgroup == HITGROUP_RIGHTLEG then
 				    ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rleg")).Pos,self:GetAngles())
 					self:SetBodygroup(2,1)
-				end
+end
 				if math.random(1,4) == 1 then anim = ACT_FLINCH_PHYSICS end
 				self:SetBodygroup(0,0)
 				self:VJ_ACT_PLAYACTIVITY(anim,true,false,true)

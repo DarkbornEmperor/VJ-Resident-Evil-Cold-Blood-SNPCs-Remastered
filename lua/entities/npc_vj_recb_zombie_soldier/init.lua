@@ -48,7 +48,7 @@ function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
 				elseif hitgroup == HITGROUP_RIGHTLEG then
 				    ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rleg")).Pos,self:GetAngles())
 					self:SetBodygroup(3,1)
-				end
+end
 				if math.random(1,4) == 1 then anim = ACT_FLINCH_PHYSICS end
 				self:VJ_ACT_PLAYACTIVITY(anim,true,false,true)
 				self:EmitSound(Sound("vj_recb/zombie/zom_leglost.wav",70))
@@ -138,10 +138,10 @@ function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 		bloodeffect:Fire("Start","",0)
 		bloodeffect:Fire("Kill","",2)	
 				
-   end
+    end
 end
 		return true,{DeathAnim=true}
-   end
+    end
 end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***

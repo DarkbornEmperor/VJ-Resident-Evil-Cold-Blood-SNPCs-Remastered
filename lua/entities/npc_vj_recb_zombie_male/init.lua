@@ -294,7 +294,7 @@ function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(0,0)
 		self:SetBodygroup(6,1)
-   end
+    end
 end	
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
@@ -311,7 +311,7 @@ function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
 				elseif hitgroup == HITGROUP_RIGHTLEG then
 				    ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rleg")).Pos,self:GetAngles())
 					self:SetBodygroup(2,1)
-				end
+end
 				if math.random(1,4) == 1 then anim = ACT_FLINCH_PHYSICS end
 				self:SetBodygroup(0,0)
 				self:VJ_ACT_PLAYACTIVITY(anim,true,false,true)
