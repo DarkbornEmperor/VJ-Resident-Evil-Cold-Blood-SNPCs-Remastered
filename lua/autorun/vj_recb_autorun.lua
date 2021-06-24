@@ -90,6 +90,7 @@ if VJExists == true then
 	AddConvars["VJ_RECB_Gibbing"] = 1
 	AddConvars["VJ_RECB_Zombie_Time"] = 10
 	AddConvars["VJ_RECB_GetUp"] = 1
+	AddConvars["VJ_RECB_Cerberus_Sleep"] = 1
 	
     -- Map Spawner ConVars --
     AddConvars["VJ_RECB_MapSpawner_Music"] = 1
@@ -115,11 +116,13 @@ end
 				VJ_RECB_Gibbing = "1",
 				VJ_RECB_Zombie_Time = "10",
 				VJ_RECB_GetUp = "1",
+				VJ_RECB_Cerberus_Sleep = "1",
 }
 Panel:AddControl("ComboBox", vj_recbreset)
 Panel:ControlHelp("NOTE: Only Future Spawned SNPCs Will Be Affected!")
 Panel:AddControl("Checkbox", {Label ="Bosses Have Music?", Command ="VJ_RECB_Boss_Music"})
 Panel:AddControl("Checkbox", {Label ="SNPCs Can Gib?", Command ="VJ_RECB_Gibbing"})
+Panel:AddControl("Checkbox", {Label ="Cerberuses Can Sleep?", Command ="VJ_RECB_Cerberus_Sleep"})
 Panel:AddControl("Checkbox", {Label ="Zombies Can Be Knocked Down?", Command ="VJ_RECB_GetUp"})
 Panel:AddControl("Slider", {Label ="Time Until Zombies Get Back Up",Command ="VJ_RECB_Zombie_Time",Min = "10",Max = "100"})
 Panel:AddPanel(typebox)

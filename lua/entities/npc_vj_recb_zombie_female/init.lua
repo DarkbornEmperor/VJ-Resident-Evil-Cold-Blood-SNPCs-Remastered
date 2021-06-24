@@ -58,8 +58,8 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	if key == "step" then
 		self:FootStepSoundCode()
 end
-    if key == "step" then
-	    VJ_EmitSound(self, "vj_recb/zombie/footstep"..math.random(1,3)..".wav", 85, 100)	
+    if key == "step_getup" then
+	    VJ_EmitSound(self, "vj_recb/zombie/footstep"..math.random(1,3)..".wav", 70, 100)	
 end
 	if key == "crawl" then
 		self:FootStepSoundCode()

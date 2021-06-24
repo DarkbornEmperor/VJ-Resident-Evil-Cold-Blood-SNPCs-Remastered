@@ -45,7 +45,6 @@ ENT.VJC_Data = {
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_FootStep = {"vj_recb/cerberus/cer_run.wav","vj_recb/cerberus/cer_run2.wav"}
 ENT.SoundTbl_Idle = {"vj_recb/cerberus/cer_growl.wav"}
-ENT.SoundTbl_Alert = {"vj_recb/cerberus/cer_alert.wav"}
 ENT.SoundTbl_CombatIdle = {"vj_recb/cerberus/cer_bark.wav","vj_recb/cerberus/cer_growl.wav"} 
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/cerberus/cer_bite.wav"}
 ENT.SoundTbl_MeleeAttack = {"vj_recb/cerberus/Bite.wav"}
@@ -90,17 +89,27 @@ if GetConVarNumber("VJ_RECB_Gibbing") == 0 then
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
-     self:SetCollisionBounds(Vector(40.46, 8.60, 38.69), Vector(-10.48, -9.03, -1.23))
+     self:SetCollisionBounds(Vector(45, 8, 38), Vector(-10, -8, 0))
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnAlert()
 if math.random(1,2) == 1 then
-        self:VJ_ACT_PLAYACTIVITY("vjseq_bark",true,2,true)	
+        self:VJ_ACT_PLAYACTIVITY("vjseq_bark",true,1.5,true)
+		self.SoundTbl_Alert = {"vj_recb/cerberus/cer_alert.wav"}
+else
+        self:VJ_ACT_PLAYACTIVITY("vjseq_growl",true,1.5,true)
+		self.SoundTbl_Alert = {"vj_recb/cerberus/cer_growl.wav"}		
+    end
 end
+-----------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnCallForHelp(ally)
+if math.random(1,2) == 1 then
+        self:VJ_ACT_PLAYACTIVITY("vjseq_growl",true,2,true)	
+    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnThink_AIEnabled()
-	if self.VJ_IsBeingControlled == false && self.Cerberus_IdleState != "N" && (self:IsMoving() or CurTime() > self.Cerberus_NextGetUpT) && self.DeathAnimationCodeRan == false && self.Dead == false then 
+	if GetConVarNumber("VJ_RECB_Cerberus_Sleep") == 1 && self.VJ_IsBeingControlled == false && self.Cerberus_IdleState != "N" && (self:IsMoving() or CurTime() > self.Cerberus_NextGetUpT) && self.DeathAnimationCodeRan == false && self.Dead == false then 
 		self:VJ_ACT_PLAYACTIVITY("sleeptostand",true,false)
 		self.Cerberus_IdleState = "N"
 		self.DisableWandering = false
@@ -108,20 +117,20 @@ function ENT:CustomOnThink_AIEnabled()
 		self.Cerberus_NextSleepT = CurTime() + 10
 end
 	
-		if self.VJ_IsBeingControlled == false && IsValid(self:GetEnemy()) && self.DeathAnimationCodeRan == false && self.Dead == false then 
+		if GetConVarNumber("VJ_RECB_Cerberus_Sleep") == 1 && self.VJ_IsBeingControlled == false && IsValid(self:GetEnemy()) && self.DeathAnimationCodeRan == false && self.Dead == false then 
 			if self.Cerberus_IdleState != "N" && self.Cerberus_InTransition == false then
 				self.Cerberus_InTransition = true
 				self:VJ_ACT_PLAYACTIVITY("sleeptostand",true,false,false,0,{},function(vsched)
 					vsched.RunCode_OnFinish = function()
 						self.Cerberus_InTransition = false
 						self.Cerberus_IdleState = "N"
-					end
-				end)
+	end
+end)
 				self.DisableWandering = false
 				self.DisableChasingEnemy = false
 	end
 end
-			if self.VJ_IsBeingControlled == false && self.Cerberus_IdleState == "N" && !self:IsMoving() && CurTime() > self.Cerberus_NextGetUpT && math.random(1,150) == 1 && self.DeathAnimationCodeRan == false && self.Dead == false then 
+			if GetConVarNumber("VJ_RECB_Cerberus_Sleep") == 1 && self.VJ_IsBeingControlled == false && self.Cerberus_IdleState == "N" && !self:IsMoving() && CurTime() > self.Cerberus_NextGetUpT && math.random(1,150) == 1 && self.DeathAnimationCodeRan == false && self.Dead == false then 
 				self:VJ_ACT_PLAYACTIVITY("gotosleep",true,false)
 				self.Cerberus_IdleState = "S"
 				self.DisableWandering = true
@@ -129,7 +138,7 @@ end
 				self.Cerberus_NextGetUpT = CurTime() + 20 //math.Rand(10,35)
 end
 			
-			if self.VJ_IsBeingControlled == false && self.Cerberus_IdleState == "N" && self.DeathAnimationCodeRan == false && self.Dead == false then
+			if GetConVarNumber("VJ_RECB_Cerberus_Sleep") == 1 && self.VJ_IsBeingControlled == false && self.Cerberus_IdleState == "N" && self.DeathAnimationCodeRan == false && self.Dead == false then
 				self.AnimTbl_IdleStand = {ACT_IDLE}
 			elseif  self.Cerberus_IdleState == "S" then
 				self.AnimTbl_IdleStand = {"sleep"}
@@ -166,11 +175,11 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup) 
 	 if self.DeathAnimationCodeRan == true && self.Dead == true then
-	 self.Cerberus_IdleState = false
-     self.Cerberus_InTransition = false
-	 self.Cerberus_NextGetUpT = false
-     self.Cerberus_NextSleepT = false
-end
+	    self.Cerberus_IdleState = false
+        self.Cerberus_InTransition = false
+	    self.Cerberus_NextGetUpT = false
+        self.Cerberus_NextSleepT = false
+    end
 end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
