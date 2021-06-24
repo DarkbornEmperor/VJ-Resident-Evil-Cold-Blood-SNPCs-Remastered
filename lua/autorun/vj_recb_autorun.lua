@@ -122,9 +122,9 @@ Panel:AddControl("ComboBox", vj_recbreset)
 Panel:ControlHelp("NOTE: Only Future Spawned SNPCs Will Be Affected!")
 Panel:AddControl("Checkbox", {Label ="Bosses Have Music?", Command ="VJ_RECB_Boss_Music"})
 Panel:AddControl("Checkbox", {Label ="SNPCs Can Gib?", Command ="VJ_RECB_Gibbing"})
-Panel:AddControl("Checkbox", {Label ="Cerberuses Can Sleep?", Command ="VJ_RECB_Cerberus_Sleep"})
-Panel:AddControl("Checkbox", {Label ="Zombies Can Be Knocked Down?", Command ="VJ_RECB_GetUp"})
-Panel:AddControl("Slider", {Label ="Time Until Zombies Get Back Up",Command ="VJ_RECB_Zombie_Time",Min = "10",Max = "100"})
+Panel:AddControl("Checkbox", {Label ="Cerberus Can Sleep?", Command ="VJ_RECB_Cerberus_Sleep"})
+Panel:AddControl("Checkbox", {Label ="Zombies Can Be Knocked Down?", Command ="VJ_RECB_Knocked"})
+Panel:AddControl("Slider", {Label ="Time Until Zombies Get Back Up",Command ="VJ_RECB_Zombie_GetUp_Time",Min = "10",Max = "100"})
 Panel:AddPanel(typebox)
 
 end

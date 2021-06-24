@@ -52,7 +52,8 @@ ENT.GeneralSoundPitch2 = 100
 -- Custom
 ENT.LegHealth = 30
 ENT.Crippled = false
-ENT.CanGetUp = true
+ENT.HasBeenKnocked = false
+ENT.CanBeKnocked = true
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	if key == "step" then
@@ -101,44 +102,46 @@ function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
 end
 
 local attacker = dmginfo:GetAttacker()
-if math.random(1,20) == 1 && !self.Crippled && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+if self.CanBeKnocked == true && math.random(1,20) == 1 && !self.Crippled && GetConVarNumber("VJ_RECB_Knocked") == 1 then
 self:VJ_ACT_PLAYACTIVITY("knocked_to_floor",true,100,false)
-self.GodMode = true
+self.MovementType = VJ_MOVETYPE_STATIONARY
+self.HasBeenKnocked = true
+self.CanBeKnocked = false
 self.VJ_NoTarget = true
 self.DisableMakingSelfEnemyToNPCs = true
 self.DisableChasingEnemy = true
 self.DisableFindEnemy = true
 self.DisableWandering = true
-self.MovementType = VJ_MOVETYPE_STATIONARY
 self.CanTurnWhileStationary = false
-self.HasSounds = false
+self.HasIdleSounds = false
 self.CanFlinch = 0
 
-timer.Simple(GetConVarNumber("VJ_RECB_Zombie_Time"),function()
-if IsValid(self) && !self.Crippled && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+timer.Simple(GetConVarNumber("VJ_RECB_Zombie_GetUp_Time"),function()
+if IsValid(self) && !self.Crippled && GetConVarNumber("VJ_RECB_Knocked") == 1 then
 self:VJ_ACT_PLAYACTIVITY("getup",true,2.5,false)
-self.GodMode = false
+self.HasBeenKnocked = false
 self.VJ_NoTarget = false
 self.DisableMakingSelfEnemyToNPCs = false
 self.DisableChasingEnemy = false
 self.DisableFindEnemy = false
 self.DisableWandering = false
-self.HasSounds = true
+self.HasIdleSounds = true
 
-elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_Knocked") == 1 then
 self:VJ_ACT_PLAYACTIVITY("crawl_attack",true,1,false)
-self.GodMode = false
+self.HasBeenKnocked = false
 self.VJ_NoTarget = false
 self.DisableMakingSelfEnemyToNPCs = false
 self.DisableChasingEnemy = false
 self.DisableFindEnemy = false
 self.DisableWandering = false
-self.HasSounds = true
+self.HasIdleSounds = true
 end
 
 timer.Simple(3,function()
 if IsValid(self) && !self.Crippled then
 self.MovementType = VJ_MOVETYPE_GROUND
+self.CanBeKnocked = true
 self.CanFlinch = 1
 
 elseif IsValid(self) && self.Crippled == true then
@@ -151,7 +154,7 @@ end
 end	
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
-	if self.Damaged == false then
+	 if self.Damaged == false then
 		local attacker = dmginfo:GetAttacker()
 	
 	elseif math.random(1,10) == 1 && hitgroup == HITGROUP_HEAD then
@@ -241,9 +244,7 @@ function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 		if self.HasGibDeathParticles == true then
 			for i=1,3 do
 				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				
+		
 		local bloodeffect = ents.Create("info_particle_system")
 		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
 		bloodeffect:SetPos(self:GetAttachment(self:LookupAttachment("head")).Pos)
@@ -262,14 +263,14 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
-	if hitgroup == HITGROUP_HEAD && !self.Crippled then
+	 if hitgroup == HITGROUP_HEAD && !self.Crippled then
 		self.AnimTbl_Death = {ACT_DIE_HEADSHOT}
 	else
 		self.AnimTbl_Death = {ACT_DIEFORWARD,ACT_DIESIMPLE}
 end
-	if self.Crippled == true then
-	self.AnimTbl_Death = {ACT_DIE_BACKSHOT}
-end
+	 if self.Crippled == true then
+	    self.AnimTbl_Death = {ACT_DIE_BACKSHOT}
+    end
 end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***

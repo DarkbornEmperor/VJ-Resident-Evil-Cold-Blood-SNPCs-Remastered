@@ -6,7 +6,7 @@ include('shared.lua')
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/vj_recb/recb_zombie_soldier.mdl"} 
-ENT.StartHealth = 150
+ENT.StartHealth = 175
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
 	self:SetSkin(math.random(0,3))
@@ -64,47 +64,46 @@ function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
 end
 	
 local attacker = dmginfo:GetAttacker()
-if math.random(1,20) == 1 && !self.Crippled && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+if self.CanBeKnocked == true && math.random(1,20) == 1 && !self.Crippled && GetConVarNumber("VJ_RECB_Knocked") == 1 then
 self:VJ_ACT_PLAYACTIVITY("knocked_to_floor",true,100,false)
-self.GodMode = true
+self.MovementType = VJ_MOVETYPE_STATIONARY
+self.HasBeenKnocked = true
+self.CanBeKnocked = false
 self.VJ_NoTarget = true
 self.DisableMakingSelfEnemyToNPCs = true
 self.DisableChasingEnemy = true
 self.DisableFindEnemy = true
 self.DisableWandering = true
-self.MovementType = VJ_MOVETYPE_STATIONARY
 self.CanTurnWhileStationary = false
-self.HasSounds = false
-self.GodMode = true
+self.HasIdleSounds = false
 self.CanFlinch = 0
 
-timer.Simple(GetConVarNumber("VJ_RECB_Zombie_Time"),function()
-if IsValid(self) && !self.Crippled && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+timer.Simple(GetConVarNumber("VJ_RECB_Zombie_GetUp_Time"),function()
+if IsValid(self) && !self.Crippled && GetConVarNumber("VJ_RECB_Knocked") == 1 then
 self:VJ_ACT_PLAYACTIVITY("getup",true,2.5,false)
-self.GodMode = false
+self.HasBeenKnocked = false
 self.VJ_NoTarget = false
 self.DisableMakingSelfEnemyToNPCs = false
 self.DisableChasingEnemy = false
 self.DisableFindEnemy = false
 self.DisableWandering = false
-self.HasSounds = true
-self.GodMode = false
+self.HasIdleSounds = true
 
-elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_Knocked") == 1 then
 self:VJ_ACT_PLAYACTIVITY("crawl_attack",true,1,false)
-self.GodMode = false
+self.HasBeenKnocked = false
 self.VJ_NoTarget = false
 self.DisableMakingSelfEnemyToNPCs = false
 self.DisableChasingEnemy = false
 self.DisableFindEnemy = false
 self.DisableWandering = false
-self.HasSounds = true
-self.GodMode = false
+self.HasIdleSounds = true
 end
 
 timer.Simple(3,function()
 if IsValid(self) && !self.Crippled then
 self.MovementType = VJ_MOVETYPE_GROUND
+self.CanBeKnocked = true
 self.CanFlinch = 1
 
 elseif IsValid(self) && self.Crippled == true then

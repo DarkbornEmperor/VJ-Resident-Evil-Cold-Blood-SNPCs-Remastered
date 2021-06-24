@@ -28,7 +28,7 @@ ENT.MeleeAttackDamageDistance = 90
 ENT.HasRangeAttack = true 
 ENT.AnimTbl_RangeAttack = {ACT_RANGE_ATTACK1}
 ENT.RangeAttackEntityToSpawn = "obj_vj_recb_spider_spit"
-ENT.NextRangeAttackTime = 6
+ENT.NextRangeAttackTime = 2.5
 ENT.RangeDistance = 700
 ENT.RangeToMeleeDistance = 200
 ENT.TimeUntilRangeAttackProjectileRelease = false
@@ -101,9 +101,7 @@ function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 		if self.HasGibDeathParticles == true then
 			for i=1,3 do
 				ParticleEffect("drg_re1_blood_impact_green",self:GetAttachment(self:LookupAttachment("abdomen")).Pos,self:GetAngles())
-				ParticleEffect("drg_re1_blood_impact_green",self:GetAttachment(self:LookupAttachment("abdomen")).Pos,self:GetAngles())
-				ParticleEffect("drg_re1_blood_impact_green",self:GetAttachment(self:LookupAttachment("abdomen")).Pos,self:GetAngles())
-				
+			
 		local bloodeffect = ents.Create("info_particle_system")
 		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
 		bloodeffect:SetPos(self:GetAttachment(self:LookupAttachment("abdomen")).Pos)

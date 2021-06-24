@@ -36,13 +36,8 @@ ENT.VJC_Data = {
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_FootStep = {"vj_recb/zombie/footstep1.wav","vj_recb/zombie/footstep2.wav","vj_recb/zombie/footstep3.wav"}
-ENT.SoundTbl_Idle = {"vj_recb/zombie/female/female1/zof_idle.wav","vj_recb/zombie/female/female2/zof_idle.wav"}
-ENT.SoundTbl_Alert = {"vj_recb/zombie/female/female1/zof_idle.wav","vj_recb/zombie/female/female2/zof_idle.wav"}
-ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female1/zof_attack.wav","vj_recb/zombie/female/female2/zof_attack.wav"}
 ENT.SoundTbl_MeleeAttack = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
 ENT.SoundTbl_RangeAttack = {"vj_recb/zombie/vomit.wav"}
-ENT.SoundTbl_Pain = {"vj_recb/zombie/female/female1/zof_pain.wav","vj_recb/zombie/female/female2/zof_pain.wav"}
-ENT.SoundTbl_Death = {"vj_recb/zombie/female/female1/zof_die.wav","vj_recb/zombie/female/female2/zof_die.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 
 ENT.GeneralSoundPitch1 = 100
@@ -52,7 +47,8 @@ ENT.GeneralSoundPitch2 = 100
 ENT.LegHealth = 20
 ENT.Crippled = false
 ENT.Vomit_Zombie = false
-ENT.Damaged = false
+ENT.HasBeenKnocked = false
+ENT.CanBeKnocked = true
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	if key == "step" then
@@ -88,9 +84,31 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
+       self:ZombieVoices()
+	   
 	if self.Vomit_Zombie && !self.Crippled then
 	     self:SetVomitZombie()
-   end		
+    end		
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:ZombieVoices()
+local voice = math.random(1,2)
+
+if voice == 1 then
+self.SoundTbl_Idle = {"vj_recb/zombie/female/female1/zof_idle.wav"}
+self.SoundTbl_Alert = {"vj_recb/zombie/female/female1/zof_idle.wav"}
+self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female1/zof_attack.wav"}
+self.SoundTbl_Pain = {"vj_recb/zombie/female/female1/zof_pain.wav"}
+self.SoundTbl_Death = {"vj_recb/zombie/female/female1/zof_die.wav"}
+end
+
+if voice == 2 then
+self.SoundTbl_Idle = {"vj_recb/zombie/female/female2/zof_idle.wav"}
+self.SoundTbl_Alert = {"vj_recb/zombie/female/female2/zof_idle.wav"}
+self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female2/zof_attack.wav"}
+self.SoundTbl_Pain = {"vj_recb/zombie/female/female2/zof_pain.wav"}
+self.SoundTbl_Death = {"vj_recb/zombie/female/female2/zof_die.wav"}
+end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetVomitZombie()
@@ -106,50 +124,56 @@ function ENT:SetVomitZombie()
 	self.NextRangeAttackTime = 4
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:RangeAttackCode_GetShootPos(projectile)
-	return self:CalculateProjectile("Curve", self:GetAttachment(self:LookupAttachment(self.RangeUseAttachmentForPosID)).Pos, self:GetEnemy():GetPos() + self:GetEnemy():OBBCenter(), 1500)
+function ENT:CustomOnMeleeAttack_Miss() 
+    if self.MeleeAttacking == true && !self.Crippled then
+	   self.vACT_StopAttacks = true
+	   self.PlayingAttackAnimation = false
+       self:VJ_ACT_PLAYACTIVITY("lunge_1",true,1,false)
+	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
 local attacker = dmginfo:GetAttacker()
-if math.random(1,20) == 1 && !self.Crippled && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+if self.CanBeKnocked == true && math.random(1,20) == 1 && !self.Crippled && GetConVarNumber("VJ_RECB_Knocked") == 1 then
 self:VJ_ACT_PLAYACTIVITY("knocked_to_floor",true,100,false)
-self.GodMode = true
+self.MovementType = VJ_MOVETYPE_STATIONARY
+self.HasBeenKnocked = true
+self.CanBeKnocked = false
 self.VJ_NoTarget = true
 self.DisableMakingSelfEnemyToNPCs = true
 self.DisableChasingEnemy = true
 self.DisableFindEnemy = true
 self.DisableWandering = true
-self.MovementType = VJ_MOVETYPE_STATIONARY
 self.CanTurnWhileStationary = false
-self.HasSounds = false
+self.HasIdleSounds = false
 self.CanFlinch = 0
 
-timer.Simple(GetConVarNumber("VJ_RECB_Zombie_Time"),function()
-if IsValid(self) && !self.Crippled && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+timer.Simple(GetConVarNumber("VJ_RECB_Zombie_GetUp_Time"),function()
+if IsValid(self) && !self.Crippled && GetConVarNumber("VJ_RECB_Knocked") == 1 then
 self:VJ_ACT_PLAYACTIVITY("getup",true,2.5,false)
-self.GodMode = false
+self.HasBeenKnocked = false
 self.VJ_NoTarget = false
 self.DisableMakingSelfEnemyToNPCs = false
 self.DisableChasingEnemy = false
 self.DisableFindEnemy = false
 self.DisableWandering = false
-self.HasSounds = true
+self.HasIdleSounds = true
 
-elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_GetUp") == 1 then
+elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_Knocked") == 1 then
 self:VJ_ACT_PLAYACTIVITY("crawl_attack",true,1,false)
-self.GodMode = false
+self.HasBeenKnocked = false
 self.VJ_NoTarget = false
 self.DisableMakingSelfEnemyToNPCs = false
 self.DisableChasingEnemy = false
 self.DisableFindEnemy = false
 self.DisableWandering = false
-self.HasSounds = true
+self.HasIdleSounds = true
 end
 
 timer.Simple(3,function()
 if IsValid(self) && !self.Crippled then
 self.MovementType = VJ_MOVETYPE_GROUND
+self.CanBeKnocked = true
 self.CanFlinch = 1
 
 elseif IsValid(self) && self.Crippled == true then
@@ -233,9 +257,7 @@ function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 		if self.HasGibDeathParticles == true then
 			for i=1,3 do
 				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				
+
 		local bloodeffect = ents.Create("info_particle_system")
 		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
 		bloodeffect:SetPos(self:GetAttachment(self:LookupAttachment("head")).Pos)
@@ -250,18 +272,18 @@ function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	end
 end
 		return true,{DeathAnim=true}
-end
+    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
-	if hitgroup == HITGROUP_HEAD && !self.Crippled then
+	 if hitgroup == HITGROUP_HEAD && !self.Crippled then
 		self.AnimTbl_Death = {ACT_DIE_HEADSHOT}
 	else
 		self.AnimTbl_Death = {ACT_DIEFORWARD,ACT_DIESIMPLE}
 end
-	if self.Crippled == true then
-	self.AnimTbl_Death = {ACT_DIE_BACKSHOT}
-end
+	 if self.Crippled == true then
+	    self.AnimTbl_Death = {ACT_DIE_BACKSHOT}
+    end
 end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
