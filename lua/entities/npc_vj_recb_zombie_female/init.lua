@@ -123,7 +123,6 @@ self.DisableWandering = true
 self.MovementType = VJ_MOVETYPE_STATIONARY
 self.CanTurnWhileStationary = false
 self.HasSounds = false
-self.GodMode = true
 self.CanFlinch = 0
 
 timer.Simple(GetConVarNumber("VJ_RECB_Zombie_Time"),function()
@@ -136,7 +135,6 @@ self.DisableChasingEnemy = false
 self.DisableFindEnemy = false
 self.DisableWandering = false
 self.HasSounds = true
-self.GodMode = false
 
 elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_GetUp") == 1 then
 self:VJ_ACT_PLAYACTIVITY("crawl_attack",true,1,false)
@@ -147,7 +145,6 @@ self.DisableChasingEnemy = false
 self.DisableFindEnemy = false
 self.DisableWandering = false
 self.HasSounds = true
-self.GodMode = false
 end
 
 timer.Simple(3,function()

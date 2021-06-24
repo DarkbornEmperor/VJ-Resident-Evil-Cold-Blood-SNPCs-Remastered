@@ -34,8 +34,8 @@ ENT.TimeUntilLeapAttackDamage = false
 ENT.AnimTbl_LeapAttack = {"vjseq_jump_window"}
 ENT.LeapAttackVelocityForward = 100 
 ENT.LeapAttackVelocityUp = 100
-ENT.LeapDistance = 150
-ENT.LeapToMeleeDistance = 75
+ENT.LeapDistance = 200
+ENT.LeapToMeleeDistance = 100
 	-- ====== Controller Data ====== --
 ENT.VJC_Data = {
 	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
