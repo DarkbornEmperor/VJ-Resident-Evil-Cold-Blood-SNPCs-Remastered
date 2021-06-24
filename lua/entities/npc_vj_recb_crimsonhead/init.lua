@@ -114,9 +114,10 @@ self.DisableWandering = true
 self.CanTurnWhileStationary = false
 self.HasIdleSounds = false
 self.CanFlinch = 0
+self:SetCollisionBounds(Vector(50,16,10),Vector(-10,-16,0))
 
 timer.Simple(GetConVarNumber("VJ_RECB_Zombie_GetUp_Time"),function()
-if IsValid(self) && !self.Crippled && GetConVarNumber("VJ_RECB_Knocked") == 1 then
+if IsValid(self) && !self.Crippled && GetConVarNumber("VJ_RECB_Knocked") == 1 && self.DeathAnimationCodeRan == false && self.Dead == false then
 self:VJ_ACT_PLAYACTIVITY("getup",true,2.5,false)
 self.HasBeenKnocked = false
 self.VJ_NoTarget = false
@@ -125,8 +126,9 @@ self.DisableChasingEnemy = false
 self.DisableFindEnemy = false
 self.DisableWandering = false
 self.HasIdleSounds = true
+self:SetCollisionBounds(Vector(13,13,72),Vector(-13,-13,0))
 
-elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_Knocked") == 1 then
+elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_Knocked") == 1 && self.DeathAnimationCodeRan == false && self.Dead == false then
 self:VJ_ACT_PLAYACTIVITY("crawl_attack",true,1,false)
 self.HasBeenKnocked = false
 self.VJ_NoTarget = false
@@ -135,6 +137,7 @@ self.DisableChasingEnemy = false
 self.DisableFindEnemy = false
 self.DisableWandering = false
 self.HasIdleSounds = true
+self:SetCollisionBounds(Vector(16,16,20),Vector(-16,-16,0))
 end
 
 timer.Simple(3,function()
@@ -150,7 +153,7 @@ end
 end)
 end)
 end
-end	
+end		
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
 	 if self.Damaged == false then
