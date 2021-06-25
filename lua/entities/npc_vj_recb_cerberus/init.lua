@@ -29,6 +29,7 @@ ENT.MeleeAttackDamageDistance = 60
 ENT.NextMeleeAttackTime = 1.5
 ENT.NextAnyAttackTime_Melee = 0.8
 ENT.HasLeapAttack = true 
+ENT.LeapAttackDamageDistance = 80
 ENT.LeapAttackDamage = 15
 ENT.TimeUntilLeapAttackDamage = false
 ENT.AnimTbl_LeapAttack = {"vjseq_jump_window"}

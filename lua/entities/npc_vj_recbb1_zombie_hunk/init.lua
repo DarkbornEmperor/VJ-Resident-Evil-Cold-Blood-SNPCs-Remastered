@@ -8,8 +8,8 @@ include('shared.lua')
 ENT.Model = {"models/vj_recb/recb_zombie_hunk.mdl"} 
 ENT.StartHealth = 200
 ENT.MeleeAttackDamage = 15
-ENT.MeleeAttackDistance = 30 
-ENT.MeleeAttackDamageDistance = 60
+ENT.MeleeAttackDistance = 25 
+ENT.MeleeAttackDamageDistance = 45
 ENT.NextMeleeAttackTime = 1.5
 ENT.SlowPlayerOnMeleeAttack = false
 	-- ====== Sound File Paths ====== --

@@ -26,13 +26,14 @@ ENT.MeleeAttackDistance = 30
 ENT.MeleeAttackDamageDistance = 60
 ENT.HasLeapAttack = true 
 ENT.LeapAttackDamage = 15
+ENT.LeapAttackDamageDistance = 80
 ENT.TimeUntilLeapAttackDamage = false
 ENT.NextAnyAttackTime_Leap = 1.5
 ENT.NextLeapAttackTime = 8
 ENT.LeapAttackAnimationDecreaseLengthAmount = 1.4
-ENT.AnimTbl_LeapAttack = {"vjseq_hunterjump"}
+ENT.AnimTbl_LeapAttack = {ACT_SPECIAL_ATTACK1}
 ENT.LeapAttackVelocityForward = 100 
-ENT.LeapAttackVelocityUp = 200
+ENT.LeapAttackVelocityUp = 250
 ENT.LeapDistance = 300
 ENT.LeapToMeleeDistance = 200
 ENT.HasDeathAnimation = true
@@ -57,8 +58,8 @@ ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/hunter/hu_alert.wav"}
 ENT.SoundTbl_MeleeAttack = {"vj_recb/hunter/hu_clawhit.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/hunter/hu_slash.wav"}
 ENT.SoundTbl_LeapAttackJump = {"vj_recb/hunter/hu_jump.wav"}
---ENT.SoundTbl_LeapAttackDamage = {"vj_recb/hunter/hu_clawhit.wav"}
---ENT.SoundTbl_LeapAttackDamageMiss = {"vj_recb/hunter/hu_slash.wav"}
+ENT.SoundTbl_LeapAttackDamage = {"vj_recb/hunter/hu_clawhit.wav"}
+ENT.SoundTbl_LeapAttackDamageMiss = {"vj_recb/hunter/hu_slash.wav"}
 ENT.SoundTbl_Pain = {"vj_recb/hunter/hu_pain.wav"}
 ENT.SoundTbl_Death = {"vj_recb/hunter/hu_die.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
@@ -75,6 +76,8 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 end
 	if key == "attack" then
 		self:MeleeAttackCode()
+end
+	if key == "attack_leap" then
 		self:LeapDamageCode()
 end
 	if key == "death" then
@@ -106,17 +109,6 @@ function ENT:CustomOnCallForHelp(ally)
 if math.random(1,2) == 1 then
         self:VJ_ACT_PLAYACTIVITY("vjseq_scream",true,2,true)	
     end
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:MultipleMeleeAttacks()
-	local hunter_attack = math.random(1,2)
-	
-		if hunter_attack == 1 then
-			self.AnimTbl_MeleeAttack = {"vjseq_attack1"}
-
-		elseif hunter_attack == 2 then
-			self.AnimTbl_MeleeAttack = {"vjseq_attack2"}
-	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)

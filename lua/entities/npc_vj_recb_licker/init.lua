@@ -18,19 +18,18 @@ ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
 ENT.NextMeleeAttackTime = 1.5
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.MeleeAttackDistance = 30 
-ENT.MeleeAttackDamageDistance = 60
 ENT.HasLeapAttack = true 
 ENT.LeapAttackDamage = 15
+ENT.LeapAttackDamageDistance = 80
 ENT.TimeUntilLeapAttackDamage = false
 ENT.NextAnyAttackTime_Leap = 1.5
 ENT.NextLeapAttackTime = 8
 ENT.LeapAttackAnimationDecreaseLengthAmount = 1.8
-ENT.AnimTbl_LeapAttack = {"vjseq_jump"}
+ENT.AnimTbl_LeapAttack = {ACT_SPECIAL_ATTACK1}
 ENT.LeapAttackVelocityForward = 100 
 ENT.LeapAttackVelocityUp = 200
-ENT.LeapDistance = 200
-ENT.LeapToMeleeDistance = 100
+ENT.LeapDistance = 250
+ENT.LeapToMeleeDistance = 200
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
@@ -65,11 +64,13 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 end
 	if key == "attack" then
 		self:MeleeAttackCode()
-		self:LeapDamageCode()
-end
+end	
 	if key == "tongue_attack" then
 		self:MeleeAttackCode()
 end	
+	if key == "attack_leap" then
+		self:LeapDamageCode()
+end
 	if key == "death" then
 		VJ_EmitSound(self, "vj_recb/licker/li_bodyfall.wav", 85, 100)
 	end	
@@ -94,11 +95,15 @@ function ENT:MultipleMeleeAttacks()
 	if licker_attack == 1 then
 		self.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
 		self.MeleeAttackDamage = 15
+		self.MeleeAttackDistance = 30 
+        self.MeleeAttackDamageDistance = 60
 		self.SoundTbl_MeleeAttack = {"vj_recb/licker/li_slash.wav"}
 end
 	if licker_attack == 2 then
 		self.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK2}
 		self.MeleeAttackDamage = 25
+		self.MeleeAttackDistance = 30 
+        self.MeleeAttackDamageDistance = 70		
 		self.SoundTbl_MeleeAttack = {"vj_recb/licker/li_tongue.wav"}
     end
 end
