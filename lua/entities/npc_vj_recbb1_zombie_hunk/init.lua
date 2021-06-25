@@ -7,9 +7,11 @@ include('shared.lua')
 -----------------------------------------------*/
 ENT.Model = {"models/vj_recb/recb_zombie_hunk.mdl"} 
 ENT.StartHealth = 200
+ENT.MeleeAttackDamage = 15
 ENT.MeleeAttackDistance = 30 
 ENT.MeleeAttackDamageDistance = 60
 ENT.NextMeleeAttackTime = 1.5
+ENT.SlowPlayerOnMeleeAttack = false
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
 ENT.SoundTbl_MeleeAttack = {"vj_recb/zombie/CrimsonHead/crimhead_slash.wav","vj_recb/zombie/CrimsonHead/crimhead_slash.wav"}
