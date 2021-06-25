@@ -1,6 +1,6 @@
 ENT.Base 			= "npc_vj_recb_zombie_male"
 ENT.Type 			= "ai"
-ENT.PrintName 		= "Zombie (Female)"
+ENT.PrintName 		= "(Beta) Zombie (Male)"
 ENT.Author 			= "Darkborn"
 ENT.Contact 		= "http://steamcommunity.com/groups/vrejgaming"
 ENT.Purpose 		= "Spawn it and fight with it!"

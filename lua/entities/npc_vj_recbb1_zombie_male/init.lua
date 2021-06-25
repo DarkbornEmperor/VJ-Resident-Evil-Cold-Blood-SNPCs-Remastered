@@ -5,73 +5,59 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/recb_zombie_soldier.mdl"} 
-ENT.StartHealth = 175
+ENT.Model = {"models/vj_recb/recb_zombie_male_beta.mdl"} 
+
+-- Custom
+ENT.LegHealth = 0
+ENT.Crippled = false
+ENT.Vomit_Zombie = false
+ENT.HasBeenKnocked = false
+ENT.CanBeKnocked = false
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnPreInitialize()
+ 	if GetConVarNumber("VJ_RECB_Gibbing") == 0 then
+        self.AllowedToGib = false 
+        self.HasGibOnDeath = false 
+        self.HasGibOnDeathSounds = false 
+        self.HasGibDeathParticles = false
+    end
+end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
     self:ZombieVoices()	
-	self:SetSkin(math.random(0,3))
-	self:SetBodygroup(1,math.random(0,4))
-	
-	if self.Vomit_Zombie && !self.Crippled then
-	     self:SetVomitZombie()
-   end		
+	self:SetSkin(math.random(0,5))
+end		
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:SetVomitZombie()
 end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnMeleeAttack_Miss() 
+    if self.MeleeAttacking == true then
+	   self.vACT_StopAttacks = true
+	   self.PlayingAttackAnimation = false
+       self:VJ_ACT_PLAYACTIVITY("flinch",true,0.5,false)
+	end
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
+end	
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
-    if (dmginfo:IsBulletDamage()) && hitgroup == HITGROUP_CHEST then
-	    dmginfo:ScaleDamage(0.50)
-end
-	if self.Damaged == false then --(dmginfo:IsBulletDamage())
-		local attacker = dmginfo:GetAttacker()
-	
-		if math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rarm")).Pos,self:GetAngles())
-		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
-		self:SetBodygroup(5,1)
-
-		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("larm")).Pos,self:GetAngles())
-		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
-		self:SetBodygroup(6,1)
-    end
-  end	
-end
+end	
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
-	if !self.Crippled then
-		local legs = {6,7}
-		if VJ_HasValue(legs,hitgroup) then
-			self.LegHealth = self.LegHealth -dmginfo:GetDamage()
-			if self.LegHealth <= 0 then
-				self.Crippled = true
-				local anim = ACT_FLINCH_PHYSICS
-				if hitgroup == HITGROUP_LEFTLEG then
-				    ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("lleg")).Pos,self:GetAngles())
-					self:SetBodygroup(4,1)
-				elseif hitgroup == HITGROUP_RIGHTLEG then
-				    ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rleg")).Pos,self:GetAngles())
-					self:SetBodygroup(3,1)
 end
-				if math.random(1,4) == 1 then anim = ACT_FLINCH_PHYSICS end
-				self:VJ_ACT_PLAYACTIVITY(anim,true,false,true)
-				self:EmitSound(Sound("vj_recb/zombie/zom_leglost.wav",70))
-				self:Cripple()
-			end
-		end
-	end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:Cripple()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
 	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",70))
 		self:SetBodygroup(0,1)
-		self:SetBodygroup(1,5)
 	
 		if self.HasGibDeathParticles == true then
 			for i=1,3 do
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
 				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
 				
 		local bloodeffect = ents.Create("info_particle_system")
@@ -85,7 +71,7 @@ function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
 		bloodeffect:Fire("Start","",0)
 		bloodeffect:Fire("Kill","",2)	
 				
-    end
+	end
 end
 		return true,{DeathAnim=true}
     end

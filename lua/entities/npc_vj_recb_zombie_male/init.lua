@@ -115,7 +115,7 @@ end
 if voice == 2 then
 self.SoundTbl_Idle = {"vj_recb/zombie/male/male2/zom_idle.wav"}
 self.SoundTbl_Alert = {"vj_recb/zombie/male/male2/zom_idle.wav"}
-self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male2/male1/zom_attack.wav"}
+self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male/male2/zom_attack.wav"}
 self.SoundTbl_Pain = {"vj_recb/zombie/male/male2/zom_pain.wav"}
 self.SoundTbl_Death = {"vj_recb/zombie/male/male2/zom_die.wav"}
 end
@@ -210,7 +210,7 @@ function ENT:CustomOnMeleeAttack_Miss()
     if self.MeleeAttacking == true && !self.Crippled then
 	   self.vACT_StopAttacks = true
 	   self.PlayingAttackAnimation = false
-       self:VJ_ACT_PLAYACTIVITY("lunge_1",true,1,false)
+       self:VJ_ACT_PLAYACTIVITY("lunge_1",true,0.5,false)
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

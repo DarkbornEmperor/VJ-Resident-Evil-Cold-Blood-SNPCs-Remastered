@@ -17,6 +17,7 @@ if VJExists == true then
     VJ.AddCategoryInfo("Resident Evil: Cold Blood", {Icon = "vj_recb/icons/recb.png"})
 
 	local vCat = "Resident Evil: Cold Blood"
+	-- RE:CB Beta 2
 	VJ.AddNPC("Zombie (Male)","npc_vj_recb_zombie_male",vCat)
 	VJ.AddNPC("Zombie (Female)","npc_vj_recb_zombie_female",vCat)
 	VJ.AddNPC("Zombie (Soldier)","npc_vj_recb_zombie_soldier",vCat)
@@ -36,6 +37,11 @@ if VJExists == true then
 	VJ.AddNPC("Flyclaw","npc_vj_recb_flyclaw",vCat)
 	VJ.AddNPC("Crow","npc_vj_recb_crow",vCat)
 	VJ.AddNPC("Neptune","npc_vj_recb_neptune",vCat)
+	-- RE:CB Beta 1
+	VJ.AddNPC("(Beta) Zombie (Male)","npc_vj_recbb1_zombie_male",vCat)
+	VJ.AddNPC("(Beta) Zombie (Female)","npc_vj_recbb1_zombie_female",vCat)
+	VJ.AddNPC("(Beta) Zombie (Hunk)","npc_vj_recbb1_zombie_hunk",vCat)
+	VJ.AddNPC("(Beta) Zombie (Torso)","npc_vj_recbb1_zombie_torso",vCat)
 
     -- Spawners and Random	
 	VJ.AddNPC("Random Monster","sent_vj_recb_mon",vCat)
