@@ -1,6 +1,6 @@
 ENT.Base 			= "npc_vj_recb_zombie_torso"
 ENT.Type 			= "ai"
-ENT.PrintName 		= "(Beta) Zombie (Torso)"
+ENT.PrintName 		= "Beta Zombie (Torso)"
 ENT.Author 			= "Darkborn"
 ENT.Contact 		= "http://steamcommunity.com/groups/vrejgaming"
 ENT.Purpose 		= "Spawn it and fight with it!"

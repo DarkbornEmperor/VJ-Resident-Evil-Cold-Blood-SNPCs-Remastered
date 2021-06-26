@@ -38,10 +38,10 @@ if VJExists == true then
 	VJ.AddNPC("Crow","npc_vj_recb_crow",vCat)
 	VJ.AddNPC("Neptune","npc_vj_recb_neptune",vCat)
 	-- RE:CB Beta 1
-	VJ.AddNPC("(Beta) Zombie (Male)","npc_vj_recbb1_zombie_male",vCat)
-	VJ.AddNPC("(Beta) Zombie (Female)","npc_vj_recbb1_zombie_female",vCat)
-	VJ.AddNPC("(Beta) Zombie (Hunk)","npc_vj_recbb1_zombie_hunk",vCat)
-	VJ.AddNPC("(Beta) Zombie (Torso)","npc_vj_recbb1_zombie_torso",vCat)
+	VJ.AddNPC("Beta Zombie (Male)","npc_vj_recbb1_zombie_male",vCat)
+	VJ.AddNPC("Beta Zombie (Female)","npc_vj_recbb1_zombie_female",vCat)
+	VJ.AddNPC("Zombie (Hunk)","npc_vj_recbb1_zombie_hunk",vCat)
+	VJ.AddNPC("Beta Zombie (Torso)","npc_vj_recbb1_zombie_torso",vCat)
 
     -- Spawners and Random	
 	VJ.AddNPC("Random Zombie","sent_vj_recb_zom",vCat)
