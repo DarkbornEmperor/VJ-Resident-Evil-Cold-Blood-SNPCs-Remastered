@@ -86,13 +86,13 @@ function ENT:MultipleMeleeAttacks()
 	local tyrant_attack = math.random(1,2)
 	if tyrant_attack == 1 then
 		self.AnimTbl_MeleeAttack = {"vjseq_attack1"}
-		self.MeleeAttackDamage = 35
+		self.MeleeAttackDamage = 45
 		self.MeleeAttackDistance = 35
 		self.MeleeAttackDamageDistance = 75
 		
 	elseif tyrant_attack == 2 then
 		self.AnimTbl_MeleeAttack = {"vjseq_attack2"}
-		self.MeleeAttackDamage = 35
+		self.MeleeAttackDamage = 45
 		self.MeleeAttackDistance = 30
 		self.MeleeAttackDamageDistance = 60
 	end
