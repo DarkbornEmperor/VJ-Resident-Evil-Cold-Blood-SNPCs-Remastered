@@ -92,7 +92,7 @@ local zombieskin = math.random(1,2)
     elseif zombieskin == 2 then
 	self:SetSkin(math.random(4,5))
 	self:SetBodygroup(7,math.random(0,1))
-   end
+end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
@@ -114,7 +114,7 @@ self.DisableWandering = true
 self.CanTurnWhileStationary = false
 self.HasIdleSounds = false
 self.CanFlinch = 0
-self:SetCollisionBounds(Vector(50,16,10),Vector(-10,-16,0))
+--self:SetCollisionBounds(Vector(50,16,10),Vector(-10,-16,0))
 
 timer.Simple(GetConVarNumber("VJ_RECB_Zombie_GetUp_Time"),function()
 if IsValid(self) && !self.Crippled && GetConVarNumber("VJ_RECB_Knocked") == 1 && self.DeathAnimationCodeRan == false && self.Dead == false then
@@ -126,7 +126,7 @@ self.DisableChasingEnemy = false
 self.DisableFindEnemy = false
 self.DisableWandering = false
 self.HasIdleSounds = true
-self:SetCollisionBounds(Vector(13,13,72),Vector(-13,-13,0))
+--self:SetCollisionBounds(Vector(13,13,72),Vector(-13,-13,0))
 
 elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_Knocked") == 1 && self.DeathAnimationCodeRan == false && self.Dead == false then
 self:VJ_ACT_PLAYACTIVITY("crawl_attack",true,1,false)
@@ -215,6 +215,8 @@ function ENT:Cripple()
 	self:SetHullType(HULL_TINY)
 	self:SetCollisionBounds(Vector(16,16,20),Vector(-16,-16,0))
 	self.SoundTbl_FootStep = {"vj_recb/zombie/crawl.wav"}
+    self.SoundTbl_MeleeAttack = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
+	self.HasMeleeAttackMissSounds = false 
 	self.AnimTbl_IdleStand = {ACT_IDLE_STIMULATED}
 	self.AnimTbl_Walk = {ACT_WALK_STIMULATED}
 	self.AnimTbl_Run = {ACT_WALK_STIMULATED}
