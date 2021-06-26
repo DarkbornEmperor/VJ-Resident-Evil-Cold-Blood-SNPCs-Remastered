@@ -6,7 +6,7 @@ include('shared.lua')
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/vj_recb/recb_neptune.mdl"} 
-ENT.StartHealth = 400
+ENT.StartHealth = 500
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.VJ_IsHugeMonster = true
 ENT.Immune_Physics = true
@@ -21,11 +21,11 @@ ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
 ENT.HullType = HULL_LARGE
 ENT.CanFlinch = 1
 ENT.FlinchChance = 5
-ENT.AnimTbl_Flinch = {ACT_FLINCH_SMALL,ACT_FLINCH_BIG}
+ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
-ENT.NextMeleeAttackTime = 1.5
+ENT.MeleeAttackDamage = 35
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.MeleeAttackDistance = 80 
+ENT.MeleeAttackDistance = 70 
 ENT.MeleeAttackDamageDistance = 120
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
@@ -63,15 +63,6 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
 	self:SetCollisionBounds(Vector(123.34, 50, 50), Vector(-150, -50, -30))	
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:MultipleMeleeAttacks()
-    local shark_attack = math.random(1,1)
-
-	if shark_attack == 1 then
-		self.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
-		self.MeleeAttackDamage = 20
-   end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)

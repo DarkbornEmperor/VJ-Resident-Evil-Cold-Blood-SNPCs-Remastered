@@ -28,7 +28,6 @@ ENT.SlowPlayerOnMeleeAttack = true
 ENT.SlowPlayerOnMeleeAttack_WalkSpeed = 100 
 ENT.SlowPlayerOnMeleeAttack_RunSpeed = 100 
 ENT.SlowPlayerOnMeleeAttackTime = 0.8
-ENT.AnimTbl_Run = {ACT_WALK}
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.AnimTbl_Death = {ACT_DIEVIOLENT}
@@ -78,25 +77,35 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
 	    self:SetCollisionBounds(Vector(20, 20, 100), Vector(-20, -20, 0))		
-	if math.random(1,5) == 1 then
-	    self.Tyrant_Rage = true 
-	end
+	--if math.random(1,2) == 1 then
+	    --self.Tyrant_Rage = true 
+	--end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------	
 function ENT:MultipleMeleeAttacks()
-	local randattack = math.random(1,2)
-	if randattack == 1 then
+	local tyrant_attack = math.random(1,2)
+	if tyrant_attack == 1 then
 		self.AnimTbl_MeleeAttack = {"vjseq_attack1"}
 		self.MeleeAttackDamage = 35
 		self.MeleeAttackDistance = 35
 		self.MeleeAttackDamageDistance = 75
 		
-	elseif randattack == 2 then
+	elseif tyrant_attack == 2 then
 		self.AnimTbl_MeleeAttack = {"vjseq_attack2"}
 		self.MeleeAttackDamage = 35
 		self.MeleeAttackDistance = 30
 		self.MeleeAttackDamageDistance = 60
 	end
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnThink_AIEnabled()
+if self:GetEnemy() != nil && self:GetPos():Distance(self:GetEnemy():GetPos()) <= 200 then
+self.AnimTbl_Walk = {ACT_WALK} 
+self.AnimTbl_Run = {ACT_WALK}
+else
+self.AnimTbl_Walk = {ACT_WALK} 
+self.AnimTbl_Run = {ACT_RUN}
+end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnAlert()
@@ -106,23 +115,23 @@ if math.random(1,2) == 1 && self.Tyrant_Rage == true then
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
-	 if self.Tyrant_Rage == true && (dmginfo:IsBulletDamage()) then
-	    dmginfo:ScaleDamage(0.10)
-	else
+	 --if self.Tyrant_Rage == true && (dmginfo:IsBulletDamage()) then
+	    --dmginfo:ScaleDamage(0.10)
+	--else
 	    dmginfo:ScaleDamage(0.25)
-    end
+    --end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
-     if math.random(1,5) == 1 && self.Tyrant_Rage == true && (self.StartHealth -1500 > self:Health()) then
-        self:TyrantRage()
-    end	
-end	
+--function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
+     --if math.random(1,5) == 1 && self.Tyrant_Rage == true && (self.StartHealth -1500 > self:Health()) then
+        --self:TyrantRage()
+    --end	
+--end	
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:TyrantRage()
-        self.MeleeAttackDamage = 50
-        self.AnimTbl_Run = {ACT_RUN}	
-end
+--function ENT:TyrantRage()
+        --self.MeleeAttackDamage = 50
+        --self.AnimTbl_Run = {ACT_RUN}	
+--end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2017 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,

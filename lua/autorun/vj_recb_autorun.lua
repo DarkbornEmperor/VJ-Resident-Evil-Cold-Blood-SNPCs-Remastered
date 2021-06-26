@@ -44,6 +44,9 @@ if VJExists == true then
 	VJ.AddNPC("(Beta) Zombie (Torso)","npc_vj_recbb1_zombie_torso",vCat)
 
     -- Spawners and Random	
+	VJ.AddNPC("Random Zombie","sent_vj_recb_zom",vCat)
+	VJ.AddNPC("Random Zombie Spawner","sent_vj_recb_zom_sp",vCat)
+	VJ.AddNPC("Random Zombie Spawner (Single)","sent_vj_recb_zom_sinsp",vCat)	
 	VJ.AddNPC("Random Monster","sent_vj_recb_mon",vCat)
 	VJ.AddNPC("Random Monster Spawner","sent_vj_recb_mon_sp",vCat)
 	VJ.AddNPC("Random Monster Spawner (Single)","sent_vj_recb_mon_sinsp",vCat)
@@ -68,7 +71,11 @@ if VJExists == true then
 	util.PrecacheModel("models/vj_recb/recb_zombie_crimsonhead.mdl")
 	util.PrecacheModel("models/vj_recb/recb_zombie_female.mdl")
 	util.PrecacheModel("models/vj_recb/recb_zombie_soldier.mdl")
-	util.PrecacheModel("models/vj_recb/recb_zombie_torso.mdl")	
+	util.PrecacheModel("models/vj_recb/recb_zombie_torso.mdl")		
+	util.PrecacheModel("models/vj_recb/recb_zombie_female_beta.mdl")
+	util.PrecacheModel("models/vj_recb/recb_zombie_hunk.mdl")
+	util.PrecacheModel("models/vj_recb/recb_zombie_male_beta.mdl")		
+	util.PrecacheModel("models/vj_recb/recb_zombie_torso_beta.mdl")	
 
     -- Decals from HL1 --
     game.AddDecal("VJ_RECB_Blood_Red",{"vj_hl/decals/hl_blood01","vj_hl/decals/hl_blood02","vj_hl/decals/hl_blood03","vj_hl/decals/hl_blood04","vj_hl/decals/hl_blood05","vj_hl/decals/hl_blood06","vj_hl/decals/hl_blood07","vj_hl/decals/hl_blood08"})
