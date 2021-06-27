@@ -16,9 +16,8 @@ self.SoundTbl_Alert = {"vj_recb/zombie/female/female1/zof_idle.wav"}
 self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female1/zof_attack.wav"}
 self.SoundTbl_Pain = {"vj_recb/zombie/female/female1/zof_pain.wav"}
 self.SoundTbl_Death = {"vj_recb/zombie/female/female1/zof_die.wav"}
-end
 
-if voice == 2 then
+elseif voice == 2 then
 self.SoundTbl_Idle = {"vj_recb/zombie/female/female2/zof_idle.wav"}
 self.SoundTbl_Alert = {"vj_recb/zombie/female/female2/zof_idle.wav"}
 self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female2/zof_attack.wav"}
