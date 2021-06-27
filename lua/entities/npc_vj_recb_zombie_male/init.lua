@@ -54,6 +54,10 @@ ENT.Crippled = false
 ENT.Vomit_Zombie = false
 ENT.HasBeenKnocked = false
 ENT.CanBeKnocked = true
+ENT.Head_Damaged = false
+ENT.Chest_Damaged = false
+ENT.RArm_Damaged = false
+ENT.LArm_Damaged = false
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	if key == "step" then
@@ -378,28 +382,31 @@ end
 end	
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
-	--if self.Damaged == false then --(dmginfo:IsBulletDamage())
 		local attacker = dmginfo:GetAttacker()	
-		if math.random(1,10) == 1 && hitgroup == HITGROUP_HEAD then
-		self:EmitSound(Sound("vj_recb/zombie/zom_neck_break.wav",70))
+		if self.Head_Damaged == false && math.random(1,10) == 1 && hitgroup == HITGROUP_HEAD then
+		self.Head_Damaged = true
 		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())	
+		self:EmitSound(Sound("vj_recb/zombie/zom_neck_break.wav",70))
         self:SetBodygroup(0,0)		
 		self:SetBodygroup(1,2)
 		self:SetBodygroup(7,0)
 	
-		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_CHEST then
+		elseif self.Chest_Damaged == false && math.random(1,10) == 1 && hitgroup == HITGROUP_CHEST then
+		self.Chest_Damaged = true
 		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("chest")).Pos,self:GetAngles())
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(0,0)
 		self:SetBodygroup(4,1)
 	
-		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
+		elseif self.RArm_Damaged == false && math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
+		self.RArm_Damaged = true
 		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rarm")).Pos,self:GetAngles())
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(0,0)
 		self:SetBodygroup(5,1)
 
-		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
+		elseif self.LArm_Damaged == false && math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
+		self.LArm_Damaged = true
 		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("larm")).Pos,self:GetAngles())
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(0,0)

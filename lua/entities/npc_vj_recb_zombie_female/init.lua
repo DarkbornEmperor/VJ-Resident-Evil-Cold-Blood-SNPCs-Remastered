@@ -27,20 +27,19 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
-	if self.Damaged == false then --(dmginfo:IsBulletDamage())
-		local attacker = dmginfo:GetAttacker()
-		
-		if math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
+		local attacker = dmginfo:GetAttacker()	
+		if self.RArm_Damaged == false && math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
+		self.RArm_Damaged = true 
 		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rarm")).Pos,self:GetAngles())
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(4,1)
-
-		elseif math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
+		
+		elseif self.LArm_Damaged == false && math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
+		self.LArm_Damaged = true 
 		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("larm")).Pos,self:GetAngles())
 		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",70))
 		self:SetBodygroup(5,1)
-    end
-  end	
+    end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
