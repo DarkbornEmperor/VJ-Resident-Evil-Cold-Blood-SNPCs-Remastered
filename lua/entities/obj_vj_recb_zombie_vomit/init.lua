@@ -15,7 +15,7 @@ ENT.RadiusDamage = 15 -- How much damage should it deal? Remember this is a radi
 ENT.RadiusDamageUseRealisticRadius = true -- Should the damage decrease the farther away the enemy is from the position that the projectile hit?
 ENT.RadiusDamageType = DMG_ACID-- Damage type
 ENT.DoesDirectDamage = false -- Should it do a direct damage when it hits something?
-ENT.DirectDamage = 10 -- How much damage should it do when it hits something
+ENT.DirectDamage = 15 -- How much damage should it do when it hits something
 ENT.DirectDamageType = DMG_ACID -- Damage type
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomPhysicsObjectOnInitialize(phys)

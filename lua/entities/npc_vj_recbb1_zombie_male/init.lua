@@ -6,13 +6,6 @@ include('shared.lua')
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/vj_recb/recb_zombie_male_beta.mdl"} 
-
--- Custom
-ENT.LegHealth = 0
-ENT.Crippled = false
-ENT.Vomit_Zombie = false
-ENT.HasBeenKnocked = false
-ENT.CanBeKnocked = false
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPreInitialize()
  	if GetConVarNumber("VJ_RECB_Gibbing") == 0 then

@@ -19,8 +19,8 @@ ENT.HasMeleeAttack = true
 ENT.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
 ENT.MeleeAttackDamage = 10
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.MeleeAttackDistance = 20 
-ENT.MeleeAttackDamageDistance = 40
+ENT.MeleeAttackDistance = 15 
+ENT.MeleeAttackDamageDistance = 30
 ENT.SlowPlayerOnMeleeAttack = true
 ENT.SlowPlayerOnMeleeAttack_WalkSpeed = 1
 ENT.SlowPlayerOnMeleeAttack_RunSpeed = 1 
@@ -203,12 +203,12 @@ function ENT:SetVomitZombie()
 	self.HasRangeAttack = true 
 	self.AnimTbl_RangeAttack = {ACT_SPECIAL_ATTACK1}
 	self.RangeAttackEntityToSpawn = "obj_vj_recb_zombie_vomit"
-	self.RangeDistance = 40
+	self.RangeDistance = 45
     self.RangeToMeleeDistance = 1 
 	self.TimeUntilRangeAttackProjectileRelease = false
 	self.RangeUseAttachmentForPos = true 
     self.RangeUseAttachmentForPosID = "mouth"
-	self.NextRangeAttackTime = 4
+	self.NextRangeAttackTime = 2.5
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnMeleeAttack_Miss() 
