@@ -25,10 +25,10 @@ ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true
 ENT.GibOnDeathDamagesTable = {"All"}
 ENT.MeleeAttackDistance = 30 
-ENT.MeleeAttackDamageDistance = 60
+ENT.MeleeAttackDamageDistance = 40
 ENT.NextMeleeAttackTime = 1.5
-ENT.NextAnyAttackTime_Melee = 0.8
 ENT.HasLeapAttack = true 
+ENT.NextLeapAttackTime = 8
 ENT.LeapAttackDamageDistance = 90
 ENT.LeapAttackDamage = 15
 ENT.TimeUntilLeapAttackDamage = false
@@ -36,7 +36,7 @@ ENT.AnimTbl_LeapAttack = {ACT_SPECIAL_ATTACK1}
 ENT.LeapAttackVelocityForward = 100 
 ENT.LeapAttackVelocityUp = 100
 ENT.LeapDistance = 200
-ENT.LeapToMeleeDistance = 100
+ENT.LeapToMeleeDistance = 150
 	-- ====== Controller Data ====== --
 ENT.VJC_Data = {
 	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
@@ -92,7 +92,7 @@ if GetConVarNumber("VJ_RECB_Gibbing") == 0 then
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
-     self:SetCollisionBounds(Vector(45, 8, 38), Vector(-10, -8, 0))
+     self:SetCollisionBounds(Vector(15, 15, 40), Vector(-15, -15, 0))
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnAlert()

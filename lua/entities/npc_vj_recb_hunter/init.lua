@@ -97,7 +97,7 @@ end
 function ENT:CustomOnInitialize() 
 --VJ_EmitSound(self,{"hunter/hu_scream.wav"},70)
 	--self:VJ_ACT_PLAYACTIVITY("scream",true,1.76,true)
-	self:SetCollisionBounds(Vector(18, 22, 60), Vector(-18, -22, 0))
+	self:SetCollisionBounds(Vector(16, 16, 60), Vector(-16, -16, 0))
 	
     if math.random(1,2) == 1 then
 	        self.GraySkin = true

@@ -62,7 +62,7 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize() 
-	self:SetCollisionBounds(Vector(35, 22, 60), Vector(-25, -22, 0))
+	self:SetCollisionBounds(Vector(18, 18, 62), Vector(-18, -18, 0))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)

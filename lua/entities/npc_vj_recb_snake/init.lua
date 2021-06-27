@@ -21,7 +21,7 @@ ENT.NextMeleeAttackTime = 1.5
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDamage = 10
 ENT.MeleeAttackDistance = 15 
-ENT.MeleeAttackDamageDistance = 45
+ENT.MeleeAttackDamageDistance = 40
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
@@ -59,7 +59,7 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
-self:SetCollisionBounds(Vector(29.86, 6.04, 5.87), Vector(-15.24, -10.02, 0))
+self:SetCollisionBounds(Vector(10, 10, 5), Vector(-10, -10, 0))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)

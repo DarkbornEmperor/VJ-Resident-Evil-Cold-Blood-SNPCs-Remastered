@@ -25,8 +25,8 @@ ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
 ENT.MeleeAttackDamage = 35
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.MeleeAttackDistance = 70 
-ENT.MeleeAttackDamageDistance = 120
+ENT.MeleeAttackDistance = 60 
+ENT.MeleeAttackDamageDistance = 130
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
@@ -62,7 +62,7 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
-	self:SetCollisionBounds(Vector(123.34, 50, 50), Vector(-150, -50, -30))	
+	self:SetCollisionBounds(Vector(60, 60, 60), Vector(-60, -60, -20))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)

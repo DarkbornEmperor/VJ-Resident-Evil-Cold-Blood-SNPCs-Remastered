@@ -86,7 +86,7 @@ if GetConVarNumber("VJ_RECB_Gibbing") == 0 then
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize() 
-	self:SetCollisionBounds(Vector(60, 50, 52), Vector(-60, -50, 0))
+	self:SetCollisionBounds(Vector(40, 40, 52), Vector(-40, -40, 0))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:RangeAttackCode_GetShootPos(projectile)

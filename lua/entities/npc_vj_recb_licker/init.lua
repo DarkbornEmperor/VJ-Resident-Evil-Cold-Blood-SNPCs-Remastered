@@ -86,7 +86,7 @@ if GetConVarNumber("VJ_RECB_Gibbing") == 0 then
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
-	self:SetCollisionBounds(Vector(30, 20, 32), Vector(-30, -20, 0))	
+	self:SetCollisionBounds(Vector(20, 20, 32), Vector(-20, -20, 0))	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:MultipleMeleeAttacks()

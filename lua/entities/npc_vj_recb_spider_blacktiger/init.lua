@@ -97,7 +97,7 @@ if GetConVarNumber("VJ_RECB_Boss_Music") == 0 then
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize() 
-	self:SetCollisionBounds(Vector(80, 80, 75), Vector(-60, -70, 0))
+	self:SetCollisionBounds(Vector(60, 60, 70), Vector(-60, -60, 0))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:RangeAttackCode_GetShootPos(projectile)
