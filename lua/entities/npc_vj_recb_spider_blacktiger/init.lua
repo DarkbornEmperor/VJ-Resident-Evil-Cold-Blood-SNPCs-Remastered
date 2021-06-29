@@ -110,7 +110,7 @@ function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
+function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
 	if hitgroup == 1 && dmginfo:GetDamageForce():Length() > 800 then
 	    self:EmitSound(Sound("vj_recb/spider/sp_abdomenlost.wav",70))
 		self:SetBodygroup(0,1)

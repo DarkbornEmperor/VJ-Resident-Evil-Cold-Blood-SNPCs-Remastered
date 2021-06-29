@@ -93,7 +93,7 @@ function ENT:RangeAttackCode_GetShootPos(projectile)
 	return self:CalculateProjectile("Curve", self:GetAttachment(self:LookupAttachment(self.RangeUseAttachmentForPosID)).Pos, self:GetEnemy():GetPos() + self:GetEnemy():OBBCenter(), 1500)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:SetUpGibesOnDeath(dmginfo,hitgroup)
+function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
 	if hitgroup == 1 && dmginfo:GetDamageForce():Length() > 800 then
 	    self:EmitSound(Sound("vj_recb/spider/sp_abdomenlost.wav",70))
 		self:SetBodygroup(0,1)
