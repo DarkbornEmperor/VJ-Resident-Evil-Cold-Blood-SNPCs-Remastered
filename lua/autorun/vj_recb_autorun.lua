@@ -78,9 +78,10 @@ if VJExists == true then
 	util.PrecacheModel("models/vj_recb/recb_zombie_torso_beta.mdl")	
 
     -- Decals from HL1 --
-    game.AddDecal("VJ_RECB_Blood_Red",{"vj_hl/decals/hl_blood01","vj_hl/decals/hl_blood02","vj_hl/decals/hl_blood03","vj_hl/decals/hl_blood04","vj_hl/decals/hl_blood05","vj_hl/decals/hl_blood06","vj_hl/decals/hl_blood07","vj_hl/decals/hl_blood08"})
-    game.AddDecal("VJ_RECB_Blood_Red_Large",{"vj_hl/decals/hl_bigblood01","vj_hl/decals/hl_bigblood02"})
-    game.AddDecal("VJ_RECB_Blood_Yellow",{"vj_hl/decals/hl_yblood01","vj_hl/decals/hl_yblood02","vj_hl/decals/hl_yblood03","vj_hl/decals/hl_yblood04","vj_hl/decals/hl_yblood05","vj_hl/decals/hl_yblood06"})
+    game.AddDecal("VJ_RECB_Blood_Red",{"vj_recb/decals/hl_blood01","vj_recb/decals/hl_blood02","vj_recb/decals/hl_blood03","vj_recb/decals/hl_blood04","vj_recb/decals/hl_blood05","vj_recb/decals/hl_blood06","vj_recb/decals/hl_blood07","vj_recb/decals/hl_blood08"})
+    game.AddDecal("VJ_RECB_Blood_Red_Large",{"vj_recb/decals/hl_bigblood01","vj_recb/decals/hl_bigblood02"})
+    game.AddDecal("VJ_RECB_Blood_Yellow",{"vj_recb/decals/hl_yblood01","vj_recb/decals/hl_yblood02","vj_recb/decals/hl_yblood03","vj_recb/decals/hl_yblood04","vj_recb/decals/hl_yblood05","vj_recb/decals/hl_yblood06"})
+    game.AddDecal("VJ_RECB_Spit",{"vj_recb/decals/spit1_green","vj_recb/decals/spit2_green"})
 
     -- Particles by Dopey --
     game.AddParticles( "particles/drg_re1_monster_effects.pcf" )

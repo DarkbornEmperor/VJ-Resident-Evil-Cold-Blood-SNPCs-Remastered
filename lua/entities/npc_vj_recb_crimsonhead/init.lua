@@ -26,11 +26,12 @@ ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.GibOnDeathDamagesTable = {"All"}
+ENT.HasExtraMeleeAttackSounds = true
 	-- ====== Controller Data ====== --
 ENT.VJC_Data = {
 	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
-	ThirdP_Offset = Vector(30, 25, -50), -- The offset for the controller when the camera is in third person
-	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	ThirdP_Offset = Vector(40, 20, -50), -- The offset for the controller when the camera is in third person
+	FirstP_Bone = "Bip01 Head", -- If left empty, the base will attempt to calculate a position for first person
 	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
 }
 	-- ====== Sound File Paths ====== --
@@ -40,7 +41,7 @@ ENT.SoundTbl_Breath = {"vj_recb/zombie/crimsonhead/crimhead_run.wav"}
 ENT.SoundTbl_Idle = {"vj_recb/zombie/CrimsonHead/crimhead_attack1.wav","vj_recb/zombie/CrimsonHead/crimhead_attack2.wav"}
 ENT.SoundTbl_Alert = {"vj_recb/zombie/CrimsonHead/crimhead_alert.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/CrimsonHead/crimhead_attack1.wav","vj_recb/zombie/CrimsonHead/crimhead_attack2.wav"}
-ENT.SoundTbl_MeleeAttack = {"vj_recb/zombie/CrimsonHead/crimhead_slash.wav"}
+ENT.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/CrimsonHead/crimhead_slash.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
 ENT.SoundTbl_Pain = {"vj_recb/zombie/CrimsonHead/crimhead_pain.wav"}
 ENT.SoundTbl_Death = {"vj_recb/zombie/CrimsonHead/crimhead_die.wav"}
@@ -100,7 +101,7 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
-    if (dmginfo:IsBulletDamage()) && hitgroup == HITGROUP_CHEST or hitgroup == HITGROUP_RIGHTARM or hitgroup == HITGROUP_LEFTARM or hitgroup == HITGROUP_RIGHTLEG or hitgroup == HITGROUP_LEFTARM then
+    if (dmginfo:IsBulletDamage()) && hitgroup == HITGROUP_CHEST or hitgroup == HITGROUP_RIGHTARM or hitgroup == HITGROUP_LEFTARM or hitgroup == HITGROUP_RIGHTLEG or hitgroup == HITGROUP_LEFTLEG then
 	    dmginfo:ScaleDamage(0.25)
 end
 
@@ -110,36 +111,24 @@ self:VJ_ACT_PLAYACTIVITY("knocked_to_floor",true,100,false)
 self.MovementType = VJ_MOVETYPE_STATIONARY
 self.HasBeenKnocked = true
 self.CanBeKnocked = false
-self.VJ_NoTarget = true
-self.DisableMakingSelfEnemyToNPCs = true
-self.DisableChasingEnemy = true
-self.DisableFindEnemy = true
-self.DisableWandering = true
+self:AddFlags(FL_NOTARGET)
 self.CanTurnWhileStationary = false
 self.HasIdleSounds = false
 self.CanFlinch = 0
---self:SetCollisionBounds(Vector(50,16,10),Vector(-10,-16,0))
+self:SetCollisionBounds(Vector(13,13,50),Vector(-13,-13,0))
 
 timer.Simple(GetConVarNumber("VJ_RECB_Zombie_GetUp_Time"),function()
 if IsValid(self) && !self.Crippled && GetConVarNumber("VJ_RECB_Knocked") == 1 && self.DeathAnimationCodeRan == false && self.Dead == false then
 self:VJ_ACT_PLAYACTIVITY("getup",true,2.5,false)
 self.HasBeenKnocked = false
-self.VJ_NoTarget = false
-self.DisableMakingSelfEnemyToNPCs = false
-self.DisableChasingEnemy = false
-self.DisableFindEnemy = false
-self.DisableWandering = false
+self:RemoveFlags(FL_NOTARGET)
 self.HasIdleSounds = true
---self:SetCollisionBounds(Vector(13,13,72),Vector(-13,-13,0))
+self:SetCollisionBounds(Vector(13,13,72),Vector(-13,-13,0))
 
 elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_Knocked") == 1 && self.DeathAnimationCodeRan == false && self.Dead == false then
 self:VJ_ACT_PLAYACTIVITY("crawl_attack",true,1,false)
 self.HasBeenKnocked = false
-self.VJ_NoTarget = false
-self.DisableMakingSelfEnemyToNPCs = false
-self.DisableChasingEnemy = false
-self.DisableFindEnemy = false
-self.DisableWandering = false
+self:AddFlags(FL_NOTARGET)
 self.HasIdleSounds = true
 self:SetCollisionBounds(Vector(16,16,20),Vector(-16,-16,0))
 end

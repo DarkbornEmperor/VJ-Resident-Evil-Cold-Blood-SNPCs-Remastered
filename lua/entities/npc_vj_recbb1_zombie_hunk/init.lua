@@ -11,10 +11,10 @@ ENT.MeleeAttackDamage = 15
 ENT.MeleeAttackDistance = 25 
 ENT.MeleeAttackDamageDistance = 45
 ENT.NextMeleeAttackTime = 1.5
-ENT.SlowPlayerOnMeleeAttack = false
+ENT.HasMeleeAttackKnockBack = false
 	-- ====== Sound File Paths ====== --
 -- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_MeleeAttack = {"vj_recb/zombie/CrimsonHead/crimhead_slash.wav","vj_recb/zombie/CrimsonHead/crimhead_slash.wav"}
+ENT.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/CrimsonHead/crimhead_slash.wav","vj_recb/zombie/CrimsonHead/crimhead_slash.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
 -- Custom
 ENT.LegHealth = 0

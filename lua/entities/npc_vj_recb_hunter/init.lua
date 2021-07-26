@@ -41,11 +41,12 @@ ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.GibOnDeathDamagesTable = {"All"}
+ENT.HasExtraMeleeAttackSounds = true
 	-- ====== Controller Data ====== --
 ENT.VJC_Data = {
 	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
 	ThirdP_Offset = Vector(30, 25, -35), -- The offset for the controller when the camera is in third person
-	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Bone = "Bip01 Head", -- If left empty, the base will attempt to calculate a position for first person
 	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
 }
 	-- ====== Sound File Paths ====== --
@@ -55,7 +56,7 @@ ENT.SoundTbl_Idle = {"vj_recb/hunter/hu_idle1.wav","vj_recb/hunter/hu_idle2.wav"
 ENT.SoundTbl_Alert = {"vj_recb/hunter/hu_alert.wav"}
 ENT.SoundTbl_CallForHelp = {"vj_recb/hunter/hu_scream.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/hunter/hu_alert.wav"}
-ENT.SoundTbl_MeleeAttack = {"vj_recb/hunter/hu_clawhit.wav"}
+ENT.SoundTbl_MeleeAttackExtra = {"vj_recb/hunter/hu_clawhit.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/hunter/hu_slash.wav"}
 ENT.SoundTbl_LeapAttackJump = {"vj_recb/hunter/hu_jump.wav"}
 ENT.SoundTbl_LeapAttackDamage = {"vj_recb/hunter/hu_clawhit.wav"}

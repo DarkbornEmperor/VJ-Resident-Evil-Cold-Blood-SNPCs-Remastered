@@ -35,11 +35,12 @@ ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.GibOnDeathDamagesTable = {"All"}
+ENT.HasExtraMeleeAttackSounds = true
 	-- ====== Controller Data ====== --
 ENT.VJC_Data = {
 	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
 	ThirdP_Offset = Vector(25, 30, -25), -- The offset for the controller when the camera is in third person
-	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Bone = "Bip01 Head", -- If left empty, the base will attempt to calculate a position for first person
 	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
 }
 	-- ====== Sound File Paths ====== --
@@ -97,14 +98,14 @@ function ENT:MultipleMeleeAttacks()
 		self.MeleeAttackDamage = 15
 		self.MeleeAttackDistance = 30 
         self.MeleeAttackDamageDistance = 60
-		self.SoundTbl_MeleeAttack = {"vj_recb/licker/li_slash.wav"}
+		self.SoundTbl_MeleeAttackExtra = {"vj_recb/licker/li_slash.wav"}
 end
 	if licker_attack == 2 then
 		self.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK2}
 		self.MeleeAttackDamage = 25
 		self.MeleeAttackDistance = 30 
         self.MeleeAttackDamageDistance = 70		
-		self.SoundTbl_MeleeAttack = {"vj_recb/licker/li_tongue.wav"}
+		self.SoundTbl_MeleeAttackExtra = {"vj_recb/licker/li_tongue.wav"}
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

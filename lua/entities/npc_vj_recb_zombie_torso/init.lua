@@ -20,10 +20,9 @@ ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDamage = 10
 ENT.MeleeAttackDistance = 20 
 ENT.MeleeAttackDamageDistance = 40
-ENT.SlowPlayerOnMeleeAttack = true
-ENT.SlowPlayerOnMeleeAttack_WalkSpeed = 1
-ENT.SlowPlayerOnMeleeAttack_RunSpeed = 1 
-ENT.SlowPlayerOnMeleeAttackTime = 1
+ENT.HasMeleeAttackKnockBack = true
+ENT.MeleeAttackKnockBack_Forward1 = -50
+ENT.MeleeAttackKnockBack_Forward2 = -50
 ENT.HasDeathAnimation = true
 ENT.AnimTbl_Death = {ACT_DIESIMPLE}
 ENT.DeathAnimationTime = 8
@@ -33,7 +32,7 @@ ENT.DisableFootStepSoundTimer = true
 ENT.VJC_Data = {
 	CameraMode = 1, 
 	ThirdP_Offset = Vector(35, 25, -15), 
-	FirstP_Bone = "ValveBiped.Bip01_Head1", 
+	FirstP_Bone = "Bip01 Head", 
 	FirstP_Offset = Vector(10, 0, -30), 
 }
 	-- ====== Sound File Paths ====== --

@@ -39,11 +39,12 @@ ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.GibOnDeathDamagesTable = {"All"}
+ENT.HasExtraMeleeAttackSounds = true
 	-- ====== Controller Data ====== --
 ENT.VJC_Data = {
 	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
 	ThirdP_Offset = Vector(-15, 25, -20), -- The offset for the controller when the camera is in third person
-	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Bone = "Joint 15", -- If left empty, the base will attempt to calculate a position for first person
 	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
 }
 	-- ====== Sound File Paths ====== --
@@ -51,7 +52,7 @@ ENT.VJC_Data = {
 ENT.SoundTbl_FootStep = {"vj_recb/spider/fl_walk.wav"}
 ENT.SoundTbl_Idle = {"vj_recb/spider/fl_out.wav"} 
 ENT.SoundTbl_Alert = {"vj_recb/spider/fl_out.wav"}
-ENT.SoundTbl_MeleeAttack = {"vj_recb/spider/spider_bite.wav","vj_recb/spider/spider_bite2.wav"}
+ENT.SoundTbl_MeleeAttackExtra = {"vj_recb/spider/spider_bite.wav","vj_recb/spider/spider_bite2.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
 ENT.SoundTbl_RangeAttack = {"vj_recb/spider/Sp_spit.wav"}
 ENT.SoundTbl_Pain = {"vj_recb/spider/fl_dam.wav"}

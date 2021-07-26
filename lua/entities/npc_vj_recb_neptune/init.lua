@@ -32,11 +32,12 @@ ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.GibOnDeathDamagesTable = {"All"}
+ENT.HasExtraMeleeAttackSounds = true
 	-- ====== Controller Data ====== --
 ENT.VJC_Data = {
 	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
 	ThirdP_Offset = Vector(20, 30, -60), -- The offset for the controller when the camera is in third person
-	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Bone = "Bip01 Head", -- If left empty, the base will attempt to calculate a position for first person
 	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
 }
 	-- ====== Sound File Paths ====== --
@@ -44,7 +45,7 @@ ENT.VJC_Data = {
 ENT.SoundTbl_Breath = {"vj_recb/shark/shark_swim_peace.wav"}
 ENT.SoundTbl_Alert = {"vj_recb/shark/Shark_Alert.wav"}
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/shark/Shark_attack.wav"} 
-ENT.SoundTbl_MeleeAttack = {"vj_recb/shark/shark_bite.wav"} 
+ENT.SoundTbl_MeleeAttackExtra = {"vj_recb/shark/shark_bite.wav"} 
 ENT.SoundTbl_Pain = {"vj_recb/shark/Shark_pain.wav"}
 ENT.SoundTbl_Death = {"vj_recb/shark/Shark_death.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}

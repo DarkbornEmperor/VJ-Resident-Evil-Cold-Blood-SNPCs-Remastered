@@ -37,11 +37,12 @@ ENT.LeapAttackVelocityForward = 100
 ENT.LeapAttackVelocityUp = 100
 ENT.LeapDistance = 200
 ENT.LeapToMeleeDistance = 150
+ENT.HasExtraMeleeAttackSounds = true
 	-- ====== Controller Data ====== --
 ENT.VJC_Data = {
 	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
 	ThirdP_Offset = Vector(30, 25, -30), -- The offset for the controller when the camera is in third person
-	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Bone = "Bone08", -- If left empty, the base will attempt to calculate a position for first person
 	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
 }
 	-- ====== Sound File Paths ====== --
@@ -50,7 +51,7 @@ ENT.SoundTbl_FootStep = {"vj_recb/cerberus/cer_run.wav","vj_recb/cerberus/cer_ru
 ENT.SoundTbl_Idle = {"vj_recb/cerberus/cer_growl.wav"}
 ENT.SoundTbl_CombatIdle = {"vj_recb/cerberus/cer_bark.wav","vj_recb/cerberus/cer_growl.wav"} 
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/cerberus/cer_bite.wav"}
-ENT.SoundTbl_MeleeAttack = {"vj_recb/cerberus/Bite.wav"}
+ENT.SoundTbl_MeleeAttackExtra = {"vj_recb/cerberus/Bite.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
 ENT.SoundTbl_LeapAttackJump = {"vj_recb/cerberus/cer_jump.wav"}
 ENT.SoundTbl_LeapAttackDamage = {"vj_recb/cerberus/Bite.wav"}

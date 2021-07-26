@@ -33,11 +33,12 @@ ENT.DeathAnimationTime = 8
 ENT.AnimTbl_Death = {ACT_DIEVIOLENT}
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
+ENT.HasExtraMeleeAttackSounds = true
 	-- ====== Controller Data ====== --
 ENT.VJC_Data = {
 	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
 	ThirdP_Offset = Vector(20, 25, -70), -- The offset for the controller when the camera is in third person
-	FirstP_Bone = "ValveBiped.Bip01_Head1", -- If left empty, the base will attempt to calculate a position for first person
+	FirstP_Bone = "Bip01 Head", -- If left empty, the base will attempt to calculate a position for first person
 	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
 }
 	-- ====== Sound File Paths ====== --
@@ -45,7 +46,7 @@ ENT.VJC_Data = {
 ENT.SoundTbl_FootStep = {"vj_recb/tyrant/tyrant_foot.wav"}
 ENT.SoundTbl_Alert = {"vj_recb/tyrant/tyrant_roar.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/tyrant/tyrant_swing2.wav","vj_recb/tyrant/tyrant_swing.wav"}
-ENT.SoundTbl_MeleeAttack = {"vj_recb/tyrant/tyrant_stab.wav","vj_recb/tyrant/tyrant_slash.wav"}
+ENT.SoundTbl_MeleeAttackExtra = {"vj_recb/tyrant/tyrant_stab.wav","vj_recb/tyrant/tyrant_slash.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
 ENT.SoundTbl_SoundTrack = {"vj_recb/mapspawner/mansionbossend.wav"}
 ENT.HasSoundTrack = true

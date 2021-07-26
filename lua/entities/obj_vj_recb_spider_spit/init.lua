@@ -6,7 +6,7 @@ include("shared.lua")
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/spitball_medium.mdl"} -- The models it should spawn with | Picks a random one from the table
-ENT.DecalTbl_DeathDecals = {"VJ_RECB_Blood_Yellow"}
+ENT.DecalTbl_DeathDecals = {"VJ_RECB_Spit"}
 --ENT.SoundTbl_Idle = {"vj_acid/acid_idle1.wav"}
 ENT.SoundTbl_OnCollide = {"vj_recb/spider/spidershot.wav"}
 ENT.DoesRadiusDamage = true -- Should it do a blast damage when it hits something?

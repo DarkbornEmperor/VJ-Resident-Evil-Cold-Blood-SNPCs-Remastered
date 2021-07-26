@@ -99,7 +99,7 @@ end
 --self:SetMaterial("hud/killicons/default")
 VJ_EmitSound(self,{"vj_recb/mapspawner/residentevil.wav"},70)
 self:SetNoDraw(true)
-self.VJ_NoTarget = true
+self:AddFlags(FL_NOTARGET)
 self:SetCollisionBounds(Vector(0, 0, 0), -Vector(0, 0, 0))
 end 
 end			
