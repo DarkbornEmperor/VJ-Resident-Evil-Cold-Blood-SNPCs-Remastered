@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/recb_zombie_torso.mdl"} 
+ENT.Model = {"models/vj_recb/zombie_torso.mdl"} 
 ENT.StartHealth = 100
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
@@ -267,7 +267,7 @@ function ENT:CustomOnMeleeAttack_Miss()
     if self.MeleeAttacking == true then
 	   self.vACT_StopAttacks = true
 	   self.PlayingAttackAnimation = false
-       self:VJ_ACT_PLAYACTIVITY("lunge",true,0.5,false)
+       self:VJ_ACT_PLAYACTIVITY("lunge",true,false,false)
 	end
 end
 /*-----------------------------------------------

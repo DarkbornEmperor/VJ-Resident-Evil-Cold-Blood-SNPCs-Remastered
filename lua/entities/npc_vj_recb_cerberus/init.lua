@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/recb_cerberus.mdl"} 
+ENT.Model = {"models/vj_recb/cerberus.mdl"} 
 ENT.StartHealth = 60
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
@@ -24,15 +24,17 @@ ENT.AnimTbl_Death = {ACT_DIESIMPLE}
 ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true
 ENT.GibOnDeathDamagesTable = {"All"}
-ENT.MeleeAttackDistance = 30 
-ENT.MeleeAttackDamageDistance = 40
+ENT.MeleeAttackDistance = 25 
+ENT.MeleeAttackDamageDistance = 50
 ENT.NextMeleeAttackTime = 1.5
 ENT.HasLeapAttack = true 
-ENT.NextLeapAttackTime = 8
-ENT.LeapAttackDamageDistance = 90
-ENT.LeapAttackDamage = 15
-ENT.TimeUntilLeapAttackDamage = false
 ENT.AnimTbl_LeapAttack = {ACT_SPECIAL_ATTACK1}
+ENT.NextLeapAttackTime = 8
+ENT.LeapAttackDamageDistance = 50
+ENT.LeapAttackDamage = 15
+ENT.TimeUntilLeapAttackDamage = 0.4 
+ENT.LeapAttackExtraTimers = {0.6, 0.8, 1} 
+ENT.StopLeapAttackAfterFirstHit = true
 ENT.LeapAttackVelocityForward = 100 
 ENT.LeapAttackVelocityUp = 100
 ENT.LeapDistance = 200
@@ -52,10 +54,8 @@ ENT.SoundTbl_Idle = {"vj_recb/cerberus/cer_growl.wav"}
 ENT.SoundTbl_CombatIdle = {"vj_recb/cerberus/cer_bark.wav","vj_recb/cerberus/cer_growl.wav"} 
 ENT.SoundTbl_BeforeMeleeAttack = {"vj_recb/cerberus/cer_bite.wav"}
 ENT.SoundTbl_MeleeAttackExtra = {"vj_recb/cerberus/Bite.wav"}
-ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
 ENT.SoundTbl_LeapAttackJump = {"vj_recb/cerberus/cer_jump.wav"}
 ENT.SoundTbl_LeapAttackDamage = {"vj_recb/cerberus/Bite.wav"}
-ENT.SoundTbl_LeapAttackDamageMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
 ENT.SoundTbl_CallForHelp = {"vj_recb/cerberus/cer_howl.wav"}
 ENT.SoundTbl_Pain = {"vj_recb/cerberus/cer_pain.wav","vj_recb/cerberus/cer_pain2.wav"}
 ENT.SoundTbl_Death = {"vj_recb/cerberus/cer_die.wav"}
@@ -76,7 +76,7 @@ function ENT:CustomOnAcceptInput(key,activator,caller,data)
 end
 	if key == "attack" then
 		self:MeleeAttackCode()
-		self:LeapDamageCode()
+		//self:LeapDamageCode()
 end
 	if key == "death" then
 		VJ_EmitSound(self, "vj_recb/cerberus/cer_bodyfall.wav", 85, 100)
@@ -167,8 +167,7 @@ function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
 		bloodeffect:Spawn()
 		bloodeffect:Activate()
 		bloodeffect:Fire("Start","",0)
-		bloodeffect:Fire("Kill","",2)	
-				
+		bloodeffect:Fire("Kill","",2)					
 	end
 end
 		return true,{DeathAnim=true}

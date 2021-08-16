@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/recb_neptune.mdl"} 
+ENT.Model = {"models/vj_recb/neptune.mdl"} 
 ENT.StartHealth = 500
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.VJ_IsHugeMonster = true
@@ -25,8 +25,8 @@ ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
 ENT.MeleeAttackDamage = 35
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.MeleeAttackDistance = 60 
-ENT.MeleeAttackDamageDistance = 130
+ENT.MeleeAttackDistance = 40 
+ENT.MeleeAttackDamageDistance = 100
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false

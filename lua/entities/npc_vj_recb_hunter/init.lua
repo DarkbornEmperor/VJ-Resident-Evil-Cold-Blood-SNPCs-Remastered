@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/recb_hunter.mdl"} -- The game will pick a random model from the table when the SNPC is spawned | Add as many as you want
+ENT.Model = {"models/vj_recb/hunter.mdl"} -- The game will pick a random model from the table when the SNPC is spawned | Add as many as you want
 ENT.StartHealth = 250
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
@@ -69,7 +69,7 @@ ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
 
 -- Custom
-ENT.GraySkin = false
+ENT.Hunter_Skin = 0
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	if key == "step" then
@@ -98,42 +98,34 @@ end
 function ENT:CustomOnInitialize() 
 --VJ_EmitSound(self,{"hunter/hu_scream.wav"},70)
 	--self:VJ_ACT_PLAYACTIVITY("scream",true,1.76,true)
-	self:SetCollisionBounds(Vector(16, 16, 60), Vector(-16, -16, 0))
+	self:SetCollisionBounds(Vector(16, 16, 70), Vector(-16, -16, 0))
 	
-    if math.random(1,2) == 1 then
-	        self.GraySkin = true
-			self:SetBodygroup(0,1)
-	end		
+    local Hunter_Body = math.random(1,2)
+    if Hunter_Body == 1 then
+       self.Hunter_Skin = 0
+       self:SetBodygroup(0,0)
+elseif Hunter_Body == 2 then
+       self.Hunter_Skin = 1
+       self:SetBodygroup(0,1)		
+    end		
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnCallForHelp(ally)
 if math.random(1,2) == 1 then
-        self:VJ_ACT_PLAYACTIVITY("vjseq_scream",true,2,true)	
+        self:VJ_ACT_PLAYACTIVITY("vjseq_scream",true,false,true)	
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
-	if self.GraySkin == false && hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 && self.HasGibDeathParticles == true then
-	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",70))
-		self:SetBodygroup(0,2)
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
 	
-		local bloodeffect = ents.Create("info_particle_system")
-		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
-		bloodeffect:SetPos(self:GetAttachment(self:LookupAttachment("head")).Pos)
-		bloodeffect:SetAngles(self:GetAttachment(self:LookupAttachment("head")).Ang)
-		bloodeffect:SetParent(self)
-		bloodeffect:Fire("SetParentAttachment","head")
-		bloodeffect:Spawn()
-		bloodeffect:Activate()
-		bloodeffect:Fire("Start","",0)
-		bloodeffect:Fire("Kill","",2)	
-		
-	elseif self.GraySkin == true && hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 && self.HasGibDeathParticles == true then
-		self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",70))
-	    self:SetBodygroup(0,3)		
+	if self.Hunter_Skin == 0 then self:SetBodygroup(0,2) end
+	if self.Hunter_Skin == 1 then self:SetBodygroup(0,4) end
+	
+	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",70))
 		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				
+
+    if self.HasGibDeathParticles == true then	
 		local bloodeffect = ents.Create("info_particle_system")
 		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
 		bloodeffect:SetPos(self:GetAttachment(self:LookupAttachment("head")).Pos)
@@ -143,10 +135,10 @@ function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
 		bloodeffect:Spawn()
 		bloodeffect:Activate()
 		bloodeffect:Fire("Start","",0)
-		bloodeffect:Fire("Kill","",2)
-			
+		bloodeffect:Fire("Kill","",2)			
 end
-	return true,{DeathAnim=true}
+	    return true,{DeathAnim=true}
+	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)

@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/recb_zombie_crimsonhead.mdl"} 
+ENT.Model = {"models/vj_recb/zombie_crimsonhead.mdl"} 
 ENT.StartHealth = 200
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
@@ -21,6 +21,7 @@ ENT.MeleeAttackDamage = 20
 ENT.NextMeleeAttackTime = 1.5
 ENT.MeleeAttackDistance = 25 
 ENT.MeleeAttackDamageDistance = 55
+ENT.HasMeleeAttackKnockBack = false
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false

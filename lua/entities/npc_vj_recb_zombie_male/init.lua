@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/recb_zombie_male.mdl"} 
+ENT.Model = {"models/vj_recb/zombie_male.mdl"} 
 ENT.StartHealth = 150
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
@@ -13,7 +13,6 @@ ENT.CustomBlood_Particle = {"drg_re1_blood_impact"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
 ENT.HullType = HULL_HUMAN
 ENT.CanFlinch = 1
-ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_CHEST}
 ENT.HasMeleeAttack = true 
 ENT.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
@@ -22,8 +21,8 @@ ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDistance = 15 
 ENT.MeleeAttackDamageDistance = 35
 ENT.HasMeleeAttackKnockBack = true
-ENT.MeleeAttackKnockBack_Forward1 = -50
-ENT.MeleeAttackKnockBack_Forward2 = -50
+ENT.MeleeAttackKnockBack_Forward1 = -100
+ENT.MeleeAttackKnockBack_Forward2 = -100
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
@@ -43,7 +42,6 @@ ENT.SoundTbl_FootStep = {"vj_recb/zombie/footstep1.wav","vj_recb/zombie/footstep
 ENT.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
 ENT.SoundTbl_RangeAttack = {"vj_recb/zombie/vomit.wav"}
 ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
-ENT.SoundTbl_MeleeAttackSlowPlayer = {""}
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
@@ -54,6 +52,7 @@ ENT.Crippled = false
 ENT.Vomit_Zombie = false
 ENT.HasBeenKnocked = false
 ENT.CanBeKnocked = true
+ENT.NextKnockTimeT = 0
 ENT.Head_Damaged = false
 ENT.Chest_Damaged = false
 ENT.RArm_Damaged = false
@@ -73,10 +72,12 @@ end
 		self:MeleeAttackCode()
 end
 	if key == "vomit" then
-		self:RangeAttackCode()
+		self:MeleeAttackCode()
+		VJ_EmitSound(self, "vj_recb/zombie/vomit.wav", 75, 100)
+		ParticleEffect("drg_re1_blood_impact_acid",self:GetAttachment(self:LookupAttachment("mouth")).Pos,self:GetAngles())
 end
 	if key == "death" then
-		VJ_EmitSound(self, "vj_recb/zombie/zom_bodyfall"..math.random(1,2)..".wav", 85, 100)
+		VJ_EmitSound(self, "vj_recb/zombie/zom_bodyfall"..math.random(1,2)..".wav", 75, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -101,13 +102,13 @@ function ENT:CustomOnInitialize()
     if zombieskin == 1 then
 	self:SetSkin(math.random(0,3))
 	
-    elseif zombieskin == 2 then
+elseif zombieskin == 2 then
 	self:SetSkin(math.random(4,5))
 	self:SetBodygroup(7,math.random(0,1))
 end	
 	if self.Vomit_Zombie then
 	     self:SetVomitZombie()
-   end		
+    end		
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ZombieVoices()
@@ -305,68 +306,66 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetVomitZombie()
-    self.HasMeleeAttack = false 
-	self.HasRangeAttack = true 
-	self.AnimTbl_RangeAttack = {ACT_SPECIAL_ATTACK1}
-	self.RangeAttackEntityToSpawn = "obj_vj_recb_zombie_vomit"
-	self.RangeDistance = 45
-    self.RangeToMeleeDistance = 1 
-	self.TimeUntilRangeAttackProjectileRelease = false
-	self.RangeUseAttachmentForPos = true 
-    self.RangeUseAttachmentForPosID = "mouth"
-	self.NextRangeAttackTime = 2.5
+	self.AnimTbl_MeleeAttack = {ACT_SPECIAL_ATTACK1}
+	self.MeleeAttackDamageType = DMG_ACID
+	self.MeleeAttackDamage = 15
+	self.MeleeAttackDistance = 15
+    self.MeleeAttackDamageDistance = 35 
+	self.NextMeleeAttackTime = 2
+	self.HasMeleeAttackKnockBack = false
+	self.HasExtraMeleeAttackSounds = false
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnMeleeAttack_Miss() 
-    if self.MeleeAttacking == true && !self.Crippled then
+    if self.MeleeAttacking == true && !self.Crippled && !self.Vomit_Zombie then
 	   self.vACT_StopAttacks = true
 	   self.PlayingAttackAnimation = false
-       self:VJ_ACT_PLAYACTIVITY("lunge_1",true,0.5,false)
+       self:VJ_ACT_PLAYACTIVITY("lunge_1",true,false,false)
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
-local attacker = dmginfo:GetAttacker()
-if self.CanBeKnocked == true && math.random(1,20) == 1 && !self.Crippled && GetConVarNumber("VJ_RECB_Knocked") == 1 then
-self:VJ_ACT_PLAYACTIVITY("knocked_to_floor",true,100,false)
-self.MovementType = VJ_MOVETYPE_STATIONARY
-self.HasBeenKnocked = true
-self.CanBeKnocked = false
-self:AddFlags(FL_NOTARGET)
-self.CanTurnWhileStationary = false
-self.HasIdleSounds = false
-self.CanFlinch = 0
-self:SetCollisionBounds(Vector(13,13,50),Vector(-13,-13,0))
+    local attacker = dmginfo:GetAttacker()
+    if self.CanBeKnocked == true && math.random(1,20) == 1 && CurTime() > self.NextKnockTimeT && !self.Crippled && GetConVarNumber("VJ_RECB_Knocked") == 1 then
+       self:VJ_ACT_PLAYACTIVITY("knocked_to_floor",true,100,false)
+       self.MovementType = VJ_MOVETYPE_STATIONARY
+	   self.CanTurnWhileStationary = false
+       self.HasBeenKnocked = true
+       self.CanBeKnocked = false
+       self:AddFlags(FL_NOTARGET)
+       self.HasIdleSounds = false
+       self.CanFlinch = 0
+       self:SetCollisionBounds(Vector(13,13,25),Vector(-13,-13,0))
 
-timer.Simple(GetConVarNumber("VJ_RECB_Zombie_GetUp_Time"),function()
-if IsValid(self) && !self.Crippled && GetConVarNumber("VJ_RECB_Knocked") == 1 && self.DeathAnimationCodeRan == false && self.Dead == false then
-self:VJ_ACT_PLAYACTIVITY("getup",true,2.5,false)
-self.HasBeenKnocked = false
-self:RemoveFlags(FL_NOTARGET)
-self.HasIdleSounds = true
-self:SetCollisionBounds(Vector(13,13,72),Vector(-13,-13,0))
+    timer.Simple(GetConVarNumber("VJ_RECB_Zombie_GetUp_Time"),function()
+    if IsValid(self) && !self.Crippled && GetConVarNumber("VJ_RECB_Knocked") == 1 && self.DeathAnimationCodeRan == false && self.Dead == false then
+       self:VJ_ACT_PLAYACTIVITY("getup",true,false,false)
+	   self.MovementType = VJ_MOVETYPE_GROUND
+       self.HasBeenKnocked = false
+       self:RemoveFlags(FL_NOTARGET)
+       self.HasIdleSounds = true
+       self:SetCollisionBounds(Vector(13,13,72),Vector(-13,-13,0))
+       self.NextKnockTimeT = CurTime() + math.random(5,8) 
 
-elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_Knocked") == 1 && self.DeathAnimationCodeRan == false && self.Dead == false then
-self:VJ_ACT_PLAYACTIVITY("crawl_attack",true,1,false)
-self.HasBeenKnocked = false
-self:AddFlags(FL_NOTARGET)
-self.HasIdleSounds = true
-self:SetCollisionBounds(Vector(16,16,20),Vector(-16,-16,0))
+ elseif IsValid(self) && self.Crippled == true && GetConVarNumber("VJ_RECB_Knocked") == 1 && self.DeathAnimationCodeRan == false && self.Dead == false then
+       self:VJ_ACT_PLAYACTIVITY("crawl_attack",true,1,false)
+	   self.MovementType = VJ_MOVETYPE_GROUND
+       self.HasBeenKnocked = false
+       self:RemoveFlags(FL_NOTARGET)
+       self.HasIdleSounds = true
+       self:SetCollisionBounds(Vector(16,16,20),Vector(-16,-16,0))
 end
+               timer.Simple(3,function()
+               if IsValid(self) && !self.Crippled then
+                 self.CanBeKnocked = true
+                 self.CanFlinch = 1
 
-timer.Simple(3,function()
-if IsValid(self) && !self.Crippled then
-self.MovementType = VJ_MOVETYPE_GROUND
-self.CanBeKnocked = true
-self.CanFlinch = 1
-
-elseif IsValid(self) && self.Crippled == true then
-self.MovementType = VJ_MOVETYPE_GROUND
-self.CanFlinch = 0
-end
-end)
-end)
-end
+           elseif IsValid(self) && self.Crippled == true then
+                 self.CanFlinch = 0
+              end
+          end)
+      end)
+   end
 end	
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)

@@ -5,11 +5,9 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/recb_black_tiger.mdl"} 
+ENT.Model = {"models/vj_recb/black_tiger.mdl"} 
 ENT.StartHealth = 1500
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
-ENT.VJ_IsHugeMonster = true
-ENT.Immune_Physics = true
 ENT.BloodColor = "Yellow"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact_green"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Yellow"}

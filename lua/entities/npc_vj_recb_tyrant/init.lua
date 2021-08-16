@@ -5,11 +5,9 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/recb_tyrant_103.mdl"} 
+ENT.Model = {"models/vj_recb/tyrant_103.mdl"} 
 ENT.StartHealth = 2000
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
-ENT.VJ_IsHugeMonster = true
-ENT.Immune_Physics = true
 ENT.BloodColor = "Red"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
@@ -74,12 +72,12 @@ if GetConVarNumber("VJ_RECB_Boss_Music") == 0 then
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
-	self:SetCollisionBounds(Vector(14, 22, 87), Vector(-10, -21, 0))	
+	self:SetCollisionBounds(Vector(18, 18, 90), Vector(-18, -18, 0))	
 end   	
  ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
     if (dmginfo:IsBulletDamage()) && hitgroup == HITGROUP_CHEST or hitgroup == HITGROUP_RIGHTARM or hitgroup == HITGROUP_LEFTARM or hitgroup == HITGROUP_RIGHTLEG or hitgroup == HITGROUP_LEFTARM then
-	    dmginfo:ScaleDamage(0.15)
+	    dmginfo:ScaleDamage(0.05)
 	end
 end
 /*-----------------------------------------------

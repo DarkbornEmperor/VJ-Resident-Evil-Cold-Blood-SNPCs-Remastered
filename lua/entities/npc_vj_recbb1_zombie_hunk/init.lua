@@ -5,7 +5,7 @@ include('shared.lua')
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/recb_zombie_hunk.mdl"} 
+ENT.Model = {"models/vj_recb/zombie_hunk.mdl"} 
 ENT.StartHealth = 200
 ENT.MeleeAttackDamage = 15
 ENT.MeleeAttackDistance = 25 
