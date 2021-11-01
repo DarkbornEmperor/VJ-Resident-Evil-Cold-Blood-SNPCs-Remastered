@@ -1,19 +1,18 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/vj_recb/giantspider.mdl"} 
 ENT.StartHealth = 300
-ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
+ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_RE1","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Yellow"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact_green"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Yellow"}
 ENT.HullType = HULL_LARGE
 ENT.CanFlinch = 1
-ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
 ENT.NextMeleeAttackTime = 1.5
@@ -71,17 +70,8 @@ end
 		self:RangeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "vj_recb/spider/sp_bodyfall.wav", 85, 100)
+		VJ_EmitSound(self, "vj_recb/spider/sp_bodyfall.wav", 75, 100)
 	end	
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnPreInitialize() 
-if GetConVarNumber("VJ_RECB_Gibbing") == 0 then
-        self.AllowedToGib = false 
-        self.HasGibOnDeath = false 
-        self.HasGibOnDeathSounds = false 
-        self.HasGibDeathParticles = false
-    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize() 
@@ -93,13 +83,15 @@ function ENT:RangeAttackCode_GetShootPos(projectile)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
-	if hitgroup == 1 && dmginfo:GetDamageForce():Length() > 800 then
-	    self:EmitSound(Sound("vj_recb/spider/sp_abdomenlost.wav",70))
+    if GetConVarNumber("VJ_RECB_Knocked") == 0 then return end
+	if hitgroup == 3 && dmginfo:GetDamageForce():Length() > 800 then
+	    self:EmitSound(Sound("vj_recb/spider/sp_abdomenlost.wav",75,100))
 		self:SetBodygroup(0,1)
 	
 		if self.HasGibDeathParticles == true then
 			for i=1,3 do
 				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("abdomen")).Pos,self:GetAngles())
+				ParticleEffect("drg_re1_blood_impact_green",self:GetAttachment(self:LookupAttachment("abdomen")).Pos,self:GetAngles())				
 			
 		local bloodeffect = ents.Create("info_particle_system")
 		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
@@ -110,8 +102,7 @@ function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
 		bloodeffect:Spawn()
 		bloodeffect:Activate()
 		bloodeffect:Fire("Start","",0)
-		bloodeffect:Fire("Kill","",2)	
-				
+		bloodeffect:Fire("Kill","",2)					
 	end
 end
 		return true,{DeathAnim=true}
@@ -122,7 +113,7 @@ function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
 		self.AnimTbl_Death = {ACT_DIESIMPLE}
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

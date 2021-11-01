@@ -1,7 +1,7 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
@@ -12,8 +12,8 @@ ENT.BloodColor = "Red"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
 ENT.HullType = HULL_HUMAN
+ENT.PoseParameterLooking_Names = {pitch={}, yaw={"head"}, roll={}}
 ENT.CanFlinch = 1
-ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
 ENT.TimeUntilMeleeAttackDamage = false
@@ -271,7 +271,7 @@ function ENT:CustomOnMeleeAttack_Miss()
 	end
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

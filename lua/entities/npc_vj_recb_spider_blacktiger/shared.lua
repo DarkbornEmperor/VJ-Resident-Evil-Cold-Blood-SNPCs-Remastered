@@ -1,4 +1,4 @@
-ENT.Base 			= "npc_vj_creature_base"
+ENT.Base 			= "npc_vj_recb_spider_giant"
 ENT.Type 			= "ai"
 ENT.PrintName 		= "Spider (Black Tiger)"
 ENT.Author 			= "Darkborn"

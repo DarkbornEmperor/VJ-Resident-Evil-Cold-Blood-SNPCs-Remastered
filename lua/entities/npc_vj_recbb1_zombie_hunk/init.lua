@@ -1,7 +1,7 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
@@ -21,22 +21,17 @@ ENT.LegHealth = 0
 ENT.Crippled = false
 ENT.Vomit_Zombie = false
 ENT.HasBeenKnocked = false
-ENT.CanBeKnocked = false
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnInitialize()
-    self:ZombieVoices()	
-end		
+ENT.CanBeKnocked = false	
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ZombieVoices()
-local voice = 1
-
-if voice == 1 then
-self.SoundTbl_Idle = {"vj_recb/zombie/merc/zom_idle.wav"}
-self.SoundTbl_Alert = {"vj_recb/zombie/merc/zom_idle.wav"}
-self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/merc/zom_attack.wav"}
-self.SoundTbl_Pain = {"vj_recb/zombie/merc/zom_pain.wav"}
-self.SoundTbl_Death = {"vj_recb/zombie/merc/zom_die.wav"}
-end
+   local voice = 1
+     if voice == 1 then
+        self.SoundTbl_Idle = {"vj_recb/zombie/merc/zom_idle.wav"}
+        self.SoundTbl_Alert = {"vj_recb/zombie/merc/zom_idle.wav"}
+        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/merc/zom_attack.wav"}
+        self.SoundTbl_Pain = {"vj_recb/zombie/merc/zom_pain.wav"}
+        self.SoundTbl_Death = {"vj_recb/zombie/merc/zom_die.wav"}
+    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetVomitZombie()
@@ -71,7 +66,7 @@ function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
     end
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

@@ -1,43 +1,31 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/vj_recb/zombie_female_beta.mdl"}
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ZombieVoices()
-local voice = math.random(1,2)
+   local voice = math.random(1,2)
+     if voice == 1 then
+        self.SoundTbl_Idle = {"vj_recb/zombie/female/female1/zof_idle.wav"}
+        self.SoundTbl_Alert = {"vj_recb/zombie/female/female1/zof_idle.wav"}
+        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female1/zof_attack.wav"}
+        self.SoundTbl_Pain = {"vj_recb/zombie/female/female1/zof_pain.wav"}
+        self.SoundTbl_Death = {"vj_recb/zombie/female/female1/zof_die.wav"}
 
-if voice == 1 then
-self.SoundTbl_Idle = {"vj_recb/zombie/female/female1/zof_idle.wav"}
-self.SoundTbl_Alert = {"vj_recb/zombie/female/female1/zof_idle.wav"}
-self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female1/zof_attack.wav"}
-self.SoundTbl_Pain = {"vj_recb/zombie/female/female1/zof_pain.wav"}
-self.SoundTbl_Death = {"vj_recb/zombie/female/female1/zof_die.wav"}
-end
-
-if voice == 2 then
-self.SoundTbl_Idle = {"vj_recb/zombie/female/female2/zof_idle.wav"}
-self.SoundTbl_Alert = {"vj_recb/zombie/female/female2/zof_idle.wav"}
-self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female2/zof_attack.wav"}
-self.SoundTbl_Pain = {"vj_recb/zombie/female/female2/zof_pain.wav"}
-self.SoundTbl_Death = {"vj_recb/zombie/female/female2/zof_die.wav"}
-end
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnPreInitialize() 	
-if GetConVarNumber("VJ_RECB_Gibbing") == 0 then
-        self.AllowedToGib = false 
-        self.HasGibOnDeath = false 
-        self.HasGibOnDeathSounds = false 
-        self.HasGibDeathParticles = false
+        elseif voice == 2 then
+        self.SoundTbl_Idle = {"vj_recb/zombie/female/female2/zof_idle.wav"}
+        self.SoundTbl_Alert = {"vj_recb/zombie/female/female2/zof_idle.wav"}
+        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female2/zof_attack.wav"}
+        self.SoundTbl_Pain = {"vj_recb/zombie/female/female2/zof_pain.wav"}
+        self.SoundTbl_Death = {"vj_recb/zombie/female/female2/zof_die.wav"}
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnInitialize()
-    self:ZombieVoices()	
+function ENT:Zombie_CustomOnInitialize()	
 	self:SetSkin(math.random(0,2))
 end		
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -65,8 +53,9 @@ function ENT:Cripple()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
+    if GetConVarNumber("VJ_RECB_Knocked") == 0 then return end
 	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
-	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",70))
+	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",75,100))
 		self:SetBodygroup(0,1)
 	
 		if self.HasGibDeathParticles == true then
@@ -82,15 +71,14 @@ function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
 		bloodeffect:Spawn()
 		bloodeffect:Activate()
 		bloodeffect:Fire("Start","",0)
-		bloodeffect:Fire("Kill","",2)	
-				
+		bloodeffect:Fire("Kill","",2)				
 	end
 end
 		return true,{DeathAnim=true}
     end
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

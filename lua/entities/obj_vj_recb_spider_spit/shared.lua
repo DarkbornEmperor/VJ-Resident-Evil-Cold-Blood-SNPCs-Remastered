@@ -8,7 +8,7 @@ ENT.Category		= "Resident Evil: Cold Blood"
 
 if (CLIENT) then
 	local Name = "Spider Spit"
-	local LangName = "obj_vj_recb_zombie_vomit"
+	local LangName = "obj_vj_recb_spider_spit"
 	language.Add(LangName, Name)
 	killicon.Add(LangName,"HUD/killicons/default",Color(255,80,0,255))
 	language.Add("#"..LangName, Name)

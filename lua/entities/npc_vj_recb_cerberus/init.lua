@@ -1,19 +1,18 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/vj_recb/cerberus.mdl"} 
 ENT.StartHealth = 60
-ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
+ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_RE1","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
 ENT.HullType = HULL_MEDIUM
 ENT.CanFlinch = 1
-ENT.FlinchChance = 5
 ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasMeleeAttack = true 
 ENT.NextMeleeAttackTime = 1.5
@@ -25,7 +24,7 @@ ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true
 ENT.GibOnDeathDamagesTable = {"All"}
 ENT.MeleeAttackDistance = 25 
-ENT.MeleeAttackDamageDistance = 50
+ENT.MeleeAttackDamageDistance = 60
 ENT.NextMeleeAttackTime = 1.5
 ENT.HasLeapAttack = true 
 ENT.AnimTbl_LeapAttack = {ACT_SPECIAL_ATTACK1}
@@ -79,17 +78,8 @@ end
 		//self:LeapDamageCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "vj_recb/cerberus/cer_bodyfall.wav", 85, 100)
+		VJ_EmitSound(self, "vj_recb/cerberus/cer_bodyfall.wav", 75, 100)
 	end	
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnPreInitialize() 
-if GetConVarNumber("VJ_RECB_Gibbing") == 0 then
-        self.AllowedToGib = false 
-        self.HasGibOnDeath = false 
-        self.HasGibOnDeathSounds = false 
-        self.HasGibDeathParticles = false
-    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
@@ -107,9 +97,7 @@ else
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnCallForHelp(ally)
-if math.random(1,2) == 1 then
         self:VJ_ACT_PLAYACTIVITY("vjseq_growl",true,2,true)	
-    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnThink_AIEnabled()
@@ -150,8 +138,9 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
+    if GetConVarNumber("VJ_RECB_Knocked") == 0 then return end
 	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
-	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",70))
+	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",75,100))
 		self:SetBodygroup(0,1)
 	
 		if self.HasGibDeathParticles == true then
@@ -183,7 +172,7 @@ function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
     end
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

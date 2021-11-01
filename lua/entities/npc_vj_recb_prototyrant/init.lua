@@ -1,13 +1,13 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2018 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/vj_recb/prototyrant.mdl"} 
 ENT.StartHealth = 3000
-ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
+ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_RE1","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
@@ -52,9 +52,6 @@ ENT.SoundTrackLevel = 0.8
 
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
-
--- Custom
-ENT.Tyrant_Rage = false
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnAcceptInput(key,activator,caller,data)
 	if key == "step" then
@@ -64,7 +61,7 @@ end
 		self:MeleeAttackCode()
 end
 	if key == "death" then
-		VJ_EmitSound(self, "vj_recb/tyrant/tyrant_bodyhit.wav", 85, 100)
+		VJ_EmitSound(self, "vj_recb/tyrant/tyrant_bodyhit.wav", 75, 100)
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,9 +73,6 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomInitialize() 
 	    self:SetCollisionBounds(Vector(20, 20, 100), Vector(-20, -20, 0))		
-	--if math.random(1,2) == 1 then
-	    --self.Tyrant_Rage = true 
-	--end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------	
 function ENT:MultipleMeleeAttacks()
@@ -98,13 +92,13 @@ function ENT:MultipleMeleeAttacks()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnThink_AIEnabled()
-if self:GetEnemy() != nil && self:GetPos():Distance(self:GetEnemy():GetPos()) <= 200 then
-self.AnimTbl_Walk = {ACT_WALK} 
-self.AnimTbl_Run = {ACT_WALK}
-else
-self.AnimTbl_Walk = {ACT_WALK} 
-self.AnimTbl_Run = {ACT_RUN}
-end
+   if self:GetEnemy() != nil && self:GetPos():Distance(self:GetEnemy():GetPos()) <= 200 then
+      self.AnimTbl_Walk = {ACT_WALK} 
+      self.AnimTbl_Run = {ACT_WALK}
+  else
+      self.AnimTbl_Walk = {ACT_WALK} 
+      self.AnimTbl_Run = {ACT_RUN}
+   end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnAlert()
@@ -114,25 +108,10 @@ if math.random(1,2) == 1 && self.Tyrant_Rage == true then
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
-	 --if self.Tyrant_Rage == true && (dmginfo:IsBulletDamage()) then
-	    --dmginfo:ScaleDamage(0.10)
-	--else
 	    dmginfo:ScaleDamage(0.25)
-    --end
 end
----------------------------------------------------------------------------------------------------------------------------------------------
---function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
-     --if math.random(1,5) == 1 && self.Tyrant_Rage == true && (self.StartHealth -1500 > self:Health()) then
-        --self:TyrantRage()
-    --end	
---end	
----------------------------------------------------------------------------------------------------------------------------------------------
---function ENT:TyrantRage()
-        --self.MeleeAttackDamage = 50
-        --self.AnimTbl_Run = {ACT_RUN}	
---end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2017 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
