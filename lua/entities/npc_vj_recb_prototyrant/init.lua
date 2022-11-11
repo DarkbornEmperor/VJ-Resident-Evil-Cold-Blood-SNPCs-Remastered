@@ -1,7 +1,7 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
@@ -14,8 +14,6 @@ ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
 ENT.HullType = HULL_HUMAN
 ENT.HasMeleeAttack = true 
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.FootStepTimeRun = 0.27
-ENT.FootStepTimeWalk = 0.6
 ENT.NextMeleeAttackTime = 1.8
 ENT.HasMeleeAttackKnockBack = true 
 ENT.MeleeAttackKnockBack_Forward1 = 150
@@ -23,13 +21,13 @@ ENT.MeleeAttackKnockBack_Forward2 = 150
 ENT.MeleeAttackKnockBack_Up1 = 60
 ENT.MeleeAttackKnockBack_Up2 = 60 
 ENT.SlowPlayerOnMeleeAttack = true
+ENT.HasMeleeAttackSlowPlayerSound = false
 ENT.SlowPlayerOnMeleeAttack_WalkSpeed = 100 
 ENT.SlowPlayerOnMeleeAttack_RunSpeed = 100 
 ENT.SlowPlayerOnMeleeAttackTime = 0.8
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.AnimTbl_Death = {ACT_DIEVIOLENT}
-ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.HasExtraMeleeAttackSounds = true
 	-- ====== Controller Data ====== --
@@ -66,7 +64,7 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPreInitialize() 
-if GetConVarNumber("VJ_RECB_Boss_Music") == 0 then
+if GetConVar("VJ_RECB_BossMusic"):GetInt() == 0 then
         self.HasSoundTrack = false 
     end
 end
@@ -92,7 +90,7 @@ function ENT:MultipleMeleeAttacks()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnThink_AIEnabled()
-   if self:GetEnemy() != nil && self:GetPos():Distance(self:GetEnemy():GetPos()) <= 200 then
+   if IsValid(self:GetEnemy()) && self:GetPos():Distance(self:GetEnemy():GetPos()) <= 200 then
       self.AnimTbl_Walk = {ACT_WALK} 
       self.AnimTbl_Run = {ACT_WALK}
   else
@@ -100,18 +98,12 @@ function ENT:CustomOnThink_AIEnabled()
       self.AnimTbl_Run = {ACT_RUN}
    end
 end
------------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnAlert()
-if math.random(1,2) == 1 && self.Tyrant_Rage == true then
-        self:VJ_ACT_PLAYACTIVITY("vjseq_attack2",true,1,false)	
-    end
-end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
 	    dmginfo:ScaleDamage(0.25)
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

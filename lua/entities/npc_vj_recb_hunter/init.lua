@@ -1,7 +1,7 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
@@ -16,7 +16,12 @@ ENT.CanFlinch = 1
 ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
 ENT.HasHitGroupFlinching = true 
 ENT.HitGroupFlinching_DefaultWhenNotHit = true
-ENT.HitGroupFlinching_Values = {{HitGroup = {HITGROUP_LEFTARM}, Animation = {"vjseq_laflinch"}}, {HitGroup = {HITGROUP_RIGHTARM}, Animation = {"vjseq_raflinch"}}, {HitGroup = {HITGROUP_LEFTLEG}, Animation = {"vjseq_llflinch"}}, {HitGroup = {HITGROUP_RIGHTLEG}, Animation = {"vjseq_rlflinch"}}}
+ENT.HitGroupFlinching_Values = {
+{HitGroup = {HITGROUP_LEFTARM}, Animation = {"vjseq_laflinch"}}, 
+{HitGroup = {HITGROUP_RIGHTARM}, Animation = {"vjseq_raflinch"}}, 
+{HitGroup = {HITGROUP_LEFTLEG}, Animation = {"vjseq_llflinch"}}, 
+{HitGroup = {HITGROUP_RIGHTLEG}, Animation = {"vjseq_rlflinch"}}
+}
 ENT.HasMeleeAttack = true 
 ENT.NextMeleeAttackTime = 1.5
 ENT.TimeUntilMeleeAttackDamage = false
@@ -37,7 +42,6 @@ ENT.LeapDistance = 300
 ENT.LeapToMeleeDistance = 200
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
-ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.GibOnDeathDamagesTable = {"All"}
 ENT.HasExtraMeleeAttackSounds = true
@@ -102,16 +106,17 @@ function ENT:CustomOnCallForHelp(ally)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
-    if GetConVarNumber("VJ_RECB_Knocked") == 0 then return end
-	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
+    if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end
+	if dmginfo:GetDamageForce():Length() < 800 then return end
+	if hitgroup == HITGROUP_HEAD then
 	
 	if self.Hunter_Skin == 0 then self:SetBodygroup(0,2) end
 	if self.Hunter_Skin == 1 then self:SetBodygroup(0,4) end
 	
-	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",75,100))
+	    VJ_EmitSound(self,"vj_recb/zombie/zom_headburst.wav",75,100)
 		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
 
-    if self.HasGibDeathParticles == true then	
+    if self.HasGibDeathParticles then	
 		local bloodeffect = ents.Create("info_particle_system")
 		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
 		bloodeffect:SetPos(self:GetAttachment(self:LookupAttachment("head")).Pos)
@@ -121,9 +126,8 @@ function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
 		bloodeffect:Spawn()
 		bloodeffect:Activate()
 		bloodeffect:Fire("Start","",0)
-		bloodeffect:Fire("Kill","",2)			
-end
-	    return true,{DeathAnim=true}
+		bloodeffect:Fire("Kill","",5)			
+        end
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -135,7 +139,7 @@ function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
     end
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

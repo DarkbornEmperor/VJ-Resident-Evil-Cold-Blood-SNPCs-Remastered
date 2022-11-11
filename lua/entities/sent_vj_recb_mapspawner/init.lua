@@ -86,7 +86,7 @@ function ENT:Initialize()
 	self.RECB_HordeChance = GetConVarNumber("VJ_RECB_MapSpawner_HordeChance")
 	self.RECB_HordeCooldownMin = GetConVarNumber("VJ_RECB_MapSpawner_HordeCooldownMin")
 	self.RECB_HordeCooldownMax = GetConVarNumber("VJ_RECB_MapSpawner_HordeCooldownMax")
-	self.RECB_MaxZombie = GetConVarNumber("VJ_RECB_MapSpawner_MaxMon")
+	self.RECB_MaxZombie = GetConVarNumber("VJ_RECB_MapSpawner_MaxZom")
 	self.RECB_MaxHordeSpawn = GetConVarNumber("VJ_RECB_MapSpawner_HordeCount")
 	self.tbl_SpawnedNPCs = {}
 	self.tbl_NPCsWithEnemies = {}
@@ -100,13 +100,15 @@ function ENT:Initialize()
 	self.MaxSpecialZombie = 1
 	self.CanSpawnSpecialZombie = true --GetConVarNumber("VJ_RECB_MapSpawner_Boss")
 
+ local Ambience = {"vj_recb/mapspawner/residentevil.wav"}
+ local Music = {"vj_recb/mapspawner/mall_music.wav"}
 	for _,v in ipairs(player.GetAll()) do
-			v:EmitSound("vj_recb/mapspawner/residentevil.wav",75,100)
-     if GetConVarNumber("VJ_RECB_MapSpawner_Music") == 0 then return end	 			
-             self.RE_Music = CreateSound(v, "vj_recb/mapspawner/mall_music.wav") 
-		     self.RE_Music:SetSoundLevel(75)
-             self.RE_Music:PlayEx(100,100)			
-			
+     if GetConVar("VJ_RECB_MapSpawner_Ambient"):GetInt() == 1 then 	 			
+             self.RECB_Ambience = VJ_CreateSound(v,Ambience,GetConVarNumber("VJ_RECB_MapSpawner_AmbienceVolume"), 100)  
+end			 
+     if GetConVar("VJ_RECB_MapSpawner_Music"):GetInt() == 1 then
+             self.RECB_Music = VJ_CreateSound(v,Music,GetConVarNumber("VJ_RECB_MapSpawner_MusicVolume"), 100)    			 
+		end	
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -238,7 +240,7 @@ end
 function ENT:FindEnemy()
 	local tbl = {}
 	for _,v in pairs(ents.GetAll()) do
-		if (v:IsPlayer() && GetConVarNumber("ai_ignoreplayers") == 0 || v:IsNPC()) && v:Health() > 0 && !v:IsFlagSet(65536) && (v.VJ_NPC_Class && !VJ_HasValue(v.VJ_NPC_Class,"CLASS_ZOMBIE") or true) then
+		if (v:IsPlayer() || v:IsNPC()) && v:Health() > 0 && !v:IsFlagSet(65536) && (v.VJ_NPC_Class && !VJ_HasValue(v.VJ_NPC_Class,"CLASS_ZOMBIE") or true) then
 			table_insert(tbl,v)
 		end
 	end
@@ -289,7 +291,7 @@ function ENT:Think()
 	    self.RECB_HordeChance = GetConVarNumber("VJ_RECB_MapSpawner_HordeChance")
 	    self.RECB_HordeCooldownMin = GetConVarNumber("VJ_RECB_MapSpawner_HordeCooldownMin")
 	    self.RECB_HordeCooldownMax = GetConVarNumber("VJ_RECB_MapSpawner_HordeCooldownMax")
-	    self.RECB_MaxZombie = GetConVarNumber("VJ_RECB_MapSpawner_MaxMon")
+	    self.RECB_MaxZombie = GetConVarNumber("VJ_RECB_MapSpawner_MaxZom")
 	    self.RECB_MaxHordeSpawn = GetConVarNumber("VJ_RECB_MapSpawner_HordeCount")
 		self.AI_RefreshTime = GetConVarNumber("VJ_RECB_MapSpawner_RefreshRate") 
 		
@@ -396,6 +398,7 @@ function ENT:SpawnZombie(ent,pos,isMob)
 	Zombie:SetAngles(Angle(0,math.random(0,360),0))
 	Zombie:Spawn()
 	table_insert(self.tbl_SpawnedNPCs,Zombie)
+/*
 	if isMob then
 		Zombie.FindEnemy_UseSphere = true
 		Zombie.FindEnemy_CanSeeThroughWalls = true
@@ -406,6 +409,7 @@ function ENT:SpawnZombie(ent,pos,isMob)
 			end
 		end)
 	end
+*/
 	Zombie.MapSpawner = self
 	Zombie.EntitiesToNoCollide = {}
 	for _,v in pairs(self.Zombie) do
@@ -425,8 +429,6 @@ function ENT:SpawnSpecialZombie(ent,pos)
 	Boss:SetPos(pos)
 	Boss:SetAngles(Angle(0,math.random(0,360),0))
 	Boss:Spawn()
-	Boss.FindEnemy_UseSphere = true
-	Boss.FindEnemy_CanSeeThroughWalls = true
 	table_insert(self.tbl_SpawnedSpecialZombie,Boss)
 	Boss.MapSpawner = self
 	Boss.EntitiesToNoCollide = {}
@@ -436,7 +438,8 @@ function ENT:SpawnSpecialZombie(ent,pos)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnRemove()
-    VJ_STOPSOUND(self.RE_Music)
+    VJ_STOPSOUND(self.RECB_Ambience)
+	VJ_STOPSOUND(self.RECB_Music)
 	for index,object in ipairs(self.tbl_SpawnedNPCs) do
 		if IsValid(object) then
 			object:Remove()

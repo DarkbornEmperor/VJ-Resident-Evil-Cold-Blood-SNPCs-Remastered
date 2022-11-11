@@ -1,7 +1,7 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
@@ -25,6 +25,7 @@ ENT.MeleeAttackKnockBack_Forward2 = 150
 ENT.MeleeAttackKnockBack_Up1 = 60
 ENT.MeleeAttackKnockBack_Up2 = 60 
 ENT.SlowPlayerOnMeleeAttack = true
+ENT.HasMeleeAttackSlowPlayerSound = false
 ENT.SlowPlayerOnMeleeAttack_WalkSpeed = 100 
 ENT.SlowPlayerOnMeleeAttack_RunSpeed = 100 
 ENT.SlowPlayerOnMeleeAttackTime = 0.8
@@ -67,7 +68,7 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPreInitialize() 
-if GetConVarNumber("VJ_RECB_Boss_Music") == 0 then
+if GetConVar("VJ_RECB_BossMusic"):GetInt() == 0 then
         self.HasSoundTrack = false 
     end
 end
@@ -77,12 +78,12 @@ function ENT:CustomInitialize()
 end   	
  ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
-    if (dmginfo:IsBulletDamage()) && hitgroup == HITGROUP_CHEST or hitgroup == HITGROUP_RIGHTARM or hitgroup == HITGROUP_LEFTARM or hitgroup == HITGROUP_RIGHTLEG or hitgroup == HITGROUP_LEFTARM then
+    if (dmginfo:IsBulletDamage()) && hitgroup != HITGROUP_HEAD then
 	    dmginfo:ScaleDamage(0.05)
 	end
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

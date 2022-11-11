@@ -1,7 +1,7 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
@@ -13,27 +13,14 @@ function ENT:Zombie_CustomOnInitialize()
 	self:SetBodygroup(1,math.random(0,4))	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
+function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
     if (dmginfo:IsBulletDamage()) && hitgroup == HITGROUP_CHEST then
 	    dmginfo:ScaleDamage(0.25)
-end	
-     if GetConVarNumber("VJ_RECB_Dismember") == 0 then return end
-		if self.RArm_Damaged == false && math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
-		self.RArm_Damaged = true
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rarm")).Pos,self:GetAngles())
-		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",75,100))
-		self:SetBodygroup(5,1)
-
-		elseif self.LArm_Damaged == false && math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
-		self.LArm_Damaged = true
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("larm")).Pos,self:GetAngles())
-		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",75,100))
-		self:SetBodygroup(6,1)
     end
-end	
+end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
-    if GetConVarNumber("VJ_RECB_Dismember") == 0 then return end
+    if GetConVar("VJ_RECB_Dismember"):GetInt() == 0 then return end
 	if !self.Crippled then
 		local legs = {6,7}
 		if VJ_HasValue(legs,hitgroup) then
@@ -49,27 +36,50 @@ function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
 					self:SetBodygroup(3,1)
 end
 				if math.random(1,4) == 1 then anim = ACT_FLINCH_PHYSICS end
-				self:VJ_ACT_PLAYACTIVITY(anim,true,false,true)
-				self:EmitSound(Sound("vj_recb/zombie/zom_leglost.wav",75,100))
+				self:SetBodygroup(0,0)
+				self:VJ_ACT_PLAYACTIVITY(anim,true,false,false)
+				VJ_EmitSound(self,"vj_recb/zombie/zom_leglost.wav",75,100)
+		        self:RemoveAllDecals()
 				self:Cripple()
-			end
 		end
 	end
 end
+	 local rarm = {5} -- Right Arm
+	 local larm = {4} -- Left Arm
+	 if VJ_HasValue(rarm,hitgroup) then
+		self.RArmHealth = self.RArmHealth -dmginfo:GetDamage()	
+	 if !self.RArm_Damaged && hitgroup == HITGROUP_RIGHTARM && self.RArmHealth <= 0 then
+		self.RArm_Damaged = true
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rarm")).Pos,self:GetAngles())
+		VJ_EmitSound(self,"vj_recb/zombie/zom_armlost.wav",75,100)
+		self:SetBodygroup(5,1)
+		self:RemoveAllDecals()
+	end
+end
+	 if VJ_HasValue(larm,hitgroup) then
+		self.LArmHealth = self.LArmHealth -dmginfo:GetDamage()	
+	 if !self.LArm_Damaged && hitgroup == HITGROUP_LEFTARM && self.LArmHealth <= 0 then
+		self.LArm_Damaged = true
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("larm")).Pos,self:GetAngles())
+		VJ_EmitSound(self,"vj_recb/zombie/zom_armlost.wav",75,100)
+		self:SetBodygroup(6,1)
+		self:RemoveAllDecals()
+		end
+	end		
+end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
-    if GetConVarNumber("VJ_RECB_Dismember") == 0 then return end
-	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
-	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",75))
+    if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end
+	if dmginfo:GetDamageForce():Length() < 800 then return end
+	if hitgroup == HITGROUP_HEAD then
+	    VJ_EmitSound(self,"vj_recb/zombie/zom_headburst.wav",75)
 		self:SetBodygroup(0,1)
 		self:SetBodygroup(1,5)
         self.HasDeathSounds = false
+		self:RemoveAllDecals()
 	
-		if self.HasGibDeathParticles == true then
-			for i=1,3 do
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+	if self.HasGibDeathParticles then
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
 				
 		local bloodeffect = ents.Create("info_particle_system")
 		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
@@ -80,14 +90,12 @@ function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
 		bloodeffect:Spawn()
 		bloodeffect:Activate()
 		bloodeffect:Fire("Start","",0)
-		bloodeffect:Fire("Kill","",2)				
-    end
-end
-		return true,{DeathAnim=true}
+		bloodeffect:Fire("Kill","",5)				
+        end
     end
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

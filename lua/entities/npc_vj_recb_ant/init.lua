@@ -22,9 +22,8 @@ ENT.MeleeAttackDistance = 30
 ENT.MeleeAttackDamageDistance = 60
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
-ENT.HasDeathRagdoll = false
+ENT.AnimTbl_Death = {ACT_DIESIMPLE}
 ENT.DisableFootStepSoundTimer = true 
-ENT.GibOnDeathDamagesTable = {"All"}
 ENT.HasExtraMeleeAttackSounds = true
 	-- ====== Controller Data ====== --
 ENT.VJC_Data = {
@@ -62,10 +61,6 @@ end
 function ENT:CustomOnInitialize() 
 	self:SetCollisionBounds(Vector(30, 30, 45), Vector(-30, -30, 0))
 	self:SetSkin(math.random(0,1))
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
-		self.AnimTbl_Death = {ACT_DIESIMPLE}
 end
 /*-----------------------------------------------
 	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***

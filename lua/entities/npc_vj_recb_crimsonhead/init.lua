@@ -1,12 +1,12 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = {"models/vj_recb/zombie_crimsonhead.mdl"} 
-ENT.StartHealth = 200
+ENT.StartHealth = 250
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_RE1","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Red"
 ENT.CustomBlood_Particle = {"drg_re1_blood_impact"}
@@ -19,9 +19,14 @@ ENT.HasMeleeAttack = true
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDamage = 20
 ENT.NextMeleeAttackTime = 1.5
-ENT.MeleeAttackDistance = 25 
-ENT.MeleeAttackDamageDistance = 55
-ENT.HasMeleeAttackKnockBack = false
+ENT.MeleeAttackDistance = 30 
+ENT.MeleeAttackDamageDistance = 60
+ENT.HasMeleeAttackSlowPlayerSound = false
+ENT.SlowPlayerOnMeleeAttack_WalkSpeed = 0.01
+ENT.SlowPlayerOnMeleeAttack_RunSpeed = 0.01
+ENT.SlowPlayerOnMeleeAttackTime = 1.7
+ENT.MeleeAttackKnockBack_Forward1 = -100
+ENT.MeleeAttackKnockBack_Forward2 = -100
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.HasDeathRagdoll = false
@@ -31,7 +36,7 @@ ENT.HasExtraMeleeAttackSounds = true
 	-- ====== Controller Data ====== --
 ENT.VJC_Data = {
 	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
-	ThirdP_Offset = Vector(40, 20, -50), -- The offset for the controller when the camera is in third person
+	ThirdP_Offset = Vector(40, 25, -50), -- The offset for the controller when the camera is in third person
 	FirstP_Bone = "Bip01 Head", -- If left empty, the base will attempt to calculate a position for first person
 	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
 }
@@ -44,7 +49,11 @@ ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
 
 -- Custom
-ENT.LegHealth = 30
+ENT.HeadHealth = 10
+ENT.ChestHealth = 25
+ENT.RArmHealth = 15
+ENT.LArmHealth = 20
+ENT.LegHealth = 20
 ENT.Crippled = false
 ENT.HasBeenKnocked = false
 ENT.CanBeKnocked = true
@@ -82,14 +91,14 @@ function ENT:Zombie_CustomOnInitialize()
         self:SetBodygroup(0,1)	
      if zombieskin == 1 then
 	   self:SetSkin(math.random(0,3))
-     elseif zombieskin == 2 then
+     elseif zombieskin == 2 && math.random(1,3) == 1 then
 	   self:SetSkin(math.random(4,5))
 	   self:SetBodygroup(7,math.random(0,1))
 	end
 end	
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ZombieVoices()
-     local voice = math.random(1,2)
+ local voice = math.random(1,2)
      if voice == 1 then
        self.SoundTbl_Breath = {"vj_recb/zombie/crimsonhead/crimhead_run.wav"}
        self.SoundTbl_Alert = {"vj_recb/zombie/CrimsonHead/crimhead_alert.wav"}
@@ -110,13 +119,25 @@ function ENT:ZombieVoices()
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
-    if (dmginfo:IsBulletDamage()) && hitgroup == HITGROUP_CHEST or hitgroup == HITGROUP_RIGHTARM or hitgroup == HITGROUP_LEFTARM or hitgroup == HITGROUP_RIGHTLEG or hitgroup == HITGROUP_LEFTLEG then
-	    dmginfo:ScaleDamage(0.25)
+function ENT:CustomOnMeleeAttack_BeforeStartTimer(seed) 
+     if self.Crippled then  
+	    self.MeleeAttackDamage = self.MeleeAttackDamage /2
+	    self.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK2}
+		self.HasMeleeAttackKnockBack = true
+		self.SlowPlayerOnMeleeAttack = true
+        self.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"} 
+    end
 end
-    if GetConVarNumber("VJ_RECB_Knocked") == 0 then return end
-    if self.CanBeKnocked == true && math.random(1,20) == 1 && CurTime() > self.NextKnockTimeT && !self.Crippled then
-       self:VJ_ACT_PLAYACTIVITY("knocked_to_floor",true,100,false)
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnFlinch_BeforeFlinch(dmginfo,hitgroup)
+    return !self.Crippled && self:GetSequence() != self:LookupSequence("knocked_to_floor") && self:GetSequence() != self:LookupSequence("getup") -- If we are crawling then DO NOT flinch!		
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
+  if GetConVar("VJ_RECB_Dismember"):GetInt() == 0 or self.DeathAnimationCodeRan then return end	 
+	local AnimTime = VJ_GetSequenceDuration(self,self:GetSequenceName(self:GetSequence()))
+    if self.CanBeKnocked && !self.HasBeenKnocked && math.random(1,10) == 1 && CurTime() > self.NextKnockTimeT && !self.Crippled then
+       self:VJ_ACT_PLAYACTIVITY("knocked_to_floor",true,false,false)
        self.MovementType = VJ_MOVETYPE_STATIONARY
 	   self.CanTurnWhileStationary = false
 	   self.HasPoseParameterLooking = false
@@ -125,79 +146,54 @@ end
        self.CanBeKnocked = false
        self:AddFlags(FL_NOTARGET)
        self.HasIdleSounds = false
-       self.CanFlinch = 0
-       self:SetCollisionBounds(Vector(13,13,25),Vector(-13,-13,0))
+	   self.HasBreathSound = false
+	   self.DisableSelectSchedule = true
+       self.DisableFindEnemy = true		
+       self.DisableMakingSelfEnemyToNPCs = true
+	   self.HasMeleeAttack = false
+	   self.CanFlinch = 0
 
-    timer.Simple(GetConVarNumber("VJ_RECB_Zombie_GetUp_Time"),function()
-    if IsValid(self) && !self.Crippled && self.DeathAnimationCodeRan == false && self.Dead == false then
+    timer.Simple(math.random(GetConVar("VJ_RECB_Zombie_GetUpTime1"):GetInt(),GetConVar("VJ_RECB_Zombie_GetUpTime2"):GetInt()),function()
+    if IsValid(self) && !self.DeathAnimationCodeRan then
+    if !self.Crippled then
        self:VJ_ACT_PLAYACTIVITY("getup",true,false,false)
-	   self.MovementType = VJ_MOVETYPE_GROUND
-	   self.HasPoseParameterLooking = true
-	   self.CallForHelp = true
-       self.HasBeenKnocked = false
-       self:RemoveFlags(FL_NOTARGET)
-       self.HasIdleSounds = true
-       self:SetCollisionBounds(Vector(13,13,72),Vector(-13,-13,0))
-       self.NextKnockTimeT = CurTime() + math.random(5,8) 
+	   AnimTime = VJ_GetSequenceDuration(self,"getup")
 
- elseif IsValid(self) && self.Crippled == true && self.DeathAnimationCodeRan == false && self.Dead == false then
-       self:VJ_ACT_PLAYACTIVITY("crawl_attack",true,1,false)
-	   self.MovementType = VJ_MOVETYPE_GROUND
-	   self.HasPoseParameterLooking = true
-	   self.CallForHelp = true
-       self.HasBeenKnocked = false
-       self:RemoveFlags(FL_NOTARGET)
-       self.HasIdleSounds = true
-       self:SetCollisionBounds(Vector(16,16,20),Vector(-16,-16,0))
+    elseif self.Crippled then
+       self:VJ_ACT_PLAYACTIVITY("crawl_attack",true,false,false)
+       self:SetCollisionBounds(Vector(13,13,25),Vector(-13,-13,0))
+	   AnimTime = VJ_GetSequenceDuration(self,"crawl_attack")
 end
-               timer.Simple(3,function()
-               if IsValid(self) && !self.Crippled then
-                 self.CanBeKnocked = true
-                 self.CanFlinch = 1
+	   self.HasPoseParameterLooking = true
+	   self.CallForHelp = true
+       self.HasBeenKnocked = false
+       self:RemoveFlags(FL_NOTARGET)
+       self.HasIdleSounds = true
+	   self.HasBreathSound = true
+       self.NextKnockTimeT = CurTime() + math.random(5,8) 	   
+end	   
+       timer.Simple(AnimTime,function()
+       if IsValid(self) && !self.DeathAnimationCodeRan then
+       if !self.Crippled then 
+	      self.CanFlinch = 1       
 
-           elseif IsValid(self) && self.Crippled == true then
-                 self.CanFlinch = 0
-              end
-          end)
-      end)
-   end
-end	
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup)
-     if GetConVarNumber("VJ_RECB_Dismember") == 0 then return end	
-		if self.Head_Damaged == false && math.random(1,10) == 1 && hitgroup == HITGROUP_HEAD then
-		self.Head_Damaged = true
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())	
-		self:EmitSound(Sound("vj_recb/zombie/zom_neck_break.wav",75,100))
-        self:SetBodygroup(0,0)		
-		self:SetBodygroup(1,2)
-		self:SetBodygroup(7,0)
-	
-		elseif self.Chest_Damaged == false && math.random(1,10) == 1 && hitgroup == HITGROUP_CHEST then
-		self.Chest_Damaged = true
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("chest")).Pos,self:GetAngles())
-		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",75,100))
-		self:SetBodygroup(0,0)
-		self:SetBodygroup(4,1)
-	
-		elseif self.RArm_Damaged == false && math.random(1,10) == 1 && hitgroup == HITGROUP_RIGHTARM then
-		self.RArm_Damaged = true
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rarm")).Pos,self:GetAngles())
-		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",75,100))
-		self:SetBodygroup(0,0)
-		self:SetBodygroup(5,1)
-
-		elseif self.LArm_Damaged == false && math.random(1,10) == 1 && hitgroup == HITGROUP_LEFTARM then
-		self.LArm_Damaged = true
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("larm")).Pos,self:GetAngles())
-		self:EmitSound(Sound("vj_recb/zombie/zom_armlost.wav",75,100))
-		self:SetBodygroup(0,0)
-		self:SetBodygroup(6,1)
+       elseif self.Crippled then
+	      self.CanBeKnocked = false
+          self.CanFlinch = 0
+end
+	      self.MovementType = VJ_MOVETYPE_GROUND
+		  self.DisableSelectSchedule = false
+          self.DisableFindEnemy = false		
+          self.DisableMakingSelfEnemyToNPCs = false
+	      self.HasMeleeAttack = true
+                end		  
+            end)
+        end)
     end
-end	
+end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
-    if GetConVarNumber("VJ_RECB_Dismember") == 0 then return end
+    if GetConVar("VJ_RECB_Dismember"):GetInt() == 0 then return end
 	if !self.Crippled then
 		local legs = {6,7}
 		if VJ_HasValue(legs,hitgroup) then
@@ -214,30 +210,71 @@ function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
 end
 				if math.random(1,4) == 1 then anim = ACT_FLINCH_PHYSICS end
 				self:SetBodygroup(0,0)
-				self:VJ_ACT_PLAYACTIVITY(anim,true,false,true)
-				self:EmitSound(Sound("vj_recb/zombie/zom_leglost.wav",75,100))
+				self:VJ_ACT_PLAYACTIVITY(anim,true,false,false)
+				VJ_EmitSound(self,"vj_recb/zombie/zom_leglost.wav",75,100)
+		        self:RemoveAllDecals()
 				self:Cripple()
-			end
 		end
 	end
+end
+	 local head = {1} -- Head
+	 local chest = {2} -- Chest
+	 local rarm = {5} -- Right Arm
+	 local larm = {4} -- Left Arm
+	 if VJ_HasValue(head,hitgroup) then
+		self.HeadHealth = self.HeadHealth -dmginfo:GetDamage()		
+	 if !self.Head_Damaged && hitgroup == HITGROUP_HEAD && self.HeadHealth <= 0 then
+		self.Head_Damaged = true
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())	
+		VJ_EmitSound(self,"vj_recb/zombie/zom_neck_break.wav",75,100)
+        self:SetBodygroup(0,0)		
+		self:SetBodygroup(1,2)
+		self:SetBodygroup(7,0)
+		self:RemoveAllDecals()
+	end
+end	
+	 if VJ_HasValue(chest,hitgroup) then
+		self.ChestHealth = self.ChestHealth -dmginfo:GetDamage()		
+	 if !self.Chest_Damaged && hitgroup == HITGROUP_CHEST && self.ChestHealth <= 0 then
+		self.Chest_Damaged = true
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("chest")).Pos,self:GetAngles())
+		VJ_EmitSound(self,"vj_recb/zombie/zom_armlost.wav",75,100)
+		self:SetBodygroup(0,0)
+		self:SetBodygroup(4,1)
+		self:RemoveAllDecals()
+	end
+end
+	 if VJ_HasValue(rarm,hitgroup) then
+		self.RArmHealth = self.RArmHealth -dmginfo:GetDamage()	
+	 if !self.RArm_Damaged && hitgroup == HITGROUP_RIGHTARM && self.RArmHealth <= 0 then
+		self.RArm_Damaged = true
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rarm")).Pos,self:GetAngles())
+		VJ_EmitSound(self,"vj_recb/zombie/zom_armlost.wav",75,100)
+		self:SetBodygroup(0,0)
+		self:SetBodygroup(5,1)
+		self:RemoveAllDecals()
+	end
+end
+	 if VJ_HasValue(larm,hitgroup) then
+		self.LArmHealth = self.LArmHealth -dmginfo:GetDamage()	
+	 if !self.LArm_Damaged && hitgroup == HITGROUP_LEFTARM && self.LArmHealth <= 0 then
+		self.LArm_Damaged = true
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("larm")).Pos,self:GetAngles())
+		VJ_EmitSound(self,"vj_recb/zombie/zom_armlost.wav",75,100)
+		self:SetBodygroup(0,0)
+		self:SetBodygroup(6,1)
+		self:RemoveAllDecals()
+		end
+	end		
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Cripple()
 	self:SetHullType(HULL_TINY)
-	self:SetCollisionBounds(Vector(16,16,20),Vector(-16,-16,0))
+	self:SetCollisionBounds(Vector(13,13,25),Vector(-13,-13,0))
 	self.SoundTbl_FootStep = {"vj_recb/zombie/crawl.wav"}
-    self.SoundTbl_MeleeAttack = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
-	self.HasMeleeAttackMissSounds = false 
 	self.AnimTbl_IdleStand = {ACT_IDLE_STIMULATED}
 	self.AnimTbl_Walk = {ACT_WALK_STIMULATED}
 	self.AnimTbl_Run = {ACT_WALK_STIMULATED}
-	self.MeleeAttackDamage = self.MeleeAttackDamage /2
-	self.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK2}
-	self.CanFlinch = 0
-	self.HasRangeAttack = false
-	self.HasMeleeAttack = true 
-	self.MeleeAttackDistance = 20 
-    self.MeleeAttackDamageDistance = 50
 	self.VJC_Data = {
 	CameraMode = 1, 
 	ThirdP_Offset = Vector(30, 25, -15), 
@@ -247,46 +284,45 @@ function ENT:Cripple()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
-    if GetConVarNumber("VJ_RECB_Dismember") == 0 then return end
-	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
-	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",75,100))
+    if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end
+	if dmginfo:GetDamageForce():Length() < 800 then return end
+	if hitgroup == HITGROUP_HEAD then
+	    VJ_EmitSound(self,"vj_recb/zombie/zom_headburst.wav",75,100)
 		self:SetBodygroup(0,0)
 		self:SetBodygroup(1,3)
 		self:SetBodygroup(7,0)
-        self.HasDeathSounds = false		
+        self.HasDeathSounds = false
+		self:RemoveAllDecals()
 	
-		if self.HasGibDeathParticles == true then
-			for i=1,3 do
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-		
-		local bloodeffect = ents.Create("info_particle_system")
-		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
-		bloodeffect:SetPos(self:GetAttachment(self:LookupAttachment("head")).Pos)
-		bloodeffect:SetAngles(self:GetAttachment(self:LookupAttachment("head")).Ang)
-		bloodeffect:SetParent(self)
-		bloodeffect:Fire("SetParentAttachment","head")
-		bloodeffect:Spawn()
-		bloodeffect:Activate()
-		bloodeffect:Fire("Start","",0)
-		bloodeffect:Fire("Kill","",2)					
-	end
-end
-		return true,{DeathAnim=true}
+	 if self.HasGibDeathParticles then
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+				
+		local BloodEffect = ents.Create("info_particle_system")
+		BloodEffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
+		BloodEffect:SetPos(self:GetAttachment(self:LookupAttachment("head")).Pos)
+		BloodEffect:SetAngles(self:GetAttachment(self:LookupAttachment("head")).Ang)
+		BloodEffect:SetParent(self)
+		BloodEffect:Fire("SetParentAttachment","head")
+		BloodEffect:Spawn()
+		BloodEffect:Activate()
+		BloodEffect:Fire("Start","",0)
+		BloodEffect:Fire("Kill","",5)					
+        end
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
+function ENT:CustomDeathAnimationCode(dmginfo,hitgroup)
 	 if hitgroup == HITGROUP_HEAD && !self.Crippled then
 		self.AnimTbl_Death = {ACT_DIE_HEADSHOT}
 	else
 		self.AnimTbl_Death = {ACT_DIEFORWARD,ACT_DIESIMPLE}
 end
-	 if self.Crippled == true then
-	    self.AnimTbl_Death = {ACT_DIE_BACKSHOT}
+	 if self.Crippled then
+	    self.AnimTbl_Death = {"crawl_die"}
     end
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

@@ -1,7 +1,7 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
@@ -33,7 +33,7 @@ ENT.LeapDistance = 300
 ENT.LeapToMeleeDistance = 200
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
-ENT.HasDeathRagdoll = false
+ENT.AnimTbl_Death = {ACT_DIESIMPLE}
 ENT.DisableFootStepSoundTimer = true 
 ENT.HasExtraMeleeAttackSounds = true
 	-- ====== Controller Data ====== --
@@ -80,12 +80,8 @@ function ENT:CustomOnInitialize()
 	self:SetCollisionBounds(Vector(16, 16, 60), Vector(-16, -16, 0))
     self:SetModelScale(1.1,0.1)	
 end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
-		self.AnimTbl_Death = {ACT_DIESIMPLE}
-end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

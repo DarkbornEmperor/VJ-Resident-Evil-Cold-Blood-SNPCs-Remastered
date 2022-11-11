@@ -1,7 +1,7 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
@@ -16,17 +16,18 @@ ENT.CustomBlood_Particle = {"drg_re1_blood_impact"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
 ENT.HullType = HULL_TINY
 ENT.CanFlinch = 1
-ENT.AnimTbl_Flinch = {ACT_FLINCH_SMALL,ACT_FLINCH_BIG}
+ENT.AnimTbl_Flinch = {ACT_SMALL_FLINCH}
 ENT.HasMeleeAttack = true 
 ENT.NextMeleeAttackTime = 1.5
+ENT.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
+ENT.MeleeAttackDamage = 6
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDistance = 40
 ENT.MeleeAttackDamageDistance = 80
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 4
-ENT.HasDeathRagdoll = false
+ENT.AnimTbl_Death = {ACT_DIESIMPLE}
 ENT.DisableFootStepSoundTimer = true 
-ENT.GibOnDeathDamagesTable = {"All"}
 ENT.HasExtraMeleeAttackSounds = true
 	-- ====== Controller Data ====== --
 ENT.VJC_Data = {
@@ -62,24 +63,15 @@ end
 	end	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomInitialize() 
-	self:SetCollisionBounds(Vector(10, 10, 11.63), Vector(-10, -10, -5.53))
+function ENT:CustomOnInitialize() 
+	self:SetCollisionBounds(Vector(8,8,15),Vector(-8,-8,0))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:MultipleMeleeAttacks()
-    local crow_attack = math.random(1,1)
-
-	if crow_attack == 1 then
-		self.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
-		self.MeleeAttackDamage = 6
-end
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
-		self.AnimTbl_Death = {ACT_DIESIMPLE}
-end
+function ENT:CustomDeathAnimationCode(dmginfo,hitgroup)
+	self:DoChangeMovementType(VJ_MOVETYPE_GROUND)
+end 
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

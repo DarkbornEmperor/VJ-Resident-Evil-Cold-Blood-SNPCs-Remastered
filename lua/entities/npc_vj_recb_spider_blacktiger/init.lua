@@ -1,7 +1,7 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
@@ -24,7 +24,7 @@ ENT.HasSoundTrack = true
 ENT.SoundTrackLevel = 0.8
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPreInitialize() 
-if GetConVarNumber("VJ_RECB_Boss_Music") == 0 then
+if GetConVar("VJ_RECB_BossMusic"):GetInt() == 0 then
         self.HasSoundTrack = false 
     end	
 end
@@ -34,12 +34,10 @@ function ENT:CustomOnInitialize()
 end
  ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
-    if (dmginfo:IsBulletDamage()) then
-	    dmginfo:ScaleDamage(0.25)
-	end
+    dmginfo:ScaleDamage(0.25)
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

@@ -1,7 +1,7 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
@@ -31,7 +31,6 @@ ENT.LeapDistance = 250
 ENT.LeapToMeleeDistance = 200
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
-ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true 
 ENT.GibOnDeathDamagesTable = {"All"}
 ENT.HasExtraMeleeAttackSounds = true
@@ -82,7 +81,6 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:MultipleMeleeAttacks()
     local licker_attack = math.random(1,2)
-
 	if licker_attack == 1 then
 		self.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
 		self.MeleeAttackDamage = 15
@@ -100,14 +98,14 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
-    if GetConVarNumber("VJ_RECB_Knocked") == 0 then return end
-	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
-	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",75,100))
+    if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end
+	if dmginfo:GetDamageForce():Length() < 800 then return end
+	if hitgroup == HITGROUP_HEAD then
+	    VJ_EmitSound(self,"vj_recb/zombie/zom_headburst.wav",75,100)
 		self:SetBodygroup(0,1)
 	
-		if self.HasGibDeathParticles == true then
-			for i=1,3 do
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+	if self.HasGibDeathParticles then
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
 				
 		local bloodeffect = ents.Create("info_particle_system")
 		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
@@ -118,11 +116,8 @@ function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
 		bloodeffect:Spawn()
 		bloodeffect:Activate()
 		bloodeffect:Fire("Start","",0)
-		bloodeffect:Fire("Kill","",2)	
-				
-	end
-end
-		return true,{DeathAnim=true}
+		bloodeffect:Fire("Kill","",5)					
+	    end
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -134,7 +129,7 @@ function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
     end
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

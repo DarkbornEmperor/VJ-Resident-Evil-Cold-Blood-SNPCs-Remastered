@@ -1,7 +1,7 @@
 AddCSLuaFile("shared.lua")
 include('shared.lua')
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
@@ -20,7 +20,6 @@ ENT.TimeUntilMeleeAttackDamage = false
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationTime = 8
 ENT.AnimTbl_Death = {ACT_DIESIMPLE}
-ENT.HasDeathRagdoll = false
 ENT.DisableFootStepSoundTimer = true
 ENT.GibOnDeathDamagesTable = {"All"}
 ENT.MeleeAttackDistance = 25 
@@ -88,20 +87,21 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnAlert()
 if math.random(1,2) == 1 then
-        self:VJ_ACT_PLAYACTIVITY("vjseq_bark",true,1.5,true)
+        self:VJ_ACT_PLAYACTIVITY("vjseq_bark",true,false,true)
 		self.SoundTbl_Alert = {"vj_recb/cerberus/cer_alert.wav"}
 else
-        self:VJ_ACT_PLAYACTIVITY("vjseq_growl",true,1.5,true)
+        self:VJ_ACT_PLAYACTIVITY("vjseq_growl",true,false,true)
 		self.SoundTbl_Alert = {"vj_recb/cerberus/cer_growl.wav"}		
     end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnCallForHelp(ally)
-        self:VJ_ACT_PLAYACTIVITY("vjseq_growl",true,2,true)	
+        self:VJ_ACT_PLAYACTIVITY("vjseq_growl",true,false,true)	
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnThink_AIEnabled()
-	if GetConVarNumber("VJ_RECB_Cerberus_Sleep") == 1 && self.VJ_IsBeingControlled == false && self.Cerberus_IdleState != "N" && (self:IsMoving() or CurTime() > self.Cerberus_NextGetUpT) && self.DeathAnimationCodeRan == false && self.Dead == false then 
+if GetConVar("VJ_RECB_CerberusSleep"):GetInt() == 0 or self.DeathAnimationCodeRan then return end
+	if !self.VJ_IsBeingControlled && self.Cerberus_IdleState != "N" && (self:IsMoving() or CurTime() > self.Cerberus_NextGetUpT) then 
 		self:VJ_ACT_PLAYACTIVITY("sleeptostand",true,false)
 		self.Cerberus_IdleState = "N"
 		self.DisableWandering = false
@@ -109,7 +109,7 @@ function ENT:CustomOnThink_AIEnabled()
 		self.Cerberus_NextSleepT = CurTime() + 10
 end
 	
-		if GetConVarNumber("VJ_RECB_Cerberus_Sleep") == 1 && self.VJ_IsBeingControlled == false && IsValid(self:GetEnemy()) && self.DeathAnimationCodeRan == false && self.Dead == false then 
+		if !self.VJ_IsBeingControlled && IsValid(self:GetEnemy()) then 
 			if self.Cerberus_IdleState != "N" && self.Cerberus_InTransition == false then
 				self.Cerberus_InTransition = true
 				self:VJ_ACT_PLAYACTIVITY("sleeptostand",true,false,false,0,{},function(vsched)
@@ -122,7 +122,7 @@ end)
 				self.DisableChasingEnemy = false
 	end
 end
-			if GetConVarNumber("VJ_RECB_Cerberus_Sleep") == 1 && self.VJ_IsBeingControlled == false && self.Cerberus_IdleState == "N" && !self:IsMoving() && CurTime() > self.Cerberus_NextGetUpT && math.random(1,150) == 1 && self.DeathAnimationCodeRan == false && self.Dead == false then 
+			if !self.VJ_IsBeingControlled && self.Cerberus_IdleState == "N" && !self:IsMoving() && CurTime() > self.Cerberus_NextGetUpT && math.random(1,150) == 1 then 
 				self:VJ_ACT_PLAYACTIVITY("gotosleep",true,false)
 				self.Cerberus_IdleState = "S"
 				self.DisableWandering = true
@@ -130,7 +130,7 @@ end
 				self.Cerberus_NextGetUpT = CurTime() + 20 //math.Rand(10,35)
 end
 			
-			if GetConVarNumber("VJ_RECB_Cerberus_Sleep") == 1 && self.VJ_IsBeingControlled == false && self.Cerberus_IdleState == "N" && self.DeathAnimationCodeRan == false && self.Dead == false then
+			if !self.VJ_IsBeingControlled && self.Cerberus_IdleState == "N" then
 				self.AnimTbl_IdleStand = {ACT_IDLE}
 			elseif  self.Cerberus_IdleState == "S" then
 				self.AnimTbl_IdleStand = {"sleep"}
@@ -138,41 +138,30 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
-    if GetConVarNumber("VJ_RECB_Knocked") == 0 then return end
-	if hitgroup == HITGROUP_HEAD && dmginfo:GetDamageForce():Length() > 800 then
-	    self:EmitSound(Sound("vj_recb/zombie/zom_headburst.wav",75,100))
+    if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end
+	if dmginfo:GetDamageForce():Length() < 800 then return end
+	if hitgroup == HITGROUP_HEAD then
+	    VJ_EmitSound(self,"vj_recb/zombie/zom_headburst.wav",75,100)
 		self:SetBodygroup(0,1)
 	
-		if self.HasGibDeathParticles == true then
-			for i=1,3 do
-				ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+	if self.HasGibDeathParticles then
+		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
 		
-		local bloodeffect = ents.Create("info_particle_system")
-		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
-		bloodeffect:SetPos(self:GetAttachment(self:LookupAttachment("head")).Pos)
-		bloodeffect:SetAngles(self:GetAttachment(self:LookupAttachment("head")).Ang)
-		bloodeffect:SetParent(self)
-		bloodeffect:Fire("SetParentAttachment","head")
-		bloodeffect:Spawn()
-		bloodeffect:Activate()
-		bloodeffect:Fire("Start","",0)
-		bloodeffect:Fire("Kill","",2)					
+		local BloodEffect = ents.Create("info_particle_system")
+		BloodEffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
+		BloodEffect:SetPos(self:GetAttachment(self:LookupAttachment("head")).Pos)
+		BloodEffect:SetAngles(self:GetAttachment(self:LookupAttachment("head")).Ang)
+		BloodEffect:SetParent(self)
+		BloodEffect:Fire("SetParentAttachment","head")
+		BloodEffect:Spawn()
+		BloodEffect:Activate()
+		BloodEffect:Fire("Start","",0)
+		BloodEffect:Fire("Kill","",5)
+        end		
 	end
 end
-		return true,{DeathAnim=true}
-    end
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomDeathAnimationCode(dmginfo, hitgroup) 
-	 if self.DeathAnimationCodeRan == true && self.Dead == true then
-	    self.Cerberus_IdleState = false
-        self.Cerberus_InTransition = false
-	    self.Cerberus_NextGetUpT = false
-        self.Cerberus_NextSleepT = false
-    end
-end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
