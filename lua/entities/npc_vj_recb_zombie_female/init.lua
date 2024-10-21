@@ -1,11 +1,12 @@
+include("entities/npc_vj_recb_zombie_male/init.lua")
 AddCSLuaFile("shared.lua")
-include('shared.lua')
+include("shared.lua")
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
-	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
-	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
+    *** Copyright (c) 2012-2024 by DrVrej, All rights reserved. ***
+    No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
+    without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/zombie_female.mdl"}
+ENT.Model = "models/vj_recb/b2/zombie_female.mdl"
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ZombieVoices()
      local voice = math.random(1,2)
@@ -25,82 +26,157 @@ function ENT:ZombieVoices()
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup)
-    if GetConVar("VJ_RECB_Dismember"):GetInt() == 0 then return end
-	if !self.Crippled then
-		local legs = {6,7}
-		if VJ_HasValue(legs,hitgroup) then
-			self.LegHealth = self.LegHealth -dmginfo:GetDamage()
-			if self.LegHealth <= 0 then
-				self.Crippled = true
-				local anim = ACT_FLINCH_PHYSICS
-				if hitgroup == HITGROUP_LEFTLEG then
-				    ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("lleg")).Pos,self:GetAngles())
-					self:SetBodygroup(3,1)
-				elseif hitgroup == HITGROUP_RIGHTLEG then
-				    ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rleg")).Pos,self:GetAngles())
-					self:SetBodygroup(2,1)
+function ENT:OnDamaged(dmginfo,hitgroup,status)
+    local animTime = VJ.AnimDuration(self,self:GetSequenceName(self:GetSequence()))
+    if status == "PostDamage" && self.CanBeKnocked && !self.HasBeenKnocked && math.random(1,16) == 1 && CurTime() > self.NextKnockTimeT && !self.Crippled && self:Health() > 0 then
+       self:VJ_ACT_PLAYACTIVITY("knocked_to_floor",true,false,false)
+       self.MovementType = VJ_MOVETYPE_STATIONARY
+       self.CanTurnWhileStationary = false
+       self.HasPoseParameterLooking = false
+       self.CallForHelp = false
+       self.HasBeenKnocked = true
+       self.CanBeKnocked = false
+       self:AddFlags(FL_NOTARGET)
+       self.HasIdleSounds = false
+       self.HasBreathSound = false
+       self.DisableFindEnemy = true
+       self.DisableMakingSelfEnemyToNPCs = true
+       self.HasMeleeAttack = false
+
+    timer.Simple(math.random(GetConVar("VJ_RECB_Zombie_GetUpTime1"):GetInt(),GetConVar("VJ_RECB_Zombie_GetUpTime2"):GetInt()),function()
+    if IsValid(self) && !self.DeathAnimationCodeRan then
+    if !self.Crippled then
+       self:VJ_ACT_PLAYACTIVITY("floor_getup",true,false,false)
+       animTime = VJ.AnimDuration(self,"floor_getup")
+    elseif self.Crippled then
+       self:VJ_ACT_PLAYACTIVITY("crawl_attack",true,false,false)
+       self:SetCollisionBounds(Vector(13,13,25),Vector(-13,-13,0))
+       animTime = VJ.AnimDuration(self,"crawl_attack")
 end
-				if math.random(1,4) == 1 then anim = ACT_FLINCH_PHYSICS end
-				self:SetBodygroup(0,0)
-				self:VJ_ACT_PLAYACTIVITY(anim,true,false,false)
-				VJ_EmitSound(self,"vj_recb/zombie/zom_leglost.wav",75,100)
-		        self:RemoveAllDecals()
-				self:Cripple()
-		end
-	end
+       self.HasPoseParameterLooking = true
+       self.CallForHelp = true
+       self.HasBeenKnocked = false
+       self:RemoveFlags(FL_NOTARGET)
+       self.HasIdleSounds = true
+       self.HasBreathSound = true
+       self.NextKnockTimeT = CurTime() + math.Rand(5,10)
 end
-	 local rarm = {5} -- Right Arm
-	 local larm = {4} -- Left Arm
-	 if VJ_HasValue(rarm,hitgroup) then
-		self.RArmHealth = self.RArmHealth -dmginfo:GetDamage()	
-	 if !self.RArm_Damaged && hitgroup == HITGROUP_RIGHTARM && self.RArmHealth <= 0 then
-		self.RArm_Damaged = true
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("rarm")).Pos,self:GetAngles())
-		VJ_EmitSound(self,"vj_recb/zombie/zom_armlost.wav",75,100)
-		self:SetBodygroup(4,1)
-		self:RemoveAllDecals()
-	end
+    timer.Simple(animTime,function()
+    if IsValid(self) && !self.DeathAnimationCodeRan then
+        self:DoChangeMovementType(VJ_MOVETYPE_GROUND)
+        self.DisableFindEnemy = false
+        self.DisableMakingSelfEnemyToNPCs = false
+        self.HasMeleeAttack = true end
+        end)
+    end)
 end
-	 if VJ_HasValue(larm,hitgroup) then
-		self.LArmHealth = self.LArmHealth -dmginfo:GetDamage()	
-	 if !self.LArm_Damaged && hitgroup == HITGROUP_LEFTARM && self.LArmHealth <= 0 then
-		self.LArm_Damaged = true
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("larm")).Pos,self:GetAngles())
-		VJ_EmitSound(self,"vj_recb/zombie/zom_armlost.wav",75,100)
-		self:SetBodygroup(5,1)
-		self:RemoveAllDecals()
-		end
-	end		
+ if GetConVar("VJ_RECB_Dismember"):GetInt() == 0 then return end
+ if status == "PostDamage" then
+ if !self.Crippled then
+    local legs = {6,7}
+    if VJ.HasValue(legs,hitgroup) then
+        self.LegHealth = self.LegHealth -dmginfo:GetDamage()
+    if self.LegHealth <= 0 && self:Health() > 0 then
+        self.Crippled = true
+    local anim = "legless_fall"
+    if hitgroup == HITGROUP_LEFTLEG or hitgroup == HITGROUP_RIGHTLEG then
+        self:Dismember(hitgroup)
+end
+        self:VJ_ACT_PLAYACTIVITY(anim,true,false,false)
+        self:Cripple()
+        end
+    end
+end
+    local lArm = {4} -- Left Arm
+    local rArm = {5} -- Right Arm
+    if VJ.HasValue(lArm,hitgroup) then
+        self.LArmHealth = self.LArmHealth -dmginfo:GetDamage()
+    if !self.LArm_Damaged && hitgroup == HITGROUP_LEFTARM && self.LArmHealth <= 0 && self:Health() > 0 then
+        self.LArm_Damaged = true
+        self:Dismember(hitgroup)
+end
+    elseif VJ.HasValue(rArm,hitgroup) then
+        self.RArmHealth = self.RArmHealth -dmginfo:GetDamage()
+    if !self.RArm_Damaged && hitgroup == HITGROUP_RIGHTARM && self.RArmHealth <= 0 && self:Health() > 0 then
+        self.RArm_Damaged = true
+        self:Dismember(hitgroup) end
+        end
+    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
+function ENT:Dismember(hitgroup)
+    if hitgroup == HITGROUP_LEFTARM then
+        ParticleEffect("vj_recb_blood_red_large",self:GetAttachment(self:LookupAttachment("larm")).Pos,self:GetAngles())
+        VJ.EmitSound(self,"vj_recb/zombie/zom_armlost.wav",75,100)
+        self:SetBodygroup(5,1)
+        self:RemoveAllDecals()
+    elseif hitgroup == HITGROUP_RIGHTARM then
+        ParticleEffect("vj_recb_blood_red_large",self:GetAttachment(self:LookupAttachment("rarm")).Pos,self:GetAngles())
+        VJ.EmitSound(self,"vj_recb/zombie/zom_armlost.wav",75,100)
+        self:SetBodygroup(4,1)
+        self:RemoveAllDecals()
+    elseif hitgroup == HITGROUP_LEFTLEG then
+        ParticleEffect("vj_recb_blood_red_large",self:GetAttachment(self:LookupAttachment("lleg")).Pos,self:GetAngles())
+        VJ.EmitSound(self,"vj_recb/zombie/zom_leglost.wav",75,100)
+        self:SetBodygroup(3,1)
+        self:RemoveAllDecals()
+    elseif hitgroup == HITGROUP_RIGHTLEG then
+        ParticleEffect("vj_recb_blood_red_large",self:GetAttachment(self:LookupAttachment("rleg")).Pos,self:GetAngles())
+        VJ.EmitSound(self,"vj_recb/zombie/zom_leglost.wav",75,100)
+        self:SetBodygroup(2,1)
+        self:RemoveAllDecals()
+    end
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:OnDeath(dmginfo,hitgroup,status)
+ if status == "Initial" then
+    VJ_RECB_DeathCode(self)
     if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end
-	if dmginfo:GetDamageForce():Length() < 800 then return end
-	if hitgroup == HITGROUP_HEAD then
-	    VJ_EmitSound(self,"vj_recb/zombie/zom_headburst.wav",75,100)
-		self:SetBodygroup(1,1)
-        self.HasDeathSounds = false		
-		self:RemoveAllDecals()
-	
-	if self.HasGibDeathParticles then
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+    if dmginfo:GetDamageForce():Length() < 800 then return end
+    if hitgroup == HITGROUP_HEAD then
+        self.HasDeathSounds = false
+        ParticleEffect("vj_recb_blood_red_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+        VJ.EmitSound(self,"vj_recb/zombie/zom_headburst.wav",75,100)
+        self:SetBodygroup(1,1)
+        self:RemoveAllDecals()
+    elseif hitgroup == HITGROUP_LEFTARM && !self.LArm_Damaged then
+        self:Dismember(hitgroup)
+    elseif hitgroup == HITGROUP_RIGHTARM && !self.RArm_Damaged then
+        self:Dismember(hitgroup)
+    elseif hitgroup == HITGROUP_LEFTLEG && !self.Crippled then
+        self:Dismember(hitgroup)
+    elseif hitgroup == HITGROUP_RIGHTLEG && !self.Crippled then
+        self:Dismember(hitgroup)
 
-		local BloodEffect = ents.Create("info_particle_system")
-		BloodEffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
-		BloodEffect:SetPos(self:GetAttachment(self:LookupAttachment("head")).Pos)
-		BloodEffect:SetAngles(self:GetAttachment(self:LookupAttachment("head")).Ang)
-		BloodEffect:SetParent(self)
-		BloodEffect:Fire("SetParentAttachment","head")
-		BloodEffect:Spawn()
-		BloodEffect:Activate()
-		BloodEffect:Fire("Start","",0)
-		BloodEffect:Fire("Kill","",5)					
-	    end
+     /*if self.HasGibOnDeathEffects then
+        local bloodEffect = ents.Create("info_particle_system")
+        bloodEffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
+        bloodEffect:SetPos(self:GetAttachment(self:LookupAttachment("head")).Pos)
+        bloodEffect:SetAngles(self:GetAttachment(self:LookupAttachment("head")).Ang)
+        bloodEffect:SetParent(self)
+        bloodEffect:Fire("SetParentAttachment","head")
+        bloodEffect:Spawn()
+        bloodEffect:Activate()
+        bloodEffect:Fire("Start","",0)
+        bloodEffect:Fire("Kill","",5)
+        end*/
+    end
+end
+ if status == "DeathAnim" then
+    if hitgroup == HITGROUP_HEAD then
+        self.AnimTbl_Death = {ACT_DIE_HEADSHOT,ACT_DIE_GUTSHOT}
+     else
+        self.AnimTbl_Death = {ACT_DIESIMPLE,ACT_DIEBACKWARD,ACT_DIEFORWARD,ACT_DIEVIOLENT,ACT_DIE_CHESTSHOT,ACT_DIE_GUTSHOT,ACT_DIE_BACKSHOT}
+end
+     if self.Crippled then
+        self.AnimTbl_Death = {"vjseq_crawl_die"}
+     elseif self.HasBeenKnocked then
+        self.AnimTbl_Death = {"floor_death"}
+        end
     end
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
-	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
-	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
+    *** Copyright (c) 2012-2024 by DrVrej, All rights reserved. ***
+    No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
+    without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

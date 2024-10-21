@@ -1,0 +1,6 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/vj_recb/zombieb1_hunk/crackedlens"
+    "$alphatest" "1"
+    "$nocull" "1"
+}

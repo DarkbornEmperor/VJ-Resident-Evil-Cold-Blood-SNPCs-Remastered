@@ -1,80 +1,84 @@
+include("entities/npc_vj_recb_zombie_male/init.lua")
 AddCSLuaFile("shared.lua")
-include('shared.lua')
+include("shared.lua")
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
-	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
-	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
+    *** Copyright (c) 2012-2024 by DrVrej, All rights reserved. ***
+    No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
+    without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/zombie_female_beta.mdl"}
+ENT.Model = "models/vj_recb/b1/zombie_female.mdl"
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ZombieVoices()
-   local voice = math.random(1,2)
-     if voice == 1 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/female/female1/zof_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/female/female1/zof_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female1/zof_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/female/female1/zof_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/female/female1/zof_die.wav"}
-
-        elseif voice == 2 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/female/female2/zof_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/female/female2/zof_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female2/zof_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/female/female2/zof_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/female/female2/zof_die.wav"}
-    end
+    self.SoundTbl_Idle = {
+    "vj_recb/zombie/b1/female/zof_idle.wav"
+}
+    self.SoundTbl_Alert = {
+    "vj_recb/zombie/b1/female/zof_idle.wav"
+}
+    self.SoundTbl_BeforeMeleeAttack = {
+    "vj_recb/zombie/b1/female/zof_attack.wav"
+}
+    self.SoundTbl_Pain = {
+    "vj_recb/zombie/b1/female/zof_pain.wav"
+}
+    self.SoundTbl_Death = {
+    "vj_recb/zombie/b1/female/zof_die.wav"
+}
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:Zombie_CustomOnInitialize()	
-	self:SetSkin(math.random(0,2))
-end		
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:SetVomitZombie() end
+function ENT:Zombie_Init()
+    self:SetSkin(math.random(0,2))
+    self.SoundTbl_FootStep = {
+    "vj_recb/zombie/b1/footstep1.wav",
+    "vj_recb/zombie/b1/footstep2.wav",
+    "vj_recb/zombie/b1/footstep3.wav",
+    "vj_recb/zombie/b1/footstep4.wav"
+}
+end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnMeleeAttack_Miss()
-    if !self.Crippled && !self.Vomit_Zombie then
-	    self.PlayingAttackAnimation = false
-	    self:StopAttacks(false)
-	    self.vACT_StopAttacks = false
-        self:VJ_ACT_PLAYACTIVITY("flinch",true,false,false)
-	end
+    self.CurrentAttackAnimationTime = 0
+    self:StopAttacks(false)
+    self.vACT_StopAttacks = false
+    self:VJ_ACT_PLAYACTIVITY("flinch",true,false,false)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup) end	
+function ENT:OnDamaged(dmginfo,hitgroup,status) return end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_AfterDamage(dmginfo,hitgroup) end	
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_OnBleed(dmginfo,hitgroup) end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:Cripple() end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
+function ENT:OnDeath(dmginfo,hitgroup,status)
+ if status == "Initial" then
+    VJ_RECB_DeathCode(self)
     if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end
-	if dmginfo:GetDamageForce():Length() < 800 then return end
-	if hitgroup == HITGROUP_HEAD then
-	    VJ_EmitSound(self,"vj_recb/zombie/zom_headburst.wav",75,100)
-		self:SetBodygroup(0,1)
+    if dmginfo:GetDamageForce():Length() < 800 then return end
+    if hitgroup == HITGROUP_HEAD then
         self.HasDeathSounds = false
-		self:RemoveAllDecals()
-	
-	 if self.HasGibDeathParticles then
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
-				
-		local BloodEffect = ents.Create("info_particle_system")
-		BloodEffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
-		BloodEffect:SetPos(self:GetAttachment(self:LookupAttachment("head")).Pos)
-		BloodEffect:SetAngles(self:GetAttachment(self:LookupAttachment("head")).Ang)
-		BloodEffect:SetParent(self)
-		BloodEffect:Fire("SetParentAttachment","head")
-		BloodEffect:Spawn()
-		BloodEffect:Activate()
-		BloodEffect:Fire("Start","",0)
-		BloodEffect:Fire("Kill","",5)					
+        ParticleEffect("vj_recb_blood_red_large",self:GetAttachment(self:LookupAttachment("head")).Pos,self:GetAngles())
+        VJ.EmitSound(self,"vj_recb/zombie/zom_headburst.wav",75,100)
+        self:SetBodygroup(0,1)
+
+    /*if self.HasGibOnDeathEffects then
+        local bloodEffect = ents.Create("info_particle_system")
+        bloodEffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
+        bloodEffect:SetPos(self:GetAttachment(self:LookupAttachment("head")).Pos)
+        bloodEffect:SetAngles(self:GetAttachment(self:LookupAttachment("head")).Ang)
+        bloodEffect:SetParent(self)
+        bloodEffect:Fire("SetParentAttachment","head")
+        bloodEffect:Spawn()
+        bloodEffect:Activate()
+        bloodEffect:Fire("Start","",0)
+        bloodEffect:Fire("Kill","",5) end*/
+    end
+end
+ if status == "DeathAnim" then
+    if hitgroup == HITGROUP_HEAD && !self.Crippled then
+        self.AnimTbl_Death = {ACT_DIE_HEADSHOT,ACT_DIE_GUTSHOT}
+     else
+        self.AnimTbl_Death = {ACT_DIESIMPLE,ACT_DIEFORWARD,ACT_DIE_GUTSHOT}
         end
     end
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
-	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
-	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
+    *** Copyright (c) 2012-2024 by DrVrej, All rights reserved. ***
+    No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
+    without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

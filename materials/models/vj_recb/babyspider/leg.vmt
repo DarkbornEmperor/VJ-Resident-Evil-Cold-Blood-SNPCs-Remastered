@@ -1,4 +1,5 @@
 "VertexLitGeneric"
 {
 	"$basetexture" "models/vj_recb/babyspider/leg"
+	"$nocull" "1"
 }

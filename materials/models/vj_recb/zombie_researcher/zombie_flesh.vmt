@@ -1,4 +1,4 @@
-"VertexLitGeneric"
+"VertexlitGeneric"
 {
-	"$basetexture" "models/vj_recb/zombie_researcher/Zombie_Flesh"
+	"$basetexture" "models/vj_recb/zombie/Zombie_Flesh"
 }

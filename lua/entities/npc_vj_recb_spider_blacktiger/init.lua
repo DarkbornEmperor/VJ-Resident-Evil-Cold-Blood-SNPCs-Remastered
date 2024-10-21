@@ -1,43 +1,61 @@
+include("entities/npc_vj_recb_spider_giant/init.lua")
 AddCSLuaFile("shared.lua")
-include('shared.lua')
+include("shared.lua")
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
-	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
-	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
+    *** Copyright (c) 2012-2024 by DrVrej, All rights reserved. ***
+    No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
+    without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/black_tiger.mdl"} 
-ENT.StartHealth = 1500
-ENT.MeleeAttackDamage = 25
-ENT.MeleeAttackDistance = 50 
-ENT.MeleeAttackDamageDistance = 150
-	-- ====== Controller Data ====== --
-ENT.VJC_Data = {
-	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
-	ThirdP_Offset = Vector(-40, 25, -25), -- The offset for the controller when the camera is in third person
-	FirstP_Bone = "Joint 15", -- If left empty, the base will attempt to calculate a position for first person
-	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
-}
-	-- ====== Sound File Paths ====== --
--- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_SoundTrack = {"vj_recb/mapspawner/spidersrevenge.wav"}
+ENT.Model = "models/vj_recb/b2/black_tiger.mdl"
+ENT.StartHealth = 800
+ENT.VJTag_ID_Boss = true
+ENT.MeleeAttackDistance = 80
+ENT.MeleeAttackDamageDistance = 160
 ENT.HasSoundTrack = true
-ENT.SoundTrackLevel = 0.8
+    -- ====== Controller Data ====== --
+ENT.VJC_Data = {
+    CameraMode = 1,
+    ThirdP_Offset = Vector(-40, 25, -25),
+    FirstP_Bone = "Joint 15",
+    FirstP_Offset = Vector(0, 0, 5),
+}
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnPreInitialize() 
-if GetConVar("VJ_RECB_BossMusic"):GetInt() == 0 then
-        self.HasSoundTrack = false 
-    end	
+function ENT:PreInit()
+    if GetConVar("VJ_RECB_BossMusic"):GetInt() == 0 then
+        self.HasSoundTrack = false
+    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnInitialize() 
-	self:SetCollisionBounds(Vector(60, 60, 70), Vector(-60, -60, 0))
+function ENT:Spider_Init()
+    self.SoundTbl_MeleeAttackExtra = {
+    "vj_recb/spider/spider_bite.wav",
+    "vj_recb/spider/spider_bite2.wav"
+}
+    self.SoundTbl_MeleeAttackMiss = {
+    "vj_recb/shared/claw_miss1.wav",
+    "vj_recb/shared/claw_miss2.wav"
+}
+    self.SoundTbl_RangeAttack = {
+    "vj_recb/spider/sp_spit.wav"
+}
+    self.SoundTbl_Impact = {
+    "vj_recb/shared/hit_flesh1.wav",
+    "vj_recb/shared/hit_flesh2.wav",
+    "vj_recb/shared/hit_flesh3.wav",
+    "vj_recb/shared/hit_flesh4.wav"
+}
+    self.SoundTbl_SoundTrack = {
+    "vj_recb/mapspawner/spidersrevenge.wav"
+}
 end
- ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo,hitgroup)
-    dmginfo:ScaleDamage(0.25)
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:Init()
+    self:SetSkin(math.random(0,1))
+    self:SetCollisionBounds(Vector(60, 60, 70), Vector(-60, -60, 0))
+    self:Spider_Init()
 end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
-	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
-	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
+    *** Copyright (c) 2012-2024 by DrVrej, All rights reserved. ***
+    No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
+    without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

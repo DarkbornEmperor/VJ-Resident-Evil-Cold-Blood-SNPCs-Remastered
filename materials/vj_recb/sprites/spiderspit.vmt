@@ -1,0 +1,7 @@
+"UnlitGeneric"
+{
+	"$basetexture" "vj_recb/sprites/spiderspit"
+	"$nolod" 1
+	"$translucent" 1
+	//"$alphatest" 1
+}

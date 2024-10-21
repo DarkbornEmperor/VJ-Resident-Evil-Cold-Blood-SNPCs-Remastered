@@ -1,4 +1,5 @@
 "VertexlitGeneric"
 {
 	"$basetexture" "models/vj_recb/zombie_soldier/face2"
+	"$nocull" "1"
 }

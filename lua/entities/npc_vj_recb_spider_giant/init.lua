@@ -1,114 +1,124 @@
 AddCSLuaFile("shared.lua")
-include('shared.lua')
+include("shared.lua")
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
-	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
-	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
+    *** Copyright (c) 2012-2024 by DrVrej, All rights reserved. ***
+    No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
+    without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/giantspider.mdl"} 
-ENT.StartHealth = 300
+ENT.Model = "models/vj_recb/b2/giantspider.mdl"
+ENT.StartHealth = 230
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_RE1","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = "Yellow"
-ENT.CustomBlood_Particle = {"drg_re1_blood_impact_green"}
+ENT.CustomBlood_Particle = {"vj_recb_blood_yellow"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Yellow"}
 ENT.HullType = HULL_LARGE
 ENT.CanFlinch = 1
-ENT.AnimTbl_Flinch = {ACT_FLINCH_PHYSICS}
-ENT.HasMeleeAttack = true 
-ENT.NextMeleeAttackTime = 1.5
+ENT.AnimTbl_Flinch = ACT_SMALL_FLINCH
+ENT.HasMeleeAttack = true
+ENT.AnimTbl_MeleeAttack = ACT_MELEE_ATTACK2
 ENT.MeleeAttackDamageType = DMG_POISON
-ENT.AnimTbl_MeleeAttack = {ACT_MELEE_ATTACK1}
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.MeleeAttackDamage = 15
-ENT.MeleeAttackDistance = 30 
-ENT.MeleeAttackDamageDistance = 90
-ENT.HasRangeAttack = true 
-ENT.AnimTbl_RangeAttack = {ACT_RANGE_ATTACK1}
+ENT.MeleeAttackDamage = 40
+ENT.MeleeAttackDistance = 60
+ENT.MeleeAttackDamageDistance = 120
+ENT.HasRangeAttack = true
 ENT.RangeAttackEntityToSpawn = "obj_vj_recb_spider_spit"
-ENT.NextRangeAttackTime = 2.5
 ENT.RangeDistance = 700
 ENT.RangeToMeleeDistance = 200
 ENT.TimeUntilRangeAttackProjectileRelease = false
-ENT.RangeUseAttachmentForPos = true 
-ENT.RangeUseAttachmentForPosID = "mouth"
 ENT.HasDeathAnimation = true
-ENT.DeathAnimationTime = 8
-ENT.AnimTbl_Death = {ACT_DIESIMPLE}
-ENT.HasDeathRagdoll = false
-ENT.DisableFootStepSoundTimer = true 
-ENT.GibOnDeathDamagesTable = {"All"}
+ENT.AnimTbl_Death = ACT_DIESIMPLE
+ENT.DeathAnimationDecreaseLengthAmount = -1
+ENT.DeathCorpseEntityClass = "prop_vj_animatable"
 ENT.HasExtraMeleeAttackSounds = true
-	-- ====== Controller Data ====== --
-ENT.VJC_Data = {
-	CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
-	ThirdP_Offset = Vector(-15, 25, -20), -- The offset for the controller when the camera is in third person
-	FirstP_Bone = "Joint 15", -- If left empty, the base will attempt to calculate a position for first person
-	FirstP_Offset = Vector(0, 0, 5), -- The offset for the controller when the camera is in first person
-}
-	-- ====== Sound File Paths ====== --
--- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_FootStep = {"vj_recb/spider/fl_walk.wav"}
-ENT.SoundTbl_Idle = {"vj_recb/spider/fl_out.wav"} 
-ENT.SoundTbl_Alert = {"vj_recb/spider/fl_out.wav"}
-ENT.SoundTbl_MeleeAttackExtra = {"vj_recb/spider/spider_bite.wav","vj_recb/spider/spider_bite2.wav"}
-ENT.SoundTbl_MeleeAttackMiss = {"vj_recb/shared/claw_miss1.wav","vj_recb/shared/claw_miss2.wav"}
-ENT.SoundTbl_RangeAttack = {"vj_recb/spider/Sp_spit.wav"}
-ENT.SoundTbl_Pain = {"vj_recb/spider/fl_dam.wav"}
-ENT.SoundTbl_Death = {"vj_recb/ant/ant_die.wav"}
-ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
-
+ENT.DisableFootStepSoundTimer = true
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
+    -- ====== Controller Data ====== --
+ENT.VJC_Data = {
+    CameraMode = 1,
+    ThirdP_Offset = Vector(-15, 25, -20),
+    FirstP_Bone = "Joint 15",
+    FirstP_Offset = Vector(0, 0, 5),
+}
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnAcceptInput(key,activator,caller,data)
-	if key == "step" then
-		self:FootStepSoundCode()
-end
-	if key == "attack" then
-		self:MeleeAttackCode()
-end
-	if key == "range_attack" then
-		self:RangeAttackCode()
-end
-	if key == "death" then
-		VJ_EmitSound(self, "vj_recb/spider/sp_bodyfall.wav", 75, 100)
-	end	
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnInitialize() 
-	self:SetCollisionBounds(Vector(40, 40, 52), Vector(-40, -40, 0))
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:RangeAttackCode_GetShootPos(projectile)
-	return self:CalculateProjectile("Curve", self:GetAttachment(self:LookupAttachment(self.RangeUseAttachmentForPosID)).Pos, self:GetEnemy():GetPos() + self:GetEnemy():OBBCenter(), 1500)
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnPriorToKilled(dmginfo,hitgroup)
-    if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end
-	if dmginfo:GetDamageForce():Length() < 800 then return end
-	if hitgroup == 3 then
-	    VJ_EmitSound(self,"vj_recb/spider/sp_abdomenlost.wav",75,100)
-		self:SetBodygroup(0,1)
-	
-	if self.HasGibDeathParticles then
-		ParticleEffect("drg_re1_blood_impact_large",self:GetAttachment(self:LookupAttachment("abdomen")).Pos,self:GetAngles())
-		ParticleEffect("drg_re1_blood_impact_green",self:GetAttachment(self:LookupAttachment("abdomen")).Pos,self:GetAngles())				
-			
-		local bloodeffect = ents.Create("info_particle_system")
-		bloodeffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
-		bloodeffect:SetPos(self:GetAttachment(self:LookupAttachment("abdomen")).Pos)
-		bloodeffect:SetAngles(self:GetAttachment(self:LookupAttachment("abdomen")).Ang)
-		bloodeffect:SetParent(self)
-		bloodeffect:Fire("SetParentAttachment","abdomen")
-		bloodeffect:Spawn()
-		bloodeffect:Activate()
-		bloodeffect:Fire("Start","",0)
-		bloodeffect:Fire("Kill","",5)					
-	    end
+function ENT:OnInput(key,activator,caller,data)
+    if key == "melee" then
+        self:MeleeAttackCode()
+    elseif key == "range" then
+        self:RangeAttackCode()
+        ParticleEffect("vj_recb_spider_spit",self:GetAttachment(self:LookupAttachment("mouth")).Pos,self:GetAngles())
+    elseif key == "death" then
+        VJ.EmitSound(self, "vj_recb/spider/sp_bodyfall.wav", 75, 100)
     end
 end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:Spider_Init()
+    self.SoundTbl_MeleeAttackExtra = {
+    "vj_recb/spider/spider_bite.wav",
+    "vj_recb/spider/spider_bite2.wav"
+}
+    self.SoundTbl_MeleeAttackMiss = {
+    "vj_recb/shared/claw_miss1.wav",
+    "vj_recb/shared/claw_miss2.wav"
+}
+    self.SoundTbl_RangeAttack = {
+    "vj_recb/spider/sp_spit.wav"
+}
+    self.SoundTbl_Impact = {
+    "vj_recb/shared/hit_flesh1.wav",
+    "vj_recb/shared/hit_flesh2.wav",
+    "vj_recb/shared/hit_flesh3.wav",
+    "vj_recb/shared/hit_flesh4.wav"
+}
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:Init()
+    self:SetCollisionBounds(Vector(40, 40, 52), Vector(-40, -40, 0))
+    self:Spider_Init()
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:RangeAttackProjVelocity(projectile)
+    local projPos = projectile:GetPos()
+    return self:CalculateProjectile("Curve", projPos, self:GetAimPosition(self:GetEnemy(), projPos, 1, 1500), 1500)
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:RangeAttackProjSpawnPos(projectile)
+    return self:GetAttachment(self:LookupAttachment("mouth")).Pos
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:OnDeath(dmginfo,hitgroup,status)
+ if status == "Initial" then
+    VJ_RECB_DeathCode(self)
+    if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end
+    if dmginfo:GetDamageForce():Length() < 800 then return end
+    if hitgroup == 3 then
+        ParticleEffect("vj_recb_blood_red_large",self:GetAttachment(self:LookupAttachment("abdomen")).Pos,self:GetAngles())
+        VJ.EmitSound(self,"vj_recb/zombie/zom_headburst.wav",75,100)
+        self:SetBodygroup(0,1)
+        self:RemoveAllDecals()
+
+    /*if self.HasGibOnDeathEffects then
+        local bloodEffect = ents.Create("info_particle_system")
+        bloodEffect:SetKeyValue("effect_name","blood_advisor_pierce_spray")
+        bloodEffect:SetPos(self:GetAttachment(self:LookupAttachment("abdomen")).Pos)
+        bloodEffect:SetAngles(self:GetAttachment(self:LookupAttachment("abdomen")).Ang)
+        bloodEffect:SetParent(self)
+        bloodEffect:Fire("SetParentAttachment","abdomen")
+        bloodEffect:Spawn()
+        bloodEffect:Activate()
+        bloodEffect:Fire("Start","",0)
+        bloodEffect:Fire("Kill","",5) end*/
+        end
+    end
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:OnCreateDeathCorpse(dmginfo,hitgroup,corpseEnt)
+    corpseEnt:SetMoveType(MOVETYPE_STEP)
+    VJ_RECB_ApplyCorpse(self,corpseEnt)
+end
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2022 by DrVrej, All rights reserved. ***
-	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
-	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
+    *** Copyright (c) 2012-2024 by DrVrej, All rights reserved. ***
+    No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
+    without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/

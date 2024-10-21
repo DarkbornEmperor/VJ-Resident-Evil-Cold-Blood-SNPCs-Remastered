@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/vj_recb/zombieb1/ribcage"
+               "$alphatest" 1
+}
