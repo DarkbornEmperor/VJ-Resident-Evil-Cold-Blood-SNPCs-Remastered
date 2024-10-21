@@ -45,13 +45,13 @@ if VJExists == true then
     VJ.AddNPC("Hunter (B1)","npc_vj_recbb1_hunter",spawnCategory)
 
     -- Spawners and Random
-    /*VJ.AddNPC("Random Zombie","sent_vj_recb_zom",spawnCategory)
+    VJ.AddNPC("Random Zombie","sent_vj_recb_zom",spawnCategory)
     VJ.AddNPC("Random Zombie Spawner","sent_vj_recb_zom_sp",spawnCategory)
     VJ.AddNPC("Random Zombie Spawner (Single)","sent_vj_recb_zom_sinsp",spawnCategory)
     VJ.AddNPC("Random Monster","sent_vj_recb_mon",spawnCategory)
     VJ.AddNPC("Random Monster Spawner","sent_vj_recb_mon_sp",spawnCategory)
     VJ.AddNPC("Random Monster Spawner (Single)","sent_vj_recb_mon_sinsp",spawnCategory)
-    VJ.AddNPC("Monster Map Spawner","sent_vj_recb_mapspawner",spawnCategory)*/
+    VJ.AddNPC("Monster Map Spawner","sent_vj_recb_mapspawner",spawnCategory)
 
     -- Precache Models --
     /*util.PrecacheModel("models/vj_recb/ant_boss.mdl")

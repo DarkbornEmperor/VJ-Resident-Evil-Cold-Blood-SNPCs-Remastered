@@ -1,6 +1,6 @@
 /* Note: All credits go to Cpt. Hazama. I take no credit for this. */
 AddCSLuaFile("shared.lua")
-include('shared.lua')
+include("shared.lua")
 
 local table_insert = table.insert
 local table_remove = table.remove
@@ -21,6 +21,7 @@ ENT.Zombie = {
     {class="npc_vj_recb_cerberus",chance=10},
     {class="npc_vj_recbb3_cerberus",chance=10},
     {class="npc_vj_recb_hunter",chance=15},
+    {class="npc_vj_recbb1_hunter",chance=15},
     {class="npc_vj_recbb3_hunter",chance=15},
     {class="npc_vj_recb_licker",chance=15},
     {class="npc_vj_recb_spider_giant",chance=25},
@@ -38,13 +39,17 @@ ENT.SpecialZombie = {
     {class="npc_vj_recb_spider_blacktiger",max=1},
     {class="npc_vj_recb_prototyrant",max=1},
 }
+
+local MusicList = {
+    "vj_recb/mapspawner/mall_music.wav"
+}
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Initialize()
     local i = 0
     for k, v in ipairs(ents.GetAll()) do
         if v:GetClass() == "sent_vj_recb_mapspawner" then
             i = i + 1
-            if i > 1 then PrintMessage(HUD_PRINTTALK, "Only one Map Spawner is allowed on the map.") self.SkipOnRemove = true self:Remove() return end
+            if i > 1 then PrintMessage(HUD_PRINTTALK, "Only one Map Spawner is allowed on the map.") self.SkipOnRemove = true self:Remove() end
         end
     end
 
@@ -61,16 +66,13 @@ function ENT:Initialize()
 
     local count = #self.nodePositions +#self.navAreas
     if count <= 50 then
-        local msg = "Low node/nav-area count detected! The Map Spawner may find it difficult to process with such low nodes/nav-areas...removing..."
+        local msg = "WARNING: Low node/nav-area count detected! The Map Spawner may find it difficult to process with such low nodes/nav-areas. The Map Spawner will now remove itself."
         if count <= 0 then
-            msg = "No nodes or nav-mesh detected! The Map Spawner relies on nodes/nav-areas for many things. Without any, the Map Spawner will not work! The Map Spawner will now remove itself..."
+            msg = "WARNING: No nodes or nav-mesh detected! The Map Spawner relies on nodes/nav-areas for many things. Without any, the Map Spawner will not work! The Map Spawner will now remove itself."
         end
         MsgN(msg)
-        if IsValid(self:GetCreator()) then
-            self:GetCreator():ChatPrint(msg)
-        end
+        PrintMessage(HUD_PRINTTALK, msg)
         SafeRemoveEntity(self)
-        return
     end
 
     self:SetCollisionGroup(COLLISION_GROUP_NONE)
@@ -95,26 +97,24 @@ function ENT:Initialize()
     self.NextZombieSpawnTime = CurTime() +1
     self.NextSpecialZombieSpawnTime = CurTime() +math.random(4,20)
     self.NextHordeSpawnTime = CurTime() +math.Rand(self.RECB_HordeCooldownMin,self.RECB_HordeCooldownMax)
+    self.DidStartMusic = false
+    self.NextMusicSwitchT = CurTime() +1
     self.NextAIBossCheckTime = CurTime() +5
     self.HordeSpawnRate = 0.19
     self.MaxSpecialZombie = 1
     self.CanSpawnSpecialZombie = true --GetConVarNumber("VJ_RECB_MapSpawner_Boss")
 
- local Ambience = {"vj_recb/mapspawner/residentevil.wav"}
- local Music = {"vj_recb/mapspawner/mall_music.wav"}
+ local Ambience = {"vj_recb/mapspawner/desperation_cityambience.wav","vj_recb/mapspawner/recb_city-ambient.wav"}
     for _,v in ipairs(player.GetAll()) do
      if GetConVar("VJ_RECB_MapSpawner_Ambient"):GetInt() == 1 then
              self.RECB_Ambience = VJ.CreateSound(v,Ambience,GetConVar("VJ_RECB_MapSpawner_AmbienceVolume"):GetInt(), 100)
-end
-     if GetConVar("VJ_RECB_MapSpawner_Music"):GetInt() == 1 then
-             self.RECB_Music = VJ.CreateSound(v,Music,GetConVar("VJ_RECB_MapSpawner_MusicVolume"):GetInt(), 100)
         end
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CheckVisibility(pos,ent,mdl)
     local check = ents.Create("prop_vj_animatable")
-    check:SetModel(mdl or "models/vj_recb/zombie_male.mdl")
+    check:SetModel(mdl or "models/vj_recb/zombie.mdl")
     check:SetPos(pos)
     check:SetCollisionGroup(COLLISION_GROUP_IN_VEHICLE)
     check:Spawn()
@@ -334,6 +334,9 @@ function ENT:Think()
             self.NextAICheckTime = CurTime() +5
         end
 
+        -- Manages Music
+        self:DoMusic(false)
+
         -- Spawns AI
         if CurTime() > self.NextZombieSpawnTime then
             if #self.tbl_SpawnedNPCs >= self.RECB_MaxZombie -self.RECB_MaxHordeSpawn then return end -- Makes sure that we can at least spawn a mob when it's time
@@ -356,6 +359,30 @@ end
                 end)
             end
             self.NextHordeSpawnTime = CurTime() +math.Rand(self.RECB_HordeCooldownMin,self.RECB_HordeCooldownMax)
+        end
+    end
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:DoMusic(stop)
+    for _,v in ipairs(player.GetAll()) do
+        if !stop && !self.DidStartMusic then
+            self.DidStartMusic = true
+            self.NextMusicSwitchT = CurTime() +1
+            if GetConVar("VJ_RECB_MapSpawner_Music"):GetInt() == 1 then
+                self.NextRECBMusicT = self.NextRECBMusicT or 0
+                if CurTime() > self.NextRECBMusicT then
+                    self.RECB_PickTrack = VJ.PICK(MusicList)
+                    self.RECB_Track = VJ.CreateSound(v,self.RECB_PickTrack,GetConVar("VJ_RECB_MapSpawner_MusicVolume"):GetInt(),100)
+                    self.NextRECBMusicT = CurTime() + ((((SoundDuration(self.RECB_PickTrack) > 0) and SoundDuration(self.RECB_PickTrack)) or 2) + 1)
+
+                    timer.Simple(((((SoundDuration(self.RECB_PickTrack) > 0) and SoundDuration(self.RECB_PickTrack)) or 2) + 1),function() if IsValid(self) then self.DidStartMusic = false VJ.STOPSOUND(self.RECB_Track) end end)
+                end
+            end
+        end
+        if stop && self.DidStartMusic then
+            self.DidStartMusic = false
+            self.NextMusicSwitchT = CurTime() +1
+            VJ.STOPSOUND(self.RECB_Track)
         end
     end
 end
@@ -398,7 +425,6 @@ function ENT:SpawnZombie(ent,pos,isMob)
     Zombie:SetAngles(Angle(0,math.random(0,360),0))
     Zombie:Spawn()
     table_insert(self.tbl_SpawnedNPCs,Zombie)
-/*
     if isMob then
         Zombie.FindEnemy_UseSphere = true
         Zombie.FindEnemy_CanSeeThroughWalls = true
@@ -409,9 +435,9 @@ function ENT:SpawnZombie(ent,pos,isMob)
             end
         end)
     end
-*/
     Zombie.MapSpawner = self
     Zombie.EntitiesToNoCollide = {}
+    Zombie.CallForHelp = false
     for _,v in pairs(self.Zombie) do
         table_insert(Zombie.EntitiesToNoCollide,v.class)
 end
@@ -438,8 +464,8 @@ function ENT:SpawnSpecialZombie(ent,pos)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnRemove()
+    self:DoMusic(true)
     VJ.STOPSOUND(self.RECB_Ambience)
-    VJ.STOPSOUND(self.RECB_Music)
     for index,object in ipairs(self.tbl_SpawnedNPCs) do
         if IsValid(object) then
             object:Remove()
