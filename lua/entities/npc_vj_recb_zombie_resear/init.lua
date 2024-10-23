@@ -11,6 +11,17 @@ ENT.Model = "models/vj_recb/b3/zombie_researcher.mdl"
 function ENT:Zombie_Init()
     self:SetBodygroup(0,1)
     self:SetSkin(math.random(0,3))
+    self.SoundTbl_FootStep = {
+    "vj_recb/zombie/footstep1.wav",
+    "vj_recb/zombie/footstep2.wav",
+    "vj_recb/zombie/footstep3.wav"
+}
+    self.SoundTbl_Impact = {
+    "vj_recb/shared/hit_flesh1.wav",
+    "vj_recb/shared/hit_flesh2.wav",
+    "vj_recb/shared/hit_flesh3.wav",
+    "vj_recb/shared/hit_flesh4.wav"
+}
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDamaged(dmginfo,hitgroup,status)

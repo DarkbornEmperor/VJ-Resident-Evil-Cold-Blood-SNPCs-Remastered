@@ -12,13 +12,18 @@ ENT.BloodColor = "Red"
 ENT.CustomBlood_Particle = {"vj_recb_blood_red"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
 ENT.HullType = HULL_TINY
+ENT.MovementType = VJ_MOVETYPE_AERIAL
+ENT.Aerial_FlyingSpeed_Calm = 200
+ENT.Aerial_FlyingSpeed_Alerted = 200
+ENT.Aerial_AnimTbl_Calm = ACT_WALK
+ENT.Aerial_AnimTbl_Alerted = ACT_WALK
 ENT.CanFlinch = 1
 ENT.AnimTbl_Flinch = ACT_SMALL_FLINCH
 ENT.HasMeleeAttack = true
-ENT.MeleeAttackDamage = 10
+ENT.MeleeAttackDamage = 5
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.MeleeAttackDistance = 40
-ENT.MeleeAttackDamageDistance = 80
+ENT.MeleeAttackDistance = 20
+ENT.MeleeAttackDamageDistance = 40
 ENT.HasDeathAnimation = true
 ENT.AnimTbl_Death = ACT_DIESIMPLE
 ENT.DeathAnimationDecreaseLengthAmount = -1
@@ -62,10 +67,6 @@ function ENT:Crow_Init()
     self.SoundTbl_BeforeMeleeAttack = {
     "vj_recb/crow/crow_attack.wav"
 }
-    self.SoundTbl_MeleeAttackMiss = {
-    "vj_recb/shared/claw_miss1.wav",
-    "vj_recb/shared/claw_miss2.wav"
-}
     self.SoundTbl_Death = {
     "vj_recb/crow/crow_die.wav"
 }
@@ -78,12 +79,13 @@ function ENT:Crow_Init()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Init()
-    self:SetCollisionBounds(Vector(8,8,88),Vector(-8,-8,0))
+    self:SetCollisionBounds(Vector(8,8,12),Vector(-8,-8,0))
     self:Crow_Init()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDeath(dmginfo,hitgroup,status)
     if status == "Initial" then
+        self:DoChangeMovementType(VJ_MOVETYPE_GROUND)
         VJ_RECB_DeathCode(self)
     end
 end
