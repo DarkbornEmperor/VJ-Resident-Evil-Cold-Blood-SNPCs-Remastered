@@ -15,7 +15,7 @@ ENT.HullType = HULL_MEDIUM
 ENT.CanFlinch = 1
 ENT.AnimTbl_Flinch = ACT_SMALL_FLINCH
 ENT.HasMeleeAttack = true
-ENT.TimeUntilMeleeAttackDamage = false
+ENT.TimeUntilMeleeAttackDamage = 0.4
 ENT.MeleeAttackDamage = 30
 ENT.MeleeAttackDistance = 25
 ENT.MeleeAttackDamageDistance = 60
@@ -27,10 +27,6 @@ ENT.LeapAttackDamage = 15
 ENT.TimeUntilLeapAttackDamage = 0.4
 ENT.LeapAttackExtraTimers = {0.6, 0.8, 1}
 ENT.StopLeapAttackAfterFirstHit = true
-ENT.LeapAttackVelocityForward = 100
-ENT.LeapAttackVelocityUp = 100
-ENT.LeapDistance = 200
-ENT.LeapToMeleeDistance = 150
 ENT.HasDeathAnimation = true
 ENT.AnimTbl_Death = ACT_DIESIMPLE
 ENT.DeathAnimationDecreaseLengthAmount = -1
@@ -109,7 +105,7 @@ function ENT:Init()
     self:Cerberus_Init()
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:OnAlert()
+function ENT:OnAlert(ent)
     if math.random(1,2) == 1 then
         self:VJ_ACT_PLAYACTIVITY("bark",true,false,true)
         self.SoundTbl_Alert = {"vj_recb/cerberus/cer_alert.wav"}
@@ -160,6 +156,10 @@ end
                 self.AnimTbl_IdleStand = {"sleep"}
     end
 end*/
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:GetLeapAttackVelocity()
+    return VJ.CalculateTrajectory(self, NULL, "Curve", self:GetPos() + self:OBBCenter(), self:GetEnemy():EyePos(), 1) + self:GetForward() * 80 - self:GetUp() * 30
+end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDeath(dmginfo,hitgroup,status)
  if status == "Initial" then
