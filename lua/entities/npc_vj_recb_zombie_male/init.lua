@@ -396,7 +396,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnFlinch(dmginfo,hitgroup,status)
     if status == "PriorExecution" then
-        return !self.HasBeenKnocked && self:GetSequence() != self:LookupSequence("floor_getup") -- If we are crawling then DO NOT flinch!
+        return !self.Crippled && !self.HasBeenKnocked && self:GetSequence() != self:LookupSequence("floor_getup") -- If we are crawling then DO NOT flinch!
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

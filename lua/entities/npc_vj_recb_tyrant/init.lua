@@ -74,7 +74,7 @@ function ENT:Tyrant_Init()
     "vj_recb/shared/hit_flesh4.wav"
 }
     self.SoundTbl_SoundTrack = {
-    "vj_recb/tyrant103/recb_-_tyrant.wav"
+    "vj_recb/tyrant103/RECB_-_tyrant.mp3"
 }
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
