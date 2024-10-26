@@ -62,7 +62,7 @@ function ENT:OnInput(key,activator,caller,data)
     elseif key == "vomit" then
         self:MeleeAttackCode()
         VJ.EmitSound(self,"vj_recb/zombie/vomit.wav",75,100)
-        ParticleEffect("vj_recb_vomit",self:GetAttachment(self:LookupAttachment("mouth")).Pos,self:GetAngles())
+        ParticleEffectAttach("vj_recb_vomit", PATTACH_POINT_FOLLOW, self, self:LookupAttachment("mouth"))
     elseif key == "death_knee" then
         VJ.EmitSound(self,"vj_recb/zombie/zom_knee.wav",75,100)
     elseif key == "death" then

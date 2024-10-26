@@ -47,7 +47,7 @@ function ENT:OnInput(key,activator,caller,data)
         self:MeleeAttackCode()
     elseif key == "range" then
         self:RangeAttackCode()
-        ParticleEffect("vj_recb_spider_spit",self:GetAttachment(self:LookupAttachment("mouth")).Pos,self:GetAngles())
+        ParticleEffectAttach("vj_recb_spider_spit", PATTACH_POINT_FOLLOW, self, self:LookupAttachment("mouth"))
     elseif key == "death" then
         VJ.EmitSound(self, "vj_recb/spider/sp_bodyfall.wav", 75, 100)
     end
