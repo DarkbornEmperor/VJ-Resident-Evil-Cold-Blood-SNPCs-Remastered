@@ -10,7 +10,20 @@ ENT.Model = "models/vj_recb/b1/zombie_torso.mdl"
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Zombie_Init()
     self:SetSkin(math.random(0,5))
-    self:SetCollisionBounds(Vector(13,13,25),Vector(-13,-13,0))
+    self.SoundTbl_FootStep = {
+    "vj_recb/zombie/zom_crawl_leftarm.wav",
+    "vj_recb/zombie/zom_crawl_rightarm.wav"
+}
+    self.SoundTbl_MeleeAttackExtra = {
+    "vj_recb/zombie/bite1.wav",
+    "vj_recb/zombie/bite2.wav"
+}
+    self.SoundTbl_Impact = {
+    "vj_recb/shared/hit_flesh1.wav",
+    "vj_recb/shared/hit_flesh2.wav",
+    "vj_recb/shared/hit_flesh3.wav",
+    "vj_recb/shared/hit_flesh4.wav"
+}
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ZombieVoices()

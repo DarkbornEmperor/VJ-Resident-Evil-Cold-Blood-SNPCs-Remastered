@@ -230,8 +230,7 @@ end
 end)
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function VJ_RECB_DeathCode(ent)
-    //ent.Bleeds = false
-    //ent:SetSolid(SOLID_NONE)
+    ent.HasBloodPool = false
     ent:AddFlags(FL_NOTARGET) -- So normal NPCs can stop shooting at the corpse
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

@@ -31,7 +31,10 @@ ENT.HasDeathAnimation = true
 ENT.AnimTbl_Death = ACT_DIESIMPLE
 ENT.DeathAnimationDecreaseLengthAmount = -1
 ENT.DeathCorpseEntityClass = "prop_vj_animatable"
+ENT.HasExtraMeleeAttackSounds = true
 ENT.DisableFootStepSoundTimer = true
+ENT.GeneralSoundPitch1 = 100
+ENT.GeneralSoundPitch2 = 100
     -- ====== Controller Data ====== --
 ENT.VJC_Data = {
     CameraMode = 1,
@@ -39,14 +42,6 @@ ENT.VJC_Data = {
     FirstP_Bone = "Bip01 Head",
     FirstP_Offset = Vector(10, 0, -30),
 }
-    -- ====== Sound File Paths ====== --
--- Leave blank if you don't want any sounds to play
-ENT.SoundTbl_FootStep = {"vj_recb/zombie/zom_crawl_leftarm.wav","vj_recb/zombie/zom_crawl_rightarm.wav"}
-ENT.SoundTbl_MeleeAttack = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
-ENT.SoundTbl_Impact = {"vj_recb/shared/hit_flesh1.wav","vj_recb/shared/hit_flesh2.wav","vj_recb/shared/hit_flesh3.wav","vj_recb/shared/hit_flesh4.wav"}
-
-ENT.GeneralSoundPitch1 = 100
-ENT.GeneralSoundPitch2 = 100
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnInput(key,activator,caller,data)
     if key == "step" then
@@ -58,15 +53,33 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Init()
     self:ZombieVoices()
+    self:Zombie_Init()
     self:SetCollisionBounds(Vector(13,13,25),Vector(-13,-13,0))
-    local zombieSkin = math.random(1,2)
-    if zombieSkin == 1 then
-        self:SetSkin(math.random(0,3))
-        self:SetBodygroup(0,math.random(0,1))
-    elseif zombieSkin == 2 && math.random(1,3) == 1 then
-        self:SetSkin(math.random(4,5))
-        self:SetBodygroup(7,math.random(0,1))
-    end
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:Zombie_Init()
+ local zombieSkin = math.random(1,2)
+ if zombieSkin == 1 then
+    self:SetSkin(math.random(0,3))
+    self:SetBodygroup(0,math.random(0,1))
+ elseif zombieSkin == 2 && math.random(1,3) == 1 then
+    self:SetSkin(math.random(4,5))
+    self:SetBodygroup(7,math.random(0,1))
+end
+    self.SoundTbl_FootStep = {
+    "vj_recb/zombie/zom_crawl_leftarm.wav",
+    "vj_recb/zombie/zom_crawl_rightarm.wav"
+}
+    self.SoundTbl_MeleeAttackExtra = {
+    "vj_recb/zombie/bite1.wav",
+    "vj_recb/zombie/bite2.wav"
+}
+    self.SoundTbl_Impact = {
+    "vj_recb/shared/hit_flesh1.wav",
+    "vj_recb/shared/hit_flesh2.wav",
+    "vj_recb/shared/hit_flesh3.wav",
+    "vj_recb/shared/hit_flesh4.wav"
+}
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ZombieVoices()
@@ -148,6 +161,17 @@ function ENT:ZombieVoices()
         self.SoundTbl_Pain = {"vj_recb/zombie/male/male11/zom_pain.wav"}
         self.SoundTbl_Death = {"vj_recb/zombie/male/male11/zom_die.wav"}
     end
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+local vecZ50 = Vector(0, 0, -50)
+--
+function ENT:OnThinkActive()
+    if self:IsMoving() && CurTime() > self.WeirdCrawl_NextBloodT then
+        local selfPos = self:GetPos() + self:OBBCenter()
+        local tr = util.TraceLine({start = selfPos, endpos = selfPos + vecZ50, filter = self})
+        util.Decal("VJ_RECB_Blood_Red", tr.HitPos + tr.HitNormal, tr.HitPos - tr.HitNormal, self)
+	      self.WeirdCrawl_NextBloodT = CurTime() + 1
+	  end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnMeleeAttack_Miss()
