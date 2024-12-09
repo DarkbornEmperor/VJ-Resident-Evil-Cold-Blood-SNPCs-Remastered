@@ -115,7 +115,7 @@ function ENT:Init()
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnCallForHelp(ally)
-    self:VJ_ACT_PLAYACTIVITY("scream",true,false,true)
+    self:PlayAnim("scream",true,false,true)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:GetLeapAttackVelocity()

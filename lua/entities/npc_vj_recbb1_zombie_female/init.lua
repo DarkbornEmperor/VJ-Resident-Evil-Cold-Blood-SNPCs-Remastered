@@ -49,7 +49,7 @@ function ENT:CustomOnMeleeAttack_Miss()
     self.CurrentAttackAnimationTime = 0
     self:StopAttacks(false)
     self.vACT_StopAttacks = false
-    self:VJ_ACT_PLAYACTIVITY("flinch",true,false,false)
+    self:PlayAnim("flinch",true,false,false)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDamaged(dmginfo,hitgroup,status) return end

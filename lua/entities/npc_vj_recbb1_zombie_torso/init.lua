@@ -76,7 +76,7 @@ function ENT:CustomOnMeleeAttack_Miss()
     self.CurrentAttackAnimationTime = 0
     self:StopAttacks(false)
     self.vACT_StopAttacks = false
-    self:VJ_ACT_PLAYACTIVITY("flinch",true,false,false)
+    self:PlayAnim("flinch",true,false,false)
 end
 /*-----------------------------------------------
     *** Copyright (c) 2012-2024 by DrVrej, All rights reserved. ***

@@ -56,10 +56,10 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnAlert(ent)
     if math.random(1,2) == 1 then
-        self:VJ_ACT_PLAYACTIVITY("bark",true,false,true)
+        self:PlayAnim("bark",true,false,true)
         self.SoundTbl_Alert = {"vj_recb/cerberus/b3/dog_bark.wav"}
     else
-        self:VJ_ACT_PLAYACTIVITY("growl",true,false,true)
+        self:PlayAnim("growl",true,false,true)
         self.SoundTbl_Alert = {"vj_recb/cerberus/b3/dog_growl.wav"}
     end
 end

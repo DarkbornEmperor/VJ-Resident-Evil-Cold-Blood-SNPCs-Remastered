@@ -107,22 +107,22 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnAlert(ent)
     if math.random(1,2) == 1 then
-        self:VJ_ACT_PLAYACTIVITY("bark",true,false,true)
+        self:PlayAnim("bark",true,false,true)
         self.SoundTbl_Alert = {"vj_recb/cerberus/cer_alert.wav"}
     else
-        self:VJ_ACT_PLAYACTIVITY("growl",true,false,true)
+        self:PlayAnim("growl",true,false,true)
         self.SoundTbl_Alert = {"vj_recb/cerberus/cer_growl.wav"}
     end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnCallForHelp(ally)
-    self:VJ_ACT_PLAYACTIVITY("growl",true,false,true)
+    self:PlayAnim("growl",true,false,true)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 /*function ENT:OnThinkActive()
 if GetConVar("VJ_RECB_CerberusSleep"):GetInt() == 0 or self.DeathAnimationCodeRan then return end
     if !self.VJ_IsBeingControlled && self.Cerberus_IdleState != "N" && (self:IsMoving() or CurTime() > self.Cerberus_NextGetUpT) then
-        self:VJ_ACT_PLAYACTIVITY("sleeptostand",true,false)
+        self:PlayAnim("sleeptostand",true,false)
         self.Cerberus_IdleState = "N"
         self.DisableWandering = false
         self.DisableChasingEnemy = false
@@ -132,7 +132,7 @@ end
         if !self.VJ_IsBeingControlled && IsValid(self:GetEnemy()) then
             if self.Cerberus_IdleState != "N" && self.Cerberus_InTransition == false then
                 self.Cerberus_InTransition = true
-                self:VJ_ACT_PLAYACTIVITY("sleeptostand",true,false,false,0,{},function(vsched)
+                self:PlayAnim("sleeptostand",true,false,false,0,{},function(vsched)
                     vsched.RunCode_OnFinish = function()
                         self.Cerberus_InTransition = false
                         self.Cerberus_IdleState = "N"
@@ -143,7 +143,7 @@ end)
     end
 end
             if !self.VJ_IsBeingControlled && self.Cerberus_IdleState == "N" && !self:IsMoving() && CurTime() > self.Cerberus_NextGetUpT && math.random(1,150) == 1 then
-                self:VJ_ACT_PLAYACTIVITY("gotosleep",true,false)
+                self:PlayAnim("gotosleep",true,false)
                 self.Cerberus_IdleState = "S"
                 self.DisableWandering = true
                 self.DisableChasingEnemy = true
