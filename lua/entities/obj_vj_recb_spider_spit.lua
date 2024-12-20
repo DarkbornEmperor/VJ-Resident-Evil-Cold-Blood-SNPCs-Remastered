@@ -33,16 +33,8 @@ ENT.RadiusDamageRadius = 30
 ENT.RadiusDamage = 15
 ENT.RadiusDamageUseRealisticRadius = true
 ENT.RadiusDamageType = DMG_POISON
-//ENT.SoundTbl_Idle = {"vj_acid/acid_idle1.wav"}
-ENT.SoundTbl_OnCollide = {"vj_recb/spider/spidershot.wav"}
-ENT.DecalTbl_DeathDecals = {"VJ_RECB_Spider_Spit"}
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomPhysicsObjectOnInitialize(phys)
-    phys:Wake()
-    phys:EnableGravity(true)
-    phys:EnableDrag(false)
-    phys:SetBuoyancyRatio(0)
-end
+ENT.SoundTbl_OnCollide = "vj_recb/spider/spidershot.wav"
+ENT.CollisionDecals = "VJ_RECB_Spider_Spit"
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Init()
     self:SetNoDraw(true)
