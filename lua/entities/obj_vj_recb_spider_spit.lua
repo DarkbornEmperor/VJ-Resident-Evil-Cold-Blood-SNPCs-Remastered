@@ -27,6 +27,7 @@ end
 if !SERVER then return end
 
 ENT.Model = "models/spitball_medium.mdl"
+ENT.ProjectileType = VJ.PROJ_TYPE_GRAVITY
 ENT.DoesDirectDamage = false
 ENT.DoesRadiusDamage = true
 ENT.RadiusDamageRadius = 30
