@@ -8,7 +8,7 @@ include("shared.lua")
 -----------------------------------------------*/
 ENT.Model = "models/vj_recb/b2/black_tiger.mdl"
 ENT.StartHealth = 800
-ENT.VJTag_ID_Boss = true
+ENT.VJ_ID_Boss = true
 ENT.MeleeAttackDistance = 80
 ENT.MeleeAttackDamageDistance = 160
 ENT.HasSoundTrack = true

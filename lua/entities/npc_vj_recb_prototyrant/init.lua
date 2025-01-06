@@ -8,7 +8,7 @@ include("shared.lua")
 ENT.Model = "models/vj_recb/b2/proto_tyrant.mdl"
 ENT.StartHealth = 3000
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_RE1","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
-ENT.VJTag_ID_Boss = true
+ENT.VJ_ID_Boss = true
 ENT.BloodColor = VJ.BLOOD_COLOR_RED
 ENT.CustomBlood_Particle = {"vj_recb_blood_red"}
 ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}

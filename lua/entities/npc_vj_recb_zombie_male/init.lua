@@ -323,10 +323,10 @@ function ENT:CustomOnMeleeAttack_AfterChecks(hitEnt,isProp)
     end
 end
    if self:GetSequence() == self:LookupSequence("attack2") then
-   if hitEnt.IsVJBaseSNPC && (hitEnt.MovementType != VJ_MOVETYPE_GROUND or hitEnt.VJTag_ID_Boss or hitEnt.IsVJBaseSNPC_Tank) then self.RECB_Grappled = false return false end
+   if hitEnt.IsVJBaseSNPC && (hitEnt.MovementType != VJ_MOVETYPE_GROUND or hitEnt.VJ_ID_Boss or hitEnt.IsVJBaseSNPC_Tank) then self.RECB_Grappled = false return false end
    if !self.RECB_Grappled then
       self.RECB_Grappled = true
-   if hitEnt:IsPlayer() or (hitEnt.IsVJBaseSNPC && hitEnt.MovementType == VJ_MOVETYPE_GROUND && !hitEnt.VJTag_ID_Boss && !hitEnt.IsVJBaseSNPC_Tank) then
+   if hitEnt:IsPlayer() or (hitEnt.IsVJBaseSNPC && hitEnt.MovementType == VJ_MOVETYPE_GROUND && !hitEnt.VJ_ID_Boss && !hitEnt.IsVJBaseSNPC_Tank) then
       self:Grapple(self,hitEnt)
 end
    if hitEnt:IsNPC() && !hitEnt.IsVJBaseSNPC && hitEnt:GetMoveType(MOVETYPE_STEP) then

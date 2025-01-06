@@ -8,7 +8,7 @@ include("shared.lua")
 ENT.Model = "models/vj_recb/b2/neptune.mdl"
 ENT.StartHealth = 500
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_RE1","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
-ENT.VJTag_ID_Boss = true
+ENT.VJ_ID_Boss = true
 ENT.MovementType = VJ_MOVETYPE_AQUATIC
 ENT.Aquatic_SwimmingSpeed_Calm = 80
 ENT.Aquatic_SwimmingSpeed_Alerted = 200
