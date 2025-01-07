@@ -35,7 +35,7 @@ ENT.RadiusDamage = 15
 ENT.RadiusDamageUseRealisticRadius = true
 ENT.RadiusDamageType = DMG_POISON
 ENT.SoundTbl_OnCollide = "vj_recb/spider/spidershot.wav"
-ENT.CollisionDecals = "VJ_RECB_Spider_Spit"
+ENT.CollisionDecal = "VJ_RECB_Spider_Spit"
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Init()
     self:SetNoDraw(true)
