@@ -51,6 +51,8 @@ ENT.Head_Damaged = false
 ENT.Chest_Damaged = false
 ENT.RArm_Damaged = false
 ENT.LArm_Damaged = false
+ENT.RECB_CurEnt = NULL
+ENT.RECB_CurEntMoveType = MOVETYPE_WALK
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnInput(key,activator,caller,data)
     if key == "step" then
@@ -326,60 +328,69 @@ end
    if hitEnt.IsVJBaseSNPC && (hitEnt.MovementType != VJ_MOVETYPE_GROUND or hitEnt.VJ_ID_Boss or hitEnt.IsVJBaseSNPC_Tank) then self.RECB_Grappled = false return false end
    if !self.RECB_Grappled then
       self.RECB_Grappled = true
+      //hitEnt:SetVelocity(self:MeleeAttackKnockbackVelocity(hitEnt))
+   if self.RECB_CurEnt != hitEnt then -- If the grabbed enemy is a new enemy then reset the enemy values
+      self:ResetGrapple()
+      self.RECB_CurEntMoveType = hitEnt:GetMoveType()
+end
    if hitEnt:IsPlayer() or (hitEnt.IsVJBaseSNPC && hitEnt.MovementType == VJ_MOVETYPE_GROUND && !hitEnt.VJ_ID_Boss && !hitEnt.IsVJBaseSNPC_Tank) then
-      self:Grapple(self,hitEnt)
+      self:Grapple()
 end
    if hitEnt:IsNPC() && !hitEnt.IsVJBaseSNPC && hitEnt:GetMoveType(MOVETYPE_STEP) then
-        self:Grapple_NPC(self,hitEnt)
+        self:Grapple_NPC()
         end
     end
 end
     return false
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:Grapple(self,victim)
-    if victim.IsVJBaseSNPC then
-        victim:StopMoving()
-        victim:SetState(VJ_STATE_ONLY_ANIMATION)
-        victim:VJ_DoSetEnemy(self,true,true)
-        local ang = self:GetAngles()
-        victim:SetAngles(Angle(ang.x,(self:GetPos() -victim:GetPos()):Angle().y,ang.z))
+function ENT:Grapple()
+ if self.RECB_CurEnt.IsVJBaseSNPC then
+    self.RECB_CurEnt:StopMoving()
+    self.RECB_CurEnt:SetMoveType(MOVETYPE_NONE)
+    self.RECB_CurEnt:SetState(VJ_STATE_ONLY_ANIMATION)
+    self.RECB_CurEnt:ForceSetEnemy(self,true,true)
+    self.RECB_CurEnt:SetTurnTarget(self)
 end
-    if victim:IsPlayer() then
-        local ang = self:GetAngles()
-        victim:SetEyeAngles(Angle(ang.x,(self:GetPos() -victim:GetPos()):Angle().y,ang.z))
-        //victim:SetMoveType(MOVETYPE_NONE)
+ if self.RECB_CurEnt:IsPlayer() then
+    local ang = self:GetAngles()
+    self.RECB_CurEnt:SetMoveType(MOVETYPE_NONE)
+    self.RECB_CurEnt:SetEyeAngles(Angle(ang.x,(self:GetPos() -self.RECB_CurEnt:GetPos()):Angle().y,ang.z))
 end
-    timer.Create(self:EntIndex().."VJ_NMRIHR_Grapple",0.1,0,function()
-        if !IsValid(self) or !IsValid(victim) or self.CurrentAttackAnimationTime < CurTime() then
+    timer.Create(self:EntIndex().."VJ_RECB_Grapple",0.1,0,function()
+    if IsValid(self) && self.CurrentAttackAnimationTime < CurTime() then
         self.RECB_Grappled = false
-        timer.Remove(self:EntIndex().."VJ_NMRIHR_Grapple")
-        if IsValid(victim) then
-            if victim.IsVJBaseSNPC then victim:SetState() victim:SetMoveType(MOVETYPE_STEP) end
-            //if victim:IsPlayer() then victim:SetMoveType(victim:GetMoveType()) end
-            end
+        self:ResetGrapple()
+        timer.Remove(self:EntIndex().."VJ_RECB_Grapple")
         end
     end)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:Grapple_NPC(self,victim)
-    if victim:IsNPC() then
-        victim.GrabPos = victim:GetPos()
-        victim:StopMoving()
-        local ang = self:GetAngles()
-        victim:SetAngles(Angle(ang.x,(self:GetPos() -victim:GetPos()):Angle().y,ang.z))
-        victim:SetMoveType(MOVETYPE_NONE)
+function ENT:Grapple_NPC()
+ if self.RECB_CurEnt:IsNPC() or self.RECB_CurEnt:IsNextBot() then
+    self.RECB_CurEnt:StopMoving()
+    self.RECB_CurEnt:SetMoveType(MOVETYPE_NONE)
+    local ang = self:GetAngles()
+    self.RECB_CurEnt:SetAngles(Angle(ang.x,(self:GetPos() -self.RECB_CurEnt:GetPos()):Angle().y,ang.z))
 end
-    timer.Create(self:EntIndex().."VJ_NMRIHR_Grapple",0.1,0,function()
-        if !IsValid(self) or !IsValid(victim) or self.CurrentAttackAnimationTime < CurTime() then
+    timer.Create(self:EntIndex().."VJ_RECB_Grapple",0.1,0,function()
+    if IsValid(self) && self.CurrentAttackAnimationTime < CurTime() then
         self.RECB_Grappled = false
-        timer.Remove(self:EntIndex().."VJ_NMRIHR_Grapple")
-        if IsValid(victim) then
-            //victim:SetPos(victim.GrabPos or victim:GetPos())
-            victim:SetMoveType(MOVETYPE_STEP)
-            end
+        self:ResetGrapple()
+        timer.Remove(self:EntIndex().."VJ_RECB_Grapple")
         end
     end)
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:ResetGrapple()
+ if !IsValid(self.RECB_CurEnt) then return end
+ if self.RECB_CurEnt.IsVJBaseSNPC then
+    self.RECB_CurEnt:SetState()
+end
+    self.RECB_CurEnt:SetMoveType(self.RECB_CurEntMoveType) -- Reset the enemy's move type
+    if (self.RECB_CurEnt:IsNPC() or self.RECB_CurEnt:IsNextBot()) && self.RECB_CurEnt:GetMoveType(MOVETYPE_NONE) then self.RECB_CurEnt:SetMoveType(MOVETYPE_STEP) end
+    if self.RECB_CurEnt:IsPlayer() && self.RECB_CurEnt:GetMoveType(MOVETYPE_NONE) then self.RECB_CurEnt:SetMoveType(MOVETYPE_WALK) end
+    self.RECB_CurEnt = NULL
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:MeleeAttackKnockbackVelocity(hitEnt)
@@ -552,6 +563,7 @@ function ENT:OnDeath(dmginfo,hitgroup,status)
     self:DoChangeMovementType(VJ_MOVETYPE_GROUND)
 end
  if status == "Initial" then
+    self:ResetGrapple()
     VJ_RECB_DeathCode(self)
     if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end
     if dmginfo:GetDamageForce():Length() < 800 then return end
@@ -605,6 +617,10 @@ end
 function ENT:OnCreateDeathCorpse(dmginfo,hitgroup,corpseEnt)
     corpseEnt:SetMoveType(MOVETYPE_STEP)
     VJ_RECB_ApplyCorpse(self,corpseEnt)
+end
+---------------------------------------------------------------------------------------------------------------------------------------------
+function ENT:CustomOnRemove()
+    self:ResetGrapple()
 end
 /*-----------------------------------------------
     *** Copyright (c) 2012-2025 by DrVrej, All rights reserved. ***
