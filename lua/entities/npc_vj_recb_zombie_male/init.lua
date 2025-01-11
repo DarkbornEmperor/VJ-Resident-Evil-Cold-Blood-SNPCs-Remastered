@@ -18,11 +18,6 @@ ENT.HasMeleeAttack = true
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDistance = 15
 ENT.MeleeAttackDamageDistance = 45
-ENT.HasMeleeAttackSlowPlayerSound = false
-ENT.SlowPlayerOnMeleeAttack_WalkSpeed = 0.01
-ENT.SlowPlayerOnMeleeAttack_RunSpeed = 0.01
-ENT.SlowPlayerOnMeleeAttackTime = 1.7
-ENT.HasMeleeAttackKnockBack = true
 ENT.HasDeathAnimation = true
 ENT.DeathAnimationDecreaseLengthAmount = -1
 ENT.DeathCorpseEntityClass = "prop_vj_animatable"
@@ -282,12 +277,12 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:TranslateActivity(act)
  if act == ACT_IDLE && self.HasBeenKnocked then
-        return VJ.SequenceToActivity(self,"on_floor")
+    return VJ.SequenceToActivity(self,"on_floor")
 end
- if self.Crippled then
- if act == ACT_IDLE then
+    if self.Crippled then
+    if act == ACT_IDLE then
         return ACT_CROUCHIDLE
- elseif act == ACT_WALK or act == ACT_RUN then
+    elseif act == ACT_WALK or act == ACT_RUN then
         return ACT_WALK_HURT
     end
 end
@@ -297,22 +292,16 @@ end
 function ENT:MultipleMeleeAttacks()
     if self.Crippled then
         self.AnimTbl_MeleeAttack = "crawl_attack"
-        self.HasMeleeAttackKnockBack = true
-        self.SlowPlayerOnMeleeAttack = true
         self.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
-    return end
+return end
         self.AnimTbl_MeleeAttack = "attack2"
         self.MeleeAttackDamageType = DMG_SLASH
         self.MeleeAttackDamage = 25
-        self.HasMeleeAttackKnockBack = true
-        self.SlowPlayerOnMeleeAttack = true
         self.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
     if math.random(1,4) == 1 then
         self.AnimTbl_MeleeAttack = "vomit"
         self.MeleeAttackDamageType = DMG_ACID
         self.MeleeAttackDamage = 20
-        self.HasMeleeAttackKnockBack = false
-        self.SlowPlayerOnMeleeAttack = false
         self.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/vomit_floor.wav"}
     end
 end
