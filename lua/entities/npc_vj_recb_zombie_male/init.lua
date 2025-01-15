@@ -9,8 +9,8 @@ ENT.Model = "models/vj_recb/b2/zombie.mdl"
 ENT.StartHealth = 250
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE","FACTION_RE1","FACTION_REPS1","RE1HD_ZOMBIE","FACTION_RE3ZOMBIE","RESISTANCE_ENEMY","FACTION_MRX","FACTION_REDCUC","FACTION_REDCUCEM","C_MONSTER_LAB"}
 ENT.BloodColor = VJ.BLOOD_COLOR_RED
-ENT.CustomBlood_Particle = {"vj_recb_blood_red"}
-ENT.CustomBlood_Decal = {"VJ_RECB_Blood_Red"}
+ENT.BloodParticle = {"vj_recb_blood_red"}
+ENT.BloodDecal = {"VJ_RECB_Blood_Red"}
 ENT.HullType = HULL_HUMAN
 ENT.CanFlinch = 1
 ENT.AnimTbl_Flinch = ACT_SMALL_FLINCH
@@ -309,7 +309,7 @@ end
 function ENT:CustomOnMeleeAttack_AfterChecks(hitEnt,isProp)
     if self:IsOnFire() then hitEnt:Ignite(4) end
     if !isProp && self:GetSequence() == self:LookupSequence("attack2") then
-    if hitEnt.IsVJBaseSNPC && VJ.PICK(hitEnt.CustomBlood_Particle) then ParticleEffectAttach(VJ.PICK(hitEnt.CustomBlood_Particle),PATTACH_POINT_FOLLOW,self,self:LookupAttachment("mouth"))
+    if hitEnt.IsVJBaseSNPC && VJ.PICK(hitEnt.BloodParticle) then ParticleEffectAttach(VJ.PICK(hitEnt.BloodParticle),PATTACH_POINT_FOLLOW,self,self:LookupAttachment("mouth"))
     elseif (hitEnt:IsPlayer() or hitEnt:IsNPC() or hitEnt:IsNextBot()) then ParticleEffectAttach("blood_impact_red_01",PATTACH_POINT_FOLLOW,self,self:LookupAttachment("mouth"))
     end
 end
