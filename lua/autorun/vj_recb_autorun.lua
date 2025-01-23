@@ -144,7 +144,7 @@ if VJExists == true then
 end
             Panel:AddControl( "Label", {Text = "#vjbase.menu.general.admin.only"})
             local vj_recbreset = {Options = {}, CVars = {}, Label = "Reset everything:", MenuButton = "0"}
-            vj_recbreset.Options["#vjbase.menugeneral.default"] = {
+            vj_recbreset.Options["#vjbase.menu.general.reset.everything"] = {
                 VJ_RECB_BossMusic = "1",
                 VJ_RECB_Gib = "1",
                 VJ_RECB_Dismember = "1",
@@ -168,7 +168,7 @@ end
 end)
          spawnmenu.AddToolMenuOption("DrVrej", "SNPC Configures", "RECB (Map Spawner)", "RECB (Map Spawner)", "", "", function(Panel)
             local vj_recbreset_mapspawner_cs = {Options = {}, CVars = {}, Label = "Reset everything:", MenuButton = "0"}
-            vj_recbreset_mapspawner_cs.Options["#vjbase.menugeneral.default"] = {
+            vj_recbreset_mapspawner_cs.Options["#vjbase.menu.general.reset.everything"] = {
                 VJ_RECB_MapSpawner_Music = "1",
                 VJ_RECB_MapSpawner_Ambient = "1",
                 VJ_RECB_MapSpawner_MusicVolume = "50",
@@ -187,7 +187,7 @@ end)
 end
             Panel:AddControl( "Label", {Text = "#vjbase.menu.general.admin.only"})
             local vj_recbreset_mapspawner = {Options = {}, CVars = {}, Label = "Reset everything:", MenuButton = "0"}
-            vj_recbreset_mapspawner.Options["#vjbase.menugeneral.default"] = {
+            vj_recbreset_mapspawner.Options["#vjbase.menu.general.reset.everything"] = {
                 VJ_RECB_MapSpawner_Enabled = "1",
                 VJ_RECB_MapSpawner_MaxZom = "80",
                 VJ_RECB_MapSpawner_HordeCount = "35",
