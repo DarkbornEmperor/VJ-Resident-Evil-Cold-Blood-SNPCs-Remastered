@@ -46,7 +46,7 @@ function ENT:MultipleMeleeAttacks()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnMeleeAttack_Miss()
-    self.CurrentAttackAnimationTime = 0
+    self.AttackAnimTime = 0
     self:StopAttacks(false)
     self.vACT_StopAttacks = false
     self:PlayAnim("flinch",true,false,false)

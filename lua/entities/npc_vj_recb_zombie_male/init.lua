@@ -347,7 +347,7 @@ end
     self.RECB_CurEnt:SetEyeAngles(Angle(ang.x,(self:GetPos() -self.RECB_CurEnt:GetPos()):Angle().y,ang.z))
 end
     timer.Create(self:EntIndex().."VJ_RECB_Grapple",0.1,0,function()
-    if IsValid(self) && self.CurrentAttackAnimationTime < CurTime() then
+    if IsValid(self) && self.AttackAnimTime < CurTime() then
         self.RECB_Grappled = false
         self:ResetGrapple()
         timer.Remove(self:EntIndex().."VJ_RECB_Grapple")
@@ -363,7 +363,7 @@ function ENT:Grapple_NPC()
     self.RECB_CurEnt:SetAngles(Angle(ang.x,(self:GetPos() -self.RECB_CurEnt:GetPos()):Angle().y,ang.z))
 end
     timer.Create(self:EntIndex().."VJ_RECB_Grapple",0.1,0,function()
-    if IsValid(self) && self.CurrentAttackAnimationTime < CurTime() then
+    if IsValid(self) && self.AttackAnimTime < CurTime() then
         self.RECB_Grappled = false
         self:ResetGrapple()
         timer.Remove(self:EntIndex().."VJ_RECB_Grapple")
@@ -388,7 +388,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnMeleeAttack_Miss()
  if self.Crippled or self:GetSequence() == self:LookupSequence("vomit") then return end
-    self.CurrentAttackAnimationTime = 0
+    self.AttackAnimTime = 0
     self:StopAttacks(false)
     self.vACT_StopAttacks = false
     self:PlayAnim("lunge_1",true,false,false)
