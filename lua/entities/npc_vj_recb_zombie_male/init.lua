@@ -26,7 +26,7 @@ ENT.DisableFootStepSoundTimer = true
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
     -- ====== Controller Data ====== --
-ENT.VJC_Data = {
+ENT.ControllerVars = {
     CameraMode = 1,
     ThirdP_Offset = Vector(40, 25, -50),
     FirstP_Bone = "Bip01 Head",
@@ -51,7 +51,7 @@ ENT.RECB_CurEntMoveType = MOVETYPE_WALK
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnInput(key,activator,caller,data)
     if key == "step" then
-        self:FootStepSoundCode()
+        self:PlayFootstepSound()
     elseif key == "step_getup" then
         VJ.EmitSound(self,"vj_recb/zombie/footstep"..math.random(1,3)..".wav",70,100)
     elseif key == "melee" then
@@ -536,7 +536,7 @@ end
 function ENT:Cripple()
     self:SetHullType(HULL_TINY)
     self:SetCollisionBounds(Vector(13,13,25),Vector(-13,-13,0))
-    self.VJC_Data = {
+    self.ControllerVars = {
     CameraMode = 1,
     ThirdP_Offset = Vector(30, 25, -15),
     FirstP_Bone = "Bip01 Head",

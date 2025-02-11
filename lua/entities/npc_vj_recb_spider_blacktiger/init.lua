@@ -13,7 +13,7 @@ ENT.MeleeAttackDistance = 80
 ENT.MeleeAttackDamageDistance = 160
 ENT.HasSoundTrack = true
     -- ====== Controller Data ====== --
-ENT.VJC_Data = {
+ENT.ControllerVars = {
     CameraMode = 1,
     ThirdP_Offset = Vector(-40, 25, -25),
     FirstP_Bone = "Joint 15",

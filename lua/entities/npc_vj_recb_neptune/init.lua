@@ -34,7 +34,7 @@ ENT.DisableFootStepSoundTimer = true
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
     -- ====== Controller Data ====== --
-ENT.VJC_Data = {
+ENT.ControllerVars = {
     CameraMode = 1,
     ThirdP_Offset = Vector(20, 30, -60),
     FirstP_Bone = "Bip01 Head",

@@ -34,7 +34,7 @@ ENT.DisableFootStepSoundTimer = true
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
     -- ====== Controller Data ====== --
-ENT.VJC_Data = {
+ENT.ControllerVars = {
     CameraMode = 1,
     ThirdP_Offset = Vector(30, 25, -30),
     FirstP_Bone = "Bip01 Head",
@@ -43,7 +43,7 @@ ENT.VJC_Data = {
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnInput(key,activator,caller,data)
     if key == "step" then
-        self:FootStepSoundCode()
+        self:PlayFootstepSound()
     elseif key == "melee" then
         self:MeleeAttackCode()
     elseif key == "death" then

@@ -9,7 +9,7 @@ include("shared.lua")
 ENT.Model = "models/vj_recb/b1/cerberus.mdl"
 ENT.HasLeapAttack = false
     -- ====== Controller Data ====== --
-ENT.VJC_Data = {
+ENT.ControllerVars = {
     CameraMode = 1,
     ThirdP_Offset = Vector(30, 25, -30),
     FirstP_Bone = "head",

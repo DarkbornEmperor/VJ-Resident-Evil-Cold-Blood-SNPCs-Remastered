@@ -27,7 +27,7 @@ ENT.DisableFootStepSoundTimer = true
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
     -- ====== Controller Data ====== --
-ENT.VJC_Data = {
+ENT.ControllerVars = {
     CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
     ThirdP_Offset = Vector(40, 20, -50), -- The offset for the controller when the camera is in third person
     FirstP_Bone = "Bone 25", -- If left empty, the base will attempt to calculate a position for first person
@@ -36,7 +36,7 @@ ENT.VJC_Data = {
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnInput(key,activator,caller,data)
     if key == "step" then
-        self:FootStepSoundCode()
+        self:PlayFootstepSound()
     elseif key == "melee" then
         self:MeleeAttackCode()
     elseif key == "death" then
