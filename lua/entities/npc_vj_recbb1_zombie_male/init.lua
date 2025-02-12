@@ -64,7 +64,7 @@ function ENT:ZombieVoices()
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:MultipleMeleeAttacks()
+function ENT:CustomOnMeleeAttack_BeforeStartTimer(seed)
     self.AnimTbl_MeleeAttack = "attack2"
     self.MeleeAttackDamageType = DMG_SLASH
     self.MeleeAttackDamage = 25

@@ -35,7 +35,7 @@ ENT.DisableFootStepSoundTimer = true
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
     -- ====== Controller Data ====== --
-ENT.ControllerVars = {
+ENT.ControllerParameters = {
     CameraMode = 1,
     ThirdP_Offset = Vector(25, 30, -25),
     FirstP_Bone = "Bip01 Head",
@@ -46,7 +46,7 @@ function ENT:OnInput(key,activator,caller,data)
     if key == "step" then
         self:PlayFootstepSound()
     elseif key == "melee" then
-        self:MeleeAttackCode()
+        self:ExecuteMeleeAttack()
     elseif key == "death" then
         VJ.EmitSound(self, "vj_recb/licker/li_bodyfall.wav", 75, 100)
     end
@@ -91,21 +91,21 @@ function ENT:Init()
     self:Licker_Init()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:MultipleMeleeAttacks()
+function ENT:CustomOnMeleeAttack_BeforeStartTimer(seed)
     local attack = math.random(1,2)
     if attack == 1 then
         self.AnimTbl_MeleeAttack = ACT_MELEE_ATTACK1
         self.MeleeAttackDamage = 35
         self.MeleeAttackDistance = 30
         self.MeleeAttackDamageDistance = 60
-        self.SoundTbl_MeleeAttackExtra = {"vj_recb/licker/li_slash.wav"}
+        self.SoundTbl_MeleeAttackExtra = "vj_recb/licker/li_slash.wav"
         self.HasMeleeAttackMissSounds = true
     elseif attack == 2 then
         self.AnimTbl_MeleeAttack = ACT_MELEE_ATTACK2
         self.MeleeAttackDamage = 30
         self.MeleeAttackDistance = 30
         self.MeleeAttackDamageDistance = 70
-        self.SoundTbl_MeleeAttackExtra = {"vj_recb/licker/li_tongue.wav"}
+        self.SoundTbl_MeleeAttackExtra = "vj_recb/licker/li_tongue.wav"
         self.HasMeleeAttackMissSounds = false
     end
 end

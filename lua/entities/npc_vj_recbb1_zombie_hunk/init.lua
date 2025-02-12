@@ -47,7 +47,7 @@ function ENT:Zombie_Init()
 }
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:MultipleMeleeAttacks()
+function ENT:CustomOnMeleeAttack_BeforeStartTimer(seed)
     self.AnimTbl_MeleeAttack = ACT_MELEE_ATTACK1
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

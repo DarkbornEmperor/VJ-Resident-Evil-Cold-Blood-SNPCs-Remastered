@@ -14,7 +14,7 @@ ENT.TimeUntilLeapAttackVelocity = 0.2
 ENT.LeapAttackExtraTimers = false
 ENT.AnimTbl_Death = {"die_back","die_forward_scream"}
     -- ====== Controller Data ====== --
-ENT.ControllerVars = {
+ENT.ControllerParameters = {
     CameraMode = 1,
     ThirdP_Offset = Vector(30, 25, -35),
     FirstP_Bone = "Object_3",

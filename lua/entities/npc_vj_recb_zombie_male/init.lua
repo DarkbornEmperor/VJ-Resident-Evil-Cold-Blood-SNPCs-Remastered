@@ -26,7 +26,7 @@ ENT.DisableFootStepSoundTimer = true
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
     -- ====== Controller Data ====== --
-ENT.ControllerVars = {
+ENT.ControllerParameters = {
     CameraMode = 1,
     ThirdP_Offset = Vector(40, 25, -50),
     FirstP_Bone = "Bip01 Head",
@@ -55,9 +55,9 @@ function ENT:OnInput(key,activator,caller,data)
     elseif key == "step_getup" then
         VJ.EmitSound(self,"vj_recb/zombie/footstep"..math.random(1,3)..".wav",70,100)
     elseif key == "melee" then
-        self:MeleeAttackCode()
+        self:ExecuteMeleeAttack()
     elseif key == "vomit" then
-        self:MeleeAttackCode()
+        self:ExecuteMeleeAttack()
         VJ.EmitSound(self,"vj_recb/zombie/vomit.wav",75,100)
         ParticleEffectAttach("vj_recb_vomit", PATTACH_POINT_FOLLOW, self, self:LookupAttachment("mouth"))
     elseif key == "death_knee" then
@@ -289,7 +289,7 @@ end
     return self.BaseClass.TranslateActivity(self,act)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:MultipleMeleeAttacks()
+function ENT:CustomOnMeleeAttack_BeforeStartTimer(seed)
     if self.Crippled then
         self.AnimTbl_MeleeAttack = "crawl_attack"
         self.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
@@ -302,7 +302,7 @@ return end
         self.AnimTbl_MeleeAttack = "vomit"
         self.MeleeAttackDamageType = DMG_ACID
         self.MeleeAttackDamage = 20
-        self.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/vomit_floor.wav"}
+        self.SoundTbl_MeleeAttackExtra = "vj_recb/zombie/vomit_floor.wav"
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -536,7 +536,7 @@ end
 function ENT:Cripple()
     self:SetHullType(HULL_TINY)
     self:SetCollisionBounds(Vector(13,13,25),Vector(-13,-13,0))
-    self.ControllerVars = {
+    self.ControllerParameters = {
     CameraMode = 1,
     ThirdP_Offset = Vector(30, 25, -15),
     FirstP_Bone = "Bip01 Head",

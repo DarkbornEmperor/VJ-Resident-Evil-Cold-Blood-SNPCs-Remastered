@@ -34,7 +34,7 @@ ENT.DisableFootStepSoundTimer = true
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
     -- ====== Controller Data ====== --
-ENT.ControllerVars = {
+ENT.ControllerParameters = {
     CameraMode = 1,
     ThirdP_Offset = Vector(30, 25, -30),
     FirstP_Bone = "Bip01 Head",
@@ -45,7 +45,7 @@ function ENT:OnInput(key,activator,caller,data)
     if key == "step" then
         self:PlayFootstepSound()
     elseif key == "melee" then
-        self:MeleeAttackCode()
+        self:ExecuteMeleeAttack()
     elseif key == "death" then
         VJ.EmitSound(self, "vj_recb/crow/crow_bodyhit.wav", 75, 100)
     end

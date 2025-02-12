@@ -30,7 +30,7 @@ ENT.BreathSoundLevel = 75
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
     -- ====== Controller Data ====== --
-ENT.ControllerVars = {
+ENT.ControllerParameters = {
     CameraMode = 1,
     ThirdP_Offset = Vector(40, 25, -50),
     FirstP_Bone = "Bip01 Head",
@@ -52,7 +52,7 @@ function ENT:OnInput(key,activator,caller,data)
     elseif key == "step_getup" then
         VJ.EmitSound(self,"vj_recb/zombie/footstep"..math.random(1,3)..".wav",70,100)
     elseif key == "melee" then
-        self:MeleeAttackCode()
+        self:ExecuteMeleeAttack()
     elseif key == "death_knee" then
         VJ.EmitSound(self,"vj_recb/zombie/zom_knee.wav",75,100)
     elseif key == "death" then

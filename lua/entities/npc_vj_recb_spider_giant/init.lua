@@ -35,7 +35,7 @@ ENT.DisableFootStepSoundTimer = true
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
     -- ====== Controller Data ====== --
-ENT.ControllerVars = {
+ENT.ControllerParameters = {
     CameraMode = 1,
     ThirdP_Offset = Vector(-15, 25, -20),
     FirstP_Bone = "Joint 15",
@@ -44,9 +44,9 @@ ENT.ControllerVars = {
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnInput(key,activator,caller,data)
     if key == "melee" then
-        self:MeleeAttackCode()
+        self:ExecuteMeleeAttack()
     elseif key == "range" then
-        self:RangeAttackCode()
+        self:ExecuteRangeAttack()
         ParticleEffectAttach("vj_recb_spider_spit", PATTACH_POINT_FOLLOW, self, self:LookupAttachment("mouth"))
     elseif key == "death" then
         VJ.EmitSound(self, "vj_recb/spider/sp_bodyfall.wav", 75, 100)

@@ -34,7 +34,7 @@ ENT.DisableFootStepSoundTimer = true
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
     -- ====== Controller Data ====== --
-ENT.ControllerVars = {
+ENT.ControllerParameters = {
     CameraMode = 1,
     ThirdP_Offset = Vector(20, 30, -60),
     FirstP_Bone = "Bip01 Head",
@@ -43,7 +43,7 @@ ENT.ControllerVars = {
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnInput(key,activator,caller,data)
     if key == "melee" then
-        self:MeleeAttackCode()
+        self:ExecuteMeleeAttack()
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
