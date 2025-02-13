@@ -17,7 +17,7 @@ ENT.Aerial_FlyingSpeed_Calm = 200
 ENT.Aerial_FlyingSpeed_Alerted = 200
 ENT.Aerial_AnimTbl_Calm = ACT_WALK
 ENT.Aerial_AnimTbl_Alerted = ACT_WALK
-ENT.CanFlinch = 1
+ENT.CanFlinch = true
 ENT.AnimTbl_Flinch = ACT_SMALL_FLINCH
 ENT.HasMeleeAttack = true
 ENT.MeleeAttackDamage = 5
@@ -34,7 +34,7 @@ ENT.DisableFootStepSoundTimer = true
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
     -- ====== Controller Data ====== --
-ENT.ControllerParameters = {
+ENT.ControllerParams = {
     CameraMode = 1,
     ThirdP_Offset = Vector(30, 25, -30),
     FirstP_Bone = "Bip01 Head",

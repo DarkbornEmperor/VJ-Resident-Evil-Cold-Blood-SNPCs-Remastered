@@ -12,7 +12,7 @@ ENT.BloodColor = VJ.BLOOD_COLOR_RED
 ENT.BloodParticle = {"vj_recb_blood_red"}
 ENT.BloodDecal = {"VJ_RECB_Blood_Red"}
 ENT.HullType = HULL_HUMAN
-ENT.CanFlinch = 1
+ENT.CanFlinch = true
 ENT.AnimTbl_Flinch = ACT_SMALL_FLINCH
 ENT.HasMeleeAttack = true
 ENT.TimeUntilMeleeAttackDamage = false
@@ -30,7 +30,7 @@ ENT.BreathSoundLevel = 75
 ENT.GeneralSoundPitch1 = 100
 ENT.GeneralSoundPitch2 = 100
     -- ====== Controller Data ====== --
-ENT.ControllerParameters = {
+ENT.ControllerParams = {
     CameraMode = 1,
     ThirdP_Offset = Vector(40, 25, -50),
     FirstP_Bone = "Bip01 Head",
