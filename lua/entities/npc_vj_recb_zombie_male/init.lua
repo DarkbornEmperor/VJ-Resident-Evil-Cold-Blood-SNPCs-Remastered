@@ -413,7 +413,7 @@ function ENT:OnDamaged(dmginfo,hitgroup,status)
        self:AddFlags(FL_NOTARGET)
        self.HasIdleSounds = false
        self.HasBreathSound = false
-       self.DisableFindEnemy = true
+       self.EnemyDetection = true
        self.DisableMakingSelfEnemyToNPCs = true
        self.HasMeleeAttack = false
 
@@ -438,7 +438,7 @@ end
     timer.Simple(animTime,function()
     if IsValid(self) && !self.DeathAnimationCodeRan then
         self:DoChangeMovementType(VJ_MOVETYPE_GROUND)
-        self.DisableFindEnemy = false
+        self.EnemyDetection = false
         self.DisableMakingSelfEnemyToNPCs = false
         self.HasMeleeAttack = true end
         end)

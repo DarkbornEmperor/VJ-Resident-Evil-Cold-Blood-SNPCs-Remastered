@@ -69,7 +69,7 @@ function ENT:CustomOnMeleeAttack_BeforeStartTimer(seed)
     self.MeleeAttackDamageType = DMG_SLASH
     self.MeleeAttackDamage = 25
     self.HasMeleeAttackKnockBack = true
-    self.SlowPlayerOnMeleeAttack = true
+    self.MeleeAttackPlayerSpeed = true
     self.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

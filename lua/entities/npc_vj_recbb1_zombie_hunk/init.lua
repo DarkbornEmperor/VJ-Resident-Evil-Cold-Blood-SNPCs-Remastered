@@ -9,7 +9,7 @@ include("shared.lua")
 ENT.Model = {"models/vj_recb/b1/zombie_hunk.mdl"}
 ENT.MeleeAttackDistance = 30
 ENT.MeleeAttackDamageDistance = 60
-ENT.SlowPlayerOnMeleeAttack = false
+ENT.MeleeAttackPlayerSpeed = false
 ENT.HasMeleeAttackKnockBack = false
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ZombieVoices()

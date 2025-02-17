@@ -14,11 +14,11 @@ ENT.NextLeapAttackTime = 4
 ENT.LeapAttackDamageDistance = 50
 ENT.LeapAttackDamage = 15
 ENT.LeapAttackExtraTimers = {0.6, 0.8, 1}
-ENT.StopLeapAttackAfterFirstHit = true
+ENT.LeapAttackStopOnHit = true
 ENT.LeapAttackVelocityForward = 100
 ENT.LeapAttackVelocityUp = 100
-ENT.LeapDistance = 200
-ENT.LeapToMeleeDistance = 1
+ENT.LeapAttackMaxDistance = 200
+ENT.LeapAttackMinDistance = 1
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Cerberus_Init()
     self.SoundTbl_FootStep = {

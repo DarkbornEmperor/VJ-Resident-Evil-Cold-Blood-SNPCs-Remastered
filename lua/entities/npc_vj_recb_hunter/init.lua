@@ -14,8 +14,8 @@ ENT.BloodDecal = {"VJ_RECB_Blood_Red"}
 ENT.HullType = HULL_HUMAN
 ENT.CanFlinch = true
 ENT.AnimTbl_Flinch = ACT_SMALL_FLINCH
-ENT.HitGroupFlinching_DefaultWhenNotHit = true
-ENT.HitGroupFlinching_Values = {
+ENT.FlinchHitGroupPlayDefault = true
+ENT.FlinchHitGroupMap = {
 {HitGroup = {HITGROUP_LEFTARM}, Animation = {ACT_FLINCH_LEFTARM}},
 {HitGroup = {HITGROUP_RIGHTARM}, Animation = {ACT_FLINCH_RIGHTARM}},
 {HitGroup = {HITGROUP_LEFTLEG}, Animation = {ACT_FLINCH_LEFTLEG}},
@@ -34,9 +34,9 @@ ENT.TimeUntilLeapAttackDamage = 0.8
 ENT.TimeUntilLeapAttackVelocity = 0.8
 ENT.NextLeapAttackTime = 8
 ENT.LeapAttackExtraTimers = {1, 1.2, 1.4, 1.6}
-ENT.StopLeapAttackAfterFirstHit = true
-ENT.LeapDistance = 300
-ENT.LeapToMeleeDistance = 200
+ENT.LeapAttackStopOnHit = true
+ENT.LeapAttackMaxDistance = 300
+ENT.LeapAttackMinDistance = 200
 ENT.HasDeathAnimation = true
 ENT.AnimTbl_Death = ACT_DIESIMPLE
 ENT.DeathAnimationDecreaseLengthAmount = -1
