@@ -27,8 +27,7 @@ ENT.DeathCorpseEntityClass = "prop_vj_animatable"
 ENT.HasExtraMeleeAttackSounds = true
 ENT.DisableFootStepSoundTimer = true
 ENT.BreathSoundLevel = 75
-ENT.MainSoundPitch = VJ.SET(100, 100)
-    -- ====== Controller Data ====== --
+ENT.MainSoundPitch = VJ.SET(100, 100)    -- ====== Controller Data ====== --
 ENT.ControllerParams = {
     CameraMode = 1,
     ThirdP_Offset = Vector(40, 25, -50),

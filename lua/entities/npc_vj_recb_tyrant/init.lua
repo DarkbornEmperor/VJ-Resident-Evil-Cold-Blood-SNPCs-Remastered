@@ -20,7 +20,7 @@ ENT.MeleeAttackDamageDistance = 80
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.HasMeleeAttackKnockBack = true
 ENT.MeleeAttackPlayerSpeed = true
-ENT.HasMeleeAttackSlowPlayerSound = false
+ENT.HasMeleeAttackPlayerSpeedSounds = false
 ENT.MeleeAttackPlayerSpeedWalk = 100
 ENT.MeleeAttackPlayerSpeedRun = 100
 ENT.MeleeAttackPlayerSpeedTime = 0.8
@@ -31,8 +31,7 @@ ENT.DeathCorpseEntityClass = "prop_vj_animatable"
 ENT.HasSoundTrack = true
 ENT.HasExtraMeleeAttackSounds = true
 ENT.DisableFootStepSoundTimer = true
-ENT.MainSoundPitch = VJ.SET(100, 100)
-    -- ====== Controller Data ====== --
+ENT.MainSoundPitch = VJ.SET(100, 100)    -- ====== Controller Data ====== --
 ENT.ControllerParams = {
     CameraMode = 1, -- Sets the default camera mode | 1 = Third Person, 2 = First Person
     ThirdP_Offset = Vector(20, 25, -60), -- The offset for the controller when the camera is in third person

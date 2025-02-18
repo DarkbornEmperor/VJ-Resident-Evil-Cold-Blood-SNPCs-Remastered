@@ -17,7 +17,7 @@ ENT.HasMeleeAttack = true
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackDamage = 40
 ENT.MeleeAttackPlayerSpeed = true
-ENT.HasMeleeAttackSlowPlayerSound = false
+ENT.HasMeleeAttackPlayerSpeedSounds = false
 ENT.MeleeAttackPlayerSpeedWalk = 100
 ENT.MeleeAttackPlayerSpeedRun = 100
 ENT.MeleeAttackPlayerSpeedTime = 0.8
@@ -28,8 +28,7 @@ ENT.DeathCorpseEntityClass = "prop_vj_animatable"
 ENT.HasSoundTrack = true
 ENT.HasExtraMeleeAttackSounds = true
 ENT.DisableFootStepSoundTimer = true
-ENT.MainSoundPitch = VJ.SET(100, 100)
-    -- ====== Controller Data ====== --
+ENT.MainSoundPitch = VJ.SET(100, 100)    -- ====== Controller Data ====== --
 ENT.ControllerParams = {
     CameraMode = 1,
     ThirdP_Offset = Vector(20, 25, -70),
