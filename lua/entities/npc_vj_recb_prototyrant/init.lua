@@ -84,7 +84,7 @@ function ENT:Init()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:TranslateActivity(act)
- if act == ACT_RUN && self.LatestEnemyDistance < 250 && IsValid(self:GetEnemy()) then
+ if act == ACT_RUN && self.EnemyData.Distance < 250 && IsValid(self:GetEnemy()) then
     return ACT_WALK
 end
     return self.BaseClass.TranslateActivity(self,act)
