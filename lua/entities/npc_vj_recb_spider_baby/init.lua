@@ -16,7 +16,8 @@ ENT.BloodDecal = {"VJ_RECB_Blood_Yellow"}
 ENT.HullType = HULL_TINY
 ENT.HasMeleeAttack = false
 ENT.DisableFootStepSoundTimer = true
-ENT.MainSoundPitch = VJ.SET(100, 100)    -- ====== Controller Data ====== --
+ENT.MainSoundPitch = 100
+-- ====== Controller Data ====== --
 ENT.ControllerParams = {
     CameraMode = 1,
     ThirdP_Offset = Vector(40, 20, -50),

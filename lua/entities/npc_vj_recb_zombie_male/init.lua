@@ -23,7 +23,8 @@ ENT.DeathAnimationDecreaseLengthAmount = -1
 ENT.DeathCorpseEntityClass = "prop_vj_animatable"
 ENT.HasExtraMeleeAttackSounds = true
 ENT.DisableFootStepSoundTimer = true
-ENT.MainSoundPitch = VJ.SET(100, 100)    -- ====== Controller Data ====== --
+ENT.MainSoundPitch = 100
+-- ====== Controller Data ====== --
 ENT.ControllerParams = {
     CameraMode = 1,
     ThirdP_Offset = Vector(40, 25, -50),
@@ -393,7 +394,7 @@ function ENT:CustomOnMeleeAttack_Miss()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnFlinch(dmginfo,hitgroup,status)
-    if status == "PriorExecution" then
+    if status == "Init" then
         return self.Crippled or self.HasBeenKnocked or self:GetSequence() == self:LookupSequence("floor_getup") -- If we are crawling then DO NOT flinch!
     end
 end
@@ -546,10 +547,10 @@ function ENT:Cripple()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDeath(dmginfo,hitgroup,status)
- if status == "Initial" && self.MovementType == VJ_MOVETYPE_STATIONARY then
+ if status == "Init" && self.MovementType == VJ_MOVETYPE_STATIONARY then
     self:DoChangeMovementType(VJ_MOVETYPE_GROUND)
 end
- if status == "Initial" then
+ if status == "Init" then
     self:ResetGrapple()
     VJ_RECB_DeathCode(self)
     if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end

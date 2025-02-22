@@ -31,7 +31,8 @@ ENT.DeathCorpseEntityClass = "prop_vj_animatable"
 ENT.HasExtraMeleeAttackSounds = true
 ENT.DisableFootStepSoundTimer = true
 //ENT.BreathSoundLevel = 40
-ENT.MainSoundPitch = VJ.SET(100, 100)    -- ====== Controller Data ====== --
+ENT.MainSoundPitch = 100
+-- ====== Controller Data ====== --
 ENT.ControllerParams = {
     CameraMode = 1,
     ThirdP_Offset = Vector(30, 25, -30),
@@ -82,7 +83,7 @@ function ENT:Init()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDeath(dmginfo,hitgroup,status)
-    if status == "Initial" then
+    if status == "Init" then
         self:DoChangeMovementType(VJ_MOVETYPE_GROUND)
         VJ_RECB_DeathCode(self)
     end

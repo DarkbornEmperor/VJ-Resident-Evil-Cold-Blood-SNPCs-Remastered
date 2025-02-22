@@ -46,7 +46,7 @@ function ENT:Hunter_Init()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDeath(dmginfo,hitgroup,status)
- if status == "Initial" then
+ if status == "Init" then
     VJ_RECB_DeathCode(self)
 end
  if status == "DeathAnim" then
