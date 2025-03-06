@@ -288,11 +288,12 @@ end
     return self.BaseClass.TranslateActivity(self,act)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnMeleeAttack_BeforeStartTimer(seed)
+function ENT:OnMeleeAttack(status,enemy)
+    if status == "Init" then
     if self.Crippled then
         self.AnimTbl_MeleeAttack = "crawl_attack"
         self.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
-return end
+    return end
         self.AnimTbl_MeleeAttack = "attack2"
         self.MeleeAttackDamageType = DMG_SLASH
         self.MeleeAttackDamage = 25
@@ -302,6 +303,7 @@ return end
         self.MeleeAttackDamageType = DMG_ACID
         self.MeleeAttackDamage = 20
         self.SoundTbl_MeleeAttackExtra = "vj_recb/zombie/vomit_floor.wav"
+        end
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

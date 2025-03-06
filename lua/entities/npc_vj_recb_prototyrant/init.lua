@@ -91,7 +91,8 @@ end
     return self.BaseClass.TranslateActivity(self,act)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnMeleeAttack_BeforeStartTimer(seed)
+function ENT:OnMeleeAttack(status,enemy)
+    if status == "Init" then
     local attack = math.random(1,2)
     if attack == 1 then
         self.AnimTbl_MeleeAttack = "vjseq_attack1"
@@ -103,6 +104,7 @@ function ENT:CustomOnMeleeAttack_BeforeStartTimer(seed)
         self.MeleeAttackDistance = 30
         self.MeleeAttackDamageDistance = 70
         self.HasMeleeAttackKnockBack = false
+        end
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

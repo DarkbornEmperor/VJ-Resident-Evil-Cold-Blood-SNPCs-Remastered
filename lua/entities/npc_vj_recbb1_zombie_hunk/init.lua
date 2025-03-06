@@ -47,8 +47,10 @@ function ENT:Zombie_Init()
 }
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnMeleeAttack_BeforeStartTimer(seed)
-    self.AnimTbl_MeleeAttack = ACT_MELEE_ATTACK1
+function ENT:OnMeleeAttack(status,enemy)
+    if status == "Init" then
+        self.AnimTbl_MeleeAttack = ACT_MELEE_ATTACK1
+    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnMeleeAttack_Miss() return end

@@ -90,7 +90,8 @@ function ENT:Init()
     self:Licker_Init()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnMeleeAttack_BeforeStartTimer(seed)
+function ENT:OnMeleeAttack(status,enemy)
+    if status == "Init" then
     local attack = math.random(1,2)
     if attack == 1 then
         self.AnimTbl_MeleeAttack = ACT_MELEE_ATTACK1
@@ -106,6 +107,7 @@ function ENT:CustomOnMeleeAttack_BeforeStartTimer(seed)
         self.MeleeAttackDamageDistance = 70
         self.SoundTbl_MeleeAttackExtra = "vj_recb/licker/li_tongue.wav"
         self.HasMeleeAttackMissSounds = false
+        end
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

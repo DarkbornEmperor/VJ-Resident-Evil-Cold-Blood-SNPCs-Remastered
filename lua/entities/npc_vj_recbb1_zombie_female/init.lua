@@ -36,13 +36,15 @@ function ENT:Zombie_Init()
 }
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnMeleeAttack_BeforeStartTimer(seed)
-    self.AnimTbl_MeleeAttack = "attack2"
-    self.MeleeAttackDamageType = DMG_SLASH
-    self.MeleeAttackDamage = 25
-    self.HasMeleeAttackKnockBack = true
-    self.MeleeAttackPlayerSpeed = true
-    self.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
+function ENT:OnMeleeAttack(status,enemy)
+    if status == "Init" then
+        self.AnimTbl_MeleeAttack = "attack2"
+        self.MeleeAttackDamageType = DMG_SLASH
+        self.MeleeAttackDamage = 25
+        self.HasMeleeAttackKnockBack = true
+        self.MeleeAttackPlayerSpeed = true
+        self.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
+    end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnMeleeAttack_Miss()
