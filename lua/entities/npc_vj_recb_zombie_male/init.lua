@@ -307,31 +307,30 @@ function ENT:OnMeleeAttack(status,enemy)
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnMeleeAttack_AfterChecks(hitEnt,isProp)
-    if self:IsOnFire() then hitEnt:Ignite(4) end
+function ENT:OnMeleeAttackExecute(status,ent,isProp)
+    if status == "PreDamage" then
+    if self:IsOnFire() then ent:Ignite(4) end
     if !isProp && self:GetSequence() == self:LookupSequence("attack2") then
-    if hitEnt.IsVJBaseSNPC && VJ.PICK(hitEnt.BloodParticle) then ParticleEffectAttach(VJ.PICK(hitEnt.BloodParticle),PATTACH_POINT_FOLLOW,self,self:LookupAttachment("mouth"))
-    elseif (hitEnt:IsPlayer() or hitEnt:IsNPC() or hitEnt:IsNextBot()) then ParticleEffectAttach("blood_impact_red_01",PATTACH_POINT_FOLLOW,self,self:LookupAttachment("mouth"))
+    if ent.IsVJBaseSNPC && VJ.PICK(ent.BloodParticle) then ParticleEffectAttach(VJ.PICK(ent.BloodParticle),PATTACH_POINT_FOLLOW,self,self:LookupAttachment("mouth"))
+    elseif (ent:IsPlayer() or ent:IsNPC() or ent:IsNextBot()) then ParticleEffectAttach("blood_impact_red_01",PATTACH_POINT_FOLLOW,self,self:LookupAttachment("mouth"))
     end
 end
    if self:GetSequence() == self:LookupSequence("attack2") then
-   if hitEnt.IsVJBaseSNPC && (hitEnt.MovementType != VJ_MOVETYPE_GROUND or hitEnt.VJ_ID_Boss or hitEnt.IsVJBaseSNPC_Tank) then self.RECB_Grappled = false return false end
+   if ent.IsVJBaseSNPC && (ent.MovementType != VJ_MOVETYPE_GROUND or ent.VJ_ID_Boss or ent.IsVJBaseSNPC_Tank) then self.RECB_Grappled = false return false end
    if !self.RECB_Grappled then
       self.RECB_Grappled = true
-      //hitEnt:SetVelocity(self:MeleeAttackKnockbackVelocity(hitEnt))
-   if self.RECB_CurEnt != hitEnt then -- If the grabbed enemy is a new enemy then reset the enemy values
+      //ent:SetVelocity(self:MeleeAttackKnockbackVelocity(ent))
+   if self.RECB_CurEnt != ent then -- If the grabbed enemy is a new enemy then reset the enemy values
       self:ResetGrapple()
-      self.RECB_CurEntMoveType = hitEnt:GetMoveType()
+      self.RECB_CurEntMoveType = ent:GetMoveType()
 end
-   if hitEnt:IsPlayer() or (hitEnt.IsVJBaseSNPC && hitEnt.MovementType == VJ_MOVETYPE_GROUND && !hitEnt.VJ_ID_Boss && !hitEnt.IsVJBaseSNPC_Tank) then
+   if ent:IsPlayer() or (ent.IsVJBaseSNPC && ent.MovementType == VJ_MOVETYPE_GROUND && !ent.VJ_ID_Boss && !ent.IsVJBaseSNPC_Tank) then
       self:Grapple()
 end
-   if hitEnt:IsNPC() && !hitEnt.IsVJBaseSNPC && hitEnt:GetMoveType(MOVETYPE_STEP) then
-        self:Grapple_NPC()
+   if ent:IsNPC() && !ent.IsVJBaseSNPC && ent:GetMoveType(MOVETYPE_STEP) then
+        self:Grapple_NPC() end end
         end
     end
-end
-    return false
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Grapple()
