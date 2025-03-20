@@ -382,7 +382,7 @@ end
     self.RECB_CurEnt = NULL
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:MeleeAttackKnockbackVelocity(hitEnt)
+function ENT:MeleeAttackKnockbackVelocity(ent)
     return self:GetForward()*-150 + self:GetUp()*10
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

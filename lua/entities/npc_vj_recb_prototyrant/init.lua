@@ -108,7 +108,7 @@ function ENT:OnMeleeAttack(status,enemy)
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:MeleeAttackKnockbackVelocity(hitEnt)
+function ENT:MeleeAttackKnockbackVelocity(ent)
     return self:GetForward()*180 + self:GetUp()*80
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
