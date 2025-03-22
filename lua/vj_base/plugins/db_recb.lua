@@ -135,13 +135,13 @@
 
       if CLIENT then
          hook.Add("PopulateToolMenu", "VJ_ADDTOMENU_RECB", function()
-         spawnmenu.AddToolMenuOption("DrVrej", "SNPC Configures", "RECB (Main)", "RECB (Main)", "", "", function(Panel)
+         spawnmenu.AddToolMenuOption("DrVrej", "SNPC Configures", "RECB - General", "RECB - General", "", "", function(panel)
             if !game.SinglePlayer() && !LocalPlayer():IsAdmin() then
-                Panel:AddControl("Label", {Text = "#vjbase.menu.general.admin.not"})
-                Panel:AddControl( "Label", {Text = "#vjbase.menu.general.admin.only"})
+                panel:Help("#vjbase.menu.general.admin.not")
+                panel:Help("#vjbase.menu.general.admin.only"})
     return
 end
-            Panel:AddControl( "Label", {Text = "#vjbase.menu.general.admin.only"})
+            panel:Help("#vjbase.menu.general.admin.only"})
             local vj_recbreset = {Options = {}, CVars = {}, Label = "Reset everything:", MenuButton = "0"}
             vj_recbreset.Options["#vjbase.menu.general.reset.everything"] = {
                 VJ_RECB_BossMusic = "1",
@@ -152,39 +152,39 @@ end
                 VJ_RECB_Zombie_GetUpTime1 = "5",
                 VJ_RECB_Zombie_GetUpTime2 = "10",
 }
-            Panel:AddControl("ComboBox", vj_recbreset)
-            Panel:ControlHelp("Note: Only future spawned SNPCs will be affected.")
-            Panel:AddControl( "Label", {Text = "Options:"})
-            Panel:AddControl("Checkbox", {Label ="Enable Boss Music?", Command ="VJ_RECB_BossMusic"})
-            Panel:AddControl("Checkbox", {Label ="Enable Cerberus Sleeping?", Command ="VJ_RECB_CerberusSleep"})
-            Panel:AddControl("Checkbox", {Label ="Enable Zombies Being Knocked Down?", Command ="VJ_RECB_Knocked"})
-            Panel:AddControl("Checkbox", {Label ="Enable Zombie Dismemberment?", Command ="VJ_RECB_Dismember"})
-            Panel:AddControl("Checkbox", {Label ="Enable Gibbing?", Command ="VJ_RECB_Gib"})
-            Panel:AddControl("Slider", {Label ="Zombie Getup Time Rand #1",Command ="VJ_RECB_Zombie_GetUpTime1", Min = "5", Max = "120"})
-            Panel:AddControl("Slider", {Label ="Zombie Getup Time Rand #2",Command ="VJ_RECB_Zombie_GetUpTime2", Min = "5", Max = "120"})
-            Panel:ControlHelp("Time until infected Players/(S)NPCs resurrect.")
-            Panel:ControlHelp("Note: Rand #2 must be higher than Rand #1")
+            panel:AddControl("ComboBox", vj_recbreset)
+            panel:ControlHelp("Note: Only future spawned SNPCs will be affected.")
+            panel:Help("Options:")
+            panel:CheckBox("Enable Boss Music?","VJ_RECB_BossMusic")
+            panel:CheckBox("Enable Cerberus Sleeping?","VJ_RECB_CerberusSleep")
+            panel:CheckBox("Enable Zombies Being Knocked Down?","VJ_RECB_Knocked")
+            panel:CheckBox("Enable Zombie Dismemberment?","VJ_RECB_Dismember")
+            panel:CheckBox("Enable Gibbing?","VJ_RECB_Gib")
+            panel:CheckBox("Zombie Getup Time Rand #1","VJ_RECB_Zombie_GetUpTime1","5","120")
+            panel:CheckBox("Zombie Getup Time Rand #2","VJ_RECB_Zombie_GetUpTime2","5","120")
+            panel:ControlHelp("Time until infected Players/(S)NPCs resurrect.")
+            panel:ControlHelp("Note: Rand #2 must be higher than Rand #1")
 end)
-         spawnmenu.AddToolMenuOption("DrVrej", "SNPC Configures", "RECB (Map Spawner)", "RECB (Map Spawner)", "", "", function(Panel)
+         spawnmenu.AddToolMenuOption("DrVrej", "SNPC Configures", "RECB - Map Spawner", "RECB - Map Spawner", "", "", function(panel)
             local vj_recbreset_mapspawner_cs = {Options = {}, CVars = {}, Label = "Reset everything:", MenuButton = "0"}
             vj_recbreset_mapspawner_cs.Options["#vjbase.menu.general.reset.everything"] = {
                 VJ_RECB_MapSpawner_Music = "1",
                 VJ_RECB_MapSpawner_Ambient = "1",
                 VJ_RECB_MapSpawner_MusicVolume = "50",
-                VJ_RECB_MapSpawner_AmbienceVolume = "30",
+                VJ_RECB_MapSpawner_AmbienceVolume = "30"
 }
-                Panel:AddControl("ComboBox", vj_recbreset_mapspawner_cs)
-                 Panel:AddControl( "Label", {Text = "Client-Side Options:"})
-                Panel:AddControl("Checkbox", {Label ="Enable Music?", Command ="VJ_RECB_MapSpawner_Music"})
-                Panel:AddControl("Checkbox", {Label ="Enable Ambience?", Command ="VJ_RECB_MapSpawner_Ambient"})
-                Panel:AddControl("Slider", { Label     = "Music Volume", Command = "VJ_RECB_MapSpawner_MusicVolume", Type = "Float", Min = "10", Max = "100"})
-                Panel:AddControl("Slider", { Label     = "Ambience Volume", Command = "VJ_RECB_MapSpawner_AmbienceVolume", Type = "Float", Min = "10", Max = "100"})
+                panel:AddControl("ComboBox", vj_recbreset_mapspawner_cs)
+                 panel:Help("Client-Side Options:")
+                panel:CheckBox("Enable Music?","VJ_RECB_MapSpawner_Music")
+                panel:CheckBox("Enable Ambience?","VJ_RECB_MapSpawner_Ambient")
+                panel:CheckBox("Music Volume","VJ_RECB_MapSpawner_MusicVolume",10,100,2)
+                panel:CheckBox("Ambience Volume","VJ_RECB_MapSpawner_AmbienceVolume",10,100,2)
             if !game.SinglePlayer() && !LocalPlayer():IsAdmin() then
-                Panel:AddControl("Label", {Text = "#vjbase.menu.general.admin.not"})
-                Panel:AddControl( "Label", {Text = "#vjbase.menu.general.admin.only"})
+                panel:Help("#vjbase.menu.general.admin.not")
+                panel:Help("#vjbase.menu.general.admin.only")
     return
 end
-            Panel:AddControl( "Label", {Text = "#vjbase.menu.general.admin.only"})
+            panel:Help("#vjbase.menu.general.admin.only")
             local vj_recbreset_mapspawner = {Options = {}, CVars = {}, Label = "Reset everything:", MenuButton = "0"}
             vj_recbreset_mapspawner.Options["#vjbase.menu.general.reset.everything"] = {
                 VJ_RECB_MapSpawner_Enabled = "1",
@@ -201,22 +201,22 @@ end
                 VJ_RECB_MapSpawner_Misc = "0",
                 VJ_RECB_MapSpawner_Specials = "0"
 }
-            Panel:AddControl("ComboBox", vj_recbreset_mapspawner)
-            Panel:AddControl( "Label", {Text = "Options:"})
-            Panel:AddControl("Checkbox", {Label = "Enable Map Spawner processing?", Command = "VJ_RECB_MapSpawner_Enabled"})
-            Panel:AddControl("Checkbox", {Label ="Enable Normal Zombies?", Command ="VJ_RECB_MapSpawner_Zombies"})
-            Panel:AddControl("Checkbox", {Label ="Enable Misc Zombies?", Command ="VJ_RECB_MapSpawner_Misc"})
-            Panel:AddControl("Checkbox", {Label ="Enable Special Zombies?", Command ="VJ_RECB_MapSpawner_Specials"})
-            Panel:AddControl( "Label", {Text = "Modifiers:"})
-            Panel:AddControl("Slider", { Label     = "Max Zombies", Command = "VJ_RECB_MapSpawner_MaxZom", Type = "Float", Min = "5", Max = "400"})
-            Panel:AddControl("Slider", { Label     = "Min Distance They Can Spawn From Players", Command = "VJ_RECB_MapSpawner_SpawnMin", Type = "Float", Min = "150", Max = "30000"})
-            Panel:AddControl("Slider", { Label     = "Max Distance They Can Spawn From Players", Command = "VJ_RECB_MapSpawner_SpawnMax", Type = "Float", Min = "150", Max = "30000"})
-            Panel:AddControl("Slider", { Label     = "Min Time Between Spawns", Command = "VJ_RECB_MapSpawner_DelayMin", Type = "Float", Min = "0.1", Max = "15"})
-            Panel:AddControl("Slider", { Label     = "Max Time Between Spawns", Command = "VJ_RECB_MapSpawner_DelayMax", Type = "Float", Min = "0.2", Max = "15"})
-            Panel:AddControl("Slider", { Label     = "Max Zombie Horde", Command = "VJ_RECB_MapSpawner_HordeCount", Type = "Float", Min = "5", Max = "400"})
-            Panel:AddControl("Slider", { Label     = "Chance That A Horde Will Appear", Command = "VJ_RECB_MapSpawner_HordeChance", Type = "Float", Min = "1", Max = "500"})
-            Panel:AddControl("Slider", { Label     = "Min Cooldown Time For Horde Spawns", Command = "VJ_RECB_MapSpawner_HordeCooldownMin", Type = "Float", Min = "1", Max = "800"})
-            Panel:AddControl("Slider", { Label     = "Max Cooldown Time For Horde Spawns", Command = "VJ_RECB_MapSpawner_HordeCooldownMax", Type = "Float", Min = "1", Max = "800"})
+            panel:AddControl("ComboBox", vj_recbreset_mapspawner)
+            panel:Help("Options:")
+            panel:CheckBox("Enable Map Spawner processing?","VJ_RECB_MapSpawner_Enabled")
+            panel:CheckBox("Enable Normal Zombies?","VJ_RECB_MapSpawner_Zombies")
+            panel:CheckBox("Enable Misc Zombies?","VJ_RECB_MapSpawner_Misc")
+            panel:CheckBox("Enable Special Zombies?","VJ_RECB_MapSpawner_Specials")
+            panel:Help("Modifiers:")
+            panel:NumSlider("Max Zombies","VJ_RECB_MapSpawner_MaxZom",5,400,2)
+            panel:NumSlider("Min Distance They Can Spawn From Players","VJ_RECB_MapSpawner_SpawnMin",150,30000,2)
+            panel:NumSlider("Max Distance They Can Spawn From Players","VJ_RECB_MapSpawner_SpawnMax",150,30000,2)
+            panel:NumSlider("Min Time Between Spawns","VJ_RECB_MapSpawner_DelayMin",0.1,15,2)
+            panel:NumSlider("Max Time Between Spawns","VJ_RECB_MapSpawner_DelayMax",0.2,15,2)
+            panel:NumSlider("Max Zombie Horde","VJ_RECB_MapSpawner_HordeCount",5,400,2)
+            panel:NumSlider("Chance That A Horde Will Appear","VJ_RECB_MapSpawner_HordeChance",1,500,2)
+            panel:NumSlider("Min Cooldown Time For Horde Spawns","VJ_RECB_MapSpawner_HordeCooldownMin",1,800,2)
+            panel:NumSlider("Max Cooldown Time For Horde Spawns","VJ_RECB_MapSpawner_HordeCooldownMax",1,800,2)
         end)
     end)
 end
