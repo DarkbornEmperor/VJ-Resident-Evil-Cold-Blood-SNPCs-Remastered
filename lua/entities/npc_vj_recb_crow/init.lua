@@ -51,24 +51,24 @@ function ENT:OnInput(key,activator,caller,data)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Crow_Init()
-    self.SoundTbl_Breath = {
+    self.SoundTbl_Breath =
     "vj_recb/crow/crow_flap.wav"
-}
-    self.SoundTbl_Idle = {
+
+    self.SoundTbl_Idle =
     "vj_recb/crow/crow_caw.wav"
-}
-    self.SoundTbl_Alert = {
+
+    self.SoundTbl_Alert =
     "vj_recb/crow/crow_caw.wav"
-}
-    self.SoundTbl_MeleeAttackExtra = {
+
+    self.SoundTbl_MeleeAttackExtra =
     "vj_recb/crow/crow_peck.wav"
-}
-    self.SoundTbl_BeforeMeleeAttack = {
+
+    self.SoundTbl_BeforeMeleeAttack =
     "vj_recb/crow/crow_attack.wav"
-}
-    self.SoundTbl_Death = {
+
+    self.SoundTbl_Death =
     "vj_recb/crow/crow_die.wav"
-}
+
     self.SoundTbl_Impact = {
     "vj_recb/shared/hit_flesh1.wav",
     "vj_recb/shared/hit_flesh2.wav",

@@ -9,33 +9,33 @@ include("shared.lua")
 ENT.Model = "models/vj_recb/b3/zombie_priest.mdl"
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDamaged(dmginfo,hitgroup,status)
-    local animTime = VJ.AnimDuration(self,self:GetSequenceName(self:GetSequence()))
-    if status == "PostDamage" && self.CanBeKnocked && !self.HasBeenKnocked && math.random(1,16) == 1 && CurTime() > self.NextKnockTimeT && !self.Crippled && self:Health() > 0 then
-       self:PlayAnim("knocked_to_floor",true,false,false)
-       self.MovementType = VJ_MOVETYPE_STATIONARY
-       self.CanTurnWhileStationary = false
-       self.HasPoseParameterLooking = false
-       self.CallForHelp = false
-       self.HasBeenKnocked = true
-       self.CanBeKnocked = false
-       self:AddFlags(FL_NOTARGET)
-       self.HasIdleSounds = false
-       self.HasBreathSound = false
-       self.EnemyDetection = true
-       self.DisableMakingSelfEnemyToNPCs = true
-       self.HasMeleeAttack = false
+ local animTime = VJ.AnimDuration(self,self:GetSequenceName(self:GetSequence()))
+ if status == "PostDamage" && self.CanBeKnocked && !self.HasBeenKnocked && math.random(1,16) == 1 && CurTime() > self.NextKnockTimeT && !self.Crippled && self:Health() > 0 then
+    self:PlayAnim("knocked_to_floor",true,false,false)
+    self.MovementType = VJ_MOVETYPE_STATIONARY
+    self.CanTurnWhileStationary = false
+    self.HasPoseParameterLooking = false
+    self.CallForHelp = false
+    self.HasBeenKnocked = true
+    self.CanBeKnocked = false
+    self:AddFlags(FL_NOTARGET)
+    self.HasIdleSounds = false
+    self.HasBreathSound = false
+    self.EnemyDetection = true
+    self.DisableMakingSelfEnemyToNPCs = true
+    self.HasMeleeAttack = false
 
-    timer.Simple(math.random(GetConVar("VJ_RECB_Zombie_GetUpTime1"):GetInt(),GetConVar("VJ_RECB_Zombie_GetUpTime2"):GetInt()),function()
-    if IsValid(self) && !self.DeathAnimationCodeRan then
-       self:PlayAnim("floor_getup",true,false,false)
-       animTime = VJ.AnimDuration(self,"floor_getup")
-       self.HasPoseParameterLooking = true
-       self.CallForHelp = true
-       self.HasBeenKnocked = false
-       self:RemoveFlags(FL_NOTARGET)
-       self.HasIdleSounds = true
-       self.HasBreathSound = true
-       self.NextKnockTimeT = CurTime() + math.Rand(5,10)
+ timer.Simple(math.random(GetConVar("VJ_RECB_Zombie_GetUpTime1"):GetInt(),GetConVar("VJ_RECB_Zombie_GetUpTime2"):GetInt()),function()
+ if IsValid(self) && !self.DeathAnimationCodeRan then
+    self:PlayAnim("floor_getup",true,false,false)
+    animTime = VJ.AnimDuration(self,"floor_getup")
+    self.HasPoseParameterLooking = true
+    self.CallForHelp = true
+    self.HasBeenKnocked = false
+    self:RemoveFlags(FL_NOTARGET)
+    self.HasIdleSounds = true
+    self.HasBreathSound = true
+    self.NextKnockTimeT = CurTime() + math.Rand(5,10)
 end
     timer.Simple(animTime,function()
     if IsValid(self) && !self.DeathAnimationCodeRan then

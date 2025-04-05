@@ -47,24 +47,24 @@ function ENT:OnInput(key,activator,caller,data)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Neptune_Init()
-    self.SoundTbl_Breath = {
+    self.SoundTbl_Breath =
     "vj_recb/shark/shark_swim_peace.wav"
-}
-    self.SoundTbl_Alert = {
+
+    self.SoundTbl_Alert =
     "vj_recb/shark/Shark_Alert.wav"
-}
-    self.SoundTbl_BeforeMeleeAttack = {
+
+    self.SoundTbl_BeforeMeleeAttack =
     "vj_recb/shark/Shark_attack.wav"
-}
-    self.SoundTbl_MeleeAttackExtra = {
+
+    self.SoundTbl_MeleeAttackExtra =
     "vj_recb/shark/shark_bite.wav"
-}
-    self.SoundTbl_Pain = {
+
+    self.SoundTbl_Pain =
     "vj_recb/shark/Shark_pain.wav"
-}
-    self.SoundTbl_Death = {
+
+    self.SoundTbl_Death =
     "vj_recb/shark/Shark_death.wav"
-}
+
     self.SoundTbl_Impact = {
     "vj_recb/shared/hit_flesh1.wav",
     "vj_recb/shared/hit_flesh2.wav",

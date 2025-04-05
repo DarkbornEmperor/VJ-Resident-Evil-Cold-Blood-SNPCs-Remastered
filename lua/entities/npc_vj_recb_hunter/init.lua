@@ -71,33 +71,33 @@ function ENT:Hunter_Init()
     "vj_recb/hunter/hu_idle2.wav",
     "vj_recb/hunter/hu_idle3.wav"
 }
-    self.SoundTbl_Alert = {
+    self.SoundTbl_Alert =
     "vj_recb/hunter/hu_alert.wav"
-}
-    self.SoundTbl_CallForHelp = {
+
+    self.SoundTbl_CallForHelp =
     "vj_recb/hunter/hu_scream.wav"
-}
-    self.SoundTbl_BeforeMeleeAttack = {
+
+    self.SoundTbl_BeforeMeleeAttack =
     "vj_recb/hunter/hu_alert.wav"
-}
-    self.SoundTbl_MeleeAttackExtra = {
+
+    self.SoundTbl_MeleeAttackExtra =
     "vj_recb/hunter/hu_clawhit.wav"
-}
-    self.SoundTbl_MeleeAttackMiss = {
+
+    self.SoundTbl_MeleeAttackMiss =
     "vj_recb/hunter/hu_slash.wav"
-}
-    self.SoundTbl_LeapAttackJump = {
+
+    self.SoundTbl_LeapAttackJump =
     "vj_recb/hunter/hu_jump.wav"
-}
-    self.SoundTbl_LeapAttackDamage = {
+
+    self.SoundTbl_LeapAttackDamage =
     "vj_recb/hunter/hu_clawhit.wav"
-}
-    self.SoundTbl_Pain = {
+
+    self.SoundTbl_Pain =
     "vj_recb/hunter/hu_pain.wav"
-}
-    self.SoundTbl_Death = {
+
+    self.SoundTbl_Death =
     "vj_recb/hunter/hu_die.wav"
-}
+
     self.SoundTbl_Impact = {
     "vj_recb/shared/hit_flesh1.wav",
     "vj_recb/shared/hit_flesh2.wav",
@@ -123,7 +123,7 @@ function ENT:OnLeapAttack(status,enemy)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDeath(dmginfo,hitgroup,status)
- if status == "Init" then
+    if status == "Init" then
     VJ_RECB_DeathCode(self)
     if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end
     if dmginfo:GetDamageForce():Length() < 800 then return end
@@ -148,7 +148,7 @@ function ENT:OnDeath(dmginfo,hitgroup,status)
         end*/
     end
 end
- if status == "DeathAnim" then
+    if status == "DeathAnim" then
     if hitgroup == HITGROUP_HEAD then
         self.AnimTbl_Death = {ACT_DIE_GUTSHOT,ACT_DIE_HEADSHOT}
     else

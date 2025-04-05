@@ -82,83 +82,182 @@ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ZombieVoices()
-      local voice = math.random(1,11)
-      if voice == 1 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/male/male1/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/male/male1/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male/male1/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/male/male1/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/male/male1/zom_die.wav"}
+    local voice = math.random(1,11)
+    if voice == 1 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/male/male1/zom_idle.wav"
 
-      elseif voice == 2 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/male/male2/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/male/male2/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male/male2/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/male/male2/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/male/male2/zom_die.wav"}
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/male/male1/zom_idle.wav"
 
-      elseif voice == 3 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/male/male3/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/male/male3/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male/male3/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/male/male3/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/male/male3/zom_die.wav"}
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/male/male1/zom_attack.wav"
 
-      elseif voice == 4 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/male/male4/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/male/male4/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male/male4/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/male/male4/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/male/male4/zom_die.wav"}
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/male/male1/zom_pain.wav"
 
-      elseif voice == 5 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/male/male5/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/male/male5/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male/male5/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/male/male5/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/male/male5/zom_die.wav"}
+        self.SoundTbl_Death =
+        "vj_recb/zombie/male/male1/zom_die.wav"
 
-      elseif voice == 6 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/male/male6/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/male/male6/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male/male6/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/male/male6/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/male/male6/zom_die.wav"}
+    elseif voice == 2 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/male/male2/zom_idle.wav"
 
-      elseif voice == 7 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/male/male7/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/male/male7/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male/male7/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/male/male7/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/male/male7/zom_die.wav"}
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/male/male2/zom_idle.wav"
 
-      elseif voice == 8 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/male/male8/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/male/male8/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male/male8/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/male/male8/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/male/male8/zom_die.wav"}
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/male/male2/zom_attack.wav"
 
-      elseif voice == 9 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/male/male9/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/male/male9/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male/male9/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/male/male9/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/male/male9/zom_die.wav"}
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/male/male2/zom_pain.wav"
 
-      elseif voice == 10 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/male/male10/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/male/male10/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male/male10/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/male/male10/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/male/male10/zom_die.wav"}
+        self.SoundTbl_Death =
+        "vj_recb/zombie/male/male2/zom_die.wav"
 
-      elseif voice == 11 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/male/male11/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/male/male11/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/male/male11/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/male/male11/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/male/male11/zom_die.wav"}
+    elseif voice == 3 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/male/male3/zom_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/male/male3/zom_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/male/male3/zom_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/male/male3/zom_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/male/male3/zom_die.wav"
+
+    elseif voice == 4 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/male/male4/zom_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/male/male4/zom_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/male/male4/zom_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/male/male4/zom_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/male/male4/zom_die.wav"
+
+    elseif voice == 5 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/male/male5/zom_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/male/male5/zom_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/male/male5/zom_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/male/male5/zom_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/male/male5/zom_die.wav"
+
+    elseif voice == 6 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/male/male6/zom_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/male/male6/zom_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/male/male6/zom_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/male/male6/zom_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/male/male6/zom_die.wav"
+
+    elseif voice == 7 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/male/male7/zom_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/male/male7/zom_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/male/male7/zom_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/male/male7/zom_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/male/male7/zom_die.wav"
+
+    elseif voice == 8 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/male/male8/zom_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/male/male8/zom_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/male/male8/zom_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/male/male8/zom_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/male/male8/zom_die.wav"
+
+    elseif voice == 9 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/male/male9/zom_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/male/male9/zom_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/male/male9/zom_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/male/male9/zom_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/male/male9/zom_die.wav"
+
+    elseif voice == 10 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/male/male10/zom_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/male/male10/zom_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/male/male10/zom_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/male/male10/zom_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/male/male10/zom_die.wav"
+
+    elseif voice == 11 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/male/male11/zom_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/male/male11/zom_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/male/male11/zom_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/male/male11/zom_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/male/male11/zom_die.wav"
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

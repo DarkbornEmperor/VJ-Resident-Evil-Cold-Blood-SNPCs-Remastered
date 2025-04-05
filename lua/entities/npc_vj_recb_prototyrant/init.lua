@@ -54,12 +54,12 @@ function ENT:PreInit()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ProtoTyrant_Init()
-    self.SoundTbl_FootStep = {
+    self.SoundTbl_FootStep =
     "vj_recb/tyrant/tyrant_foot.wav"
-}
-    self.SoundTbl_Alert = {
+
+    self.SoundTbl_Alert =
     "vj_recb/tyrant/tyrant_roar.wav"
-}
+
     self.SoundTbl_MeleeAttackMiss = {
     "vj_recb/tyrant/tyrant_swing2.wav",
     "vj_recb/tyrant/tyrant_swing.wav"
@@ -74,9 +74,8 @@ function ENT:ProtoTyrant_Init()
     "vj_recb/shared/hit_flesh3.wav",
     "vj_recb/shared/hit_flesh4.wav"
 }
-    self.SoundTbl_SoundTrack = {
+    self.SoundTbl_SoundTrack =
     "vj_recb/mapspawner/mansionbossend.wav"
-}
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Init()

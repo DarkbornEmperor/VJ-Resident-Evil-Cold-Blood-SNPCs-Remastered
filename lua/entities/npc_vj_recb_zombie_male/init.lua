@@ -96,181 +96,180 @@ end
 function ENT:ZombieVoices()
     local voice = math.random(1,11)
     if voice == 1 then
-        self.SoundTbl_Idle = {
+        self.SoundTbl_Idle =
         "vj_recb/zombie/male/male1/zom_idle.wav"
-}
-        self.SoundTbl_Alert = {
+
+        self.SoundTbl_Alert =
         "vj_recb/zombie/male/male1/zom_idle.wav"
-}
-        self.SoundTbl_BeforeMeleeAttack = {
+
+        self.SoundTbl_BeforeMeleeAttack =
         "vj_recb/zombie/male/male1/zom_attack.wav"
-}
-        self.SoundTbl_Pain = {
+
+        self.SoundTbl_Pain =
         "vj_recb/zombie/male/male1/zom_pain.wav"
-}
-        self.SoundTbl_Death = {
+
+        self.SoundTbl_Death =
         "vj_recb/zombie/male/male1/zom_die.wav"
-}
+
     elseif voice == 2 then
-        self.SoundTbl_Idle = {
+        self.SoundTbl_Idle =
         "vj_recb/zombie/male/male2/zom_idle.wav"
-}
-        self.SoundTbl_Alert = {
+
+        self.SoundTbl_Alert =
         "vj_recb/zombie/male/male2/zom_idle.wav"
-}
-        self.SoundTbl_BeforeMeleeAttack = {
+
+        self.SoundTbl_BeforeMeleeAttack =
         "vj_recb/zombie/male/male2/zom_attack.wav"
-}
-        self.SoundTbl_Pain = {
+
+        self.SoundTbl_Pain =
         "vj_recb/zombie/male/male2/zom_pain.wav"
-}
-        self.SoundTbl_Death = {
+
+        self.SoundTbl_Death =
         "vj_recb/zombie/male/male2/zom_die.wav"
-}
+
     elseif voice == 3 then
-        self.SoundTbl_Idle = {
+        self.SoundTbl_Idle =
         "vj_recb/zombie/male/male3/zom_idle.wav"
-}
-        self.SoundTbl_Alert = {
+
+        self.SoundTbl_Alert =
         "vj_recb/zombie/male/male3/zom_idle.wav"
-}
-        self.SoundTbl_BeforeMeleeAttack = {
+
+        self.SoundTbl_BeforeMeleeAttack =
         "vj_recb/zombie/male/male3/zom_attack.wav"
-}
-        self.SoundTbl_Pain = {
+
+        self.SoundTbl_Pain =
         "vj_recb/zombie/male/male3/zom_pain.wav"
-}
-        self.SoundTbl_Death = {
+
+        self.SoundTbl_Death =
         "vj_recb/zombie/male/male3/zom_die.wav"
-}
+
     elseif voice == 4 then
-        self.SoundTbl_Idle = {
+        self.SoundTbl_Idle =
         "vj_recb/zombie/male/male4/zom_idle.wav"
-}
-        self.SoundTbl_Alert = {
+
+        self.SoundTbl_Alert =
         "vj_recb/zombie/male/male4/zom_idle.wav"
-}
-        self.SoundTbl_BeforeMeleeAttack = {
+
+        self.SoundTbl_BeforeMeleeAttack =
         "vj_recb/zombie/male/male4/zom_attack.wav"
-}
-        self.SoundTbl_Pain = {
+
+        self.SoundTbl_Pain =
         "vj_recb/zombie/male/male4/zom_pain.wav"
-}
-        self.SoundTbl_Death = {
+
+        self.SoundTbl_Death =
         "vj_recb/zombie/male/male4/zom_die.wav"
-}
+
     elseif voice == 5 then
-        self.SoundTbl_Idle = {
+        self.SoundTbl_Idle =
         "vj_recb/zombie/male/male5/zom_idle.wav"
-}
-        self.SoundTbl_Alert = {
+
+        self.SoundTbl_Alert =
         "vj_recb/zombie/male/male5/zom_idle.wav"
-}
-        self.SoundTbl_BeforeMeleeAttack = {
+
+        self.SoundTbl_BeforeMeleeAttack =
         "vj_recb/zombie/male/male5/zom_attack.wav"
-}
-        self.SoundTbl_Pain = {
+
+        self.SoundTbl_Pain =
         "vj_recb/zombie/male/male5/zom_pain.wav"
-}
-        self.SoundTbl_Death = {
+
+        self.SoundTbl_Death =
         "vj_recb/zombie/male/male5/zom_die.wav"
-}
+
     elseif voice == 6 then
-        self.SoundTbl_Idle = {
+        self.SoundTbl_Idle =
         "vj_recb/zombie/male/male6/zom_idle.wav"
-}
-        self.SoundTbl_Alert = {
+
+        self.SoundTbl_Alert =
         "vj_recb/zombie/male/male6/zom_idle.wav"
-}
-        self.SoundTbl_BeforeMeleeAttack = {
+
+        self.SoundTbl_BeforeMeleeAttack =
         "vj_recb/zombie/male/male6/zom_attack.wav"
-}
-        self.SoundTbl_Pain = {
+
+        self.SoundTbl_Pain =
         "vj_recb/zombie/male/male6/zom_pain.wav"
-}
-        self.SoundTbl_Death = {
+
+        self.SoundTbl_Death =
         "vj_recb/zombie/male/male6/zom_die.wav"
-}
+
     elseif voice == 7 then
-        self.SoundTbl_Idle = {
+        self.SoundTbl_Idle =
         "vj_recb/zombie/male/male7/zom_idle.wav"
-}
-        self.SoundTbl_Alert = {
+
+        self.SoundTbl_Alert =
         "vj_recb/zombie/male/male7/zom_idle.wav"
-}
-        self.SoundTbl_BeforeMeleeAttack = {
+
+        self.SoundTbl_BeforeMeleeAttack =
         "vj_recb/zombie/male/male7/zom_attack.wav"
-}
-        self.SoundTbl_Pain = {
+
+        self.SoundTbl_Pain =
         "vj_recb/zombie/male/male7/zom_pain.wav"
-}
-        self.SoundTbl_Death = {
+
+        self.SoundTbl_Death =
         "vj_recb/zombie/male/male7/zom_die.wav"
-}
+
     elseif voice == 8 then
-        self.SoundTbl_Idle = {
+        self.SoundTbl_Idle =
         "vj_recb/zombie/male/male8/zom_idle.wav"
-}
-        self.SoundTbl_Alert = {
+
+        self.SoundTbl_Alert =
         "vj_recb/zombie/male/male8/zom_idle.wav"
-}
-        self.SoundTbl_BeforeMeleeAttack = {
+
+        self.SoundTbl_BeforeMeleeAttack =
         "vj_recb/zombie/male/male8/zom_attack.wav"
-}
-        self.SoundTbl_Pain = {
+
+        self.SoundTbl_Pain =
         "vj_recb/zombie/male/male8/zom_pain.wav"
-}
-        self.SoundTbl_Death = {
+
+        self.SoundTbl_Death =
         "vj_recb/zombie/male/male8/zom_die.wav"
-}
+
     elseif voice == 9 then
-        self.SoundTbl_Idle = {
+        self.SoundTbl_Idle =
         "vj_recb/zombie/male/male9/zom_idle.wav"
-}
-        self.SoundTbl_Alert = {
+
+        self.SoundTbl_Alert =
         "vj_recb/zombie/male/male9/zom_idle.wav"
-}
-        self.SoundTbl_BeforeMeleeAttack = {
+
+        self.SoundTbl_BeforeMeleeAttack =
         "vj_recb/zombie/male/male9/zom_attack.wav"
-}
-        self.SoundTbl_Pain = {
+
+        self.SoundTbl_Pain =
         "vj_recb/zombie/male/male9/zom_pain.wav"
-}
-        self.SoundTbl_Death = {
+
+        self.SoundTbl_Death =
         "vj_recb/zombie/male/male9/zom_die.wav"
-}
+
     elseif voice == 10 then
-        self.SoundTbl_Idle = {
+        self.SoundTbl_Idle =
         "vj_recb/zombie/male/male10/zom_idle.wav"
-}
-        self.SoundTbl_Alert = {
+
+        self.SoundTbl_Alert =
         "vj_recb/zombie/male/male10/zom_idle.wav"
-}
-        self.SoundTbl_BeforeMeleeAttack = {
+
+        self.SoundTbl_BeforeMeleeAttack =
         "vj_recb/zombie/male/male10/zom_attack.wav"
-}
-        self.SoundTbl_Pain = {
+
+        self.SoundTbl_Pain =
         "vj_recb/zombie/male/male10/zom_pain.wav"
-}
-        self.SoundTbl_Death = {
+
+        self.SoundTbl_Death =
         "vj_recb/zombie/male/male10/zom_die.wav"
-}
+
     elseif voice == 11 then
-        self.SoundTbl_Idle = {
+        self.SoundTbl_Idle =
         "vj_recb/zombie/male/male11/zom_idle.wav"
-}
-        self.SoundTbl_Alert = {
+
+        self.SoundTbl_Alert =
         "vj_recb/zombie/male/male11/zom_idle.wav"
-}
-        self.SoundTbl_BeforeMeleeAttack = {
+
+        self.SoundTbl_BeforeMeleeAttack =
         "vj_recb/zombie/male/male11/zom_attack.wav"
-}
-        self.SoundTbl_Pain = {
+
+        self.SoundTbl_Pain =
         "vj_recb/zombie/male/male11/zom_pain.wav"
-}
-        self.SoundTbl_Death = {
+
+        self.SoundTbl_Death =
         "vj_recb/zombie/male/male11/zom_die.wav"
-}
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -308,27 +307,36 @@ function ENT:OnMeleeAttack(status,enemy)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnMeleeAttackExecute(status,ent,isProp)
-    if status == "PreDamage" then
-    if self:IsOnFire() then ent:Ignite(4) end
-    if !isProp && self:GetSequence() == self:LookupSequence("attack2") then
-    if ent.IsVJBaseSNPC && VJ.PICK(ent.BloodParticle) then ParticleEffectAttach(VJ.PICK(ent.BloodParticle),PATTACH_POINT_FOLLOW,self,self:LookupAttachment("mouth"))
-    elseif (ent:IsPlayer() or ent:IsNPC() or ent:IsNextBot()) then ParticleEffectAttach("blood_impact_red_01",PATTACH_POINT_FOLLOW,self,self:LookupAttachment("mouth"))
+   if status == "PreDamage" then
+   if self:IsOnFire() then ent:Ignite(4) end
+   if !isProp && self:GetSequence() == self:LookupSequence("attack2") then
+   if ent.IsVJBaseSNPC && VJ.PICK(ent.BloodParticle) then ParticleEffectAttach(VJ.PICK(ent.BloodParticle),PATTACH_POINT_FOLLOW,self,self:LookupAttachment("mouth"))
+   elseif (ent:IsPlayer() or ent:IsNPC() or ent:IsNextBot()) then ParticleEffectAttach("blood_impact_red_01",PATTACH_POINT_FOLLOW,self,self:LookupAttachment("mouth"))
     end
 end
-   if self:GetSequence() == self:LookupSequence("attack2") then
-   if ent.IsVJBaseSNPC && (ent.MovementType != VJ_MOVETYPE_GROUND or ent.VJ_ID_Boss or ent.IsVJBaseSNPC_Tank) then self.RECB_Grappled = false return false end
-   if !self.RECB_Grappled then
-      self.RECB_Grappled = true
-      //ent:SetVelocity(self:MeleeAttackKnockbackVelocity(ent))
-   if self.RECB_CurEnt != ent then -- If the grabbed enemy is a new enemy then reset the enemy values
-      self:ResetGrapple()
-      self.RECB_CurEntMoveType = ent:GetMoveType()
+ if self:GetSequence() == self:LookupSequence("attack2") then
+ if ent.IsVJBaseSNPC && (ent.MovementType != VJ_MOVETYPE_GROUND or ent.VJ_ID_Boss or ent.IsVJBaseSNPC_Tank) then self.RECB_Grappled = false return false end
+ if !self.RECB_Grappled then
+    self.RECB_Grappled = true
+    //ent:SetVelocity(self:MeleeAttackKnockbackVelocity(ent))
+ if self.RECB_CurEnt != ent then -- If the grabbed enemy is a new enemy then reset the enemy values
+    self:ResetGrapple()
+    self.RECB_CurEntMoveType = ent:GetMoveType()
 end
-   if ent:IsPlayer() or (ent.IsVJBaseSNPC && ent.MovementType == VJ_MOVETYPE_GROUND && !ent.VJ_ID_Boss && !ent.IsVJBaseSNPC_Tank) then
-      self:Grapple()
+ if ent:IsPlayer() or (ent.IsVJBaseSNPC && ent.MovementType == VJ_MOVETYPE_GROUND && !ent.VJ_ID_Boss && !ent.IsVJBaseSNPC_Tank) then
+    self:Grapple()
 end
    if ent:IsNPC() && !ent.IsVJBaseSNPC && ent:GetMoveType(MOVETYPE_STEP) then
-        self:Grapple_NPC() end end
+        self:Grapple_NPC() end
+        end
+    end
+end
+    if status == "Miss" then
+    if self.Crippled or self:GetSequence() == self:LookupSequence("vomit") then return end
+        self.AttackAnimTime = 0
+        self:StopAttacks(false)
+        self.vACT_StopAttacks = false
+        self:PlayAnim("lunge_1",true,false,false)
         end
     end
 end
@@ -386,14 +394,6 @@ function ENT:MeleeAttackKnockbackVelocity(ent)
     return self:GetForward()*-150 + self:GetUp()*10
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnMeleeAttack_Miss()
- if self.Crippled or self:GetSequence() == self:LookupSequence("vomit") then return end
-    self.AttackAnimTime = 0
-    self:StopAttacks(false)
-    self.vACT_StopAttacks = false
-    self:PlayAnim("lunge_1",true,false,false)
-end
----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnFlinch(dmginfo,hitgroup,status)
     if status == "Init" then
         return self.Crippled or self.HasBeenKnocked or self:GetSequence() == self:LookupSequence("floor_getup") -- If we are crawling then DO NOT flinch!
@@ -401,39 +401,39 @@ function ENT:OnFlinch(dmginfo,hitgroup,status)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDamaged(dmginfo,hitgroup,status)
-    local animTime = VJ.AnimDuration(self,self:GetSequenceName(self:GetSequence()))
-    if status == "PostDamage" && self.CanBeKnocked && !self.HasBeenKnocked && math.random(1,16) == 1 && CurTime() > self.NextKnockTimeT && !self.Crippled && self:Health() > 0 then
-       self:PlayAnim("knocked_to_floor",true,false,false)
-       self.MovementType = VJ_MOVETYPE_STATIONARY
-       self.CanTurnWhileStationary = false
-       self.HasPoseParameterLooking = false
-       self.CallForHelp = false
-       self.HasBeenKnocked = true
-       self.CanBeKnocked = false
-       self:AddFlags(FL_NOTARGET)
-       self.HasIdleSounds = false
-       self.HasBreathSound = false
-       self.EnemyDetection = true
-       self.DisableMakingSelfEnemyToNPCs = true
-       self.HasMeleeAttack = false
+ local animTime = VJ.AnimDuration(self,self:GetSequenceName(self:GetSequence()))
+ if status == "PostDamage" && self.CanBeKnocked && !self.HasBeenKnocked && math.random(1,16) == 1 && CurTime() > self.NextKnockTimeT && !self.Crippled && self:Health() > 0 then
+    self:PlayAnim("knocked_to_floor",true,false,false)
+    self.MovementType = VJ_MOVETYPE_STATIONARY
+    self.CanTurnWhileStationary = false
+    self.HasPoseParameterLooking = false
+    self.CallForHelp = false
+    self.HasBeenKnocked = true
+    self.CanBeKnocked = false
+    self:AddFlags(FL_NOTARGET)
+    self.HasIdleSounds = false
+    self.HasBreathSound = false
+    self.EnemyDetection = true
+    self.DisableMakingSelfEnemyToNPCs = true
+    self.HasMeleeAttack = false
 
-    timer.Simple(math.random(GetConVar("VJ_RECB_Zombie_GetUpTime1"):GetInt(),GetConVar("VJ_RECB_Zombie_GetUpTime2"):GetInt()),function()
-    if IsValid(self) && !self.DeathAnimationCodeRan then
-    if !self.Crippled then
-       self:PlayAnim("floor_getup",true,false,false)
-       animTime = VJ.AnimDuration(self,"floor_getup")
-    elseif self.Crippled then
-       self:PlayAnim("crawl_attack",true,false,false)
-       self:SetCollisionBounds(Vector(13,13,25),Vector(-13,-13,0))
-       animTime = VJ.AnimDuration(self,"crawl_attack")
+ timer.Simple(math.random(GetConVar("VJ_RECB_Zombie_GetUpTime1"):GetInt(),GetConVar("VJ_RECB_Zombie_GetUpTime2"):GetInt()),function()
+ if IsValid(self) && !self.DeathAnimationCodeRan then
+ if !self.Crippled then
+    self:PlayAnim("floor_getup",true,false,false)
+    animTime = VJ.AnimDuration(self,"floor_getup")
+ elseif self.Crippled then
+    self:PlayAnim("crawl_attack",true,false,false)
+    self:SetCollisionBounds(Vector(13,13,25),Vector(-13,-13,0))
+    animTime = VJ.AnimDuration(self,"crawl_attack")
 end
-       self.HasPoseParameterLooking = true
-       self.CallForHelp = true
-       self.HasBeenKnocked = false
-       self:RemoveFlags(FL_NOTARGET)
-       self.HasIdleSounds = true
-       self.HasBreathSound = true
-       self.NextKnockTimeT = CurTime() + math.Rand(5,10)
+    self.HasPoseParameterLooking = true
+    self.CallForHelp = true
+    self.HasBeenKnocked = false
+    self:RemoveFlags(FL_NOTARGET)
+    self.HasIdleSounds = true
+    self.HasBreathSound = true
+    self.NextKnockTimeT = CurTime() + math.Rand(5,10)
 end
     timer.Simple(animTime,function()
     if IsValid(self) && !self.DeathAnimationCodeRan then
@@ -447,41 +447,41 @@ end
  if GetConVar("VJ_RECB_Dismember"):GetInt() == 0 then return end
  if status == "PostDamage" then
  if !self.Crippled then
-    local legs = {6,7}
-    if VJ.HasValue(legs,hitgroup) then
-        self.LegHealth = self.LegHealth -dmginfo:GetDamage()
-    if self.LegHealth <= 0 && self:Health() > 0 then
-        self.Crippled = true
-    local anim = "legless_fall"
-    if hitgroup == HITGROUP_LEFTLEG or hitgroup == HITGROUP_RIGHTLEG then
-        self:Dismember(hitgroup)
+ local legs = {6,7}
+ if VJ.HasValue(legs,hitgroup) then
+    self.LegHealth = self.LegHealth -dmginfo:GetDamage()
+ if self.LegHealth <= 0 && self:Health() > 0 then
+    self.Crippled = true
+ local anim = "legless_fall"
+ if hitgroup == HITGROUP_LEFTLEG or hitgroup == HITGROUP_RIGHTLEG then
+    self:Dismember(hitgroup)
 end
         self:PlayAnim(anim,true,false,false)
         self:Cripple()
         end
     end
 end
-    local head = {1} -- Head
-    local chest = {2} -- Chest
-    local lArm = {4} -- Left Arm
-    local rArm = {5} -- Right Arm
-    if VJ.HasValue(head,hitgroup) then
-        self.HeadHealth = self.HeadHealth -dmginfo:GetDamage()
-    if !self.Head_Damaged && hitgroup == HITGROUP_HEAD && self.HeadHealth <= 0 && self:Health() > 0 then
-        self.Head_Damaged = true
-        self:Dismember(hitgroup)
+ local head = {1} -- Head
+ local chest = {2} -- Chest
+ local lArm = {4} -- Left Arm
+ local rArm = {5} -- Right Arm
+ if VJ.HasValue(head,hitgroup) then
+    self.HeadHealth = self.HeadHealth -dmginfo:GetDamage()
+ if !self.Head_Damaged && hitgroup == HITGROUP_HEAD && self.HeadHealth <= 0 && self:Health() > 0 then
+    self.Head_Damaged = true
+    self:Dismember(hitgroup)
 end
-    elseif VJ.HasValue(chest,hitgroup) then
-        self.ChestHealth = self.ChestHealth -dmginfo:GetDamage()
-    if !self.Chest_Damaged && hitgroup == HITGROUP_CHEST && self.ChestHealth <= 0 && self:Health() > 0 then
-        self.Chest_Damaged = true
-        self:Dismember(hitgroup)
+ elseif VJ.HasValue(chest,hitgroup) then
+    self.ChestHealth = self.ChestHealth -dmginfo:GetDamage()
+ if !self.Chest_Damaged && hitgroup == HITGROUP_CHEST && self.ChestHealth <= 0 && self:Health() > 0 then
+    self.Chest_Damaged = true
+    self:Dismember(hitgroup)
 end
-    elseif VJ.HasValue(lArm,hitgroup) then
-        self.LArmHealth = self.LArmHealth -dmginfo:GetDamage()
-    if !self.LArm_Damaged && hitgroup == HITGROUP_LEFTARM && self.LArmHealth <= 0 && self:Health() > 0 then
-        self.LArm_Damaged = true
-        self:Dismember(hitgroup)
+ elseif VJ.HasValue(lArm,hitgroup) then
+    self.LArmHealth = self.LArmHealth -dmginfo:GetDamage()
+ if !self.LArm_Damaged && hitgroup == HITGROUP_LEFTARM && self.LArmHealth <= 0 && self:Health() > 0 then
+    self.LArm_Damaged = true
+    self:Dismember(hitgroup)
 end
     elseif VJ.HasValue(rArm,hitgroup) then
         self.RArmHealth = self.RArmHealth -dmginfo:GetDamage()

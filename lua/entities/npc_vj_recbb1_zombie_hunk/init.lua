@@ -6,28 +6,27 @@ include("shared.lua")
     No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
     without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = {"models/vj_recb/b1/zombie_hunk.mdl"}
+ENT.Model = "models/vj_recb/b1/zombie_hunk.mdl"
 ENT.MeleeAttackDistance = 30
 ENT.MeleeAttackDamageDistance = 60
 ENT.MeleeAttackPlayerSpeed = false
 ENT.HasMeleeAttackKnockBack = false
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ZombieVoices()
-    self.SoundTbl_Idle = {
+    self.SoundTbl_Idle =
     "vj_recb/zombie/b1/male/merc/zom_idle.wav"
-}
-    self.SoundTbl_Alert = {
+
+    self.SoundTbl_Alert =
     "vj_recb/zombie/b1/male/merc/zom_idle.wav"
-}
-    self.SoundTbl_BeforeMeleeAttack = {
+
+    self.SoundTbl_BeforeMeleeAttack =
     "vj_recb/zombie/b1/male/merc/zom_attack.wav"
-}
-    self.SoundTbl_Pain = {
+
+    self.SoundTbl_Pain =
     "vj_recb/zombie/b1/male/merc/zom_pain.wav"
-}
-    self.SoundTbl_Death = {
+
+    self.SoundTbl_Death =
     "vj_recb/zombie/b1/male/merc/zom_die.wav"
-}
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Zombie_Init()
@@ -53,12 +52,12 @@ function ENT:OnMeleeAttack(status,enemy)
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnMeleeAttack_Miss() return end
+function ENT:OnMeleeAttackExecute(status,ent,isProp) return end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDamaged(dmginfo,hitgroup,status) return end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDeath(dmginfo,hitgroup,status)
- if status == "DeathAnim" then
+    if status == "DeathAnim" then
     if hitgroup == HITGROUP_HEAD && !self.Crippled then
         self.AnimTbl_Death = {ACT_DIE_HEADSHOT,ACT_DIE_GUTSHOT}
      else

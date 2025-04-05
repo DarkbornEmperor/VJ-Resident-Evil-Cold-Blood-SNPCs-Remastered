@@ -44,19 +44,19 @@ function ENT:OnInput(key,activator,caller,data)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Snake_Init()
-    self.SoundTbl_BeforeMeleeAttack = {
+    self.SoundTbl_BeforeMeleeAttack =
     "vj_recb/snake/snake_attack.wav"
-}
-    self.SoundTbl_MeleeAttackExtra = {
+
+    self.SoundTbl_MeleeAttackExtra =
     "vj_recb/snake/snake_bite.wav"
-}
+
     self.SoundTbl_MeleeAttackMiss = {
     "vj_recb/shared/claw_miss1.wav",
     "vj_recb/shared/claw_miss2.wav"
 }
-    self.SoundTbl_Death = {
+    self.SoundTbl_Death =
     "vj_recb/snake/snake_die.wav"
-}
+
     self.SoundTbl_Impact = {
     "vj_recb/shared/hit_flesh1.wav",
     "vj_recb/shared/hit_flesh2.wav",

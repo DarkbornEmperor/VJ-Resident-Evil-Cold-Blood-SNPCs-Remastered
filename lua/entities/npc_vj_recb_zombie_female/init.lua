@@ -27,39 +27,39 @@ function ENT:ZombieVoices()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDamaged(dmginfo,hitgroup,status)
-    local animTime = VJ.AnimDuration(self,self:GetSequenceName(self:GetSequence()))
-    if status == "PostDamage" && self.CanBeKnocked && !self.HasBeenKnocked && math.random(1,16) == 1 && CurTime() > self.NextKnockTimeT && !self.Crippled && self:Health() > 0 then
-       self:PlayAnim("knocked_to_floor",true,false,false)
-       self.MovementType = VJ_MOVETYPE_STATIONARY
-       self.CanTurnWhileStationary = false
-       self.HasPoseParameterLooking = false
-       self.CallForHelp = false
-       self.HasBeenKnocked = true
-       self.CanBeKnocked = false
-       self:AddFlags(FL_NOTARGET)
-       self.HasIdleSounds = false
-       self.HasBreathSound = false
-       self.EnemyDetection = true
-       self.DisableMakingSelfEnemyToNPCs = true
-       self.HasMeleeAttack = false
+ local animTime = VJ.AnimDuration(self,self:GetSequenceName(self:GetSequence()))
+ if status == "PostDamage" && self.CanBeKnocked && !self.HasBeenKnocked && math.random(1,16) == 1 && CurTime() > self.NextKnockTimeT && !self.Crippled && self:Health() > 0 then
+    self:PlayAnim("knocked_to_floor",true,false,false)
+    self.MovementType = VJ_MOVETYPE_STATIONARY
+    self.CanTurnWhileStationary = false
+    self.HasPoseParameterLooking = false
+    self.CallForHelp = false
+    self.HasBeenKnocked = true
+    self.CanBeKnocked = false
+    self:AddFlags(FL_NOTARGET)
+    self.HasIdleSounds = false
+    self.HasBreathSound = false
+    self.EnemyDetection = true
+    self.DisableMakingSelfEnemyToNPCs = true
+    self.HasMeleeAttack = false
 
-    timer.Simple(math.random(GetConVar("VJ_RECB_Zombie_GetUpTime1"):GetInt(),GetConVar("VJ_RECB_Zombie_GetUpTime2"):GetInt()),function()
-    if IsValid(self) && !self.DeathAnimationCodeRan then
-    if !self.Crippled then
-       self:PlayAnim("floor_getup",true,false,false)
-       animTime = VJ.AnimDuration(self,"floor_getup")
-    elseif self.Crippled then
-       self:PlayAnim("crawl_attack",true,false,false)
-       self:SetCollisionBounds(Vector(13,13,25),Vector(-13,-13,0))
-       animTime = VJ.AnimDuration(self,"crawl_attack")
+ timer.Simple(math.random(GetConVar("VJ_RECB_Zombie_GetUpTime1"):GetInt(),GetConVar("VJ_RECB_Zombie_GetUpTime2"):GetInt()),function()
+ if IsValid(self) && !self.DeathAnimationCodeRan then
+ if !self.Crippled then
+    self:PlayAnim("floor_getup",true,false,false)
+    animTime = VJ.AnimDuration(self,"floor_getup")
+ elseif self.Crippled then
+    self:PlayAnim("crawl_attack",true,false,false)
+    self:SetCollisionBounds(Vector(13,13,25),Vector(-13,-13,0))
+    animTime = VJ.AnimDuration(self,"crawl_attack")
 end
-       self.HasPoseParameterLooking = true
-       self.CallForHelp = true
-       self.HasBeenKnocked = false
-       self:RemoveFlags(FL_NOTARGET)
-       self.HasIdleSounds = true
-       self.HasBreathSound = true
-       self.NextKnockTimeT = CurTime() + math.Rand(5,10)
+    self.HasPoseParameterLooking = true
+    self.CallForHelp = true
+    self.HasBeenKnocked = false
+    self:RemoveFlags(FL_NOTARGET)
+    self.HasIdleSounds = true
+    self.HasBreathSound = true
+    self.NextKnockTimeT = CurTime() + math.Rand(5,10)
 end
     timer.Simple(animTime,function()
     if IsValid(self) && !self.DeathAnimationCodeRan then
@@ -73,27 +73,27 @@ end
  if GetConVar("VJ_RECB_Dismember"):GetInt() == 0 then return end
  if status == "PostDamage" then
  if !self.Crippled then
-    local legs = {6,7}
-    if VJ.HasValue(legs,hitgroup) then
-        self.LegHealth = self.LegHealth -dmginfo:GetDamage()
-    if self.LegHealth <= 0 && self:Health() > 0 then
-        self.Crippled = true
-    local anim = "legless_fall"
-    if hitgroup == HITGROUP_LEFTLEG or hitgroup == HITGROUP_RIGHTLEG then
-        self:Dismember(hitgroup)
+ local legs = {6,7}
+ if VJ.HasValue(legs,hitgroup) then
+    self.LegHealth = self.LegHealth -dmginfo:GetDamage()
+ if self.LegHealth <= 0 && self:Health() > 0 then
+    self.Crippled = true
+ local anim = "legless_fall"
+ if hitgroup == HITGROUP_LEFTLEG or hitgroup == HITGROUP_RIGHTLEG then
+    self:Dismember(hitgroup)
 end
         self:PlayAnim(anim,true,false,false)
         self:Cripple()
         end
     end
 end
-    local lArm = {4} -- Left Arm
-    local rArm = {5} -- Right Arm
-    if VJ.HasValue(lArm,hitgroup) then
-        self.LArmHealth = self.LArmHealth -dmginfo:GetDamage()
-    if !self.LArm_Damaged && hitgroup == HITGROUP_LEFTARM && self.LArmHealth <= 0 && self:Health() > 0 then
-        self.LArm_Damaged = true
-        self:Dismember(hitgroup)
+ local lArm = {4} -- Left Arm
+ local rArm = {5} -- Right Arm
+ if VJ.HasValue(lArm,hitgroup) then
+    self.LArmHealth = self.LArmHealth -dmginfo:GetDamage()
+ if !self.LArm_Damaged && hitgroup == HITGROUP_LEFTARM && self.LArmHealth <= 0 && self:Health() > 0 then
+    self.LArm_Damaged = true
+    self:Dismember(hitgroup)
 end
     elseif VJ.HasValue(rArm,hitgroup) then
         self.RArmHealth = self.RArmHealth -dmginfo:GetDamage()
@@ -129,7 +129,7 @@ function ENT:Dismember(hitgroup)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDeath(dmginfo,hitgroup,status)
- if status == "Init" then
+    if status == "Init" then
     VJ_RECB_DeathCode(self)
     if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end
     if dmginfo:GetDamageForce():Length() < 800 then return end
@@ -163,10 +163,10 @@ function ENT:OnDeath(dmginfo,hitgroup,status)
     end
 end
  if status == "DeathAnim" then
-    if hitgroup == HITGROUP_HEAD then
-        self.AnimTbl_Death = {ACT_DIE_HEADSHOT,ACT_DIE_GUTSHOT}
-     else
-        self.AnimTbl_Death = {ACT_DIESIMPLE,ACT_DIEBACKWARD,ACT_DIEFORWARD,ACT_DIEVIOLENT,ACT_DIE_CHESTSHOT,ACT_DIE_GUTSHOT,ACT_DIE_BACKSHOT}
+ if hitgroup == HITGROUP_HEAD then
+    self.AnimTbl_Death = {ACT_DIE_HEADSHOT,ACT_DIE_GUTSHOT}
+    else
+    self.AnimTbl_Death = {ACT_DIESIMPLE,ACT_DIEBACKWARD,ACT_DIEFORWARD,ACT_DIEVIOLENT,ACT_DIE_CHESTSHOT,ACT_DIE_GUTSHOT,ACT_DIE_BACKSHOT}
 end
      if self.Crippled then
         self.AnimTbl_Death = {"vjseq_crawl_die"}

@@ -57,24 +57,23 @@ function ENT:PreInit()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Tyrant_Init()
-    self.SoundTbl_FootStep = {
+    self.SoundTbl_FootStep =
     "vj_recb/tyrant103/ty_walk.wav"
-}
-    self.SoundTbl_MeleeAttackExtra = {
+
+    self.SoundTbl_MeleeAttackExtra =
     "vj_recb/tyrant103/ty_punch.wav"
-}
-    self.SoundTbl_MeleeAttackMiss = {
+
+    self.SoundTbl_MeleeAttackMiss =
     "vj_recb/tyrant103/ty_swing.wav"
-}
+
     self.SoundTbl_Impact = {
     "vj_recb/shared/hit_flesh1.wav",
     "vj_recb/shared/hit_flesh2.wav",
     "vj_recb/shared/hit_flesh3.wav",
     "vj_recb/shared/hit_flesh4.wav"
 }
-    self.SoundTbl_SoundTrack = {
+    self.SoundTbl_SoundTrack =
     "vj_recb/tyrant103/RECB_-_tyrant.mp3"
-}
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Init()

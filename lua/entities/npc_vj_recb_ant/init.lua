@@ -45,27 +45,27 @@ function ENT:OnInput(key,activator,caller,data)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Ant_Init()
-    self.SoundTbl_FootStep = {
+    self.SoundTbl_FootStep =
     "vj_recb/ant/ant_walk.wav"
-}
-    self.SoundTbl_Idle = {
+
+    self.SoundTbl_Idle =
     "vj_recb/ant/ant_idle.wav"
-}
-    self.SoundTbl_BeforeMeleeAttack = {
+
+    self.SoundTbl_BeforeMeleeAttack =
     "vj_recb/ant/ant_attack.wav"
-}
-    self.SoundTbl_MeleeAttackExtra = {
+
+    self.SoundTbl_MeleeAttackExtra =
     "vj_recb/ant/ant_bite.wav"
-}
-    self.SoundTbl_MeleeAttackMiss = {
+
+    self.SoundTbl_MeleeAttackMiss =
     "vj_recb/ant/ant_bitemiss.wav"
-}
-    self.SoundTbl_Pain = {
+
+    self.SoundTbl_Pain =
     "vj_recb/ant/ant_pain.wav"
-}
-    self.SoundTbl_Death = {
+
+    self.SoundTbl_Death =
     "vj_recb/ant/ant_die.wav"
-}
+
     self.SoundTbl_Impact = {
     "vj_recb/shared/hit_flesh1.wav",
     "vj_recb/shared/hit_flesh2.wav",

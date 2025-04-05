@@ -93,72 +93,71 @@ end
 function ENT:ZombieVoices()
     local voice = math.random(1,2)
     if voice == 1 then
-        self.SoundTbl_Idle = {
+        self.SoundTbl_Idle =
         "vj_recb/zombie/crimsonhead/crimhead_run.wav"
-}
-        self.SoundTbl_Alert = {
+
+        self.SoundTbl_Alert =
         "vj_recb/zombie/crimsonhead/crimhead_alert.wav"
-}
+
         self.SoundTbl_BeforeMeleeAttack = {
         "vj_recb/zombie/crimsonhead/crimhead_attack1.wav",
         "vj_recb/zombie/crimsonhead/crimhead_attack2.wav"
 }
-        self.SoundTbl_MeleeAttackExtra = {
+        self.SoundTbl_MeleeAttackExtra =
         "vj_recb/zombie/crimsonhead/crimhead_slash.wav"
-}
-        self.SoundTbl_Pain = {
+
+        self.SoundTbl_Pain =
         "vj_recb/zombie/crimsonhead/crimhead_pain.wav"
-}
-        self.SoundTbl_Death = {
+
+        self.SoundTbl_Death =
         "vj_recb/zombie/crimsonhead/crimhead_die.wav"
-}
+
     elseif voice == 2 then
-        self.SoundTbl_Breath = {
+        self.SoundTbl_Breath =
         "vj_recb/zombie/b2/crimsonhead/crimhead_run.wav"
-}
-        self.SoundTbl_Alert = {
+
+        self.SoundTbl_Alert =
         "vj_recb/zombie/b2/crimsonhead/crimhead_alert.wav"
-}
+
         self.SoundTbl_BeforeMeleeAttack = {
         "vj_recb/zombie/b2/crimsonhead/crimhead_attack1.wav",
         "vj_recb/zombie/b2/crimsonhead/crimhead_attack2.wav"
 }
-        self.SoundTbl_MeleeAttackExtra = {
+        self.SoundTbl_MeleeAttackExtra =
         "vj_recb/zombie/b2/crimsonhead/crimhead_slash.wav"
-}
-        self.SoundTbl_Pain = {
+
+        self.SoundTbl_Pain =
         "vj_recb/zombie/b2/crimsonhead/crimhead_pain.wav"
-}
-        self.SoundTbl_Death = {
+
+        self.SoundTbl_Death =
         "vj_recb/zombie/b2/crimsonhead/crimhead_die.wav"
-}
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDamaged(dmginfo,hitgroup,status)
  if status == "PostDamage" then
  if GetConVar("VJ_RECB_Dismember"):GetInt() == 0 then return end
-    local head = {1} -- Head
-    local chest = {2} -- Chest
-    local lArm = {4} -- Left Arm
-    local rArm = {5} -- Right Arm
-    if VJ.HasValue(head,hitgroup) then
-        self.HeadHealth = self.HeadHealth -dmginfo:GetDamage()
-    if !self.Head_Damaged && hitgroup == HITGROUP_HEAD && self.HeadHealth <= 0 && self:Health() > 0 then
-        self.Head_Damaged = true
-        self:Dismember(hitgroup)
+ local head = {1} -- Head
+ local chest = {2} -- Chest
+ local lArm = {4} -- Left Arm
+ local rArm = {5} -- Right Arm
+ if VJ.HasValue(head,hitgroup) then
+    self.HeadHealth = self.HeadHealth -dmginfo:GetDamage()
+ if !self.Head_Damaged && hitgroup == HITGROUP_HEAD && self.HeadHealth <= 0 && self:Health() > 0 then
+    self.Head_Damaged = true
+    self:Dismember(hitgroup)
 end
-    elseif VJ.HasValue(chest,hitgroup) then
-        self.ChestHealth = self.ChestHealth -dmginfo:GetDamage()
-    if !self.Chest_Damaged && hitgroup == HITGROUP_CHEST && self.ChestHealth <= 0 && self:Health() > 0 then
-        self.Chest_Damaged = true
-        self:Dismember(hitgroup)
+ elseif VJ.HasValue(chest,hitgroup) then
+    self.ChestHealth = self.ChestHealth -dmginfo:GetDamage()
+ if !self.Chest_Damaged && hitgroup == HITGROUP_CHEST && self.ChestHealth <= 0 && self:Health() > 0 then
+    self.Chest_Damaged = true
+    self:Dismember(hitgroup)
 end
-    elseif VJ.HasValue(lArm,hitgroup) then
-        self.LArmHealth = self.LArmHealth -dmginfo:GetDamage()
-    if !self.LArm_Damaged && hitgroup == HITGROUP_LEFTARM && self.LArmHealth <= 0 && self:Health() > 0 then
-        self.LArm_Damaged = true
-        self:Dismember(hitgroup)
+ elseif VJ.HasValue(lArm,hitgroup) then
+    self.LArmHealth = self.LArmHealth -dmginfo:GetDamage()
+ if !self.LArm_Damaged && hitgroup == HITGROUP_LEFTARM && self.LArmHealth <= 0 && self:Health() > 0 then
+    self.LArm_Damaged = true
+    self:Dismember(hitgroup)
 end
     elseif VJ.HasValue(rArm,hitgroup) then
         self.RArmHealth = self.RArmHealth -dmginfo:GetDamage()
@@ -211,7 +210,7 @@ function ENT:Dismember(hitgroup)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDeath(dmginfo,hitgroup,status)
- if status == "Init" then
+    if status == "Init" then
     VJ_RECB_DeathCode(self)
     if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end
     if dmginfo:GetDamageForce():Length() < 800 then return end
@@ -248,10 +247,10 @@ function ENT:OnDeath(dmginfo,hitgroup,status)
         end*/
     end
 end
- if status == "DeathAnim" then
+    if status == "DeathAnim" then
     if hitgroup == HITGROUP_HEAD && !self.Crippled then
         self.AnimTbl_Death = {ACT_DIE_HEADSHOT,ACT_DIE_GUTSHOT}
-     else
+    else
         self.AnimTbl_Death = {ACT_DIESIMPLE,ACT_DIEBACKWARD,ACT_DIEFORWARD,ACT_DIEVIOLENT,ACT_DIE_CHESTSHOT,ACT_DIE_GUTSHOT,ACT_DIE_BACKSHOT}
         end
     end

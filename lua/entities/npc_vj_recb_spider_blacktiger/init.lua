@@ -35,18 +35,18 @@ function ENT:Spider_Init()
     "vj_recb/shared/claw_miss1.wav",
     "vj_recb/shared/claw_miss2.wav"
 }
-    self.SoundTbl_RangeAttack = {
+    self.SoundTbl_RangeAttack =
     "vj_recb/spider/sp_spit.wav"
-}
+
     self.SoundTbl_Impact = {
     "vj_recb/shared/hit_flesh1.wav",
     "vj_recb/shared/hit_flesh2.wav",
     "vj_recb/shared/hit_flesh3.wav",
     "vj_recb/shared/hit_flesh4.wav"
 }
-    self.SoundTbl_SoundTrack = {
+    self.SoundTbl_SoundTrack =
     "vj_recb/mapspawner/spidersrevenge.wav"
-}
+
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Init()

@@ -62,35 +62,35 @@ function ENT:Cerberus_Init()
     "vj_recb/cerberus/cer_run.wav",
     "vj_recb/cerberus/cer_run2.wav"
 }
-    self.SoundTbl_Idle = {
+    self.SoundTbl_Idle =
     "vj_recb/cerberus/cer_growl.wav"
-}
+
     self.SoundTbl_CombatIdle = {
     "vj_recb/cerberus/cer_bark.wav",
     "vj_recb/cerberus/cer_growl.wav"
 }
-    self.SoundTbl_BeforeMeleeAttack = {
+    self.SoundTbl_BeforeMeleeAttack =
     "vj_recb/cerberus/cer_bite.wav"
-}
-    self.SoundTbl_MeleeAttackExtra = {
+
+    self.SoundTbl_MeleeAttackExtra =
     "vj_recb/cerberus/Bite.wav"
-}
-    self.SoundTbl_LeapAttackJump = {
+
+    self.SoundTbl_LeapAttackJump =
     "vj_recb/cerberus/cer_jump.wav"
-}
-    self.SoundTbl_LeapAttackDamage = {
+
+    self.SoundTbl_LeapAttackDamage =
     "vj_recb/cerberus/Bite.wav"
-}
-    self.SoundTbl_CallForHelp = {
+
+    self.SoundTbl_CallForHelp =
     "vj_recb/cerberus/cer_howl.wav"
-}
+
     self.SoundTbl_Pain = {
     "vj_recb/cerberus/cer_pain.wav",
     "vj_recb/cerberus/cer_pain2.wav"
 }
-    self.SoundTbl_Death = {
+    self.SoundTbl_Death =
     "vj_recb/cerberus/cer_die.wav"
-}
+
     self.SoundTbl_Impact = {
     "vj_recb/shared/hit_flesh1.wav",
     "vj_recb/shared/hit_flesh2.wav",
@@ -107,10 +107,10 @@ end
 function ENT:OnAlert(ent)
     if math.random(1,2) == 1 then
         self:PlayAnim("bark",true,false,true)
-        self.SoundTbl_Alert = {"vj_recb/cerberus/cer_alert.wav"}
+        self.SoundTbl_Alert = "vj_recb/cerberus/cer_alert.wav"
     else
         self:PlayAnim("growl",true,false,true)
-        self.SoundTbl_Alert = {"vj_recb/cerberus/cer_growl.wav"}
+        self.SoundTbl_Alert = "vj_recb/cerberus/cer_growl.wav"
     end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------

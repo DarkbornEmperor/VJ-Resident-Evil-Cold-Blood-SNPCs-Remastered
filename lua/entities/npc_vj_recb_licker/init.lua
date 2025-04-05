@@ -52,31 +52,31 @@ function ENT:OnInput(key,activator,caller,data)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Licker_Init()
-    self.SoundTbl_FootStep = {
+    self.SoundTbl_FootStep =
     "vj_recb/licker/li_walk.wav"
-}
-    self.SoundTbl_Idle = {
+
+    self.SoundTbl_Idle =
     "vj_recb/licker/li_idle.wav"
-}
-    self.SoundTbl_Alert = {
+
+    self.SoundTbl_Alert =
     "vj_recb/licker/li_idle.wav"
-}
+
     self.SoundTbl_MeleeAttackMiss = {
     "vj_recb/shared/claw_miss1.wav",
     "vj_recb/shared/claw_miss2.wav"
 }
-    self.SoundTbl_LeapAttackJump = {
+    self.SoundTbl_LeapAttackJump =
     "vj_recb/licker/li_jump.wav"
-}
-    self.SoundTbl_LeapAttackDamage = {
+
+    self.SoundTbl_LeapAttackDamage =
     "vj_recb/licker/li_slash.wav"
-}
-    self.SoundTbl_Pain = {
+
+    self.SoundTbl_Pain =
     "vj_recb/licker/li_pain.wav"
-}
-    self.SoundTbl_Death = {
+
+    self.SoundTbl_Death =
     "vj_recb/licker/li_die.wav"
-}
+
     self.SoundTbl_Impact = {
     "vj_recb/shared/hit_flesh1.wav",
     "vj_recb/shared/hit_flesh2.wav",

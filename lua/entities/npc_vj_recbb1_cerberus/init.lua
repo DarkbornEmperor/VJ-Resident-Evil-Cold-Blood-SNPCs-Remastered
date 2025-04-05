@@ -18,9 +18,9 @@ ENT.ControllerParams = {
 -----------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnAlert(ent)
     if math.random(1,2) == 1 then
-        self.SoundTbl_Alert = {"vj_recb/cerberus/cer_bark.wav"}
+        self.SoundTbl_Alert = "vj_recb/cerberus/cer_bark.wav"
     else
-        self.SoundTbl_Alert = {"vj_recb/cerberus/cer_growl.wav"}
+        self.SoundTbl_Alert = "vj_recb/cerberus/cer_growl.wav"
     end
 end
 -----------------------------------------------------------------------------------------------------------------------------------------------

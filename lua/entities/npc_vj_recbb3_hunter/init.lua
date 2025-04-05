@@ -26,27 +26,27 @@ function ENT:Hunter_Init()
     "vj_recb/hunter/b3/hu_run.wav",
     "vj_recb/hunter/b3/hu_walk.wav"
 }
-    self.SoundTbl_MeleeAttackExtra = {
+    self.SoundTbl_MeleeAttackExtra =
     "vj_recb/hunter/b3/hu_slash.wav"
-}
-    self.SoundTbl_MeleeAttackMiss = {
+
+    self.SoundTbl_MeleeAttackMiss =
     "vj_recb/hunter/b3/hu_miss.wav"
-}
-    self.SoundTbl_LeapAttackJump = {
+
+    self.SoundTbl_LeapAttackJump =
     "vj_recb/hunter/b3/hu_jump.wav"
-}
-    self.SoundTbl_LeapAttackDamage = {
+
+    self.SoundTbl_LeapAttackDamage =
     "vj_recb/hunter/b3/hu_slash.wav"
-}
-    self.SoundTbl_LeapAttackDamageMiss = {
+
+    self.SoundTbl_LeapAttackDamageMiss =
     "vj_recb/hunter/b3/hu_miss.wav"
-}
-    self.SoundTbl_Pain = {
+
+    self.SoundTbl_Pain =
     "vj_recb/hunter/b3/hu_pain.wav"
-}
-    self.SoundTbl_Death = {
+
+    self.SoundTbl_Death =
     "vj_recb/hunter/b3/hu_die.wav"
-}
+
     self.SoundTbl_Impact = {
     "vj_recb/shared/hit_flesh1.wav",
     "vj_recb/shared/hit_flesh2.wav",

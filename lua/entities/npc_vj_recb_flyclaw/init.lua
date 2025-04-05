@@ -45,36 +45,36 @@ function ENT:OnInput(key,activator,caller,data)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Flyclaw_Init()
-    self.SoundTbl_FootStep = {
+    self.SoundTbl_FootStep =
     "vj_recb/flyclaw/fl_walk.wav"
-}
+
     self.SoundTbl_Idle = {
     "vj_recb/flyclaw/fl_idle.wav",
     "vj_recb/flyclaw/fl_idle2.wav",
     "vj_recb/flyclaw/fl_idle3.wav"
 }
-    self.SoundTbl_Alert = {
+    self.SoundTbl_Alert =
     "vj_recb/flyclaw/fl_alrt.wav"
-}
-    self.SoundTbl_CombatIdle = {
+
+    self.SoundTbl_CombatIdle =
     "vj_recb/flyclaw/fl_ang.wav"
-}
-    self.SoundTbl_BeforeMeleeAttack = {
+
+    self.SoundTbl_BeforeMeleeAttack =
     "vj_recb/flyclaw/fl_att.wav"
-}
-    self.SoundTbl_MeleeAttackExtra = {
+
+    self.SoundTbl_MeleeAttackExtra =
     "vj_recb/flyclaw/fl_slash.wav"
-}
+
     self.SoundTbl_MeleeAttackMiss = {
     "vj_recb/shared/claw_miss1.wav",
     "vj_recb/shared/claw_miss2.wav"
 }
-    self.SoundTbl_Pain = {
+    self.SoundTbl_Pain =
     "vj_recb/flyclaw/fl_dam.wav"
-}
-    self.SoundTbl_Death = {
+
+    self.SoundTbl_Death =
     "vj_recb/flyclaw/fl_out.wav"
-}
+
     self.SoundTbl_Impact = {
     "vj_recb/shared/hit_flesh1.wav",
     "vj_recb/shared/hit_flesh2.wav",
@@ -89,7 +89,7 @@ function ENT:Init()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnFlinch(dmginfo,hitgroup,status)
- if status == "Init" then
+    if status == "Init" then
     if dmginfo:GetDamage() > 30 then
         self.AnimTbl_Flinch = ACT_BIG_FLINCH
     else

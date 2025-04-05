@@ -45,25 +45,25 @@ function ENT:OnInput(key,activator,caller,data)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Crawler_Init()
-    self.SoundTbl_FootStep = {
+    self.SoundTbl_FootStep =
     "vj_recb/crawler/crawler_walk.wav"
-}
-    self.SoundTbl_Idle = {
+
+    self.SoundTbl_Idle =
     "vj_recb/crawler/crawler_idle.wav"
-}
-    self.SoundTbl_BeforeMeleeAttack = {
+
+    self.SoundTbl_BeforeMeleeAttack =
     "vj_recb/crawler/crawler_attack.wav"
-}
-    self.SoundTbl_MeleeAttackExtra = {
+
+    self.SoundTbl_MeleeAttackExtra =
     "vj_recb/crawler/crawler_bite.wav"
-}
+
     self.SoundTbl_MeleeAttackMiss = {
     "vj_recb/shared/claw_miss1.wav",
     "vj_recb/shared/claw_miss2.wav"
 }
-    self.SoundTbl_Pain = {
+    self.SoundTbl_Pain =
     "vj_recb/crawler/crawler_pain.wav"
-}
+
     self.SoundTbl_Impact = {
     "vj_recb/shared/hit_flesh1.wav",
     "vj_recb/shared/hit_flesh2.wav",

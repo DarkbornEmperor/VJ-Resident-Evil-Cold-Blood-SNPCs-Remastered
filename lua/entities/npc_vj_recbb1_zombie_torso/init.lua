@@ -27,56 +27,138 @@ function ENT:Zombie_Init()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ZombieVoices()
-      local voice = math.random(1,6)
-      if voice == 1 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/b1/male/male1/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/b1/male/male1/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/b1/male/male1/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/b1/male/male1/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/b1/male/male1/zom_die.wav"}
+    local voice = math.random(1,6)
+    if voice == 1 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/b1/male/male1/zom_idle.wav"
 
-      elseif voice == 2 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/b1/male/male2/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/b1/male/male2/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/b1/male/male2/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/b1/male/male2/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/b1/male/male2/zom_die.wav"}
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/b1/male/male1/zom_idle.wav"
 
-      elseif voice == 3 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/b1/male/male3/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/b1/male/male3/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/b1/male/male3/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/b1/male/male3/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/b1/male/male3/zom_die.wav"}
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/b1/male/male1/zom_attack.wav"
 
-      elseif voice == 4 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/b1/male/male4/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/b1/male/male4/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/b1/male/male4/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/b1/male/male4/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/b1/male/male4/zom_die.wav"}
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/b1/male/male1/zom_pain.wav"
 
-      elseif voice == 5 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/b1/male/male5/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/b1/male/male5/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/b1/male/male5/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/b1/male/male5/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/b1/male/male5/zom_die.wav"}
+        self.SoundTbl_Death =
+        "vj_recb/zombie/b1/male/male1/zom_die.wav"
 
-      elseif voice == 6 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/b1/male/male6/zom_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/b1/male/male6/zom_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/b1/male/male6/zom_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/b1/male/male6/zom_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/b1/male/male6/zom_die.wav"}
+    elseif voice == 2 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/b1/male/male2/zom_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/b1/male/male2/zom_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/b1/male/male2/zom_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/b1/male/male2/zom_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/b1/male/male2/zom_die.wav"
+
+    elseif voice == 3 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/b1/male/male3/zom_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/b1/male/male3/zom_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/b1/male/male3/zom_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/b1/male/male3/zom_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/b1/male/male3/zom_die.wav"
+
+    elseif voice == 4 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/b1/male/male4/zom_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/b1/male/male4/zom_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/b1/male/male4/zom_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/b1/male/male4/zom_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/b1/male/male4/zom_die.wav"
+
+    elseif voice == 5 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/b1/male/male5/zom_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/b1/male/male5/zom_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/b1/male/male5/zom_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/b1/male/male5/zom_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/b1/male/male5/zom_die.wav"
+
+    elseif voice == 6 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/b1/male/male6/zom_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/b1/male/male6/zom_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/b1/male/male6/zom_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/b1/male/male6/zom_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/b1/male/male6/zom_die.wav"
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnMeleeAttack_Miss()
-    self.AttackAnimTime = 0
-    self:StopAttacks(false)
-    self.vACT_StopAttacks = false
-    self:PlayAnim("flinch",true,false,false)
+function ENT:OnMeleeAttackExecute(status,ent,isProp)
+   if status == "PreDamage" then
+   if self:IsOnFire() then ent:Ignite(4) end
+   if !isProp && self:GetSequence() == self:LookupSequence("attack2") then
+   if ent.IsVJBaseSNPC && VJ.PICK(ent.BloodParticle) then ParticleEffectAttach(VJ.PICK(ent.BloodParticle),PATTACH_POINT_FOLLOW,self,self:LookupAttachment("mouth"))
+   elseif (ent:IsPlayer() or ent:IsNPC() or ent:IsNextBot()) then ParticleEffectAttach("blood_impact_red_01",PATTACH_POINT_FOLLOW,self,self:LookupAttachment("mouth"))
+    end
+end
+ if self:GetSequence() == self:LookupSequence("attack2") then
+ if ent.IsVJBaseSNPC && (ent.MovementType != VJ_MOVETYPE_GROUND or ent.VJ_ID_Boss or ent.IsVJBaseSNPC_Tank) then self.RECB_Grappled = false return false end
+ if !self.RECB_Grappled then
+    self.RECB_Grappled = true
+    //ent:SetVelocity(self:MeleeAttackKnockbackVelocity(ent))
+ if self.RECB_CurEnt != ent then -- If the grabbed enemy is a new enemy then reset the enemy values
+    self:ResetGrapple()
+    self.RECB_CurEntMoveType = ent:GetMoveType()
+end
+ if ent:IsPlayer() or (ent.IsVJBaseSNPC && ent.MovementType == VJ_MOVETYPE_GROUND && !ent.VJ_ID_Boss && !ent.IsVJBaseSNPC_Tank) then
+    self:Grapple()
+end
+   if ent:IsNPC() && !ent.IsVJBaseSNPC && ent:GetMoveType(MOVETYPE_STEP) then
+        self:Grapple_NPC() end
+        end
+    end
+end
+    if status == "Miss" then
+    if self.Crippled or self:GetSequence() == self:LookupSequence("vomit") then return end
+        self.AttackAnimTime = 0
+        self:StopAttacks(false)
+        self.vACT_StopAttacks = false
+        self:PlayAnim("flinch",true,false,false)
+        end
+    end
 end
 /*-----------------------------------------------
     *** Copyright (c) 2012-2025 by DrVrej, All rights reserved. ***

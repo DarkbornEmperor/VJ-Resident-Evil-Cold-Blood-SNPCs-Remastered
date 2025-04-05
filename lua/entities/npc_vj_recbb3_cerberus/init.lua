@@ -21,31 +21,31 @@ ENT.LeapAttackMaxDistance = 200
 ENT.LeapAttackMinDistance = 1
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Cerberus_Init()
-    self.SoundTbl_FootStep = {
+    self.SoundTbl_FootStep =
     "vj_recb/cerberus/b3/dog_step.wav"
-}
-    self.SoundTbl_Idle = {
+
+    self.SoundTbl_Idle =
     "vj_recb/cerberus/b3/dog_growl.wav"
-}
+
     self.SoundTbl_CombatIdle = {
     "vj_recb/cerberus/b3/dog_bark.wav",
     "vj_recb/cerberus/b3/dog_growl.wav"
 }
-    self.SoundTbl_LeapAttackJump = {
+    self.SoundTbl_LeapAttackJump =
     "vj_recb/cerberus/b3/dog_attack.wav"
-}
-    self.SoundTbl_LeapAttackDamage = {
+
+    self.SoundTbl_LeapAttackDamage =
     "vj_recb/cerberus/b3/dog_eat.wav"
-}
-    self.SoundTbl_CallForHelp = {
+
+    self.SoundTbl_CallForHelp =
     "vj_recb/cerberus/b3/dog_howl.wav"
-}
-    self.SoundTbl_Pain = {
+
+    self.SoundTbl_Pain =
     "vj_recb/cerberus/b3/dog_pain.wav"
-}
-    self.SoundTbl_Death = {
+
+    self.SoundTbl_Death =
     "vj_recb/cerberus/b3/dog_die.wav"
-}
+
     self.SoundTbl_Impact = {
     "vj_recb/shared/hit_flesh1.wav",
     "vj_recb/shared/hit_flesh2.wav",
@@ -57,15 +57,15 @@ end
 function ENT:OnAlert(ent)
     if math.random(1,2) == 1 then
         self:PlayAnim("bark",true,false,true)
-        self.SoundTbl_Alert = {"vj_recb/cerberus/b3/dog_bark.wav"}
+        self.SoundTbl_Alert = "vj_recb/cerberus/b3/dog_bark.wav"
     else
         self:PlayAnim("growl",true,false,true)
-        self.SoundTbl_Alert = {"vj_recb/cerberus/b3/dog_growl.wav"}
+        self.SoundTbl_Alert = "vj_recb/cerberus/b3/dog_growl.wav"
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDeath(dmginfo,hitgroup,status)
- if status == "Init" then
+    if status == "Init" then
     VJ_RECB_DeathCode(self)
     if GetConVar("VJ_RECB_Gib"):GetInt() == 0 then return end
     if dmginfo:GetDamageForce():Length() < 800 then return end
