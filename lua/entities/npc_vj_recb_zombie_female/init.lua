@@ -9,20 +9,38 @@ include("shared.lua")
 ENT.Model = "models/vj_recb/b2/zombie_female.mdl"
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:ZombieVoices()
-     local voice = math.random(1,2)
-     if voice == 1 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/female/female1/zof_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/female/female1/zof_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female1/zof_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/female/female1/zof_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/female/female1/zof_die.wav"}
+    local voice = math.random(1,2)
+    if voice == 1 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/female/female1/zof_idle.wav"
 
-     elseif voice == 2 then
-        self.SoundTbl_Idle = {"vj_recb/zombie/female/female2/zof_idle.wav"}
-        self.SoundTbl_Alert = {"vj_recb/zombie/female/female2/zof_idle.wav"}
-        self.SoundTbl_BeforeMeleeAttack = {"vj_recb/zombie/female/female2/zof_attack.wav"}
-        self.SoundTbl_Pain = {"vj_recb/zombie/female/female2/zof_pain.wav"}
-        self.SoundTbl_Death = {"vj_recb/zombie/female/female2/zof_die.wav"}
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/female/female1/zof_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/female/female1/zof_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/female/female1/zof_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/female/female1/zof_die.wav"
+
+    elseif voice == 2 then
+        self.SoundTbl_Idle =
+        "vj_recb/zombie/female/female2/zof_idle.wav"
+
+        self.SoundTbl_Alert =
+        "vj_recb/zombie/female/female2/zof_idle.wav"
+
+        self.SoundTbl_BeforeMeleeAttack =
+        "vj_recb/zombie/female/female2/zof_attack.wav"
+
+        self.SoundTbl_Pain =
+        "vj_recb/zombie/female/female2/zof_pain.wav"
+
+        self.SoundTbl_Death =
+        "vj_recb/zombie/female/female2/zof_die.wav"
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
