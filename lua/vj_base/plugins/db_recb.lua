@@ -138,10 +138,10 @@
          spawnmenu.AddToolMenuOption("DrVrej", "SNPC Configures", "RECB - General", "RECB - General", "", "", function(panel)
             if !game.SinglePlayer() && !LocalPlayer():IsAdmin() then
                 panel:Help("#vjbase.menu.general.admin.not")
-                panel:Help("#vjbase.menu.general.admin.only"})
+                panel:Help("#vjbase.menu.general.admin.only")
     return
 end
-            panel:Help("#vjbase.menu.general.admin.only"})
+            panel:Help("#vjbase.menu.general.admin.only")
             local vj_recbreset = {Options = {}, CVars = {}, Label = "Reset everything:", MenuButton = "0"}
             vj_recbreset.Options["#vjbase.menu.general.reset.everything"] = {
                 VJ_RECB_BossMusic = "1",

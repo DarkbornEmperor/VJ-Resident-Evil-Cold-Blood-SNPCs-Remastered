@@ -337,7 +337,6 @@ end
         self:StopAttacks(false)
         self.vACT_StopAttacks = false
         self:PlayAnim("lunge_1",true,false,false)
-        end
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

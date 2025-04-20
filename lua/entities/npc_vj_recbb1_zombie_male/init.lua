@@ -120,12 +120,12 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnMeleeAttack(status,enemy)
    if status == "Init" then
-      self.AnimTbl_MeleeAttack = "attack2"
-      self.MeleeAttackDamageType = DMG_SLASH
-      self.MeleeAttackDamage = 25
-      self.HasMeleeAttackKnockBack = true
-      self.MeleeAttackPlayerSpeed = true
-      self.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
+        self.AnimTbl_MeleeAttack = "attack2"
+        self.MeleeAttackDamageType = DMG_SLASH
+        self.MeleeAttackDamage = 25
+        self.HasMeleeAttackKnockBack = true
+        self.MeleeAttackPlayerSpeed = true
+        self.SoundTbl_MeleeAttackExtra = {"vj_recb/zombie/bite1.wav","vj_recb/zombie/bite2.wav"}
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -160,7 +160,6 @@ end
         self:StopAttacks(false)
         self.vACT_StopAttacks = false
         self:PlayAnim("flinch",true,false,false)
-        end
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

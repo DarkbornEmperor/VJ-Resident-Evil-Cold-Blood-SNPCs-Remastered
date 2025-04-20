@@ -157,7 +157,6 @@ end
         self:StopAttacks(false)
         self.vACT_StopAttacks = false
         self:PlayAnim("flinch",true,false,false)
-        end
     end
 end
 /*-----------------------------------------------
