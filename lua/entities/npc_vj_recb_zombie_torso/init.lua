@@ -41,6 +41,9 @@ ENT.ControllerParams = {
     FirstP_Bone = "Bip01 Head",
     FirstP_Offset = Vector(10, 0, -30),
 }
+
+-- Custom
+ENT.NextBloodT = 0
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnInput(key,activator,caller,data)
     if key == "step" then
@@ -264,11 +267,11 @@ end
 local vecZ50 = Vector(0, 0, -50)
 --
 function ENT:OnThinkActive()
-    if self:IsMoving() && CurTime() > self.WeirdCrawl_NextBloodT then
+    if self:IsMoving() && CurTime() > self.NextBloodT then
         local selfPos = self:GetPos() + self:OBBCenter()
         local tr = util.TraceLine({start = selfPos, endpos = selfPos + vecZ50, filter = self})
         util.Decal("VJ_RECB_Blood_Red", tr.HitPos + tr.HitNormal, tr.HitPos - tr.HitNormal, self)
-	      self.WeirdCrawl_NextBloodT = CurTime() + 1
+	      self.NextBloodT = CurTime() + 1
 	  end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
