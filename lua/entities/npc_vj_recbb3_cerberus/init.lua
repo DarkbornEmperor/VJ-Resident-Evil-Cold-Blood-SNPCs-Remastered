@@ -19,6 +19,7 @@ ENT.LeapAttackVelocityForward = 100
 ENT.LeapAttackVelocityUp = 100
 ENT.LeapAttackMaxDistance = 200
 ENT.LeapAttackMinDistance = 1
+ENT.AnimTbl_Death = "die_start"
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Cerberus_Init()
     self.SoundTbl_FootStep =
