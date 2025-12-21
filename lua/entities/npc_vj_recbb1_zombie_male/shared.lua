@@ -4,3 +4,5 @@ ENT.PrintName = "Zombie (Male) (B1)"
 ENT.Author = "Darkborn"
 ENT.Contact = "http://steamcommunity.com/groups/vrejgaming"
 ENT.Category = "Resident Evil: Cold Blood"
+
+ENT.VJ_ID_Undead = true

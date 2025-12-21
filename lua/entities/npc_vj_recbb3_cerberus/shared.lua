@@ -4,3 +4,5 @@ ENT.PrintName = "Cerberus (B3)"
 ENT.Author = "Darkborn"
 ENT.Contact = "http://steamcommunity.com/groups/vrejgaming"
 ENT.Category = "Resident Evil: Cold Blood"
+
+ENT.VJ_ID_Undead = true
