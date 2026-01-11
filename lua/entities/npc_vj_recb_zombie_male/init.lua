@@ -1,7 +1,7 @@
 AddCSLuaFile("shared.lua")
 include("shared.lua")
 /*-----------------------------------------------
-    *** Copyright (c) 2012-2025 by DrVrej, All rights reserved. ***
+    *** Copyright (c) 2012-2026 by DrVrej, All rights reserved. ***
     No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
     without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
@@ -38,6 +38,7 @@ ENT.RArmHealth = 15
 ENT.LArmHealth = 15
 ENT.LegHealth = 15
 ENT.Crippled = false
+ENT.RECB_Grappled = false
 ENT.HasBeenKnocked = false
 ENT.CanBeKnocked = true
 ENT.NextKnockTimeT = 0
@@ -383,7 +384,7 @@ function ENT:ResetGrapple()
  if self.RECB_CurEnt.IsVJBaseSNPC then
     self.RECB_CurEnt:SetState()
 end
-    self.RECB_CurEnt:SetMoveType(self.RECB_CurEntMoveType) -- Reset the enemy's move type
+    //self.RECB_CurEnt:SetMoveType(self.RECB_CurEntMoveType) -- Reset the enemy's move type
     if (self.RECB_CurEnt:IsNPC() or self.RECB_CurEnt:IsNextBot()) && self.RECB_CurEnt:GetMoveType(MOVETYPE_NONE) then self.RECB_CurEnt:SetMoveType(MOVETYPE_STEP) end
     if self.RECB_CurEnt:IsPlayer() && self.RECB_CurEnt:GetMoveType(MOVETYPE_NONE) then self.RECB_CurEnt:SetMoveType(MOVETYPE_WALK) end
     self.RECB_CurEnt = NULL
@@ -611,7 +612,7 @@ function ENT:CustomOnRemove()
     self:ResetGrapple()
 end
 /*-----------------------------------------------
-    *** Copyright (c) 2012-2025 by DrVrej, All rights reserved. ***
+    *** Copyright (c) 2012-2026 by DrVrej, All rights reserved. ***
     No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
     without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
