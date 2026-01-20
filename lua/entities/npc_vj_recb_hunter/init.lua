@@ -157,9 +157,9 @@ end
     end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:OnCreateDeathCorpse(dmginfo,hitgroup,corpseEnt)
-    corpseEnt:SetMoveType(MOVETYPE_STEP)
-    VJ_RECB_ApplyCorpse(self,corpseEnt)
+function ENT:OnCreateDeathCorpse(dmginfo,hitgroup,corpse)
+    corpse:SetMoveType(MOVETYPE_STEP)
+    VJ_RECB_ApplyCorpse(self,corpse)
 end
 /*-----------------------------------------------
     *** Copyright (c) 2012-2026 by DrVrej, All rights reserved. ***
