@@ -1,0 +1,18 @@
+"VertexlitGeneric"
+{
+	"$envmap" "models/vj_recb/hunk_b1/LensGlass"
+    "$color2" "[0.08 0.08 0.08]"
+    "$envmapmode" "1"
+    "$multipass" "1"
+    "$nodecal" "1"
+	"$nocull" "1"
+    "$additive" "1"
+
+    "VertexLitGeneric_HDR_DX9"
+    {
+        "$envmaptint" "[.15 .15 .15]"
+        "$envmapcontrast" ".8"
+        "$envmapsaturation" "1.5"
+    }
+}
+

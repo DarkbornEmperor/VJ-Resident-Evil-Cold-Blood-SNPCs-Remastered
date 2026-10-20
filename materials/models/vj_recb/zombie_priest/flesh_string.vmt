@@ -1,6 +1,5 @@
 "VertexlitGeneric"
 {
-	"$basetexture" "models/vj_recb/zombie/flesh_string"
+	"$basetexture" "models/vj_recb/crimsonhead/flesh_string"
 	"$alphatest" "1"
-	"$nocull" "1"
 }

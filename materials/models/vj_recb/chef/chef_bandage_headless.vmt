@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/vj_recb/chef/chef_bandage_headless"
+    "$alphatest" "1"
+}

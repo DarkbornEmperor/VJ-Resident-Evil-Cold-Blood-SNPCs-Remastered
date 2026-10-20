@@ -1,0 +1,6 @@
+"VertexlitGeneric"
+{
+    "$basetexture" "models/vj_recb/weapons/deagle/HAMMER"
+    "$nocull" "1"
+}
+

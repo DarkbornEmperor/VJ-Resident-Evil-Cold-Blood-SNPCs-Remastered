@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/vj_recb/chef_b1/ChefT"
+    "$alphatest" "1"
+}

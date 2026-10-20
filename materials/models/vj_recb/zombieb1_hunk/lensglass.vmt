@@ -1,4 +1,4 @@
-"VertexlitGeneric"
+"VertexLitGeneric"
 {
-	"$basetexture" "models/vj_recb/zombieb1_hunk/lensglass"
+    "$basetexture" "models/vj_recb/zombieb1_hunk/lensglass"
 }

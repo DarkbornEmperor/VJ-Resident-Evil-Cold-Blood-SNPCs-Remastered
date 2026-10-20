@@ -1,4 +1,5 @@
 "VertexLitGeneric"
 {
 	"$basetexture" "models/vj_recb/hunterb3/EM1006"
+    "$nocull" "1"
 }

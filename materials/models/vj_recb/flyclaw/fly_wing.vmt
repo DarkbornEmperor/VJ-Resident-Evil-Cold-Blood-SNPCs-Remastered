@@ -2,5 +2,4 @@
 {
 	"$basetexture" "models/vj_recb/flyclaw/fly_wing"
     "$additive" "1"
-	"$nocull" "1"
 }
